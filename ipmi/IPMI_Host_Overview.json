@@ -1532,6 +1532,7 @@
         "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
+        "label": "datasource",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
