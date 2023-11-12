@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
+      "name": "DS_VICTORIAMETRICS",
+      "label": "VictoriaMetrics",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -11,6 +11,12 @@
   ],
   "__elements": {},
   "__requires": [
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
     {
       "type": "grafana",
       "id": "grafana",
@@ -22,12 +28,6 @@
       "id": "prometheus",
       "name": "Prometheus",
       "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
     },
     {
       "type": "panel",
@@ -90,7 +90,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_s3"
+            "uid": "${DS_VICTORIAMETRICS}"
           },
           "refId": "A"
         }
@@ -101,7 +101,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_VICTORIAMETRICS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -120,7 +120,7 @@
             }
           ],
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "green",
@@ -128,7 +128,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 10000
               }
             ]
           },
@@ -146,10 +146,7 @@
       "links": [],
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -157,32 +154,34 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       },
       "pluginVersion": "10.1.5",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_VICTORIAMETRICS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "rgw_total_buckets",
+          "expr": "rgw_total_buckets{cluster_name=~\"$cluster\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "{{cluster_name}}",
           "refId": "A"
         }
       ],
       "title": "Total Buckets",
-      "type": "stat"
+      "type": "gauge"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_VICTORIAMETRICS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -262,9 +261,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_VICTORIAMETRICS}"
           },
-          "expr": "rgw_bucket_num_objects",
+          "editorMode": "code",
+          "expr": "rgw_bucket_num_objects{cluster_name=~\"$cluster\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -279,12 +279,15 @@
         {
           "id": "organize",
           "options": {
-            "excludeByName": {},
+            "excludeByName": {
+              "cluster_name": false
+            },
             "indexByName": {},
             "renameByName": {
               "Value": "Objects",
               "__name__": "Name",
               "bucket": "Bucket",
+              "cluster_name": "Cluster",
               "os_region": "Cluster",
               "tenant": "Tenant",
               "user": "User"
@@ -334,12 +337,6 @@
             "match": "any",
             "type": "include"
           }
-        },
-        {
-          "id": "merge",
-          "options": {
-            "reducers": []
-          }
         }
       ],
       "type": "table"
@@ -347,7 +344,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_VICTORIAMETRICS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -425,9 +422,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_VICTORIAMETRICS}"
           },
-          "expr": "rgw_bucket_shard_percentage",
+          "editorMode": "code",
+          "expr": "rgw_bucket_shard_percentage{cluster_name=~\"$cluster\"}",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -444,9 +442,9 @@
               "names": [
                 "__name__",
                 "bucket",
-                "os_region",
                 "tenant",
-                "Value"
+                "Value",
+                "cluster_name"
               ]
             }
           }
@@ -487,7 +485,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_VICTORIAMETRICS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -569,10 +567,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_VICTORIAMETRICS}"
           },
           "editorMode": "code",
-          "expr": "sort(rgw_bucket_used_b > 10000000)",
+          "expr": "sort(rgw_bucket_used_b{cluster_name=~\"$cluster\"} > 10000000)",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -586,7 +584,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_VICTORIAMETRICS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -688,9 +686,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_VICTORIAMETRICS}"
           },
-          "expr": "rgw_bucket_used_b",
+          "editorMode": "code",
+          "expr": "rgw_bucket_used_b{cluster_name=~\"$cluster\"}",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -752,7 +751,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${DS_VICTORIAMETRICS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -781,7 +780,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -822,11 +821,13 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
-          "sort": "none"
+          "sort": "desc"
         }
       },
       "pluginVersion": "10.1.5",
@@ -834,10 +835,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${DS_VICTORIAMETRICS}"
           },
           "editorMode": "code",
-          "expr": "rgw_bucket_num_objects > 500000",
+          "expr": "rgw_bucket_num_objects{cluster_name=~\"$cluster\"} > 500000",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{bucket}}-{{tenant}}",
@@ -852,19 +853,55 @@
   "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "ceph",
+    "overview",
+    "s3",
+    "ceph-s3"
+  ],
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": true,
+          "text": "VictoriaMetrics",
+          "value": "P4169E866C3094E38"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "Datasource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_s3"
+          "uid": "${DS_VICTORIAMETRICS}"
         },
-        "filters": [],
+        "definition": "label_values(rgw_total_buckets,cluster_name)",
         "hide": 0,
-        "name": "Filters",
+        "includeAll": true,
+        "label": "cluster",
+        "multi": true,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "query": "label_values(rgw_total_buckets,cluster_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "adhoc"
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -900,6 +937,6 @@
   "timezone": "",
   "title": "RGW Bucket Overview",
   "uid": "h7dDBV3nk",
-  "version": 5,
+  "version": 11,
   "weekStart": ""
 }
