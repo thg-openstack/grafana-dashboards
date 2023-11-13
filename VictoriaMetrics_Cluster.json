@@ -8846,7 +8846,7 @@
         "hide": 2,
         "includeAll": false,
         "multi": false,
-        "name": "ds",
+        "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
         "queryValue": "",
