@@ -1504,7 +1504,7 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(node_ipmi_up,instance)",
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "instance",
         "multi": false,
@@ -1526,7 +1526,7 @@
           "text": "Prometheus",
           "value": "b3610689-59e6-4618-b00f-be4f0f64ad75"
         },
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "multi": false,
         "name": "DS_PROMETHEUS",
