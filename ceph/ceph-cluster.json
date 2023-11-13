@@ -104,7 +104,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "ceph_health_status",
+          "expr": "ceph_health_status{cluster_name=~\"$cluster\"}",
           "format": "time_series",
           "instant": true,
           "interval": "$interval",
@@ -185,7 +185,7 @@
           "displayAliasType": "Always",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "count(ceph_osd_metadata)",
+          "expr": "count(ceph_osd_metadata{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "All",
@@ -200,7 +200,7 @@
           "displayAliasType": "Always",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "sum(ceph_osd_in)",
+          "expr": "sum(ceph_osd_in{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "In",
@@ -215,7 +215,7 @@
           "displayAliasType": "Warning / Critical",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "sum(ceph_osd_in == bool 0)",
+          "expr": "sum(ceph_osd_in{cluster_name=~\"$cluster\"} == bool 0)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -232,7 +232,7 @@
           "displayAliasType": "Always",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "sum(ceph_osd_up)",
+          "expr": "sum(ceph_osd_up{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Up",
@@ -248,7 +248,7 @@
           "displayAliasType": "Warning / Critical",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "sum(ceph_osd_up == bool 0)",
+          "expr": "sum(ceph_osd_up{cluster_name=~\"$cluster\"} == bool 0)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Down",
@@ -309,7 +309,7 @@
           "displayAliasType": "Always",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "sum(ceph_mon_quorum_status)",
+          "expr": "sum(ceph_mon_quorum_status{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -326,7 +326,7 @@
           "displayAliasType": "Always",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "count(ceph_mon_quorum_status)",
+          "expr": "count(ceph_mon_quorum_status{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Total",
@@ -343,7 +343,7 @@
           "displayAliasType": "Warning / Critical",
           "displayType": "Annotation",
           "displayValueWithAlias": "Never",
-          "expr": "count(ceph_mon_quorum_status) / sum(ceph_mon_quorum_status)",
+          "expr": "count(ceph_mon_quorum_status{cluster_name=~\"$cluster\"}) / sum(ceph_mon_quorum_status{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "MONs out of Quorum",
@@ -403,7 +403,7 @@
           "displayAliasType": "Always",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "count(ceph_mgr_status == 1) or vector(0)",
+          "expr": "count(ceph_mgr_status{cluster_name="$cluster"} == 1) or vector(0)",
           "format": "time_series",
           "intervalFactor": 1,
           "instant": true,
@@ -419,7 +419,7 @@
           "displayAliasType": "Always",
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
-          "expr": "count(ceph_mgr_status == 0) or vector(0)",
+          "expr": "count(ceph_mgr_status{cluster_name="$cluster"} == 0) or vector(0)",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -494,7 +494,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(ceph_osd_stat_bytes_used)/sum(ceph_osd_stat_bytes)",
+          "expr": "sum(ceph_osd_stat_bytes_used{cluster_name=~\"$cluster\"})/sum(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Used",
@@ -585,49 +585,49 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(ceph_pg_total)",
+          "expr": "sum(ceph_pg_total{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Total",
           "refId": "A"
         },
         {
-          "expr": "sum(ceph_pg_active)",
+          "expr": "sum(ceph_pg_active{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Active",
           "refId": "B"
         },
         {
-          "expr": "sum(ceph_pg_total - ceph_pg_active)",
+          "expr": "sum(ceph_pg_total{cluster_name=~\"$cluster\"} - ceph_pg_active{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Inactive",
           "refId": "G"
         },
         {
-          "expr": "sum(ceph_pg_undersized)",
+          "expr": "sum(ceph_pg_undersized{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Undersized",
           "refId": "F"
         },
         {
-          "expr": "sum(ceph_pg_degraded)",
+          "expr": "sum(ceph_pg_degraded{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Degraded",
           "refId": "C"
         },
         {
-          "expr": "sum(ceph_pg_inconsistent)",
+          "expr": "sum(ceph_pg_inconsistent{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Inconsistent",
           "refId": "D"
         },
         {
-          "expr": "sum(ceph_pg_down)",
+          "expr": "sum(ceph_pg_down{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Down",
@@ -712,28 +712,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "quantile(0.95, ceph_osd_apply_latency_ms)",
+          "expr": "quantile(0.95, ceph_osd_apply_latency_ms{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Apply Latency P_95",
           "refId": "A"
         },
         {
-          "expr": "quantile(0.95, ceph_osd_commit_latency_ms)",
+          "expr": "quantile(0.95, ceph_osd_commit_latency_ms{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Commit Latency P_95",
           "refId": "B"
         },
         {
-          "expr": "avg(ceph_osd_apply_latency_ms)",
+          "expr": "avg(ceph_osd_apply_latency_ms{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Avg Apply Latency",
           "refId": "C"
         },
         {
-          "expr": "avg(ceph_osd_commit_latency_ms)",
+          "expr": "avg(ceph_osd_commit_latency_ms{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Avg Commit Latency",
@@ -818,14 +818,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(ceph_osd_op_w_in_bytes[1m]))",
+          "expr": "sum(irate(ceph_osd_op_w_in_bytes{cluster_name=~\"$cluster\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Writes",
           "refId": "A"
         },
         {
-          "expr": "sum(irate(ceph_osd_op_r_out_bytes[1m]))",
+          "expr": "sum(irate(ceph_osd_op_r_out_bytes{cluster_name=~\"$cluster\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Reads",
@@ -905,7 +905,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(deriv(ceph_pool_stored[1m]))",
+          "expr": "sum(deriv(ceph_pool_stored{cluster_name=~\"$cluster\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -978,7 +978,7 @@
       "span": 12,
       "targets": [
         {
-          "expr": "ceph_osd_stat_bytes_used / ceph_osd_stat_bytes",
+          "expr": "ceph_osd_stat_bytes_used{cluster_name=~\"$cluster\"} / ceph_osd_stat_bytes{cluster_name=~\"$cluster\"}",
           "format": "time_series",
           "interval": "1m",
           "intervalFactor": 1,
@@ -1040,7 +1040,7 @@
       "links": [],
       "targets": [
         {
-          "expr": "ceph_osd_numpg",
+          "expr": "ceph_osd_numpg{cluster_name=~\"$cluster\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "#PGs",
@@ -1107,7 +1107,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(ceph_osd_recovery_ops[1m]))",
+          "expr": "sum(irate(ceph_osd_recovery_ops{cluster_name=~\"$cluster\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Op/s",
