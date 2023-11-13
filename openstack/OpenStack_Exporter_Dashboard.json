@@ -2186,7 +2186,7 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(os_region)",
-        "hide": 0,
+        "hide": 2,
         "includeAll": true,
         "label": "Cluster",
         "multi": true,

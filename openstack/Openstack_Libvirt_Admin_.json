@@ -3967,7 +3967,7 @@
         },
         "definition": "label_values(os_region)",
         "description": "Cluster",
-        "hide": 0,
+        "hide": 2,
         "includeAll": true,
         "label": "Cluster",
         "multi": true,
