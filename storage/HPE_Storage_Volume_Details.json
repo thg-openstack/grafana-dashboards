@@ -765,7 +765,7 @@
         },
         "definition": "label_values(array)",
         "description": "Select array to visualize",
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "Array",
         "multi": false,
@@ -855,7 +855,7 @@
           "text": "Prometheus",
           "value": "prometheus"
         },
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "datasource",
         "multi": false,
