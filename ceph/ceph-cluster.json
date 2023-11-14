@@ -343,7 +343,7 @@
           "displayAliasType": "Warning / Critical",
           "displayType": "Annotation",
           "displayValueWithAlias": "Never",
-          "expr": "count(ceph_mon_quorum_status{cluster_name=~\"$cluster\"}) / sum(ceph_mon_quorum_status{cluster_name=~\"$cluster\"})",
+          "expr": "count(ceph_mon_quorum_status{cluster_name=~\"$cluster\"}) - sum(ceph_mon_quorum_status{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "MONs out of Quorum",
@@ -1253,6 +1253,28 @@
         "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
         "refresh": 2,
         "type": "interval"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "victoriametrics"
+        },
+        "definition": "label_values(cluster_name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "cluster",
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "query": "label_values(cluster_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -1286,6 +1308,6 @@
     ]
   },
   "timezone": "",
-  "title": "Ceph - Cluster",
+  "title": "Ceph Cluster",
   "version": 13
     }
