@@ -32,7 +32,7 @@
     "list": []
   },
   "description": "Ceph cluster overview",
-  "editable": false,
+  "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
@@ -49,7 +49,7 @@
         "rgb(255, 0, 0)"
       ],
       "datasource": "${DS_PROMETHEUS}",
-      "editable": false,
+      "editable": true,
       "error": false,
       "format": "none",
       "gauge": {
@@ -1286,6 +1286,6 @@
     ]
   },
   "timezone": "",
-  "title": "Ceph - Cluster",
+  "title": "Ceph Cluster",
   "version": 13
     }
