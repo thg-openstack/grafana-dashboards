@@ -617,14 +617,10 @@
          },
       {
         "allValue": ".+",
-        "current": {
-          "selected": true,
-          "text": "de-fra-object",
-          "value": "de-fra-object"
-        },
+        "current": { },
         "datasource": {
           "type": "prometheus",
-          "uid": "victoriametrics"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(cluster_name)",
         "hide": 0,
@@ -658,7 +654,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "victoriametrics"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "",
         "hide": 2,
@@ -680,7 +676,10 @@
          {
         "allValue": ".+",
         "current": { },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "hide": 2,
         "includeAll": true,
         "label": "cluster",
@@ -708,7 +707,10 @@
           "ceph"
           ]
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "definition": "",
         "hide": 2,
         "includeAll": true,
@@ -730,7 +732,7 @@
         "current": { },
         "datasource": {
           "type": "prometheus",
-          "uid": "victoriametrics"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(ceph_pool_metadata{cluster_name=\"$cluster\"},name)",
         "hide": 0,
