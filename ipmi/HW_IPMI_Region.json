@@ -1624,7 +1624,7 @@
         },
         "definition": "label_values(node_ipmi_up,site)",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "DC",
         "multi": false,
         "name": "site",
@@ -1645,15 +1645,15 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(node_ipmi_up{site=\"$site\"},os_region)",
+        "definition": "label_values(node_ipmi_up{site=~\"$site\"},os_region)",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "cloud",
-        "multi": false,
+        "multi": true,
         "name": "cloud",
         "options": [],
         "query": {
-          "query": "label_values(node_ipmi_up{site=\"$site\"},os_region)",
+          "query": "label_values(node_ipmi_up{site=~\"$site\"},os_region)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1668,7 +1668,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(node_ipmi_up{site=\"$site\"},rack)",
+        "definition": "label_values(node_ipmi_up{site=~\"$site\"},rack)",
         "hide": 0,
         "includeAll": true,
         "label": "Rack",
@@ -1676,7 +1676,7 @@
         "name": "rack",
         "options": [],
         "query": {
-          "query": "label_values(node_ipmi_up{site=\"$site\"},rack)",
+          "query": "label_values(node_ipmi_up{site=~\"$site\"},rack)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1714,6 +1714,6 @@
   "timezone": "",
   "title": "IPMI HW Regions Overview",
   "uid": "aa6330c3-c613-4460-8b83-258fc2bdcacf",
-  "version": 34,
+  "version": 35,
   "weekStart": ""
 }
