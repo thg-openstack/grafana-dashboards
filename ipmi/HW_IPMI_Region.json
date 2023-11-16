@@ -118,7 +118,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
+        "w": 3,
         "x": 0,
         "y": 1
       },
@@ -165,7 +165,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "green",
+            "fixedColor": "text",
             "mode": "fixed"
           },
           "mappings": [],
@@ -183,11 +183,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 4,
+        "w": 3,
+        "x": 3,
         "y": 1
       },
-      "id": 2,
+      "id": 37,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -200,7 +200,6 @@
           "fields": "",
           "values": false
         },
-        "text": {},
         "textMode": "auto"
       },
       "pluginVersion": "10.1.5",
@@ -210,16 +209,19 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "disableTextWrap": false,
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(node_ipmi_chassis_power_state{site=~\"$site\",rack=~\"$rack\",os_region=~\"$cloud\"}==1)",
+          "expr": "count(count(node_ipmi_dcmi_power_consumption_watts{site=~\"$site\",rack=~\"$rack\",os_region=~\"$cloud\"} > 5) by (rack))",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": false,
-          "interval": "",
-          "legendFormat": "{{instance}}",
-          "refId": "A"
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Powered on Servers",
+      "title": "Racks",
       "type": "stat"
     },
     {
@@ -251,8 +253,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 8,
+        "w": 3,
+        "x": 6,
         "y": 1
       },
       "id": 27,
@@ -287,7 +289,72 @@
           "refId": "A"
         }
       ],
-      "title": "Powered off servers",
+      "title": "Powered off",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(node_ipmi_chassis_power_state{site=~\"$site\",rack=~\"$rack\",os_region=~\"$cloud\"}==1)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Powered on",
       "type": "stat"
     },
     {
@@ -315,7 +382,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
+        "w": 4,
         "x": 12,
         "y": 1
       },
@@ -353,7 +420,7 @@
           "useBackend": false
         }
       ],
-      "title": "Servers reporting Power Usage",
+      "title": "Reporting Power Usage",
       "type": "stat"
     },
     {
@@ -386,8 +453,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 7,
-        "x": 17,
+        "w": 8,
+        "x": 16,
         "y": 1
       },
       "id": 12,
@@ -520,7 +587,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 4,
+        "w": 5,
         "x": 4,
         "y": 5
       },
@@ -588,8 +655,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 4,
-        "x": 8,
+        "w": 3,
+        "x": 9,
         "y": 5
       },
       "id": 31,
@@ -656,7 +723,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 5,
+        "w": 4,
         "x": 12,
         "y": 5
       },
@@ -694,7 +761,7 @@
           "useBackend": false
         }
       ],
-      "title": "Servers not reporting Power Usage",
+      "title": "Not reporting Power Usage",
       "type": "stat"
     },
     {
@@ -1712,8 +1779,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "IPMI HW Regions Overview",
+  "title": "HW per Regions",
   "uid": "aa6330c3-c613-4460-8b83-258fc2bdcacf",
-  "version": 35,
+  "version": 38,
   "weekStart": ""
 }
