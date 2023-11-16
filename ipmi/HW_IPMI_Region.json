@@ -1050,7 +1050,8 @@
               "__name__": true,
               "firmware_revision": false,
               "instance": false,
-              "job": true
+              "job": true,
+              "system_firmware_version": true
             },
             "indexByName": {},
             "renameByName": {
@@ -1480,7 +1481,7 @@
           "refId": "A"
         }
       ],
-      "title": "Fan Speed State",
+      "title": "Fan Speed State Sensors",
       "transformations": [],
       "type": "stat"
     },
@@ -1650,7 +1651,7 @@
           "refId": "A"
         }
       ],
-      "title": "Temperature State Sensors",
+      "title": "Temperature State Alerts",
       "transformations": [
         {
           "id": "organize",
