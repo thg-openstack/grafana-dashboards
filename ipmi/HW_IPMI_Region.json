@@ -1265,7 +1265,7 @@
           "refId": "A"
         }
       ],
-      "title": "IPMI Sensors State in Warning State",
+      "title": "IPMI Sensors State",
       "transformations": [
         {
           "id": "organize",
@@ -1296,7 +1296,7 @@
       },
       "id": 32,
       "panels": [],
-      "title": "Voltage State Sensor",
+      "title": "Voltage State Sensors",
       "type": "row"
     },
     {
@@ -1480,7 +1480,7 @@
           "refId": "A"
         }
       ],
-      "title": "Fan Speed State above Warnings",
+      "title": "Fan Speed State",
       "transformations": [],
       "type": "stat"
     },
@@ -1650,7 +1650,7 @@
           "refId": "A"
         }
       ],
-      "title": "Temperature State Warning",
+      "title": "Temperature State Sensors",
       "transformations": [
         {
           "id": "organize",
@@ -1779,7 +1779,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "HW per Regions",
+  "title": "HW IPMI per Region",
   "uid": "aa6330c3-c613-4460-8b83-258fc2bdcacf",
   "version": 38,
   "weekStart": ""
