@@ -1,1547 +1,1797 @@
 {
-   "__inputs": [ ],
-   "__requires": [ ],
    "annotations": {
-      "list": [
-         {
-            "builtIn": 1,
-            "datasource": "-- Grafana --",
-            "enable": true,
-            "hide": true,
-            "iconColor": "rgba(0, 211, 255, 1)",
-            "name": "Annotations & Alerts",
-            "showIn": 0,
-            "tags": [ ],
-            "type": "dashboard"
-         }
-      ]
+     "list": [
+       {
+         "builtIn": 1,
+         "datasource": {
+           "type": "datasource",
+           "uid": "grafana"
+         },
+         "enable": true,
+         "hide": true,
+         "iconColor": "rgba(0, 211, 255, 1)",
+         "name": "Annotations & Alerts",
+         "showIn": 0,
+         "tags": [],
+         "type": "dashboard"
+       }
+     ]
    },
    "description": "",
-   "editable": false,
-   "gnetId": null,
+   "editable": true,
+   "fiscalYearStartMonth": 0,
    "graphTooltip": 0,
-   "hideControls": false,
-   "id": null,
-   "links": [ ],
+   "id": 58,
+   "links": [],
+   "liveNow": false,
    "panels": [
-      {
-         "cacheTimeout": null,
-         "colorBackground": false,
-         "colorValue": false,
-         "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-         ],
-         "datasource": "${DS_PROMETHEUS}",
-         "format": "none",
-         "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "mappings": [
+             {
+               "options": {
+                 "match": "null",
+                 "result": {
+                   "text": "N/A"
+                 }
+               },
+               "type": "special"
+             }
+           ],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "none"
          },
-         "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 0,
-            "y": 0
+         "overrides": []
+       },
+       "gridPos": {
+         "h": 3,
+         "w": 3,
+         "x": 0,
+         "y": 0
+       },
+       "id": 2,
+       "links": [],
+       "maxDataPoints": 100,
+       "options": {
+         "colorMode": "none",
+         "graphMode": "none",
+         "justifyMode": "auto",
+         "orientation": "horizontal",
+         "reduceOptions": {
+           "calcs": [
+             "mean"
+           ],
+           "fields": "",
+           "values": false
          },
-         "id": 2,
-         "interval": null,
-         "links": [ ],
-         "mappingType": 1,
-         "mappingTypes": [
-            {
-               "name": "value to text",
-               "value": 1
-            },
-            {
-               "name": "range to text",
-               "value": 2
-            }
-         ],
-         "maxDataPoints": 100,
-         "nullPointMode": "connected",
-         "nullText": null,
-         "postfix": "",
-         "postfixFontSize": "50%",
-         "prefix": "",
-         "prefixFontSize": "50%",
-         "rangeMaps": [
-            {
-               "from": "null",
-               "text": "N/A",
-               "to": "null"
-            }
-         ],
-         "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
+         "textMode": "auto"
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "count(ceph_pool_metadata{job=~\"$job\"})",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "",
+           "refId": "A"
+         }
+       ],
+       "title": "Pools",
+       "type": "stat"
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "Count of the pools that have compression enabled",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "mappings": [
+             {
+               "options": {
+                 "match": "null",
+                 "result": {
+                   "text": "N/A"
+                 }
+               },
+               "type": "special"
+             }
+           ],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "none"
          },
-         "tableColumn": "",
-         "targets": [
-            {
-               "expr": "count(ceph_pool_metadata{job=~\"$job\"})",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "",
-               "refId": "A"
-            }
-         ],
-         "thresholds": "",
-         "title": "Pools",
-         "type": "singlestat",
-         "valueFontSize": "80%",
-         "valueMaps": [
-            {
-               "op": "=",
-               "text": "N/A",
-               "value": "null"
-            }
-         ],
-         "valueName": "avg"
-      },
-      {
-         "cacheTimeout": null,
-         "colorBackground": false,
-         "colorValue": false,
-         "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-         ],
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "Count of the pools that have compression enabled",
-         "format": "none",
-         "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
+         "overrides": []
+       },
+       "gridPos": {
+         "h": 3,
+         "w": 3,
+         "x": 3,
+         "y": 0
+       },
+       "id": 3,
+       "links": [],
+       "maxDataPoints": 100,
+       "options": {
+         "colorMode": "none",
+         "graphMode": "none",
+         "justifyMode": "auto",
+         "orientation": "horizontal",
+         "reduceOptions": {
+           "calcs": [
+             "lastNotNull"
+           ],
+           "fields": "",
+           "values": false
          },
-         "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 3,
-            "y": 0
+         "textMode": "auto"
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "count(ceph_pool_metadata{job=~\"$job\", compression_mode!=\"none\"})",
+           "format": "",
+           "intervalFactor": 1,
+           "legendFormat": "",
+           "refId": "A"
+         }
+       ],
+       "title": "Pools with Compression",
+       "type": "stat"
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "Total raw capacity available to the cluster",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "mappings": [
+             {
+               "options": {
+                 "match": "null",
+                 "result": {
+                   "text": "N/A"
+                 }
+               },
+               "type": "special"
+             }
+           ],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "bytes"
          },
-         "id": 3,
-         "interval": null,
-         "links": [ ],
-         "mappingType": 1,
-         "mappingTypes": [
-            {
-               "name": "value to text",
-               "value": 1
-            },
-            {
-               "name": "range to text",
-               "value": 2
-            }
-         ],
-         "maxDataPoints": 100,
-         "nullPointMode": "connected",
-         "nullText": null,
-         "postfix": "",
-         "postfixFontSize": "50%",
-         "prefix": "",
-         "prefixFontSize": "50%",
-         "rangeMaps": [
-            {
-               "from": "null",
-               "text": "N/A",
-               "to": "null"
-            }
-         ],
-         "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
+         "overrides": []
+       },
+       "gridPos": {
+         "h": 3,
+         "w": 3,
+         "x": 6,
+         "y": 0
+       },
+       "id": 4,
+       "links": [],
+       "maxDataPoints": 100,
+       "options": {
+         "colorMode": "none",
+         "graphMode": "none",
+         "justifyMode": "auto",
+         "orientation": "horizontal",
+         "reduceOptions": {
+           "calcs": [
+             "lastNotNull"
+           ],
+           "fields": "",
+           "values": false
          },
-         "tableColumn": "",
-         "targets": [
-            {
-               "expr": "count(ceph_pool_metadata{job=~\"$job\", compression_mode!=\"none\"})",
-               "format": "",
-               "intervalFactor": 1,
-               "legendFormat": "",
-               "refId": "A"
-            }
-         ],
-         "thresholds": "",
-         "title": "Pools with Compression",
-         "type": "singlestat",
-         "valueFontSize": "80%",
-         "valueMaps": [
-            {
-               "op": "=",
-               "text": "N/A",
-               "value": "null"
-            }
-         ],
-         "valueName": "current"
-      },
-      {
-         "cacheTimeout": null,
-         "colorBackground": false,
-         "colorValue": false,
-         "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-         ],
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "Total raw capacity available to the cluster",
-         "format": "bytes",
-         "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
+         "textMode": "auto"
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "sum(ceph_osd_stat_bytes{job=~\"$job\"})",
+           "format": "",
+           "intervalFactor": 1,
+           "legendFormat": "",
+           "refId": "A"
+         }
+       ],
+       "title": "Total Raw Capacity",
+       "type": "stat"
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "Total raw capacity consumed by user data and associated overheads (metadata + redundancy)",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "mappings": [
+             {
+               "options": {
+                 "match": "null",
+                 "result": {
+                   "text": "N/A"
+                 }
+               },
+               "type": "special"
+             }
+           ],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "bytes"
          },
-         "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 6,
-            "y": 0
+         "overrides": []
+       },
+       "gridPos": {
+         "h": 3,
+         "w": 3,
+         "x": 9,
+         "y": 0
+       },
+       "id": 5,
+       "links": [],
+       "maxDataPoints": 100,
+       "options": {
+         "colorMode": "none",
+         "graphMode": "none",
+         "justifyMode": "auto",
+         "orientation": "horizontal",
+         "reduceOptions": {
+           "calcs": [
+             "lastNotNull"
+           ],
+           "fields": "",
+           "values": false
          },
-         "id": 4,
-         "interval": null,
-         "links": [ ],
-         "mappingType": 1,
-         "mappingTypes": [
-            {
-               "name": "value to text",
-               "value": 1
-            },
-            {
-               "name": "range to text",
-               "value": 2
-            }
-         ],
-         "maxDataPoints": 100,
-         "nullPointMode": "connected",
-         "nullText": null,
-         "postfix": "",
-         "postfixFontSize": "50%",
-         "prefix": "",
-         "prefixFontSize": "50%",
-         "rangeMaps": [
-            {
-               "from": "null",
-               "text": "N/A",
-               "to": "null"
-            }
-         ],
-         "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
+         "textMode": "auto"
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "sum(ceph_pool_bytes_used{job=~\"$job\"})",
+           "format": "",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "",
+           "refId": "A"
+         }
+       ],
+       "title": "Raw Capacity Consumed",
+       "type": "stat"
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "Total of client data stored in the cluster",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "mappings": [
+             {
+               "options": {
+                 "match": "null",
+                 "result": {
+                   "text": "N/A"
+                 }
+               },
+               "type": "special"
+             }
+           ],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "bytes"
          },
-         "tableColumn": "",
-         "targets": [
-            {
-               "expr": "sum(ceph_osd_stat_bytes{job=~\"$job\"})",
-               "format": "",
-               "intervalFactor": 1,
-               "legendFormat": "",
-               "refId": "A"
-            }
-         ],
-         "thresholds": "",
-         "title": "Total Raw Capacity",
-         "type": "singlestat",
-         "valueFontSize": "80%",
-         "valueMaps": [
-            {
-               "op": "=",
-               "text": "N/A",
-               "value": "null"
-            }
-         ],
-         "valueName": "current"
-      },
-      {
-         "cacheTimeout": null,
-         "colorBackground": false,
-         "colorValue": false,
-         "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-         ],
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "Total raw capacity consumed by user data and associated overheads (metadata + redundancy)",
-         "format": "bytes",
-         "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
+         "overrides": []
+       },
+       "gridPos": {
+         "h": 3,
+         "w": 3,
+         "x": 12,
+         "y": 0
+       },
+       "id": 6,
+       "links": [],
+       "maxDataPoints": 100,
+       "options": {
+         "colorMode": "none",
+         "graphMode": "none",
+         "justifyMode": "auto",
+         "orientation": "horizontal",
+         "reduceOptions": {
+           "calcs": [
+             "lastNotNull"
+           ],
+           "fields": "",
+           "values": false
          },
-         "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 9,
-            "y": 0
+         "textMode": "auto"
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "sum(ceph_pool_stored{job=~\"$job\"})",
+           "format": "",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "",
+           "refId": "A"
+         }
+       ],
+       "title": "Logical Stored ",
+       "type": "stat"
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "A compression saving is determined as the data eligible to be compressed minus the capacity used to store the data after compression",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "mappings": [
+             {
+               "options": {
+                 "match": "null",
+                 "result": {
+                   "text": "N/A"
+                 }
+               },
+               "type": "special"
+             }
+           ],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "bytes"
          },
-         "id": 5,
-         "interval": null,
-         "links": [ ],
-         "mappingType": 1,
-         "mappingTypes": [
-            {
-               "name": "value to text",
-               "value": 1
-            },
-            {
-               "name": "range to text",
-               "value": 2
-            }
-         ],
-         "maxDataPoints": 100,
-         "nullPointMode": "connected",
-         "nullText": null,
-         "postfix": "",
-         "postfixFontSize": "50%",
-         "prefix": "",
-         "prefixFontSize": "50%",
-         "rangeMaps": [
-            {
-               "from": "null",
-               "text": "N/A",
-               "to": "null"
-            }
-         ],
-         "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
+         "overrides": []
+       },
+       "gridPos": {
+         "h": 3,
+         "w": 3,
+         "x": 15,
+         "y": 0
+       },
+       "id": 7,
+       "links": [],
+       "maxDataPoints": 100,
+       "options": {
+         "colorMode": "none",
+         "graphMode": "none",
+         "justifyMode": "auto",
+         "orientation": "horizontal",
+         "reduceOptions": {
+           "calcs": [
+             "lastNotNull"
+           ],
+           "fields": "",
+           "values": false
          },
-         "tableColumn": "",
-         "targets": [
-            {
-               "expr": "sum(ceph_pool_bytes_used{job=~\"$job\"})",
-               "format": "",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "",
-               "refId": "A"
-            }
-         ],
-         "thresholds": "",
-         "title": "Raw Capacity Consumed",
-         "type": "singlestat",
-         "valueFontSize": "80%",
-         "valueMaps": [
-            {
-               "op": "=",
-               "text": "N/A",
-               "value": "null"
-            }
-         ],
-         "valueName": "current"
-      },
-      {
-         "cacheTimeout": null,
-         "colorBackground": false,
-         "colorValue": false,
-         "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-         ],
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "Total of client data stored in the cluster",
-         "format": "bytes",
-         "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
+         "textMode": "auto"
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\"} -\n    ceph_pool_compress_bytes_used{job=~\"$job\"}\n)\n",
+           "format": "",
+           "intervalFactor": 1,
+           "legendFormat": "",
+           "refId": "A"
+         }
+       ],
+       "title": "Compression Savings",
+       "type": "stat"
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "Indicates how suitable the data is within the pools that are/have been enabled for compression - averaged across all pools holding compressed data",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "mappings": [
+             {
+               "options": {
+                 "match": "null",
+                 "result": {
+                   "text": "N/A"
+                 }
+               },
+               "type": "special"
+             }
+           ],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "percent"
          },
-         "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 12,
-            "y": 0
+         "overrides": []
+       },
+       "gridPos": {
+         "h": 3,
+         "w": 3,
+         "x": 18,
+         "y": 0
+       },
+       "id": 8,
+       "links": [],
+       "maxDataPoints": 100,
+       "options": {
+         "colorMode": "none",
+         "graphMode": "none",
+         "justifyMode": "auto",
+         "orientation": "horizontal",
+         "reduceOptions": {
+           "calcs": [
+             "lastNotNull"
+           ],
+           "fields": "",
+           "values": false
          },
-         "id": 6,
-         "interval": null,
-         "links": [ ],
-         "mappingType": 1,
-         "mappingTypes": [
-            {
-               "name": "value to text",
-               "value": 1
-            },
-            {
-               "name": "range to text",
-               "value": 2
-            }
-         ],
-         "maxDataPoints": 100,
-         "nullPointMode": "connected",
-         "nullText": null,
-         "postfix": "",
-         "postfixFontSize": "50%",
-         "prefix": "",
-         "prefixFontSize": "50%",
-         "rangeMaps": [
-            {
-               "from": "null",
-               "text": "N/A",
-               "to": "null"
-            }
-         ],
-         "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
+         "textMode": "auto"
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "(\n  sum(ceph_pool_compress_under_bytes{job=~\"$job\"} > 0) /\n    sum(ceph_pool_stored_raw{job=~\"$job\"} and ceph_pool_compress_under_bytes{job=~\"$job\"} > 0)\n) * 100\n",
+           "format": "table",
+           "intervalFactor": 1,
+           "legendFormat": "",
+           "refId": "A"
+         }
+       ],
+       "title": "Compression Eligibility",
+       "type": "stat"
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "This factor describes the average ratio of data eligible to be compressed divided by the data actually stored. It does not account for data written that was ineligible for compression (too small, or compression yield too low)",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "mappings": [
+             {
+               "options": {
+                 "match": "null",
+                 "result": {
+                   "text": "N/A"
+                 }
+               },
+               "type": "special"
+             }
+           ],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "none"
          },
-         "tableColumn": "",
-         "targets": [
-            {
-               "expr": "sum(ceph_pool_stored{job=~\"$job\"})",
-               "format": "",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "",
-               "refId": "A"
-            }
-         ],
-         "thresholds": "",
-         "title": "Logical Stored ",
-         "type": "singlestat",
-         "valueFontSize": "80%",
-         "valueMaps": [
-            {
-               "op": "=",
-               "text": "N/A",
-               "value": "null"
-            }
-         ],
-         "valueName": "current"
-      },
-      {
-         "cacheTimeout": null,
-         "colorBackground": false,
-         "colorValue": false,
-         "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-         ],
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "A compression saving is determined as the data eligible to be compressed minus the capacity used to store the data after compression",
-         "format": "bytes",
-         "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
+         "overrides": []
+       },
+       "gridPos": {
+         "h": 3,
+         "w": 3,
+         "x": 21,
+         "y": 0
+       },
+       "id": 9,
+       "links": [],
+       "maxDataPoints": 100,
+       "options": {
+         "colorMode": "none",
+         "graphMode": "none",
+         "justifyMode": "auto",
+         "orientation": "horizontal",
+         "reduceOptions": {
+           "calcs": [
+             "lastNotNull"
+           ],
+           "fields": "",
+           "values": false
          },
-         "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 15,
-            "y": 0
+         "textMode": "auto"
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\"} > 0)\n    / sum(ceph_pool_compress_bytes_used{job=~\"$job\"} > 0\n)\n",
+           "format": "",
+           "intervalFactor": 1,
+           "legendFormat": "",
+           "refId": "A"
+         }
+       ],
+       "title": "Compression Factor",
+       "type": "stat"
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "thresholds"
+           },
+           "custom": {
+             "align": "auto",
+             "cellOptions": {
+               "type": "color-text"
+             },
+             "filterable": true,
+             "inspect": false
+           },
+           "mappings": [],
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           }
          },
-         "id": 7,
-         "interval": null,
-         "links": [ ],
-         "mappingType": 1,
-         "mappingTypes": [
-            {
-               "name": "value to text",
-               "value": 1
-            },
-            {
-               "name": "range to text",
-               "value": 2
-            }
-         ],
-         "maxDataPoints": 100,
-         "nullPointMode": "connected",
-         "nullText": null,
-         "postfix": "",
-         "postfixFontSize": "50%",
-         "prefix": "",
-         "prefixFontSize": "50%",
-         "rangeMaps": [
-            {
-               "from": "null",
-               "text": "N/A",
-               "to": "null"
-            }
-         ],
-         "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-         },
-         "tableColumn": "",
-         "targets": [
-            {
-               "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\"} -\n    ceph_pool_compress_bytes_used{job=~\"$job\"}\n)\n",
-               "format": "",
-               "intervalFactor": 1,
-               "legendFormat": "",
-               "refId": "A"
-            }
-         ],
-         "thresholds": "",
-         "title": "Compression Savings",
-         "type": "singlestat",
-         "valueFontSize": "80%",
-         "valueMaps": [
-            {
-               "op": "=",
-               "text": "N/A",
-               "value": "null"
-            }
-         ],
-         "valueName": "current"
-      },
-      {
-         "cacheTimeout": null,
-         "colorBackground": false,
-         "colorValue": false,
-         "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-         ],
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "Indicates how suitable the data is within the pools that are/have been enabled for compression - averaged across all pools holding compressed data",
-         "format": "percent",
-         "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-         },
-         "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 18,
-            "y": 0
-         },
-         "id": 8,
-         "interval": null,
-         "links": [ ],
-         "mappingType": 1,
-         "mappingTypes": [
-            {
-               "name": "value to text",
-               "value": 1
-            },
-            {
-               "name": "range to text",
-               "value": 2
-            }
-         ],
-         "maxDataPoints": 100,
-         "nullPointMode": "connected",
-         "nullText": null,
-         "postfix": "",
-         "postfixFontSize": "50%",
-         "prefix": "",
-         "prefixFontSize": "50%",
-         "rangeMaps": [
-            {
-               "from": "null",
-               "text": "N/A",
-               "to": "null"
-            }
-         ],
-         "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-         },
-         "tableColumn": "",
-         "targets": [
-            {
-               "expr": "(\n  sum(ceph_pool_compress_under_bytes{job=~\"$job\"} > 0) /\n    sum(ceph_pool_stored_raw{job=~\"$job\"} and ceph_pool_compress_under_bytes{job=~\"$job\"} > 0)\n) * 100\n",
-               "format": "table",
-               "intervalFactor": 1,
-               "legendFormat": "",
-               "refId": "A"
-            }
-         ],
-         "thresholds": "",
-         "title": "Compression Eligibility",
-         "type": "singlestat",
-         "valueFontSize": "80%",
-         "valueMaps": [
-            {
-               "op": "=",
-               "text": "N/A",
-               "value": "null"
-            }
-         ],
-         "valueName": "current"
-      },
-      {
-         "cacheTimeout": null,
-         "colorBackground": false,
-         "colorValue": false,
-         "colors": [
-            "#299c46",
-            "rgba(237, 129, 40, 0.89)",
-            "#d44a3a"
-         ],
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "This factor describes the average ratio of data eligible to be compressed divided by the data actually stored. It does not account for data written that was ineligible for compression (too small, or compression yield too low)",
-         "format": "none",
-         "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-         },
-         "gridPos": {
-            "h": 3,
-            "w": 3,
-            "x": 21,
-            "y": 0
-         },
-         "id": 9,
-         "interval": null,
-         "links": [ ],
-         "mappingType": 1,
-         "mappingTypes": [
-            {
-               "name": "value to text",
-               "value": 1
-            },
-            {
-               "name": "range to text",
-               "value": 2
-            }
-         ],
-         "maxDataPoints": 100,
-         "nullPointMode": "connected",
-         "nullText": null,
-         "postfix": "",
-         "postfixFontSize": "50%",
-         "prefix": "",
-         "prefixFontSize": "50%",
-         "rangeMaps": [
-            {
-               "from": "null",
-               "text": "N/A",
-               "to": "null"
-            }
-         ],
-         "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-         },
-         "tableColumn": "",
-         "targets": [
-            {
-               "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\"} > 0)\n    / sum(ceph_pool_compress_bytes_used{job=~\"$job\"} > 0\n)\n",
-               "format": "",
-               "intervalFactor": 1,
-               "legendFormat": "",
-               "refId": "A"
-            }
-         ],
-         "thresholds": "",
-         "title": "Compression Factor",
-         "type": "singlestat",
-         "valueFontSize": "80%",
-         "valueMaps": [
-            {
-               "op": "=",
-               "text": "N/A",
-               "value": "null"
-            }
-         ],
-         "valueName": "current"
-      },
-      {
-         "columns": [ ],
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "",
-         "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 3
-         },
-         "id": 10,
-         "links": [ ],
-         "sort": {
-            "col": 5,
-            "desc": true
-         },
-         "styles": [
-            {
-               "alias": "",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Time",
-               "thresholds": [ ],
-               "type": "hidden",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "instance",
-               "thresholds": [ ],
-               "type": "hidden",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "job",
-               "thresholds": [ ],
-               "type": "hidden",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Pool Name",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "name",
-               "thresholds": [ ],
-               "type": "string",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Pool ID",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "pool_id",
-               "thresholds": [ ],
-               "type": "hidden",
-               "unit": "none",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Compression Factor",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #A",
-               "thresholds": [ ],
-               "type": "number",
-               "unit": "none",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "% Used",
-               "colorMode": "value",
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #D",
-               "thresholds": [
-                  "70",
-                  "85"
-               ],
-               "type": "number",
-               "unit": "percentunit",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Usable Free",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #B",
-               "thresholds": [ ],
-               "type": "number",
-               "unit": "bytes",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Compression Eligibility",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #C",
-               "thresholds": [ ],
-               "type": "number",
-               "unit": "percent",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Compression Savings",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #E",
-               "thresholds": [ ],
-               "type": "number",
-               "unit": "bytes",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Growth (5d)",
-               "colorMode": "value",
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #F",
-               "thresholds": [
-                  "0",
-                  "0"
-               ],
-               "type": "number",
-               "unit": "bytes",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "IOPS",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #G",
-               "thresholds": [ ],
-               "type": "number",
-               "unit": "none",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Bandwidth",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #H",
-               "thresholds": [ ],
-               "type": "number",
-               "unit": "Bps",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "__name__",
-               "thresholds": [ ],
-               "type": "hidden",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "type",
-               "thresholds": [ ],
-               "type": "hidden",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "compression_mode",
-               "thresholds": [ ],
-               "type": "hidden",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Type",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "description",
-               "thresholds": [ ],
-               "type": "string",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Stored",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #J",
-               "thresholds": [ ],
-               "type": "number",
-               "unit": "bytes",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #I",
-               "thresholds": [ ],
-               "type": "hidden",
-               "unit": "short",
-               "valueMaps": [ ]
-            },
-            {
-               "alias": "Compression",
-               "colorMode": null,
-               "colors": [
-                  "rgba(245, 54, 54, 0.9)",
-                  "rgba(237, 129, 40, 0.89)",
-                  "rgba(50, 172, 45, 0.97)"
-               ],
-               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-               "decimals": 2,
-               "mappingType": 1,
-               "pattern": "Value #K",
-               "thresholds": [ ],
-               "type": "string",
-               "unit": "short",
-               "valueMaps": [
-                  {
-                     "text": "ON",
-                     "value": "1"
-                  }
-               ]
-            }
-         ],
-         "targets": [
-            {
-               "expr": "(\n  ceph_pool_compress_under_bytes{job=~\"$job\"} /\n    ceph_pool_compress_bytes_used{job=~\"$job\"} > 0\n) and on(pool_id) (\n  (\n    (ceph_pool_compress_under_bytes{job=~\"$job\"} > 0) /\n      ceph_pool_stored_raw{job=~\"$job\"}\n  ) * 100 > 0.5\n)\n",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "A",
-               "refId": "A"
-            },
-            {
-               "expr": "ceph_pool_max_avail{job=~\"$job\"} *\n  on(pool_id) group_left(name) ceph_pool_metadata{job=~\"$job\"}\n",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "B",
-               "refId": "B"
-            },
-            {
-               "expr": "(\n  (ceph_pool_compress_under_bytes{job=~\"$job\"} > 0) /\n    ceph_pool_stored_raw{job=~\"$job\"}\n) * 100\n",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "C",
-               "refId": "C"
-            },
-            {
-               "expr": "ceph_pool_percent_used{job=~\"$job\"} *\n  on(pool_id) group_left(name) ceph_pool_metadata{job=~\"$job\"}\n",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "D",
-               "refId": "D"
-            },
-            {
-               "expr": "ceph_pool_compress_under_bytes{job=~\"$job\"} -\n  ceph_pool_compress_bytes_used{job=~\"$job\"} > 0\n",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "E",
-               "refId": "E"
-            },
-            {
-               "expr": "delta(ceph_pool_stored{job=~\"$job\"}[5d])",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "F",
-               "refId": "F"
-            },
-            {
-               "expr": "rate(ceph_pool_rd{job=~\"$job\"}[$__rate_interval])\n  + rate(ceph_pool_wr{job=~\"$job\"}[$__rate_interval])\n",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "G",
-               "refId": "G"
-            },
-            {
-               "expr": "rate(ceph_pool_rd_bytes{job=~\"$job\"}[$__rate_interval]) +\n  rate(ceph_pool_wr_bytes{job=~\"$job\"}[$__rate_interval])\n",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "H",
-               "refId": "H"
-            },
-            {
-               "expr": "ceph_pool_metadata{job=~\"$job\"}",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "I",
-               "refId": "I"
-            },
-            {
-               "expr": "ceph_pool_stored{job=~\"$job\"} * on(pool_id) group_left ceph_pool_metadata{job=~\"$job\"}",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "J",
-               "refId": "J"
-            },
-            {
-               "expr": "ceph_pool_metadata{job=~\"$job\", compression_mode!=\"none\"}",
-               "format": "table",
-               "instant": true,
-               "intervalFactor": 1,
-               "legendFormat": "K",
-               "refId": "K"
-            },
-            {
-               "expr": "",
-               "format": "",
-               "intervalFactor": "",
-               "legendFormat": "L",
-               "refId": "L"
-            }
-         ],
-         "timeFrom": null,
-         "timeShift": null,
-         "title": "Pool Overview",
-         "transform": "table",
-         "type": "table"
-      },
-      {
-         "aliasColors": { },
-         "bars": false,
-         "dashLength": 10,
-         "dashes": false,
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "This chart shows the sum of read and write IOPS from all clients by pool",
-         "fill": 1,
-         "fillGradient": 0,
-         "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 9
-         },
-         "id": 11,
-         "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": null,
-            "total": false,
-            "values": false
-         },
-         "lines": true,
-         "linewidth": 1,
-         "links": [ ],
-         "nullPointMode": "null",
-         "percentage": false,
-         "pointradius": 5,
-         "points": false,
-         "renderer": "flot",
-         "repeat": null,
-         "seriesOverrides": [ ],
-         "spaceLength": 10,
-         "stack": false,
-         "steppedLine": false,
-         "targets": [
-            {
-               "expr": "topk($topk,\n  round(\n    (\n      rate(ceph_pool_rd{job=~\"$job\"}[$__rate_interval]) +\n        rate(ceph_pool_wr{job=~\"$job\"}[$__rate_interval])\n    ), 1\n  ) * on(pool_id) group_left(instance,name) ceph_pool_metadata{job=~\"$job\"})\n",
-               "format": "time_series",
-               "intervalFactor": 1,
-               "legendFormat": "{{name}} ",
-               "refId": "A"
-            },
-            {
-               "expr": "topk($topk,\n  rate(ceph_pool_wr{job=~\"$job\"}[$__rate_interval]) +\n    on(pool_id) group_left(instance,name) ceph_pool_metadata{job=~\"$job\"}\n)\n",
-               "format": "time_series",
-               "intervalFactor": 1,
-               "legendFormat": "{{name}} - write",
-               "refId": "B"
-            }
-         ],
-         "thresholds": [ ],
-         "timeFrom": null,
-         "timeShift": null,
-         "title": "Top $topk Client IOPS by Pool",
-         "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-         },
-         "type": "graph",
-         "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": [ ]
-         },
-         "yaxes": [
-            {
-               "format": "short",
-               "label": "IOPS",
-               "logBase": 1,
-               "max": null,
-               "min": 0,
-               "show": true
-            },
-            {
-               "format": "short",
-               "label": null,
-               "logBase": 1,
-               "max": null,
-               "min": 0,
-               "show": true
-            }
+         "overrides": [
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Time"
+             },
+             "properties": [
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "instance"
+             },
+             "properties": [
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "job"
+             },
+             "properties": [
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "name"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Pool Name"
+               },
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "pool_id"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Pool ID"
+               },
+               {
+                 "id": "unit",
+                 "value": "none"
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #A"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Compression Factor"
+               },
+               {
+                 "id": "unit",
+                 "value": "none"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #D"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "% Used"
+               },
+               {
+                 "id": "unit",
+                 "value": "percentunit"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               },
+               {
+                 "id": "custom.cellOptions",
+                 "value": {
+                   "type": "auto"
+                 }
+               },
+               {
+                 "id": "thresholds",
+                 "value": {
+                   "mode": "percentage",
+                   "steps": [
+                     {
+                       "color": "rgba(245, 54, 54, 0.9)",
+                       "value": null
+                     },
+                     {
+                       "color": "rgba(237, 129, 40, 0.89)",
+                       "value": 70
+                     },
+                     {
+                       "color": "rgba(50, 172, 45, 0.97)",
+                       "value": 85
+                     }
+                   ]
+                 }
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #B"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Usable Free"
+               },
+               {
+                 "id": "unit",
+                 "value": "bytes"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #C"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Compression Eligibility"
+               },
+               {
+                 "id": "unit",
+                 "value": "percent"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #E"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Compression Savings"
+               },
+               {
+                 "id": "unit",
+                 "value": "bytes"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #F"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Growth (5d)"
+               },
+               {
+                 "id": "unit",
+                 "value": "bytes"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               },
+               {
+                 "id": "custom.cellOptions",
+                 "value": {
+                   "type": "color-text"
+                 }
+               },
+               {
+                 "id": "thresholds",
+                 "value": {
+                   "mode": "percentage",
+                   "steps": [
+                     {
+                       "color": "rgba(245, 54, 54, 0.9)",
+                       "value": null
+                     },
+                     {
+                       "color": "rgba(237, 129, 40, 0.89)",
+                       "value": 0
+                     },
+                     {
+                       "color": "rgba(50, 172, 45, 0.97)",
+                       "value": 0
+                     }
+                   ]
+                 }
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #G"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "IOPS"
+               },
+               {
+                 "id": "unit",
+                 "value": "none"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #H"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Bandwidth"
+               },
+               {
+                 "id": "unit",
+                 "value": "Bps"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "__name__"
+             },
+             "properties": [
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "type"
+             },
+             "properties": [
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "compression_mode"
+             },
+             "properties": [
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "description"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Type"
+               },
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #J"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Stored"
+               },
+               {
+                 "id": "unit",
+                 "value": "bytes"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #I"
+             },
+             "properties": [
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           },
+           {
+             "matcher": {
+               "id": "byName",
+               "options": "Value #K"
+             },
+             "properties": [
+               {
+                 "id": "displayName",
+                 "value": "Compression"
+               },
+               {
+                 "id": "unit",
+                 "value": "short"
+               },
+               {
+                 "id": "decimals",
+                 "value": 2
+               }
+             ]
+           }
          ]
-      },
-      {
-         "aliasColors": { },
-         "bars": false,
-         "dashLength": 10,
-         "dashes": false,
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "The chart shows the sum of read and write bytes from all clients, by pool",
-         "fill": 1,
-         "fillGradient": 0,
-         "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 9
+       },
+       "gridPos": {
+         "h": 6,
+         "w": 24,
+         "x": 0,
+         "y": 3
+       },
+       "id": 10,
+       "links": [],
+       "options": {
+         "cellHeight": "sm",
+         "footer": {
+           "countRows": false,
+           "fields": "",
+           "reducer": [
+             "sum"
+           ],
+           "show": false
          },
-         "id": 12,
-         "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": null,
-            "total": false,
-            "values": false
+         "showHeader": true
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "editorMode": "code",
+           "expr": "(\n  ceph_pool_compress_under_bytes{job=~\"$job\", cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"} /\n    ceph_pool_compress_bytes_used{job=~\"$job\", cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"} > 0\n) and on(pool_id) (\n  (\n    (ceph_pool_compress_under_bytes{job=~\"$job\", cluster_name=~\"$cluster\",pool_name=~\"$pool_name\"} > 0) /\n      ceph_pool_stored_raw{job=~\"$job\", cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"}\n  ) * 100 > 0.5\n)",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "A",
+           "refId": "A"
          },
-         "lines": true,
-         "linewidth": 1,
-         "links": [ ],
-         "nullPointMode": "null",
-         "percentage": false,
-         "pointradius": 5,
-         "points": false,
-         "renderer": "flot",
-         "repeat": null,
-         "seriesOverrides": [ ],
-         "spaceLength": 10,
-         "stack": false,
-         "steppedLine": false,
-         "targets": [
-            {
-               "expr": "topk($topk,\n  (\n    rate(ceph_pool_rd_bytes{job=~\"$job\"}[$__rate_interval]) +\n      rate(ceph_pool_wr_bytes{job=~\"$job\"}[$__rate_interval])\n  ) * on(pool_id) group_left(instance, name) ceph_pool_metadata{job=~\"$job\"}\n)\n",
-               "format": "time_series",
-               "intervalFactor": 1,
-               "legendFormat": "{{name}}",
-               "refId": "A"
-            }
-         ],
-         "thresholds": [ ],
-         "timeFrom": null,
-         "timeShift": null,
-         "title": "Top $topk Client Bandwidth by Pool",
-         "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "ceph_pool_max_avail{job=~\"$job\", cluster_name=~\"$cluster\"} *\n  on(pool_id) group_left(name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}\n",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "B",
+           "refId": "B"
          },
-         "type": "graph",
-         "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": [ ]
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "(\n  (ceph_pool_compress_under_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} > 0) /\n    ceph_pool_stored_raw{job=~\"$job\", cluster_name=~\"$cluster\"}\n) * 100\n",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "C",
+           "refId": "C"
          },
-         "yaxes": [
-            {
-               "format": "Bps",
-               "label": "Throughput",
-               "logBase": 1,
-               "max": null,
-               "min": 0,
-               "show": true
-            },
-            {
-               "format": "short",
-               "label": null,
-               "logBase": 1,
-               "max": null,
-               "min": 0,
-               "show": true
-            }
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "ceph_pool_percent_used{job=~\"$job\", cluster_name=~\"$cluster\"} *\n  on(pool_id) group_left(name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}\n",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "D",
+           "refId": "D"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "ceph_pool_compress_under_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} -\n  ceph_pool_compress_bytes_used{job=~\"$job\", cluster_name=~\"$cluster\"} > 0\n",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "E",
+           "refId": "E"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "delta(ceph_pool_stored{job=~\"$job\", cluster_name=~\"$cluster\"}[5d])",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "F",
+           "refId": "F"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "rate(ceph_pool_rd{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n  + rate(ceph_pool_wr{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "G",
+           "refId": "G"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "rate(ceph_pool_rd_bytes{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n  rate(ceph_pool_wr_bytes{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "H",
+           "refId": "H"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "I",
+           "refId": "I"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "ceph_pool_stored{job=~\"$job\", cluster_name=~\"$cluster\"} * on(pool_id) group_left ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "J",
+           "refId": "J"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\", compression_mode!=\"none\"}",
+           "format": "table",
+           "instant": true,
+           "intervalFactor": 1,
+           "legendFormat": "K",
+           "refId": "K"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "expr": "",
+           "format": "",
+           "intervalFactor": "",
+           "legendFormat": "L",
+           "refId": "L"
+         }
+       ],
+       "title": "Pool Overview",
+       "transformations": [
+         {
+           "id": "seriesToRows",
+           "options": {
+             "reducers": []
+           }
+         }
+       ],
+       "transparent": true,
+       "type": "table"
+     },
+     {
+       "aliasColors": {},
+       "bars": false,
+       "dashLength": 10,
+       "dashes": false,
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "This chart shows the sum of read and write IOPS from all clients by pool",
+       "fill": 1,
+       "fillGradient": 0,
+       "gridPos": {
+         "h": 8,
+         "w": 12,
+         "x": 0,
+         "y": 9
+       },
+       "hiddenSeries": false,
+       "id": 11,
+       "legend": {
+         "alignAsTable": false,
+         "avg": false,
+         "current": false,
+         "max": false,
+         "min": false,
+         "rightSide": false,
+         "show": true,
+         "total": false,
+         "values": false
+       },
+       "lines": true,
+       "linewidth": 1,
+       "links": [],
+       "nullPointMode": "null",
+       "options": {
+         "alertThreshold": true
+       },
+       "percentage": false,
+       "pluginVersion": "10.1.5",
+       "pointradius": 5,
+       "points": false,
+       "renderer": "flot",
+       "seriesOverrides": [],
+       "spaceLength": 10,
+       "stack": false,
+       "steppedLine": false,
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "editorMode": "code",
+           "expr": "topk($topk,\n  round(\n    (\n      rate(ceph_pool_rd{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_pool_wr{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n    ), 1\n  ) * on(pool_id) group_left(instance,name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"})\n",
+           "format": "time_series",
+           "intervalFactor": 1,
+           "legendFormat": "{{name}} ",
+           "range": true,
+           "refId": "A"
+         },
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "editorMode": "code",
+           "expr": "topk($topk,\n  rate(ceph_pool_wr{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n    on(pool_id) group_left(instance,name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}\n)\n",
+           "format": "time_series",
+           "intervalFactor": 1,
+           "legendFormat": "{{name}} - write",
+           "range": true,
+           "refId": "B"
+         }
+       ],
+       "thresholds": [],
+       "timeRegions": [],
+       "title": "Top $topk Client IOPS by Pool",
+       "tooltip": {
+         "shared": true,
+         "sort": 0,
+         "value_type": "individual"
+       },
+       "type": "graph",
+       "xaxis": {
+         "mode": "time",
+         "show": true,
+         "values": []
+       },
+       "yaxes": [
+         {
+           "format": "short",
+           "label": "IOPS",
+           "logBase": 1,
+           "min": 0,
+           "show": true
+         },
+         {
+           "format": "short",
+           "logBase": 1,
+           "min": 0,
+           "show": true
+         }
+       ],
+       "yaxis": {
+         "align": false
+       }
+     },
+     {
+       "aliasColors": {},
+       "bars": false,
+       "dashLength": 10,
+       "dashes": false,
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "The chart shows the sum of read and write bytes from all clients, by pool",
+       "fill": 1,
+       "fillGradient": 0,
+       "gridPos": {
+         "h": 8,
+         "w": 12,
+         "x": 12,
+         "y": 9
+       },
+       "hiddenSeries": false,
+       "id": 12,
+       "legend": {
+         "alignAsTable": false,
+         "avg": false,
+         "current": false,
+         "max": false,
+         "min": false,
+         "rightSide": false,
+         "show": true,
+         "total": false,
+         "values": false
+       },
+       "lines": true,
+       "linewidth": 1,
+       "links": [],
+       "nullPointMode": "null",
+       "options": {
+         "alertThreshold": true
+       },
+       "percentage": false,
+       "pluginVersion": "10.1.5",
+       "pointradius": 5,
+       "points": false,
+       "renderer": "flot",
+       "seriesOverrides": [],
+       "spaceLength": 10,
+       "stack": false,
+       "steppedLine": false,
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "editorMode": "code",
+           "expr": "topk($topk,\n  (\n    rate(ceph_pool_rd_bytes{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n      rate(ceph_pool_wr_bytes{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n  ) * on(pool_id) group_left(instance, name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}\n)\n",
+           "format": "time_series",
+           "intervalFactor": 1,
+           "legendFormat": "{{name}}",
+           "range": true,
+           "refId": "A"
+         }
+       ],
+       "thresholds": [],
+       "timeRegions": [],
+       "title": "Top $topk Client Bandwidth by Pool",
+       "tooltip": {
+         "shared": true,
+         "sort": 0,
+         "value_type": "individual"
+       },
+       "type": "graph",
+       "xaxis": {
+         "mode": "time",
+         "show": true,
+         "values": []
+       },
+       "yaxes": [
+         {
+           "format": "Bps",
+           "label": "Throughput",
+           "logBase": 1,
+           "min": 0,
+           "show": true
+         },
+         {
+           "format": "short",
+           "logBase": 1,
+           "min": 0,
+           "show": true
+         }
+       ],
+       "yaxis": {
+         "align": false
+       }
+     },
+     {
+       "datasource": {
+         "type": "prometheus",
+         "uid": "${DS_PROMETHEUS}"
+       },
+       "description": "Historical view of capacity usage, to help identify growth and trends in pool consumption",
+       "fieldConfig": {
+         "defaults": {
+           "color": {
+             "mode": "palette-classic"
+           },
+           "custom": {
+             "axisCenteredZero": false,
+             "axisColorMode": "text",
+             "axisLabel": "Capacity Used",
+             "axisPlacement": "auto",
+             "barAlignment": 0,
+             "drawStyle": "line",
+             "fillOpacity": 10,
+             "gradientMode": "none",
+             "hideFrom": {
+               "legend": false,
+               "tooltip": false,
+               "viz": false
+             },
+             "insertNulls": false,
+             "lineInterpolation": "linear",
+             "lineWidth": 1,
+             "pointSize": 5,
+             "scaleDistribution": {
+               "type": "linear"
+             },
+             "showPoints": "never",
+             "spanNulls": false,
+             "stacking": {
+               "group": "A",
+               "mode": "none"
+             },
+             "thresholdsStyle": {
+               "mode": "off"
+             }
+           },
+           "mappings": [],
+           "min": 0,
+           "thresholds": {
+             "mode": "absolute",
+             "steps": [
+               {
+                 "color": "green",
+                 "value": null
+               },
+               {
+                 "color": "red",
+                 "value": 80
+               }
+             ]
+           },
+           "unit": "bytes"
+         },
+         "overrides": [
+           {
+             "__systemRef": "hideSeriesFrom",
+             "matcher": {
+               "id": "byNames",
+               "options": {
+                 "mode": "exclude",
+                 "names": [
+                   "{cluster_name=\"de-fra-object\", compression_mode=\"none\", description=\"replica:3\", instance=\"10.16.6.11:9283\", job=\"ceph\", name=\".rgw.root\", pool_id=\"4\", type=\"replicated\"}"
+                 ],
+                 "prefix": "All except:",
+                 "readOnly": true
+               }
+             },
+             "properties": [
+               {
+                 "id": "custom.hideFrom",
+                 "value": {
+                   "legend": false,
+                   "tooltip": false,
+                   "viz": true
+                 }
+               }
+             ]
+           }
          ]
-      },
-      {
-         "aliasColors": { },
-         "bars": false,
-         "dashLength": 10,
-         "dashes": false,
-         "datasource": "${DS_PROMETHEUS}",
-         "description": "Historical view of capacity usage, to help identify growth and trends in pool consumption",
-         "fill": 1,
-         "fillGradient": 0,
-         "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 17
-         },
-         "id": 13,
+       },
+       "gridPos": {
+         "h": 7,
+         "w": 24,
+         "x": 0,
+         "y": 17
+       },
+       "id": 13,
+       "links": [],
+       "options": {
          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": null,
-            "total": false,
-            "values": false
+           "calcs": [],
+           "displayMode": "list",
+           "placement": "bottom",
+           "showLegend": true
          },
-         "lines": true,
-         "linewidth": 1,
-         "links": [ ],
-         "nullPointMode": "null",
-         "percentage": false,
-         "pointradius": 5,
-         "points": false,
-         "renderer": "flot",
-         "repeat": null,
-         "seriesOverrides": [ ],
-         "spaceLength": 10,
-         "stack": false,
-         "steppedLine": false,
-         "targets": [
-            {
-               "expr": "ceph_pool_bytes_used{job=~\"$job\"} * on(pool_id) group_right ceph_pool_metadata{job=~\"$job\"}",
-               "format": "time_series",
-               "intervalFactor": 1,
-               "legendFormat": "{{name}}",
-               "refId": "A"
-            }
-         ],
-         "thresholds": [ ],
-         "timeFrom": null,
-         "timeShift": null,
-         "title": "Pool Capacity Usage (RAW)",
          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-         },
-         "type": "graph",
-         "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": [ ]
-         },
-         "yaxes": [
-            {
-               "format": "bytes",
-               "label": "Capacity Used",
-               "logBase": 1,
-               "max": null,
-               "min": 0,
-               "show": true
-            },
-            {
-               "format": "short",
-               "label": null,
-               "logBase": 1,
-               "max": null,
-               "min": 0,
-               "show": true
-            }
-         ]
-      }
+           "mode": "multi",
+           "sort": "none"
+         }
+       },
+       "pluginVersion": "10.1.5",
+       "targets": [
+         {
+           "datasource": {
+             "type": "prometheus",
+             "uid": "${DS_PROMETHEUS}"
+           },
+           "editorMode": "code",
+           "expr": "ceph_pool_bytes_used {job=~\"$job\", cluster_name=~\"$cluster\"} * on(pool_id) group_right ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}",
+           "format": "time_series",
+           "intervalFactor": 1,
+           "legendFormat": "__auto",
+           "range": true,
+           "refId": "A"
+         }
+       ],
+       "title": "Pool Capacity Usage (RAW)",
+       "type": "timeseries"
+     }
    ],
    "refresh": "30s",
-   "rows": [ ],
-   "schemaVersion": 22,
+   "schemaVersion": 38,
    "style": "dark",
    "tags": [
-      "ceph-mixin"
+     "ceph-mixin"
    ],
    "templating": {
-      "list": [
-         {
-           "current": {
-             "selected": false,
-             "text": "Prometheus",
-             "value": "prometheus"
-           },
-           "hide": 2,
-           "includeAll": false,
-           "label": "",
-           "multi": false,
-           "name": "DS_PROMETHEUS",
-           "options": [],
-           "query": "prometheus",
-           "queryValue": "",
-           "refresh": 1,
-           "regex": "",
-           "skipUrlSync": false,
-           "type": "datasource"
+     "list": [
+       {
+         "current": {
+           "selected": false,
+           "text": "Prometheus",
+           "value": "prometheus"
          },
-         {
-            "allValue": ".+",
-            "current": { },
-            "datasource": "${DS_PROMETHEUS}",
-            "hide": 2,
-            "includeAll": true,
-            "label": "cluster",
-            "multi": true,
-            "name": "cluster",
-            "options": [ ],
-            "query": "label_values(ceph_osd_metadata, cluster)",
-            "refresh": 1,
-            "regex": "(.*)",
-            "sort": 1,
-            "tagValuesQuery": "",
-            "tags": [ ],
-            "tagsQuery": "",
-            "type": "query",
-            "useTags": false
+         "hide": 2,
+         "includeAll": false,
+         "label": "",
+         "multi": false,
+         "name": "DS_PROMETHEUS",
+         "options": [],
+         "query": "prometheus",
+         "queryValue": "",
+         "refresh": 1,
+         "regex": "",
+         "skipUrlSync": false,
+         "type": "datasource"
+       },
+       {
+         "allValue": ".+",
+         "current": {
+           "selected": false
          },
-         {
-            "allValue": ".+",
-            "current": { },
-            "datasource": "${DS_PROMETHEUS}",
-            "hide": 0,
-            "includeAll": true,
-            "label": "job",
-            "multi": true,
-            "name": "job",
-            "options": [ ],
-            "query": "label_values(ceph_osd_metadata{}, job)",
-            "refresh": 1,
-            "regex": "(.*)",
-            "sort": 1,
-            "tagValuesQuery": "",
-            "tags": [ ],
-            "tagsQuery": "",
-            "type": "query",
-            "useTags": false
+         "datasource": {
+           "type": "prometheus",
+           "uid": "${DS_PROMETHEUS}"
          },
-         {
-            "allValue": null,
-            "current": {
-               "text": "15",
-               "value": "15"
-            },
-            "hide": 0,
-            "includeAll": false,
-            "label": "TopK",
-            "multi": false,
-            "name": "topk",
-            "options": [
-               {
-                  "text": "15",
-                  "value": "15"
-               }
-            ],
-            "query": "15",
-            "refresh": 0,
-            "type": "custom"
-         }
-      ]
+         "definition": "label_values(cluster_name)",
+         "hide": 0,
+         "includeAll": false,
+         "label": "cluster",
+         "multi": false,
+         "name": "cluster",
+         "options": [],
+         "query": {
+           "query": "label_values(cluster_name)",
+           "refId": "PrometheusVariableQueryEditor-VariableQuery"
+         },
+         "refresh": 1,
+         "regex": "(.*)",
+         "skipUrlSync": false,
+         "sort": 1,
+         "tagValuesQuery": "",
+         "tagsQuery": "",
+         "type": "query",
+         "useTags": false
+       },
+       {
+         "current": {
+           "selected": false,
+           "text": "cinder",
+           "value": "cinder"
+         },
+         "datasource": {
+           "type": "prometheus",
+           "uid": "${DS_PROMETHEUS}"
+         },
+         "definition": "label_values(ceph_pool_metadata{cluster_name=\"$cluster\"},name)",
+         "hide": 0,
+         "includeAll": false,
+         "label": "Pool Name",
+         "multi": false,
+         "name": "pool_name",
+         "options": [],
+         "query": {
+           "query": "label_values(ceph_pool_metadata{cluster_name=\"$cluster\"},name)",
+           "refId": "PrometheusVariableQueryEditor-VariableQuery"
+         },
+         "refresh": 1,
+         "regex": "",
+         "skipUrlSync": false,
+         "sort": 0,
+         "type": "query"
+       },
+       {
+         "allValue": ".+",
+         "current": {
+           "selected": false,
+           "text": "ceph",
+           "value": "ceph"
+         },
+         "datasource": {
+           "type": "prometheus",
+           "uid": "${DS_PROMETHEUS}"
+         },
+         "definition": "",
+         "hide": 2,
+         "includeAll": false,
+         "label": "job",
+         "multi": false,
+         "name": "job",
+         "options": [],
+         "query": "label_values(ceph_osd_metadata{}, job)",
+         "refresh": 1,
+         "regex": "(.*)",
+         "skipUrlSync": false,
+         "sort": 1,
+         "tagValuesQuery": "",
+         "tagsQuery": "",
+         "type": "query",
+         "useTags": false
+       },
+       {
+         "current": {
+           "text": "15",
+           "value": "15"
+         },
+         "hide": 0,
+         "includeAll": false,
+         "label": "TopK",
+         "multi": false,
+         "name": "topk",
+         "options": [
+           {
+             "selected": true,
+             "text": "15",
+             "value": "15"
+           }
+         ],
+         "query": "15",
+         "queryValue": "",
+         "refresh": 0,
+         "skipUrlSync": false,
+         "type": "custom"
+       }
+     ]
    },
    "time": {
-      "from": "now-1h",
-      "to": "now"
+     "from": "now-1h",
+     "to": "now"
    },
    "timepicker": {
-      "refresh_intervals": [
-         "5s",
-         "10s",
-         "30s",
-         "1m",
-         "5m",
-         "15m",
-         "30m",
-         "1h",
-         "2h",
-         "1d"
-      ],
-      "time_options": [
-         "5m",
-         "15m",
-         "1h",
-         "6h",
-         "12h",
-         "24h",
-         "2d",
-         "7d",
-         "30d"
-      ]
+     "refresh_intervals": [
+       "5s",
+       "10s",
+       "30s",
+       "1m",
+       "5m",
+       "15m",
+       "30m",
+       "1h",
+       "2h",
+       "1d"
+     ],
+     "time_options": [
+       "5m",
+       "15m",
+       "1h",
+       "6h",
+       "12h",
+       "24h",
+       "2d",
+       "7d",
+       "30d"
+     ]
    },
    "timezone": "",
    "title": "Ceph Pools Overview",
-   "uid": "z99hzWtmk",
-   "version": 0
-}
+   "uid": "e112d59a-0a4e-4eff-9bc7-8e04f3bbabb5",
+   "version": 14,
+   "weekStart": ""
+ }
