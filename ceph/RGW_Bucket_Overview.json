@@ -890,7 +890,7 @@
         "hide": 0,
         "includeAll": true,
         "label": "cluster",
-        "multi": true,
+        "multi": false,
         "name": "cluster",
         "options": [],
         "query": {
