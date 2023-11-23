@@ -1,8 +1,8 @@
 {
    "__inputs": [
      {
-       "name": "DS_VICTORIAMETRICS",
-       "label": "VictoriaMetrics",
+       "name": "DS_PROMETHEUS",
+       "label": "Prometheus",
        "description": "",
        "type": "datasource",
        "pluginId": "prometheus",
@@ -59,7 +59,7 @@
      {
        "datasource": {
          "type": "prometheus",
-         "uid": "${DS_VICTORIAMETRICS}"
+         "uid": "${DS_PROMETHEUS}"
        },
        "description": "",
        "fieldConfig": {
@@ -142,7 +142,7 @@
          {
            "datasource": {
              "type": "prometheus",
-             "uid": "${DS_VICTORIAMETRICS}"
+             "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
            "expr": "rate(ceph_rbd_write_ops{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
@@ -155,7 +155,7 @@
          {
            "datasource": {
              "type": "prometheus",
-             "uid": "${DS_VICTORIAMETRICS}"
+             "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
            "expr": "rate(ceph_rbd_read_ops{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
@@ -172,7 +172,7 @@
      {
        "datasource": {
          "type": "prometheus",
-         "uid": "${DS_VICTORIAMETRICS}"
+         "uid": "${DS_PROMETHEUS}"
        },
        "description": "",
        "fieldConfig": {
@@ -255,7 +255,7 @@
          {
            "datasource": {
              "type": "prometheus",
-             "uid": "${DS_VICTORIAMETRICS}"
+             "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
            "expr": "rate(ceph_rbd_write_bytes{job=~\"$job\", pool=\"$pool\", image=\"$image\",cluster_name=\"$cluster\"}[$__rate_interval])",
@@ -268,7 +268,7 @@
          {
            "datasource": {
              "type": "prometheus",
-             "uid": "${DS_VICTORIAMETRICS}"
+             "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
            "expr": "rate(ceph_rbd_read_bytes{job=~\"$job\", pool=\"$pool\", image=\"$image\",cluster_name=\"$cluster\"}[$__rate_interval])",
@@ -285,7 +285,7 @@
      {
        "datasource": {
          "type": "prometheus",
-         "uid": "${DS_VICTORIAMETRICS}"
+         "uid": "${DS_PROMETHEUS}"
        },
        "description": "",
        "fieldConfig": {
@@ -368,7 +368,7 @@
          {
            "datasource": {
              "type": "prometheus",
-             "uid": "${DS_VICTORIAMETRICS}"
+             "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
            "expr": "rate(ceph_rbd_write_latency_sum{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_write_latency_count{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
@@ -381,7 +381,7 @@
          {
            "datasource": {
              "type": "prometheus",
-             "uid": "${DS_VICTORIAMETRICS}"
+             "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
            "expr": "rate(ceph_rbd_read_latency_sum{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_read_latency_count{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
@@ -407,8 +407,8 @@
        {
          "current": {
            "selected": false,
-           "text": "VictoriaMetrics",
-           "value": "victoriametrics"
+           "text": "Prometheus",
+           "value": "Prometheus"
          },
          "hide": 2,
          "includeAll": false,
@@ -428,7 +428,7 @@
          "current": {},
          "datasource": {
            "type": "prometheus",
-           "uid": "${DS_VICTORIAMETRICS}"
+           "uid": "${DS_PROMETHEUS}"
          },
          "definition": "label_values(ceph_osd_metadata,cluster_name)",
          "hide": 0,
@@ -456,7 +456,7 @@
          "current": {},
          "datasource": {
            "type": "prometheus",
-           "uid": "${DS_VICTORIAMETRICS}"
+           "uid": "${DS_PROMETHEUS}"
          },
          "definition": "",
          "hide": 2,
@@ -479,7 +479,7 @@
          "current": {},
          "datasource": {
            "type": "prometheus",
-           "uid": "${DS_VICTORIAMETRICS}"
+           "uid": "${DS_PROMETHEUS}"
          },
          "definition": "",
          "hide": 2,
@@ -502,7 +502,7 @@
          "current": {},
          "datasource": {
            "type": "prometheus",
-           "uid": "${DS_VICTORIAMETRICS}"
+           "uid": "${DS_PROMETHEUS}"
          },
          "definition": "label_values({cluster_name=\"$cluster\"},image)",
          "description": "/^volume-/",
