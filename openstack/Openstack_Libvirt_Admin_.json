@@ -4161,8 +4161,8 @@
       {
         "current": {
           "selected": false,
-          "text": "VictoriaMetrics",
-          "value": "4c169895-5cc5-43be-b621-4f110e6af801"
+          "text": "Prometheus",
+          "value": "prometheus"
         },
         "datasource": "Prometheus",
         "hide": 0,
@@ -4187,7 +4187,7 @@
           "text": "auto",
           "value": "$__auto_interval_interval"
         },
-        "hide": 0,
+        "hide": 2,
         "label": "Interval",
         "name": "interval",
         "options": [
