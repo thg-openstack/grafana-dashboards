@@ -1122,7 +1122,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "max",
+            "lastNotNull"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -1144,7 +1145,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk($TopItems, avg(avg_over_time(hpe_volume_read_bytes_per_second_avg5m{array=~\"$array\",storagepool=\"$pool\"}[$__range] @ end())) by (array,volume_name)) != 0",
+          "expr": "avg(hpe_volume_read_bytes_per_second_avg5m{array=~\"$array\",storagepool=\"$pool\"}[$__range]) by (array,volume_name) + topk($TopItems, avg(avg_over_time(hpe_volume_read_bytes_per_second_avg5m{array=~\"$array\",storagepool=\"$pool\"}[$__range] @ end())) by (array,volume_name)) != 0",
           "interval": "",
           "legendFormat": "{{volume_name}}",
           "range": true,
@@ -1301,7 +1302,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2265,9 +2267,9 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "4",
-          "value": "4"
+          "selected": true,
+          "text": "15",
+          "value": "15"
         },
         "description": "Top Items",
         "hide": 0,
@@ -2292,7 +2294,7 @@
             "value": "3"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "4",
             "value": "4"
           },
@@ -2322,7 +2324,7 @@
             "value": "10"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "15",
             "value": "15"
           },
@@ -2360,9 +2362,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "Prometheus",
-          "value": "prometheus"
+          "selected": false,
+          "text": "VictoriaMetrics",
+          "value": "4c169895-5cc5-43be-b621-4f110e6af801"
         },
         "hide": 2,
         "includeAll": false,
@@ -2387,6 +2389,6 @@
   "timezone": "",
   "title": "HPE Storage Array - Overview",
   "uid": "HhpDetailsOverview",
-  "version": 16,
+  "version": 2,
   "weekStart": ""
 }
