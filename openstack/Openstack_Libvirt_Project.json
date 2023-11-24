@@ -1,5 +1,14 @@
 {
-  "__inputs": [],
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
   "__elements": {},
   "__requires": [
     {
@@ -18,7 +27,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.1.5"
+      "version": "10.2.1"
     },
     {
       "type": "datasource",
@@ -145,9 +154,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -210,9 +220,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -275,9 +286,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -308,6 +320,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -447,9 +460,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -522,9 +536,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -597,9 +612,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -662,9 +678,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -738,9 +755,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -802,6 +820,8 @@
       },
       "id": 50,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -813,7 +833,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -904,9 +924,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -1032,6 +1053,7 @@
         "displayMode": "gradient",
         "minVizHeight": 10,
         "minVizWidth": 0,
+        "namePlacement": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -1043,7 +1065,7 @@
         "showUnfilled": true,
         "valueMode": "color"
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -1147,9 +1169,10 @@
           "fields": "",
           "values": true
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -1237,9 +1260,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -1309,6 +1333,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1344,7 +1369,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1406,6 +1432,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1441,7 +1468,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1501,6 +1529,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1536,7 +1565,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1621,6 +1651,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1656,7 +1687,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1717,6 +1749,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1752,7 +1785,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1813,6 +1847,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1848,7 +1883,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -1909,6 +1945,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1944,7 +1981,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2006,6 +2044,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -2044,7 +2083,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2105,6 +2145,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -2143,7 +2184,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2292,7 +2334,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 19
+            "y": 27
           },
           "id": 19,
           "options": {
@@ -2387,7 +2429,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 19
+            "y": 27
           },
           "id": 20,
           "options": {
@@ -2507,7 +2549,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27
+            "y": 35
           },
           "id": 21,
           "options": {
@@ -2603,7 +2645,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27
+            "y": 35
           },
           "id": 26,
           "options": {
@@ -2700,7 +2742,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 35
+            "y": 43
           },
           "id": 25,
           "options": {
@@ -2797,7 +2839,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 35
+            "y": 43
           },
           "id": 27,
           "options": {
@@ -2886,6 +2928,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -2921,7 +2964,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2963,7 +3007,7 @@
           "exemplar": true,
           "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])*8)",
           "interval": "$interval",
-          "legendFormat": "{{domain}} - {{source_bridge}}",
+          "legendFormat": "{{domain}} - {{target_device}}",
           "range": true,
           "refId": "A"
         }
@@ -2983,6 +3027,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3018,7 +3063,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -3060,7 +3106,7 @@
           "exemplar": true,
           "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])*8)",
           "interval": "$interval",
-          "legendFormat": "{{domain}} - {{source_bridge}}",
+          "legendFormat": "{{domain}} - {{target_device}}",
           "range": true,
           "refId": "A"
         }
@@ -3081,6 +3127,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3116,7 +3163,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -3157,7 +3205,7 @@
           "exemplar": true,
           "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_packets_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))",
           "interval": "$interval",
-          "legendFormat": "{{domain}} - {{source_bridge}}",
+          "legendFormat": "{{domain}} - {{target_device}}",
           "range": true,
           "refId": "A"
         }
@@ -3178,6 +3226,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3213,7 +3262,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -3254,7 +3304,7 @@
           "exemplar": true,
           "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))",
           "interval": "$interval",
-          "legendFormat": "{{domain}} - {{source_bridge}}",
+          "legendFormat": "{{domain}} - {{target_device}}",
           "range": true,
           "refId": "A"
         }
@@ -3275,6 +3325,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3311,7 +3362,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -3352,7 +3404,7 @@
           "exemplar": true,
           "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))",
           "interval": "$interval",
-          "legendFormat": "{{domain}} - {{source_bridge}}",
+          "legendFormat": "{{domain}} - {{target_device}}",
           "range": true,
           "refId": "A"
         }
@@ -3373,6 +3425,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3408,7 +3461,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -3449,7 +3503,7 @@
           "exemplar": true,
           "expr": "rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])",
           "interval": "$interval",
-          "legendFormat": "{{domain}} - {{source_bridge}}",
+          "legendFormat": "{{domain}} - {{target_device}}",
           "range": true,
           "refId": "A"
         }
@@ -3470,6 +3524,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3547,7 +3602,7 @@
           "exemplar": true,
           "expr": "rate(libvirt_domain_interface_stats_receive_drops_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])",
           "interval": "$interval",
-          "legendFormat": "{{domain}} - {{source_bridge}}",
+          "legendFormat": "{{domain}} - {{target_device}}",
           "range": true,
           "refId": "A"
         }
@@ -3568,6 +3623,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -3645,7 +3701,7 @@
           "exemplar": true,
           "expr": "rate(libvirt_domain_interface_stats_transmit_drops_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])",
           "interval": "$interval",
-          "legendFormat": "{{domain}} - {{source_bridge}}",
+          "legendFormat": "{{domain}} - {{target_device}}",
           "range": true,
           "refId": "A"
         }
@@ -3695,25 +3751,16 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "inspect": false
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "index": 0,
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -3799,16 +3846,16 @@
         "x": 0,
         "y": 98
       },
-      "id": 17,
+      "id": 62,
       "options": {
-        "cellHeight": "sm",
+        "cellHeight": "md",
         "footer": {
           "countRows": false,
           "fields": [
-            "Value #A",
-            "Value #B",
-            "Value #C",
-            "Value #D"
+            "vCPU Total (lastNotNull)",
+            "vCPU Used (lastNotNull)",
+            "Memory Total (lastNotNull)",
+            "Memory Used (lastNotNull)"
           ],
           "reducer": [
             "sum"
@@ -3818,12 +3865,12 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": true,
-            "displayName": "vCPU Total"
+            "desc": false,
+            "displayName": "Region"
           }
         ]
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -3876,13 +3923,26 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} - libvirt_domain_stat_memory_unused_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"})",
+          "expr": "(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} - libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"})",
           "format": "table",
           "hide": false,
           "instant": true,
           "interval": "$interval",
           "legendFormat": "Memory Used",
           "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "libvirt_domain_info_meta{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
         }
       ],
       "title": "VMs Stats",
@@ -3909,7 +3969,71 @@
               "Value #C": "Memory Total",
               "Value #D": "Memory Used",
               "domain": "Domain",
-              "instanceId": "Instance ID"
+              "instanceId": "Instance ID",
+              "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": ""
+            }
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Domain": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Memory Total": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Memory Used": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "compute": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "os_region": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "vCPU Total": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "vCPU Used": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Domain": "Instance ID",
+              "Memory Total (lastNotNull)": "Memory Total",
+              "Memory Used (lastNotNull)": "Memory Used",
+              "compute (lastNotNull)": "Compute",
+              "os_region (lastNotNull)": "Region",
+              "vCPU Total (lastNotNull)": "vCPU Total",
+              "vCPU Used (lastNotNull)": "vCPU Used"
             }
           }
         }
@@ -3920,7 +4044,6 @@
   "refresh": "5m",
   "revision": 1,
   "schemaVersion": 38,
-  "style": "dark",
   "tags": [
     "openstack",
     "libvirt",
@@ -3976,7 +4099,7 @@
         "auto_count": 10,
         "auto_min": "1m",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "1m",
           "value": "1m"
         },
