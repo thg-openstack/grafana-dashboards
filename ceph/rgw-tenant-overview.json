@@ -632,7 +632,7 @@
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "{{bucket}}",
+          "legendFormat": "{{bucket}} - {{cluster_name}}",
           "refId": "A"
         }
       ],
@@ -750,7 +750,7 @@
           "expr": "rgw_bucket_num_objects{cluster_name=~\"$cluster\",tenant=\"$tenant\"} > 1",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{bucket}}",
+          "legendFormat": "{{bucket}} - {{cluster_name}}",
           "range": true,
           "refId": "A"
         }
@@ -1200,6 +1200,6 @@
   "timezone": "",
   "title": "S3/Object Usage Tenant Overview",
   "uid": "cca31ca4-00c2-4456-9559-a44ea149836f",
-  "version": 19,
+  "version": 2,
   "weekStart": ""
 }
