@@ -102,7 +102,7 @@
           "refId": "A"
         }
       ],
-      "title": "Libvirt Overview",
+      "title": "Admin Libvirt Overview",
       "type": "row"
     },
     {
@@ -1236,7 +1236,6 @@
         "y": 15
       },
       "id": 56,
-      "interval": "$interval",
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -1378,7 +1377,7 @@
       "type": "stat"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": {
         "type": "datasource",
         "uid": "grafana"
@@ -1390,305 +1389,7 @@
         "y": 23
       },
       "id": 15,
-      "panels": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 15,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineStyle": {
-                  "fill": "solid"
-                },
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  }
-                ]
-              },
-              "unit": "percent"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 13,
-            "w": 24,
-            "x": 0,
-            "y": 32
-          },
-          "id": 61,
-          "options": {
-            "legend": {
-              "calcs": [
-                "max",
-                "mean"
-              ],
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "sortBy": "Max",
-              "sortDesc": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "asc"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "sum(rate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__interval])) by (domain,compute) + \ntopk(6,avg_over_time(sum(rate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__range] )) by (domain,compute)))*0\n",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{domain}} - {{compute}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "vCPU Steal Time",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 15,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  }
-                ]
-              },
-              "unit": "short"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 0,
-            "y": 45
-          },
-          "id": 18,
-          "options": {
-            "legend": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "sortBy": "Last *",
-              "sortDesc": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "8.3.4",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "topk(20, libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "1m",
-              "legendFormat": "{{domain}} - {{compute}}",
-              "refId": "A"
-            }
-          ],
-          "title": "vCPU Total",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "100% = 1 Thread",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 15,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  }
-                ]
-              },
-              "unit": "percent"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 16,
-            "x": 8,
-            "y": 45
-          },
-          "id": 22,
-          "interval": "$interval",
-          "options": {
-            "legend": {
-              "calcs": [
-                "last"
-              ],
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "sortBy": "Last",
-              "sortDesc": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "desc"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, compute)@ end()))",
-              "interval": "1m",
-              "legendFormat": "{{domain}} - {{compute}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "vCPU Usage",
-          "type": "timeseries"
-        }
-      ],
+      "panels": [],
       "targets": [
         {
           "datasource": {
@@ -1702,6 +1403,304 @@
       "type": "row"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 61,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) by (domain,compute,instance_name) + \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})) by (domain,compute,instance_name) @ end()))*0\n",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{instance_name}} - {{domain}} - {{compute}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Top $TopItems vCPU Steal Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "100% = 1 Thread",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 22,
+      "interval": "$interval",
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Last",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(rate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, compute)@ end()))",
+          "interval": "1m",
+          "legendFormat": "{{domain}} - {{compute}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Top $TopItems vCPU Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "topk($TopItems, libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"})",
+          "format": "time_series",
+          "instant": false,
+          "interval": "1m",
+          "legendFormat": "{{domain}} - {{compute}}",
+          "refId": "A"
+        }
+      ],
+      "title": "vCPU Total",
+      "type": "timeseries"
+    },
+    {
       "collapsed": true,
       "datasource": {
         "type": "datasource",
@@ -1711,7 +1710,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 56
       },
       "id": 31,
       "panels": [
@@ -1762,7 +1761,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -1774,7 +1774,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 54
+            "y": 57
           },
           "id": 32,
           "interval": "$interval",
@@ -1803,14 +1803,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))*0",
+              "expr": "sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))*0",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "IOPS Read",
+          "title": "Top $TopItems IOPS Read",
           "transformations": [],
           "type": "timeseries"
         },
@@ -1873,7 +1873,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 54
+            "y": 57
           },
           "id": 33,
           "interval": "$interval",
@@ -1900,14 +1900,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n\n",
+              "expr": "sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n\n",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "IOPS Write",
+          "title": "Top $TopItems IOPS Write",
           "transformations": [],
           "type": "timeseries"
         },
@@ -1970,7 +1970,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 62
+            "y": 65
           },
           "id": 34,
           "interval": "$interval",
@@ -1998,14 +1998,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0",
+              "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0",
               "interval": "",
               "legendFormat": "{{domain}} - {{target_device}} - {{compute}}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Throughput Read",
+          "title": "Top $TopItems Throughput Read",
           "transformations": [],
           "type": "timeseries"
         },
@@ -2068,7 +2068,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 62
+            "y": 65
           },
           "id": 35,
           "options": {
@@ -2078,9 +2078,7 @@
               ],
               "displayMode": "table",
               "placement": "right",
-              "showLegend": true,
-              "sortBy": "Last *",
-              "sortDesc": false
+              "showLegend": true
             },
             "tooltip": {
               "mode": "multi",
@@ -2095,14 +2093,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))*0\n",
+              "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))*0\n",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Throughput Write",
+          "title": "Top $TopItems Throughput Write",
           "transformations": [],
           "type": "timeseries"
         },
@@ -2173,7 +2171,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 70
+            "y": 73
           },
           "id": 59,
           "interval": "$interval",
@@ -2202,7 +2200,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(rate(libvirt_domain_block_stats_read_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_block_stats_read_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n\n",
+              "expr": "sum(rate(libvirt_domain_block_stats_read_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_read_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n\n",
               "format": "time_series",
               "instant": false,
               "interval": "$interval",
@@ -2211,7 +2209,7 @@
               "refId": "A"
             }
           ],
-          "title": "Read time",
+          "title": "Top $TopItems Read time",
           "type": "timeseries"
         },
         {
@@ -2277,7 +2275,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 70
+            "y": 73
           },
           "id": 58,
           "interval": "$interval",
@@ -2305,7 +2303,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(rate(libvirt_domain_block_stats_write_time_seconds_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_block_stats_write_time_seconds_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n",
+              "expr": "sum(rate(libvirt_domain_block_stats_write_time_seconds_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_write_time_seconds_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n",
               "format": "time_series",
               "instant": false,
               "interval": "$interval",
@@ -2340,7 +2338,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 57
       },
       "id": 24,
       "panels": [
@@ -2427,7 +2425,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 81
+            "y": 84
           },
           "id": 47,
           "options": {
@@ -2556,11 +2554,7 @@
                   "options": {
                     "mode": "exclude",
                     "names": [
-                      "instance-0000ab8f",
-                      "instance-0000a5e2",
-                      "instance-0000962b",
-                      "instance-00009628",
-                      "instance-000094b4"
+                      "instance-0000ab8f"
                     ],
                     "prefix": "All except:",
                     "readOnly": true
@@ -2583,7 +2577,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 91
+            "y": 94
           },
           "id": 19,
           "options": {
@@ -2610,7 +2604,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "topk(10,libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",os_region=~\"$cluster\", compute=~\"$compute\"})",
+              "expr": "topk($TopItems,libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",os_region=~\"$cluster\", compute=~\"$compute\"})",
               "instant": false,
               "interval": "1m",
               "legendFormat": "{{domain}}",
@@ -2682,7 +2676,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 91
+            "y": 94
           },
           "id": 26,
           "options": {
@@ -2709,14 +2703,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, libvirt_domain_memory_stats_rss_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+              "expr": "topk($TopItems, libvirt_domain_memory_stats_rss_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
               "interval": "1m",
               "legendFormat": "{{domain}}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Resident Set Size",
+          "title": "Top $TopItems Resident Set Size",
           "transformations": [],
           "type": "timeseries"
         },
@@ -2804,7 +2798,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 99
+            "y": 102
           },
           "id": 21,
           "options": {
@@ -2831,7 +2825,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"} - libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"})",
+              "expr": "topk($TopItems, libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"} - libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"})",
               "interval": "1m",
               "legendFormat": "{{domain}}",
               "range": true,
@@ -2901,7 +2895,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 99
+            "y": 102
           },
           "id": 20,
           "options": {
@@ -2928,14 +2922,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+              "expr": "topk($TopItems, libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
               "interval": "1m",
               "legendFormat": "{{domain}}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Available",
+          "title": "Top $TopItems Available",
           "transformations": [],
           "type": "timeseries"
         },
@@ -3000,7 +2994,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 107
+            "y": 110
           },
           "id": 25,
           "options": {
@@ -3099,7 +3093,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 107
+            "y": 110
           },
           "id": 27,
           "options": {
@@ -3161,7 +3155,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 58
       },
       "id": 37,
       "panels": [
@@ -3224,7 +3218,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 35
+            "y": 119
           },
           "id": 38,
           "options": {
@@ -3252,14 +3246,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])*8) by (domain,target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])*8) by (domain,target_device,compute) @ end()))*0",
+              "expr": "sum(rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])*8) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])*8) by (domain,target_device,compute) @ end()))*0",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "RX Throughput",
+          "title": "Top $TopItems RX Throughput",
           "transformations": [],
           "type": "timeseries"
         },
@@ -3322,7 +3316,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 35
+            "y": 119
           },
           "id": 39,
           "interval": "$interval",
@@ -3349,14 +3343,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_interface_stats_transmit_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])*8) by (domain,target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_interface_stats_transmit_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])*8) by (domain,target_device,compute) @ end()))*0",
+              "expr": "sum(rate(libvirt_domain_interface_stats_transmit_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])*8) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_interface_stats_transmit_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])*8) by (domain,target_device,compute) @ end()))*0",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "TX Throughput",
+          "title": "Top $TopItems TX Throughput",
           "transformations": [],
           "type": "timeseries"
         },
@@ -3420,7 +3414,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 43
+            "y": 127
           },
           "id": 40,
           "options": {
@@ -3445,14 +3439,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_interface_stats_receive_packets_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_interface_stats_receive_packets_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n",
+              "expr": "sum(rate(libvirt_domain_interface_stats_receive_packets_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_interface_stats_receive_packets_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "RX Packets",
+          "title": "Top $TopItems RX Packets",
           "transformations": [],
           "type": "timeseries"
         },
@@ -3516,7 +3510,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 43
+            "y": 127
           },
           "id": 41,
           "interval": "$interval",
@@ -3544,7 +3538,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_interface_stats_transmit_packets_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0",
+              "expr": "sum(rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_interface_stats_transmit_packets_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0",
               "interval": "$interval",
               "legendFormat": "{{domain}}-{{target_device}}-{{compute}}",
               "range": true,
@@ -3615,13 +3609,14 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 51
+            "y": 135
           },
           "id": 44,
           "options": {
             "legend": {
               "calcs": [
-                "lastNotNull"
+                "lastNotNull",
+                "max"
               ],
               "displayMode": "table",
               "placement": "right",
@@ -3642,7 +3637,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_interface_stats_receive_drops_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_interface_stats_receive_drops_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n",
+              "expr": "sum(rate(libvirt_domain_interface_stats_receive_drops_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_interface_stats_receive_drops_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute) @end()))*0\n",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - rx - {{compute}}",
               "range": true,
@@ -3662,7 +3657,7 @@
               "refId": "B"
             }
           ],
-          "title": "RX/TX Packets Drop",
+          "title": "Top $TopItems RX/TX Packets Drop",
           "transformations": [],
           "type": "timeseries"
         },
@@ -3727,7 +3722,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 63
+            "y": 147
           },
           "id": 42,
           "options": {
@@ -3753,7 +3748,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval]))",
+              "expr": "topk($TopItems, rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval]))",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - rx",
               "range": true,
@@ -3765,7 +3760,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "topk(10,rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+              "expr": "topk($TopItems,rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "legendFormat": "{{domain}} - {{target_device}} - tx",
@@ -3800,7 +3795,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 59
       },
       "id": 29,
       "panels": [
@@ -3861,18 +3856,6 @@
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "Domain"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 307
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
                   "options": "vCPU Used"
                 },
                 "properties": [
@@ -3912,29 +3895,28 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 28
+            "y": 157
           },
-          "id": 65,
+          "id": 66,
           "options": {
             "cellHeight": "md",
             "footer": {
-              "countRows": false,
+              "countRows": true,
               "fields": [
                 "vCPU Total (lastNotNull)",
-                "vCPU Used (lastNotNull)",
                 "Memory Total (lastNotNull)",
                 "Memory Used (lastNotNull)"
               ],
               "reducer": [
-                "sum"
+                "count"
               ],
               "show": true
             },
             "showHeader": true,
             "sortBy": [
               {
-                "desc": false,
-                "displayName": "Region"
+                "desc": true,
+                "displayName": "Memory Used"
               }
             ]
           },
@@ -3947,7 +3929,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}",
+              "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
               "format": "table",
               "instant": true,
               "interval": "$interval",
@@ -4027,6 +4009,7 @@
                   "__name__": true,
                   "host": true,
                   "instance": true,
+                  "instance_name": false,
                   "job": true,
                   "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": true
                 },
@@ -4069,7 +4052,31 @@
                     ],
                     "operation": "aggregate"
                   },
+                  "flavor": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "instance_name": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
                   "os_region": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "project_name": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "user_name": {
                     "aggregations": [
                       "lastNotNull"
                     ],
@@ -4100,7 +4107,11 @@
                   "Memory Total (lastNotNull)": "Memory Total",
                   "Memory Used (lastNotNull)": "Memory Used",
                   "compute (lastNotNull)": "Compute",
+                  "flavor (lastNotNull)": "Flavor",
+                  "instance_name (lastNotNull)": "Instance Name",
                   "os_region (lastNotNull)": "Region",
+                  "project_name (lastNotNull)": "Project",
+                  "user_name (lastNotNull)": "UserName",
                   "vCPU Total (lastNotNull)": "vCPU Total",
                   "vCPU Used (lastNotNull)": "vCPU Used"
                 }
@@ -4123,7 +4134,7 @@
       "type": "row"
     }
   ],
-  "refresh": "10s",
+  "refresh": "1m",
   "revision": 1,
   "schemaVersion": 38,
   "tags": [
@@ -4165,7 +4176,7 @@
           "value": "prometheus"
         },
         "datasource": "Prometheus",
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "datasource",
         "multi": false,
@@ -4290,6 +4301,59 @@
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "10",
+          "value": "10"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Top Items",
+        "multi": false,
+        "name": "TopItems",
+        "options": [
+          {
+            "selected": false,
+            "text": "5",
+            "value": "5"
+          },
+          {
+            "selected": false,
+            "text": "6",
+            "value": "6"
+          },
+          {
+            "selected": false,
+            "text": "7",
+            "value": "7"
+          },
+          {
+            "selected": false,
+            "text": "8",
+            "value": "8"
+          },
+          {
+            "selected": true,
+            "text": "10",
+            "value": "10"
+          },
+          {
+            "selected": false,
+            "text": "15",
+            "value": "15"
+          },
+          {
+            "selected": false,
+            "text": "20",
+            "value": "20"
+          }
+        ],
+        "query": "5,6,7,8,10,15,20",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
@@ -4301,6 +4365,6 @@
   "timezone": "browser",
   "title": "Openstack VMs Overview Admin",
   "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 55,
+  "version": 10,
   "weekStart": ""
 }
