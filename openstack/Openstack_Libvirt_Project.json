@@ -18,12 +18,6 @@
       "version": ""
     },
     {
-      "type": "panel",
-      "id": "gauge",
-      "name": "Gauge",
-      "version": ""
-    },
-    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -108,7 +102,7 @@
           "refId": "A"
         }
       ],
-      "title": "Libvirt/Openstack Overview",
+      "title": "VM/Project Overview",
       "type": "row"
     },
     {
@@ -313,45 +307,117 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "100% = 1 Thread",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 15,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              }
+            ]
           },
-          "mappings": [],
+          "unit": "iops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 66,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}[$__rate_interval])) or on() vector(0)",
+          "format": "time_series",
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "Read IOPS",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}[$__rate_interval])) or on() vector(0)",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "Write IOPS",
+          "range": false,
+          "refId": "B"
+        }
+      ],
+      "title": "IOPS R/W on VM",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -361,33 +427,33 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "bytes"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
+        "h": 7,
+        "w": 6,
+        "x": 18,
         "y": 1
       },
-      "id": 12,
+      "id": 55,
       "options": {
-        "legend": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "sortBy": "Last *",
-          "sortDesc": true
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "textMode": "auto",
+        "wideLayout": true
       },
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -395,16 +461,30 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "topk(20, avg by (domain) (irate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])) * 100)",
-          "instant": false,
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\", compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])) or on() vector(0)",
+          "instant": true,
           "interval": "$interval",
-          "legendFormat": "{{domain}}",
+          "legendFormat": "Read Bytes",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$virtual_machine\", compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval]))",
+          "hide": false,
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "Write Bytes",
+          "refId": "B"
         }
       ],
-      "title": "vCPU Usage on VM",
-      "type": "timeseries"
+      "title": "Throughput R/W on VM",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -639,6 +719,188 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 8
+      },
+      "id": 51,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))*8 or on() vector(0)",
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "RX Bytes",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))*8",
+          "hide": false,
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "TX Bytes",
+          "refId": "B"
+        }
+      ],
+      "title": "RX/TX Throughput on VM",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 8
+      },
+      "id": 56,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_interface_stats_receive_drops_total{domain=~\"$virtual_machine\", compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])) or on() vector(0)",
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "RX Packets",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_drops_total{domain=~\"$virtual_machine\", compute=~\"$compute\", job=~\"libvirt_exporter\"}[30s])) or on() vector(0)",
+          "hide": false,
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "TX Packets",
+          "refId": "B"
+        }
+      ],
+      "title": "RX/TX Packets Drop on VM",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -785,189 +1047,6 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "index": 0,
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "iops"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 12,
-        "y": 9
-      },
-      "id": 50,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}[$__rate_interval])) or on() vector(0)",
-          "format": "time_series",
-          "instant": true,
-          "interval": "$interval",
-          "legendFormat": "Read IOPS",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}[$__rate_interval])) or on() vector(0)",
-          "format": "time_series",
-          "hide": false,
-          "instant": true,
-          "interval": "$interval",
-          "legendFormat": "Write IOPS",
-          "range": false,
-          "refId": "B"
-        }
-      ],
-      "title": "IOPS R/W on VM",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "index": 0,
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 18,
-        "y": 9
-      },
-      "id": 55,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\", compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])) or on() vector(0)",
-          "instant": true,
-          "interval": "$interval",
-          "legendFormat": "Read Bytes",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$virtual_machine\", compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": true,
-          "interval": "$interval",
-          "legendFormat": "Write Bytes",
-          "refId": "B"
-        }
-      ],
-      "title": "Throughput R/W on VM",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -1018,7 +1097,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 12,
         "x": 0,
         "y": 14
@@ -1103,17 +1182,17 @@
               }
             ]
           },
-          "unit": "decbits"
+          "unit": "pps"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 6,
         "x": 12,
-        "y": 16
+        "y": 14
       },
-      "id": 51,
+      "id": 67,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -1124,7 +1203,7 @@
             "lastNotNull"
           ],
           "fields": "",
-          "values": true
+          "values": false
         },
         "textMode": "auto",
         "wideLayout": true
@@ -1138,10 +1217,10 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\"}[$__rate_interval]))*8 or on() vector(0)",
+          "expr": "sum(rate(libvirt_domain_interface_stats_receive_drops_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
           "instant": true,
           "interval": "$interval",
-          "legendFormat": "RX Bytes",
+          "legendFormat": "RX Packets",
           "refId": "A"
         },
         {
@@ -1151,15 +1230,15 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\"}[$__rate_interval]))*8",
+          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_drops_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
           "hide": false,
           "instant": true,
           "interval": "$interval",
-          "legendFormat": "TX Bytes",
+          "legendFormat": "TX Packets",
           "refId": "B"
         }
       ],
-      "title": "RX/TX Throughput on VM",
+      "title": "RX/TX Packets Drop on VMs",
       "type": "stat"
     },
     {
@@ -1199,12 +1278,13 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 6,
         "x": 18,
-        "y": 16
+        "y": 14
       },
-      "id": 56,
+      "id": 68,
+      "interval": "$interval",
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -1229,7 +1309,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_interface_stats_receive_drops_total{domain=~\"$virtual_machine\", compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])) or on() vector(0)",
+          "expr": "sum(rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
           "instant": true,
           "interval": "$interval",
           "legendFormat": "RX Packets",
@@ -1242,7 +1322,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_drops_total{domain=~\"$virtual_machine\", compute=~\"$compute\", job=~\"libvirt_exporter\"}[30s])) or on() vector(0)",
+          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
           "hide": false,
           "instant": true,
           "interval": "$interval",
@@ -1250,7 +1330,7 @@
           "refId": "B"
         }
       ],
-      "title": "RX/TX Packets Drop on VM",
+      "title": "RX/TX Packets Error on VMs",
       "type": "stat"
     },
     {
@@ -1263,7 +1343,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 21
       },
       "id": 15,
       "panels": [
@@ -1327,7 +1407,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 2
+            "y": 22
           },
           "id": 18,
           "options": {
@@ -1355,11 +1435,11 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+              "expr": "topk(20, libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "format": "time_series",
               "instant": false,
               "interval": "1m",
-              "legendFormat": "{{domain}}",
+              "legendFormat": "{{instance_name}}",
               "refId": "A"
             }
           ],
@@ -1371,6 +1451,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "description": "100% = 1 Thread",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1393,12 +1474,12 @@
                 },
                 "insertNulls": false,
                 "lineInterpolation": "linear",
-                "lineWidth": 1,
+                "lineWidth": 2,
                 "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
                 },
-                "showPoints": "never",
+                "showPoints": "auto",
                 "spanNulls": false,
                 "stacking": {
                   "group": "A",
@@ -1426,18 +1507,18 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 2
+            "y": 22
           },
-          "id": 22,
+          "id": 12,
           "options": {
             "legend": {
               "calcs": [
-                "last"
+                "lastNotNull"
               ],
               "displayMode": "table",
               "placement": "right",
               "showLegend": true,
-              "sortBy": "Last",
+              "sortBy": "Last *",
               "sortDesc": true
             },
             "tooltip": {
@@ -1453,14 +1534,14 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, avg by (domain) (irate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\"}[$__rate_interval])) * 100)",
-              "interval": "1m",
-              "legendFormat": "{{domain}}",
-              "range": true,
+              "expr": "topk(20, avg by (domain,instance_name) (irate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) * 100)",
+              "instant": false,
+              "interval": "$interval",
+              "legendFormat": "{{instance_name}}",
               "refId": "A"
             }
           ],
-          "title": "vCPU Usage",
+          "title": "vCPU Usage on VM",
           "type": "timeseries"
         },
         {
@@ -1523,7 +1604,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 10
+            "y": 30
           },
           "id": 61,
           "options": {
@@ -1549,9 +1630,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, avg by (domain) (irate(libvirt_domain_vcpu_delay_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\"}[$__rate_interval])) * 100)",
+              "expr": "topk(20, avg by (domain,instance_name) (irate(libvirt_domain_vcpu_delay_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) * 100)",
               "interval": "1m",
-              "legendFormat": "{{domain}}",
+              "legendFormat": "{{instance_name}}",
               "range": true,
               "refId": "A"
             }
@@ -1582,7 +1663,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 22
       },
       "id": 31,
       "panels": [
@@ -1646,7 +1727,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 3
+            "y": 23
           },
           "id": 32,
           "options": {
@@ -1656,9 +1737,7 @@
               ],
               "displayMode": "table",
               "placement": "right",
-              "showLegend": true,
-              "sortBy": "Last *",
-              "sortDesc": true
+              "showLegend": true
             },
             "tooltip": {
               "mode": "single",
@@ -1673,9 +1752,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))",
+              "expr": "topk(10, rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -1744,7 +1823,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 3
+            "y": 23
           },
           "id": 33,
           "options": {
@@ -1771,9 +1850,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))",
+              "expr": "topk(10, rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -1842,7 +1921,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 11
+            "y": 31
           },
           "id": 34,
           "options": {
@@ -1869,9 +1948,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])) or on() vector(0)",
+              "expr": "topk(10, rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) or on() vector(0)",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -1940,7 +2019,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 11
+            "y": 31
           },
           "id": 35,
           "options": {
@@ -1967,9 +2046,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])) or on() vector(0)",
+              "expr": "topk(10, rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) or on() vector(0)",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -2042,7 +2121,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 19
+            "y": 39
           },
           "id": 58,
           "options": {
@@ -2052,7 +2131,9 @@
               ],
               "displayMode": "table",
               "placement": "right",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Max",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "single",
@@ -2067,11 +2148,11 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "topk(20, irate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\", compute=~\"$compute\"}[3m]))",
+              "expr": "topk(20, irate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\", compute=~\"$compute\"}[$__rate_interval]* on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
               "format": "time_series",
               "instant": false,
               "interval": "$interval",
-              "legendFormat": "{{domain}} - write",
+              "legendFormat": "{{instance_name}} - write",
               "range": true,
               "refId": "A"
             }
@@ -2143,7 +2224,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 19
+            "y": 39
           },
           "id": 59,
           "options": {
@@ -2168,11 +2249,11 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "topk(20, irate(libvirt_domain_block_stats_read_time_seconds_total{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\", compute=~\"$compute\"}[3m]))",
+              "expr": "topk(20, irate(libvirt_domain_block_stats_read_time_seconds_total{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\", compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
               "format": "time_series",
               "instant": false,
               "interval": "$interval",
-              "legendFormat": "{{domain}} - write",
+              "legendFormat": "{{instance_name}} - write",
               "range": true,
               "refId": "A"
             }
@@ -2203,7 +2284,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 23
       },
       "id": 24,
       "panels": [
@@ -2293,7 +2374,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 4
+            "y": 24
           },
           "id": 64,
           "options": {
@@ -2321,7 +2402,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(5, libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+              "expr": "topk(5, libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"})",
               "hide": false,
               "interval": "$interval",
               "legendFormat": "Total",
@@ -2335,7 +2416,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(5, libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+              "expr": "topk(5, libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"})",
               "hide": false,
               "interval": "$interval",
               "legendFormat": "Available",
@@ -2421,7 +2502,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 14
+            "y": 34
           },
           "id": 19,
           "options": {
@@ -2448,9 +2529,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\"})",
+              "expr": "topk(10, libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "1m",
-              "legendFormat": "{{domain}}",
+              "legendFormat": "{{instance_name}}",
               "range": true,
               "refId": "A"
             }
@@ -2518,7 +2599,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 14
+            "y": 34
           },
           "id": 20,
           "options": {
@@ -2545,9 +2626,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\"})",
+              "expr": "topk(20, libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\", job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "1m",
-              "legendFormat": "{{domain}}",
+              "legendFormat": "{{instance_name}}",
               "range": true,
               "refId": "A"
             }
@@ -2603,7 +2684,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -2615,7 +2697,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 22
+            "y": 42
           },
           "id": 21,
           "options": {
@@ -2642,9 +2724,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"} - libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+              "expr": "topk(20, libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"} - libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
               "interval": "1m",
-              "legendFormat": "{{domain}}",
+              "legendFormat": "{{instance_name}}",
               "range": true,
               "refId": "A"
             }
@@ -2714,7 +2796,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 22
+            "y": 42
           },
           "id": 26,
           "options": {
@@ -2741,9 +2823,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, libvirt_domain_memory_stats_rss_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"})",
+              "expr": "topk(20, libvirt_domain_memory_stats_rss_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "1m",
-              "legendFormat": "{{domain}}",
+              "legendFormat": "{{instance_name}}",
               "range": true,
               "refId": "A"
             }
@@ -2813,7 +2895,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 30
+            "y": 50
           },
           "id": 25,
           "options": {
@@ -2912,7 +2994,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 30
+            "y": 50
           },
           "id": 27,
           "options": {
@@ -2974,7 +3056,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 24
       },
       "id": 37,
       "panels": [
@@ -3037,7 +3119,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 100
+            "y": 25
           },
           "id": 38,
           "options": {
@@ -3065,9 +3147,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])*8)",
+              "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})*8)",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -3135,7 +3217,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 100
+            "y": 25
           },
           "id": 39,
           "options": {
@@ -3163,9 +3245,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])*8)",
+              "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})*8)",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -3234,7 +3316,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 108
+            "y": 33
           },
           "id": 40,
           "options": {
@@ -3261,9 +3343,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_packets_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))",
+              "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_packets_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -3332,7 +3414,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 108
+            "y": 33
           },
           "id": 41,
           "options": {
@@ -3359,9 +3441,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))",
+              "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -3431,7 +3513,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 116
+            "y": 41
           },
           "id": 42,
           "options": {
@@ -3458,9 +3540,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))",
+              "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -3529,7 +3611,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 116
+            "y": 41
           },
           "id": 43,
           "options": {
@@ -3556,9 +3638,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])",
+              "expr": "rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -3628,7 +3710,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 124
+            "y": 49
           },
           "id": 44,
           "options": {
@@ -3655,9 +3737,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "rate(libvirt_domain_interface_stats_receive_drops_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])",
+              "expr": "rate(libvirt_domain_interface_stats_receive_drops_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -3727,7 +3809,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 124
+            "y": 49
           },
           "id": 45,
           "options": {
@@ -3754,9 +3836,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "rate(libvirt_domain_interface_stats_transmit_drops_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval])",
+              "expr": "rate(libvirt_domain_interface_stats_transmit_drops_total{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}}",
+              "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
             }
@@ -3788,7 +3870,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 25
       },
       "id": 29,
       "panels": [
@@ -3849,18 +3931,6 @@
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "Domain"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 307
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
                   "options": "vCPU Used"
                 },
                 "properties": [
@@ -3900,29 +3970,28 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 6
+            "y": 26
           },
-          "id": 62,
+          "id": 65,
           "options": {
             "cellHeight": "md",
             "footer": {
-              "countRows": false,
+              "countRows": true,
               "fields": [
                 "vCPU Total (lastNotNull)",
-                "vCPU Used (lastNotNull)",
                 "Memory Total (lastNotNull)",
                 "Memory Used (lastNotNull)"
               ],
               "reducer": [
-                "sum"
+                "count"
               ],
               "show": true
             },
             "showHeader": true,
             "sortBy": [
               {
-                "desc": false,
-                "displayName": "Region"
+                "desc": true,
+                "displayName": "Memory Used"
               }
             ]
           },
@@ -3935,7 +4004,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}",
+              "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}  * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
               "format": "table",
               "instant": true,
               "interval": "$interval",
@@ -4015,7 +4084,9 @@
                   "__name__": true,
                   "host": true,
                   "instance": true,
-                  "job": true
+                  "instance_name": false,
+                  "job": true,
+                  "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": true
                 },
                 "indexByName": {},
                 "renameByName": {
@@ -4056,7 +4127,31 @@
                     ],
                     "operation": "aggregate"
                   },
+                  "flavor": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "instance_name": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
                   "os_region": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "project_name": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "user_name": {
                     "aggregations": [
                       "lastNotNull"
                     ],
@@ -4087,7 +4182,11 @@
                   "Memory Total (lastNotNull)": "Memory Total",
                   "Memory Used (lastNotNull)": "Memory Used",
                   "compute (lastNotNull)": "Compute",
+                  "flavor (lastNotNull)": "Flavor",
+                  "instance_name (lastNotNull)": "Instance Name",
                   "os_region (lastNotNull)": "Region",
+                  "project_name (lastNotNull)": "Project",
+                  "user_name (lastNotNull)": "UserName",
                   "vCPU Total (lastNotNull)": "vCPU Total",
                   "vCPU Used (lastNotNull)": "vCPU Used"
                 }
@@ -4286,15 +4385,40 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", project_name=\"${project}\", os_region=\"$cluster\"},domain)",
+        "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", project_name=\"${project}\", os_region=\"$cluster\"},instance_name)",
         "hide": 0,
+        "includeAll": true,
+        "label": "Instance",
+        "multi": true,
+        "name": "instance_name",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", project_name=\"${project}\", os_region=\"$cluster\"},instance_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", project_name=\"${project}\", os_region=\"$cluster\", instance_name=~\"$instance_name\"},domain)",
+        "hide": 2,
         "includeAll": true,
         "label": "VM",
         "multi": true,
         "name": "virtual_machine",
         "options": [],
         "query": {
-          "query": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", project_name=\"${project}\", os_region=\"$cluster\"},domain)",
+          "qryType": 1,
+          "query": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", project_name=\"${project}\", os_region=\"$cluster\", instance_name=~\"$instance_name\"},domain)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -4324,6 +4448,6 @@
   "timezone": "",
   "title": "Openstack VM/Project Overview",
   "uid": "f4561742-da51-44ab-8bd2-9bc4b120a988",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
