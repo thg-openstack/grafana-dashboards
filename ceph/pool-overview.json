@@ -224,7 +224,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "count(ceph_pool_metadata{job=~\"$job\", compression_mode!=\"none\"})",
+          "expr": "count(ceph_pool_metadata{job=~\"$job\", compression_mode!=\"none\",cluster_name=~\"$cluster\"})",
           "format": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -304,7 +304,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_osd_stat_bytes{job=~\"$job\"})",
+          "expr": "sum(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=\"$cluster\"})",
           "format": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -384,7 +384,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pool_bytes_used{job=~\"$job\"})",
+          "expr": "sum(ceph_pool_bytes_used{job=~\"$job\", cluster_name=~\"$cluster\"})",
           "format": "",
           "instant": true,
           "intervalFactor": 1,
@@ -465,7 +465,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pool_stored{job=~\"$job\"})",
+          "expr": "sum(ceph_pool_stored{job=~\"$job\",cluster_name=~\"$cluster\"})",
           "format": "",
           "instant": true,
           "intervalFactor": 1,
@@ -546,7 +546,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\"} -\n    ceph_pool_compress_bytes_used{job=~\"$job\"}\n)\n",
+          "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\",cluster_name=~\"$cluster\"} -\n    ceph_pool_compress_bytes_used{job=~\"$job\",cluster_name=~\"$cluster\"}\n)\n",
           "format": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -626,7 +626,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "(\n  sum(ceph_pool_compress_under_bytes{job=~\"$job\"} > 0) /\n    sum(ceph_pool_stored_raw{job=~\"$job\"} and ceph_pool_compress_under_bytes{job=~\"$job\"} > 0)\n) * 100\n",
+          "expr": "(\n  sum(ceph_pool_compress_under_bytes{job=~\"$job\",cluster_name=~\"$cluster\"} > 0) /\n    sum(ceph_pool_stored_raw{job=~\"$job\",cluster_name=~\"$cluster\"} and ceph_pool_compress_under_bytes{job=~\"$job\",cluster_name=~\"$cluster\"} > 0)\n) * 100\n",
           "format": "table",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -706,7 +706,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\"} > 0)\n    / sum(ceph_pool_compress_bytes_used{job=~\"$job\"} > 0\n)\n",
+          "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\",cluster_name=~\"$cluster\"} > 0)\n    / sum(ceph_pool_compress_bytes_used{job=~\"$job\",cluster_name=~\"$cluster\"} > 0\n)\n",
           "format": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1839,7 +1839,7 @@
   },
   "timezone": "",
   "title": "Ceph Pools Overview",
-  "uid": "e112d59a-0a4e-4eff-9bc7-8e04f3bbabb5",
-  "version": 1,
+  "uid": "d2ab2354-a0c0-4b41-bd52-3e5dbe38f23c",
+  "version": 2,
   "weekStart": ""
 }
