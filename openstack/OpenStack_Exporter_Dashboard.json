@@ -153,13 +153,15 @@
       "id": 38,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -434,7 +436,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg(openstack_neutron_floating_ips{os_region=~\"$cluster\"}) ",
+          "expr": "sum(openstack_neutron_floating_ips{os_region=~\"$cluster\"}) ",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "floating ips",
@@ -447,7 +449,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg(openstack_neutron_networks{os_region=~\"$cluster\"})",
+          "expr": "sum(openstack_neutron_networks{os_region=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "networks",
@@ -459,10 +461,12 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "avg(openstack_neutron_security_groups{os_region=~\"$cluster\"})",
+          "editorMode": "code",
+          "expr": "sum(openstack_neutron_security_groups{os_region=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "security groups",
+          "range": true,
           "refId": "C"
         },
         {
@@ -470,10 +474,12 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "avg(openstack_neutron_subnets{os_region=~\"$cluster\"})",
+          "editorMode": "code",
+          "expr": "sum(openstack_neutron_subnets{os_region=~\"$cluster\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "subnets",
+          "range": true,
           "refId": "D"
         },
         {
@@ -661,7 +667,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -1831,8 +1837,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1848,7 +1853,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 53
+            "y": 29
           },
           "id": 2,
           "links": [],
@@ -1964,8 +1969,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1981,7 +1985,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 53
+            "y": 29
           },
           "id": 4,
           "links": [],
@@ -2082,8 +2086,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2099,7 +2102,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 62
+            "y": 38
           },
           "id": 6,
           "links": [],
@@ -2200,8 +2203,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2217,7 +2219,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 62
+            "y": 38
           },
           "id": 30,
           "links": [],
@@ -2348,8 +2350,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2365,7 +2366,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 71
+            "y": 47
           },
           "id": 10,
           "links": [],
@@ -2474,8 +2475,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2512,7 +2512,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 71
+            "y": 47
           },
           "id": 8,
           "links": [],
@@ -2611,8 +2611,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2628,7 +2627,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 80
+            "y": 56
           },
           "id": 32,
           "links": [],
@@ -2726,8 +2725,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2743,7 +2741,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 80
+            "y": 56
           },
           "id": 34,
           "links": [],
@@ -2794,6 +2792,143 @@
       ],
       "title": "Resource Usage",
       "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 29
+      },
+      "id": 44,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": true
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "decgbytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 146
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cluster"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 104
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 30
+          },
+          "id": 45,
+          "options": {
+            "cellHeight": "md",
+            "footer": {
+              "countRows": false,
+              "enablePagination": false,
+              "fields": [],
+              "reducer": [],
+              "show": true
+            },
+            "frameIndex": 151,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "cluster"
+              }
+            ]
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "openstack_cinder_volume_gb{name=~\"pvc-(.*)\",os_region=~\"$cluster\"}",
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Data exporter for PVC Volumes",
+          "transformations": [
+            {
+              "id": "timeSeriesTable",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Trend": false,
+                  "__name__": true,
+                  "bootable": true,
+                  "instance": true,
+                  "job": true,
+                  "name": false,
+                  "user_id": true
+                },
+                "indexByName": {},
+                "renameByName": {
+                  "os_region": "cluster"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "PVC Data Exporter",
+      "type": "row"
     }
   ],
   "refresh": "",
@@ -2833,8 +2968,8 @@
       {
         "current": {
           "selected": false,
-          "text": "NetworMeshMon",
-          "value": "45F064FB-7389-4B6D-94BC-C7A926F53936"
+          "text": "Prometheus",
+          "value": "Prometheus"
         },
         "hide": 2,
         "includeAll": false,
@@ -2881,8 +3016,8 @@
     ]
   },
   "timezone": "",
-  "title": "OpenStack Dashboardv2 Work in Progress",
-  "uid": "d18c8d38-8cb4-464f-80f4-3778c4d17b3a",
-  "version": 9,
+  "title": "OpenStack Dashboardv2",
+  "uid": "YZCsB1Qmz",
+  "version": 12,
   "weekStart": ""
 }
