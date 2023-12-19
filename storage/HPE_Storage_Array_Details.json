@@ -166,6 +166,8 @@
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
+          "sortBy": "Value",
+          "sortDesc": false,
           "values": [
             "value"
           ]
@@ -191,7 +193,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=~\"$array\"})",
+          "expr": "sum(hpe_storagepool_volume_used_bytes{array=~\"$array\"}) - sum(hpe_storagepool_data_reduction_bytes{array=~\"$array\"})",
           "instant": false,
           "interval": "",
           "legendFormat": "Used",
@@ -228,6 +230,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=~\"$array\"})",
           "hide": false,
@@ -241,6 +244,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(hpe_storagepool_data_reduction_bytes{array=~\"$array\"})",
           "hide": false,
@@ -1302,8 +1306,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2267,7 +2270,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "15",
           "value": "15"
         },
@@ -2351,7 +2354,7 @@
         "name": "pool",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "",
             "value": ""
           }
@@ -2364,7 +2367,7 @@
         "current": {
           "selected": false,
           "text": "VictoriaMetrics",
-          "value": "4c169895-5cc5-43be-b621-4f110e6af801"
+          "value": "0327ed88-2327-4893-b15f-b98eb99b9b41"
         },
         "hide": 2,
         "includeAll": false,
