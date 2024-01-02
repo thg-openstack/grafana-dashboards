@@ -1464,7 +1464,7 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "(.*)",
+        "regex": "/[^bhdjy$]/g",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
@@ -1542,6 +1542,6 @@
   "timezone": "",
   "title": "Host Details",
   "uid": "d52cf0bc-b22f-4d23-9adb-3adade779ee4",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }

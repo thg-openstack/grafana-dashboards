@@ -651,7 +651,7 @@
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
-         "regex": "(.*)",
+         "regex": "/[^bhdjy$]/g",
          "skipUrlSync": false,
          "sort": 1,
          "tagValuesQuery": "",
@@ -753,6 +753,6 @@
    "timezone": "",
    "title": "Ceph Pool Details",
    "uid": "c8fea891-54d4-41fc-9fd3-c56d749ab6ca",
-   "version": 17,
+   "version": 18,
    "weekStart": ""
  }

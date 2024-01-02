@@ -1362,7 +1362,7 @@
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
-         "regex": "(.*)",
+         "regex": "/[^bhdjy$]/g",
          "skipUrlSync": false,
          "sort": 1,
          "tagValuesQuery": "",
@@ -1432,6 +1432,6 @@
    "timezone": "",
    "title": "OSD Overview",
    "uid": "b5166c19-00f5-43ad-a1e2-3cc3a5651729",
-   "version": 11,
+   "version": 12,
    "weekStart": ""
  }

@@ -143,7 +143,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "count(ceph_pool_metadata{job=~\"$job\"})",
+          "expr": "count(ceph_pool_metadata{job=~\"$job\",cluster_name=~\"$cluster\"})",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1727,7 +1727,7 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "(.*)",
+        "regex": "/[^bhdjy$]/g",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
@@ -1840,6 +1840,6 @@
   "timezone": "",
   "title": "Ceph Pools Overview",
   "uid": "e112d59a-0a4e-4eff-9bc7-8e04f3bbabb5",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }
