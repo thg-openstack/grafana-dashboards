@@ -651,6 +651,7 @@
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
+         "comment": "Remove below regex once the labels are cleaned up",
          "regex": "/[^bhdjy$]/g",
          "skipUrlSync": false,
          "sort": 1,
