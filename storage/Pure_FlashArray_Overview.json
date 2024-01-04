@@ -1,5 +1,14 @@
 {
-  "__inputs": [],
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
   "__elements": {},
   "__requires": [
     {
@@ -2975,6 +2984,6 @@
   "timezone": "",
   "title": "Pure Storage FlashArray - Overview",
   "uid": "c7941883-9c73-4ba6-b3ad-22fea935f187",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
