@@ -20,11 +20,6 @@ jobs:
         with:
           path: kubernetes-mixin
           repository: kubernetes-monitoring/kubernetes-mixin
-      - name: create directory in repo
-        shell: bash
-        working-directory: grafana-dashboards
-        run: |
-          mkdir -p ./k8s-generated
       - name: install required packages
         shell: bash
         run: |
@@ -46,14 +41,14 @@ jobs:
       - name: move dashboards to our repo
         shell: bash
         run: |
-          rsync -avP kubernetes-mixin/dashboards_out/ grafana-dashboards/k8s-generated/
+          rsync -avP kubernetes-mixin/dashboards_out/ grafana-dashboards/kubernetes/
       - name: Commit files
         working-directory: grafana-dashboards
         run: |
           git config --local user.email "dl-osadmins@thehutgroup.com"
           git config --local user.name "github-actions[bot]"
           git add -A .
-          git commit -m "Auto Generated k8s-mixin"
+          git commit -m "Auto Generated k8s-mixin $(date)"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -62,6 +57,6 @@ jobs:
           branch: k8s_automation_${{ github.run_id }}
       - name: create pull request
         working-directory: grafana-dashboards
-        run: gh pr create -B main -H k8s_automation_${{ github.run_id }} --title 'Merge k8s_automation_${{ github.job }} into base_branch' --body 'Created by Github action'
+        run: gh pr create -B main -H k8s_automation_${{ github.run_id }} --title 'Merge k8s_automation_${{ github.job }} into main' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
