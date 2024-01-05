@@ -1,0 +1,53 @@
+---
+name: "Generate K8s Mixin Dashboards"
+on:
+  workflow_dispatch:
+jobs:
+  generate_k8s_dashboards:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out code
+        uses: actions/checkout@v3
+        with:
+          path: grafana-dashboards
+      - name: create new branch
+        shell: bash
+        working-directory: grafana-dashboards
+        run: |
+          git checkout -b k8s_automation_${{ github.job }}
+      - name: check out k8s mixin dashboards
+        uses: actions/checkout@v3
+        with:
+          path: kubernetes-mixin
+          repository: kubernetes-monitoring/kubernetes-mixin
+      - name: create directory in repo
+        shell: bash
+        working-directory: grafana-dashboards
+        run: |
+          mkdir -p ./k8s-generated
+      - name: install required packages
+        shell: bash
+        run: |
+          apt install -y jsonnet golang
+      - name: install jsonnet-bundler
+        shell: bash
+        run: |
+          go install -a github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
+      - name: install jb dependancies
+        shell: bash
+        working-directory: kubernetes-mixin
+        run: |
+          jb install
+      - name: generate k8s mixin dashboards
+        shell: bash
+        working-directory: kubernetes-mixin
+        run: |
+          BIN_DIR="/usr/bin" make dashboards_out
+      - name: move dashboards to our repo
+        shell: bash
+        run: |
+          rsync -avP kubernetes-mixin/dashboards_out/ grafana-dashboards/k8s-generated/
+      - name: create pull request
+        run: gh pr create -B main -H k8s_automation_${{ github.job }} --title 'Merge k8s_automation_${{ github.job }} into base_branch' --body 'Created by Github action'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
