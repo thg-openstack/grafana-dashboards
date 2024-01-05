@@ -51,7 +51,15 @@ jobs:
         shell: bash
         run: |
           rsync -avP kubernetes-mixin/dashboards_out/ grafana-dashboards/k8s-generated/
+      - name: push changes to grafana-dashboards
+        shell: bash
+        working-directory: grafana-dashboards
+        run: |
+          git push origin k8s_automation_${{ github.job }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: create pull request
+        working-directory: grafana-dashboards
         run: gh pr create -B main -H k8s_automation_${{ github.job }} --title 'Merge k8s_automation_${{ github.job }} into base_branch' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
