@@ -6,10 +6,6 @@ jobs:
   generate_k8s_dashboards:
     runs-on: ubuntu-latest
     steps:
-      - name: show some stuff for debug
-        shell: bash
-        run: |
-          go env
       - name: check out code
         uses: actions/checkout@v3
         with:
@@ -18,7 +14,7 @@ jobs:
         shell: bash
         working-directory: grafana-dashboards
         run: |
-          git checkout -b k8s_automation_${{ github.job }}
+          git checkout -b k8s_automation_${{ github.run_id }}
       - name: check out k8s mixin dashboards
         uses: actions/checkout@v3
         with:
@@ -51,15 +47,18 @@ jobs:
         shell: bash
         run: |
           rsync -avP kubernetes-mixin/dashboards_out/ grafana-dashboards/k8s-generated/
-      - name: push changes to grafana-dashboards
-        shell: bash
-        working-directory: grafana-dashboards
+      - name: Commit files
         run: |
-          git push origin k8s_automation_${{ github.job }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git config --local user.email "dl-osadmins@thehutgroup.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Auto Generated k8s-mixin"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: k8s_automation_${{ github.run_id }}
       - name: create pull request
         working-directory: grafana-dashboards
-        run: gh pr create -B main -H k8s_automation_${{ github.job }} --title 'Merge k8s_automation_${{ github.job }} into base_branch' --body 'Created by Github action'
+        run: gh pr create -B main -H k8s_automation_${{ github.run_id }} --title 'Merge k8s_automation_${{ github.job }} into base_branch' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
