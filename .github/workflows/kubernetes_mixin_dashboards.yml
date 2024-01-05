@@ -48,6 +48,7 @@ jobs:
         run: |
           rsync -avP kubernetes-mixin/dashboards_out/ grafana-dashboards/k8s-generated/
       - name: Commit files
+        working-directory: grafana-dashboards
         run: |
           git config --local user.email "dl-osadmins@thehutgroup.com"
           git config --local user.name "github-actions[bot]"
@@ -55,6 +56,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
+          directory: grafana-dashboards
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: k8s_automation_${{ github.run_id }}
       - name: create pull request
