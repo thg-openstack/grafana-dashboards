@@ -6,6 +6,10 @@ jobs:
   generate_k8s_dashboards:
     runs-on: ubuntu-latest
     steps:
+      - name: show some stuff for debug
+        shell: bash
+        run: |
+          go env
       - name: check out code
         uses: actions/checkout@v3
         with:
