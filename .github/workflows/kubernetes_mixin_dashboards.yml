@@ -37,12 +37,12 @@ jobs:
         shell: bash
         working-directory: kubernetes-mixin
         run: |
-          jb install
+          GOROOT=$HOME/go PATH=$PATH:$GOROOT/bin jb install
       - name: generate k8s mixin dashboards
         shell: bash
         working-directory: kubernetes-mixin
         run: |
-          BIN_DIR="/usr/bin" make dashboards_out
+          GOROOT=$HOME/go PATH=$PATH:$GOROOT/bin BIN_DIR="/usr/bin" make dashboards_out
       - name: move dashboards to our repo
         shell: bash
         run: |
