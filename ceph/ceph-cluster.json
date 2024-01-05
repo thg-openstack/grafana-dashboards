@@ -1544,7 +1544,8 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
+        "comment": "Remove below regex once the labels are cleaned up",
+        "regex": "/[^bhdjy$]/g",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
@@ -1583,6 +1584,6 @@
   "timezone": "",
   "title": "Ceph  Cluster",
   "uid": "f26678d4-6bd1-4c95-a52e-15f0f2bba3d3",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
