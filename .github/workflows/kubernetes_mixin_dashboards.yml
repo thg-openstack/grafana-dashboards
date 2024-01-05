@@ -32,7 +32,7 @@ jobs:
       - name: install required packages
         shell: bash
         run: |
-          sudo apt install -y jsonnet golang
+          sudo apt install -y jsonnet
       - name: install jsonnet-bundler
         shell: bash
         run: |
