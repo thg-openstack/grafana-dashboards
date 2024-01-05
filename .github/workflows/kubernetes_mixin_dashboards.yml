@@ -46,7 +46,7 @@ jobs:
         shell: bash
         working-directory: kubernetes-mixin
         run: |
-          BIN_DIR=$GOROOT GOMODCACHE=$GOROOT/pkg/mod make dashboards_out
+          sudo BIN_DIR=$HOME/go GOMODCACHE=$GOROOT/pkg/mod make dashboards_out
       - name: move dashboards to our repo
         shell: bash
         run: |
