@@ -52,7 +52,8 @@ jobs:
         run: |
           git config --local user.email "dl-osadmins@thehutgroup.com"
           git config --local user.name "github-actions[bot]"
-          git commit -a -m "Auto Generated k8s-mixin"
+          git add -A .
+          git commit -m "Auto Generated k8s-mixin"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
