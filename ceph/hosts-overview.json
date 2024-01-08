@@ -785,7 +785,7 @@
          },
          "refresh": 1,
          "comment": "Remove below regex once the labels are cleaned up",
-         "regex": "/[^bhdjy$]/g",
+         "regex": "/[^bhdjy$,^rmtzh$]/g",
          "skipUrlSync": false,
          "sort": 1,
          "tagValuesQuery": "",
