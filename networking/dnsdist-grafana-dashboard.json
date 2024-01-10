@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_VICTORIAMETRICS",
-      "label": "VictoriaMetrics",
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -70,7 +70,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -137,7 +137,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "dnsdist_uptime{instance=~\"$instance\"}",
@@ -186,7 +186,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -250,7 +250,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "rate(dnsdist_frontend_queries{instance=~\"$instance\",proto=\"UDP\"}[5m])*300",
@@ -296,7 +296,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "",
           "hide": false,
@@ -311,7 +311,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -379,7 +379,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "count(dnsdist_pool_active_servers{instance=~\"$instance\", job=\"dnsdist\", pool=~\".*\"})",
@@ -427,7 +427,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Busy state of all CPU cores together (5 min average)",
       "fieldConfig": {
@@ -497,7 +497,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "avg(node_load5{job=~\"(?i:(${Site1ActiveDNS:pipe}).*)\"}) /  count(count(node_cpu_seconds_total{job=~\"(?i:(${Site1ActiveDNS:pipe}).*)\"}) by (cpu)) * 100",
           "format": "time_series",
@@ -513,7 +513,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -621,7 +621,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "round(rate(dnsdist_server_drops{address=~\"$address\"}[5m]) * 100) ",
           "format": "time_series",
@@ -638,7 +638,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -746,7 +746,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "dnsdist_server_latency{address=~\"$address\"}",
           "format": "time_series",
@@ -763,7 +763,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -831,7 +831,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "dnsdist_downstream_send_errors{instance=~\"$instance\"}",
@@ -880,7 +880,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -948,7 +948,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "round(rate(dnsdist_downstream_timeouts{instance=~\"$instance\"}[5m])*300)",
@@ -997,7 +997,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1061,7 +1061,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "rate(dnsdist_frontend_queries{instance=~\"$instance\",proto=\"TCP\"}[5m])*300",
@@ -1110,7 +1110,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Active VIP Used Root FS",
       "fieldConfig": {
@@ -1180,7 +1180,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 - ((node_filesystem_avail_bytes{instance=~\"$instance\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=~\"$instance\",mountpoint=\"/\",fstype!=\"rootfs\"})",
@@ -1198,7 +1198,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Non available RAM memory",
       "fieldConfig": {
@@ -1263,7 +1263,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "((node_memory_MemTotal_bytes{instance=~\"$node:$port\",job=~\"$job\"} - node_memory_MemFree_bytes{instance=~\"$node:$port\",job=~\"$job\"}) / (node_memory_MemTotal_bytes{instance=~\"$node:$port\",job=~\"$job\"} )) * 100",
@@ -1278,7 +1278,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=~\"$instance\"} * 100) / node_memory_MemTotal_bytes{instance=~\"$instance\"})",
@@ -1297,7 +1297,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Number of responses received from backends",
       "fieldConfig": {
@@ -1428,7 +1428,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum(irate(dnsdist_responses{instance=~\"$instance\"}[5m])) by (instance)",
           "format": "time_series",
@@ -1446,7 +1446,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1554,7 +1554,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum (rate(dnsdist_latency0_1{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
@@ -1568,7 +1568,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum (rate(dnsdist_latency1_10{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
@@ -1582,7 +1582,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum (rate(dnsdist_latency10_100{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
@@ -1597,7 +1597,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum (rate(dnsdist_latency100_1000{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
@@ -1610,7 +1610,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum (rate(dnsdist_latency_slow{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
@@ -1628,7 +1628,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Number of times an answer was retrieved from cache",
       "fieldConfig": {
@@ -1758,7 +1758,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "rate(dnsdist_cache_hits{instance=~\"$instance\"}[5m])*60",
           "format": "time_series",
@@ -1776,7 +1776,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Number of times an answer not found in the cache",
       "fieldConfig": {
@@ -1906,7 +1906,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "rate(dnsdist_cache_misses{instance=~\"$instance\"}[5m])*60",
           "format": "time_series",
@@ -1924,7 +1924,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "response latency of the last 1K packets",
       "fieldConfig": {
@@ -2054,7 +2054,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "dnsdist_latency_avg1000{instance=~\"$instance\"}",
           "format": "time_series",
@@ -2072,7 +2072,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2200,7 +2200,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum(rate(dnsdist_real_memory_usage{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
@@ -2217,7 +2217,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2345,7 +2345,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum(rate(dnsdist_cpu_sys_msec{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
@@ -2358,7 +2358,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum(rate(dnsdist_cpu_user_msec{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
@@ -2375,7 +2375,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -2464,7 +2464,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "node_filesystem_avail_bytes{instance=~\"$instance\",device!~'rootfs'}",
@@ -2480,7 +2480,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "node_filesystem_free_bytes{instance=~\"(?i:(${Site1DNSHost:pipe}).*)\",device!~'rootfs'}",
           "format": "time_series",
@@ -2493,7 +2493,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "node_filesystem_size_bytes{instance=~\"(?i:(${Site1DNSHost:pipe}).*)\",device!~'rootfs'}",
           "format": "time_series",
@@ -2596,7 +2596,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "label_replace(node_memory_MemTotal_bytes{instance=~\"$instance\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") - (label_replace(node_memory_MemFree_bytes{instance=~\"(${ILLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") + label_replace(node_memory_Cached_bytes{instance=~\"(${ILLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") + label_replace(node_memory_Buffers_bytes{instance=~\"(${ILLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\"))",
@@ -2610,7 +2610,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "label_replace(node_memory_MemTotal_bytes{instance=~\"(${USLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") - (label_replace(node_memory_MemFree_bytes{instance=~\"(${USLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") + label_replace(node_memory_Cached_bytes{instance=~\"(${USLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") + label_replace(node_memory_Buffers_bytes{instance=~\"(${USLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\"))",
           "format": "time_series",
@@ -2622,7 +2622,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "label_replace(node_memory_MemTotal_bytes{instance=~\"(${BYLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") - (label_replace(node_memory_MemFree_bytes{instance=~\"(${BYLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") + label_replace(node_memory_Cached_bytes{instance=~\"(${BYLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") + label_replace(node_memory_Buffers_bytes{instance=~\"(${BYLBHost:pipe}).*\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\"))",
           "format": "time_series",
@@ -2634,7 +2634,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 - ((label_replace(node_memory_MemAvailable_bytes{instance=~\"$instance\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") * 100) / label_replace(node_memory_MemTotal_bytes{instance=~\"$instance\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\"))",
@@ -2648,7 +2648,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 - ((label_replace(node_memory_MemAvailable_bytes{instance=~\"$instance\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") * 100) / label_replace(node_memory_MemTotal_bytes{instance=~\"$instance\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\"))",
@@ -2754,7 +2754,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "label_replace(node_load5{instance=~\"$instance\"}, \"instance\", \"$1\", \"instance\", \"^([^.]+).*\") / count(label_replace(node_cpu_seconds_total{instance=~\"$instance\",mode=\"system\"},\"instance\", \"$1\", \"instance\", \"^([^.]+).*\")) WITHOUT (cpu, mode)",
@@ -3319,7 +3319,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "label_replace(rate(node_network_transmit_bytes_total{instance=~\"$instance\",device!=\"lo\"}[5m]), \"instance\", \"$1\", \"instance\", \"^([^.]+).*\")",
@@ -3884,7 +3884,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "label_replace(rate(node_network_receive_bytes_total{instance=~\"$instance\",device!=\"lo\"}[5m]), \"instance\", \"$1\", \"instance\", \"^([^.]+).*\")",
@@ -3913,7 +3913,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_VICTORIAMETRICS}"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(dnsdist_uptime, instance)",
         "hide": 0,
@@ -3936,7 +3936,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_VICTORIAMETRICS}"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(dnsdist_server_drops,address)",
         "hide": 0,
@@ -3959,7 +3959,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_VICTORIAMETRICS}"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(node_uname_info, nodename)",
         "hide": 2,
@@ -3981,7 +3981,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_VICTORIAMETRICS}"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(node_uname_info, job)",
         "hide": 0,
@@ -4032,6 +4032,6 @@
   "timezone": "browser",
   "title": "dnsdist dashboard",
   "uid": "c79b1f58-fb3a-4b60-a0b5-21dac6fc7101",
-  "version": 23,
+  "version": 24,
   "weekStart": ""
 }
