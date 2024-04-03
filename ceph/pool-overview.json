@@ -1635,7 +1635,7 @@
                 "value": {
                   "legend": false,
                   "tooltip": false,
-                  "viz": true
+                  "viz": false
                 }
               }
             ]
@@ -1652,8 +1652,12 @@
       "links": [],
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1670,10 +1674,10 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "ceph_pool_bytes_used {job=~\"$job\", cluster_name=~\"$cluster\"} * on(pool_id) group_right ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}",
+          "expr": "ceph_pool_bytes_used {job=~\"$job\", cluster_name=~\"$cluster\", pool_id=\"$pool_id\"} * on(pool_id) group_right ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "__auto",
+          "legendFormat": "{{cluster_name}}-{{name}}",
           "range": true,
           "refId": "A"
         }
@@ -1710,6 +1714,7 @@
       },
       {
         "allValue": ".+",
+        "comment": "Remove below regex once the labels are cleaned up",
         "current": {},
         "datasource": {
           "type": "prometheus",
@@ -1727,7 +1732,6 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "comment": "Remove below regex once the labels are cleaned up",
         "regex": "/[^bhdjy$,^rmtzh$]/g",
         "skipUrlSync": false,
         "sort": 1,
@@ -1806,6 +1810,30 @@
         "refresh": 0,
         "skipUrlSync": false,
         "type": "custom"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(ceph_pool_metadata{cluster_name=\"$cluster\", name=\"$pool_name\"},pool_id)",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Pool Name",
+        "multi": false,
+        "name": "pool_id",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(ceph_pool_metadata{cluster_name=\"$cluster\", name=\"$pool_name\"},pool_id)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -1841,6 +1869,6 @@
   "timezone": "",
   "title": "Ceph Pools Overview",
   "uid": "e112d59a-0a4e-4eff-9bc7-8e04f3bbabb5",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
