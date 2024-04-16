@@ -145,7 +145,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_write_ops{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
+           "expr": "rate(ceph_rbd_write_ops{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Write",
@@ -158,7 +158,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_read_ops{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
+           "expr": "rate(ceph_rbd_read_ops{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Read",
@@ -258,7 +258,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_write_bytes{job=~\"$job\", pool=\"$pool\", image=\"$image\",cluster_name=\"$cluster\"}[$__rate_interval])",
+           "expr": "rate(ceph_rbd_write_bytes{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\",cluster_name=\"$cluster\"}[$__rate_interval])",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Write",
@@ -271,7 +271,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_read_bytes{job=~\"$job\", pool=\"$pool\", image=\"$image\",cluster_name=\"$cluster\"}[$__rate_interval])",
+           "expr": "rate(ceph_rbd_read_bytes{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\",cluster_name=\"$cluster\"}[$__rate_interval])",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Read",
@@ -371,7 +371,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_write_latency_sum{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_write_latency_count{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
+           "expr": "rate(ceph_rbd_write_latency_sum{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_write_latency_count{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Write",
@@ -384,7 +384,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_read_latency_sum{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_read_latency_count{job=~\"$job\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
+           "expr": "rate(ceph_rbd_read_latency_sum{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_read_latency_count{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Read",

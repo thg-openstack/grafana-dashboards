@@ -114,7 +114,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_bytes_sum{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]))",
+           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_bytes_sum{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{source_zone}}",
@@ -178,7 +178,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_bytes_count{job=~\"$job\"}[$__rate_interval]))",
+           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_bytes_count{job=~\"ceph|ceph-exporter\"}[$__rate_interval]))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{source_zone}}",
@@ -271,7 +271,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_poll_latency_sum{job=~\"$job\"}[$__rate_interval]))",
+           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_poll_latency_sum{job=~\"ceph|ceph-exporter\"}[$__rate_interval]))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{source_zone}}",
@@ -363,7 +363,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_errors{job=~\"$job\"}[$__rate_interval]))",
+           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_errors{job=~\"ceph|ceph-exporter\"}[$__rate_interval]))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{source_zone}}",
@@ -497,7 +497,7 @@
            "type": "prometheus",
            "uid": "${DS_PROMETHEUS}"
          },
-         "definition": "label_values(ceph_rgw_metadata{cluster_name=\"$cluster\", job=\"$job\"},ceph_daemon)",
+         "definition": "label_values(ceph_rgw_metadata{cluster_name=\"$cluster\", job=\"ceph|ceph-exporter\"},ceph_daemon)",
          "hide": 0,
          "includeAll": true,
          "label": "",
@@ -505,7 +505,7 @@
          "name": "rgw_servers",
          "options": [],
          "query": {
-           "query": "label_values(ceph_rgw_metadata{cluster_name=\"$cluster\", job=\"$job\"},ceph_daemon)",
+           "query": "label_values(ceph_rgw_metadata{cluster_name=\"$cluster\", job=\"ceph|ceph-exporter\"},ceph_daemon)",
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
