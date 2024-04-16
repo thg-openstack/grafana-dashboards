@@ -143,7 +143,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "sum by (instance_id) (\n  rate(ceph_rgw_get_initial_lat_sum{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    rate(ceph_rgw_get_initial_lat_count{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n) * on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "sum by (instance_id) (\n  rate(ceph_rgw_get_initial_lat_sum{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    rate(ceph_rgw_get_initial_lat_count{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval])\n) * on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "GET {{ceph_daemon}}",
@@ -156,7 +156,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "sum by (instance_id) (\n  rate(ceph_rgw_put_initial_lat_sum{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    rate(ceph_rgw_put_initial_lat_count{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n) * on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "sum by (instance_id) (\n  rate(ceph_rgw_put_initial_lat_sum{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    rate(ceph_rgw_put_initial_lat_count{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval])\n) * on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "PUT {{ceph_daemon}}",
@@ -256,7 +256,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rgw_get_b{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "rate(ceph_rgw_get_b{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "GETs {{ceph_daemon}}",
@@ -269,7 +269,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rgw_put_b{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon)\n  ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "rate(ceph_rgw_put_b{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon)\n  ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "PUTs {{ceph_daemon}}",
@@ -445,7 +445,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rgw_failed_req{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "rate(ceph_rgw_failed_req{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "Requests Failed {{ceph_daemon}}",
@@ -458,7 +458,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rgw_get{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "rate(ceph_rgw_get{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "GETs {{ceph_daemon}}",
@@ -471,7 +471,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rgw_put{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "rate(ceph_rgw_put{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "PUTs {{ceph_daemon}}",
@@ -484,7 +484,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "(\n  rate(ceph_rgw_req{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) -\n    (\n      rate(ceph_rgw_get{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_rgw_put{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n    )\n) * on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "(\n  rate(ceph_rgw_req{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) -\n    (\n      rate(ceph_rgw_get{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_rgw_put{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval])\n    )\n) * on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "Other {{ceph_daemon}}",
@@ -557,7 +557,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rgw_failed_req{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "rate(ceph_rgw_failed_req{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "Failures {{ceph_daemon}}",
@@ -570,7 +570,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rgw_get{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "rate(ceph_rgw_get{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "GETs {{ceph_daemon}}",
@@ -583,7 +583,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rgw_put{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "rate(ceph_rgw_put{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on (instance_id) group_left (ceph_daemon) ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "PUTs {{ceph_daemon}}",
@@ -596,7 +596,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "(\n  rate(ceph_rgw_req{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) -\n    (\n      rate(ceph_rgw_get{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_rgw_put{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n    )\n) * on (instance_id) group_left (ceph_daemon)\n  ceph_rgw_metadata{job=~\"$job\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
+           "expr": "(\n  rate(ceph_rgw_req{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) -\n    (\n      rate(ceph_rgw_get{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_rgw_put{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\"}[$__rate_interval])\n    )\n) * on (instance_id) group_left (ceph_daemon)\n  ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=~\"$cluster\", ceph_daemon=~\"$rgw_servers\"}\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "Other (DELETE,LIST) {{ceph_daemon}}",
@@ -701,7 +701,7 @@
            "type": "prometheus",
            "uid": "${DS_PROMETHEUS}"
          },
-         "definition": "label_values(ceph_rgw_metadata{job=~\"$job\", cluster_name=\"$cluster\"},ceph_daemon)",
+         "definition": "label_values(ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=\"$cluster\"},ceph_daemon)",
          "hide": 0,
          "includeAll": false,
          "label": "",
@@ -709,7 +709,7 @@
          "name": "rgw_servers",
          "options": [],
          "query": {
-           "query": "label_values(ceph_rgw_metadata{job=~\"$job\", cluster_name=\"$cluster\"},ceph_daemon)",
+           "query": "label_values(ceph_rgw_metadata{job=~\"ceph|ceph-exporter\", cluster_name=\"$cluster\"},ceph_daemon)",
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
