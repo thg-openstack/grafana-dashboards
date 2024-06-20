@@ -3381,7 +3381,7 @@
           "query": "grafana-opensearch-datasource",
           "queryValue": "",
           "refresh": 1,
-          "regex": "/^OpenSearch/",
+          "regex": "/^OpenSearch_/",
           "skipUrlSync": false,
           "type": "datasource"
         }
