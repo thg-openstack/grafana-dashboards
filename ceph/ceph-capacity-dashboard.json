@@ -706,7 +706,9 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "max",
+            "min"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -867,7 +869,7 @@
           "expr": "ceph_pool_percent_used{cluster_name=\"us-dfw-object\", job=\"ceph\", pool_id=\"29\"}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "us-dfw-object-data-pool",
           "range": true,
           "refId": "A"
         }
@@ -1038,7 +1040,9 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "max",
+            "min"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -1184,7 +1188,7 @@
           "expr": "ceph_pool_percent_used{cluster_name=\"de-fra-object\", job=\"ceph\", pool_id=\"26\"}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "de-fra-object-data-pool",
           "range": true,
           "refId": "A"
         }
@@ -1341,7 +1345,9 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "max",
+            "min"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -1487,7 +1493,7 @@
           "expr": "ceph_pool_percent_used{cluster_name=\"de-fra-nvme-block\",job=\"ceph\",pool_id=\"2\"}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "de-fra-nvme-block-data-pool",
           "range": true,
           "refId": "A"
         }
@@ -1657,7 +1663,9 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "max",
+            "min"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -1807,7 +1815,7 @@
           "expr": "ceph_pool_percent_used{cluster_name=\"gb-lon-archive\", job=\"ceph\", pool_id=\"19\"}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "gb-lon-archive-data-pool",
           "range": true,
           "refId": "A"
         }
@@ -1965,7 +1973,9 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "max",
+            "min"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -2111,7 +2121,7 @@
           "expr": "ceph_pool_percent_used{cluster_name=\"gb-lon-object\", job=\"ceph\", pool_id=\"21\"}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "gb-lon-object-data-pool",
           "range": true,
           "refId": "A"
         }
@@ -2269,7 +2279,9 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "max",
+            "min"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -2415,7 +2427,7 @@
           "expr": "ceph_pool_percent_used{cluster_name=\"gb-lon-nvme-block\",job=\"ceph\",pool_id=\"2\"}",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "gb-lon-nvme-block-data-pool",
           "range": true,
           "refId": "A"
         }
@@ -2538,7 +2550,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "right",
+            "axisPlacement": "left",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -2594,7 +2606,7 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "right",
           "showLegend": true
         },
@@ -2610,6 +2622,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
+          "exemplar": false,
           "expr": "sum(ceph_pool_bytes_used{cluster_name=\"us-dfw-object\"})",
           "instant": false,
           "legendFormat": "RAW Consumed",
@@ -3773,7 +3786,7 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
@@ -3804,6 +3817,6 @@
   "timezone": "",
   "title": "Ceph capacity dashboard",
   "uid": "ed9ec6cf-b7fb-4af8-8309-1cedcea85e73",
-  "version": 10,
+  "version": 11,
   "weekStart": ""
 }
