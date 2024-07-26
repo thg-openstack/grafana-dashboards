@@ -887,6 +887,17 @@
       "type": "table"
     },
     {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 223,
+      "title": "DE1",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -935,7 +946,7 @@
         "h": 4,
         "w": 10,
         "x": 0,
-        "y": 19
+        "y": 20
       },
       "id": 214,
       "options": {
@@ -1036,7 +1047,7 @@
         "h": 4,
         "w": 7,
         "x": 10,
-        "y": 19
+        "y": 20
       },
       "id": 210,
       "options": {
@@ -1155,7 +1166,7 @@
         "h": 4,
         "w": 7,
         "x": 17,
-        "y": 19
+        "y": 20
       },
       "id": 208,
       "options": {
@@ -1242,7 +1253,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "orange",
@@ -1281,7 +1293,7 @@
         "h": 2,
         "w": 10,
         "x": 0,
-        "y": 23
+        "y": 24
       },
       "id": 211,
       "options": {
@@ -1368,7 +1380,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "orange",
@@ -1407,7 +1420,7 @@
         "h": 2,
         "w": 7,
         "x": 10,
-        "y": 23
+        "y": 24
       },
       "id": 215,
       "options": {
@@ -1494,7 +1507,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1526,7 +1540,7 @@
         "h": 2,
         "w": 7,
         "x": 17,
-        "y": 23
+        "y": 24
       },
       "id": 213,
       "options": {
@@ -1597,6 +1611,17 @@
       "type": "bargauge"
     },
     {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 222,
+      "title": "GB4",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -1612,7 +1637,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1644,7 +1670,7 @@
         "h": 4,
         "w": 10,
         "x": 0,
-        "y": 25
+        "y": 27
       },
       "id": 216,
       "options": {
@@ -1712,7 +1738,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1744,7 +1771,7 @@
         "h": 4,
         "w": 7,
         "x": 10,
-        "y": 25
+        "y": 27
       },
       "id": 218,
       "options": {
@@ -1830,7 +1857,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1862,7 +1890,7 @@
         "h": 4,
         "w": 7,
         "x": 17,
-        "y": 25
+        "y": 27
       },
       "id": 220,
       "options": {
@@ -1949,7 +1977,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "orange",
@@ -1988,7 +2017,7 @@
         "h": 2,
         "w": 10,
         "x": 0,
-        "y": 29
+        "y": 31
       },
       "id": 217,
       "options": {
@@ -2075,7 +2104,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "orange",
@@ -2114,7 +2144,7 @@
         "h": 2,
         "w": 7,
         "x": 10,
-        "y": 29
+        "y": 31
       },
       "id": 219,
       "options": {
@@ -2201,7 +2231,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "orange",
@@ -2240,7 +2271,7 @@
         "h": 2,
         "w": 7,
         "x": 17,
-        "y": 29
+        "y": 31
       },
       "id": 221,
       "options": {
@@ -2498,6 +2529,6 @@
   "timezone": "",
   "title": "Pure Capacity Dashboard",
   "uid": "b5c4a954-50af-41ef-a911-7f25bd1aac58",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
