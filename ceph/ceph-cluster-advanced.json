@@ -1778,7 +1778,7 @@
           "sortDesc": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "desc"
         }
       },
@@ -1901,7 +1901,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "desc"
         }
       },
@@ -2022,7 +2022,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "desc"
         }
       },
@@ -2138,7 +2138,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "desc"
         }
       },
@@ -2251,7 +2251,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "desc"
         }
       },
@@ -2353,7 +2353,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -2454,7 +2454,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -2555,7 +2555,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -2687,7 +2687,7 @@
           "showLegend": false
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "asc"
         }
       },
@@ -2830,7 +2830,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "asc"
         }
       },
@@ -3212,7 +3212,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "asc"
         }
       },
@@ -3339,7 +3339,7 @@
           "showLegend": false
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -3955,7 +3955,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -4069,7 +4069,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
