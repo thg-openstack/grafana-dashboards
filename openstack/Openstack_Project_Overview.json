@@ -866,6 +866,7 @@
             "mode": "continuous-GrYlRd"
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -878,8 +879,7 @@
                 "value": 1000
               }
             ]
-          },
-          "min": 0
+          }
         },
         "overrides": []
       },
@@ -3096,7 +3096,7 @@
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3104,503 +3104,527 @@
         "y": 26
       },
       "id": 88,
-      "panels": [
+      "panels": [],
+      "title": "VM / Storage stats for export",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Instance ID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 331
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "vCPU Total"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "vCPU Used"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory Total"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              },
+              {
+                "id": "custom.width",
+                "value": 134
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory Used"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Compute"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 179
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Flavor"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 131
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Instance Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 208
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 65,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": true,
+          "enablePagination": false,
+          "fields": [
+            "vCPU Total (lastNotNull)",
+            "Memory Total (lastNotNull)",
+            "Memory Used (lastNotNull)"
+          ],
+          "reducer": [
+            "count"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Memory Used"
+          }
+        ]
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "filterable": true,
-                "inspect": false
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  }
-                ]
-              },
-              "unit": "short"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Instance ID"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 331
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "vCPU Total"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 120
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "vCPU Used"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "percent"
-                  },
-                  {
-                    "id": "custom.width",
-                    "value": 124
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Memory Total"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "bytes"
-                  },
-                  {
-                    "id": "custom.width",
-                    "value": 134
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Memory Used"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "bytes"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Compute"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 179
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Flavor"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 131
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Instance Name"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 208
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 24,
-            "x": 0,
-            "y": 27
-          },
-          "id": 65,
-          "options": {
-            "cellHeight": "sm",
-            "footer": {
-              "countRows": true,
-              "enablePagination": false,
-              "fields": [
-                "vCPU Total (lastNotNull)",
-                "Memory Total (lastNotNull)",
-                "Memory Used (lastNotNull)"
-              ],
-              "reducer": [
-                "count"
-              ],
-              "show": false
-            },
-            "showHeader": true,
-            "sortBy": [
-              {
-                "desc": true,
-                "displayName": "Memory Used"
-              }
-            ]
-          },
-          "pluginVersion": "10.2.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "libvirt_domain_info_virtual_cpus{compute=~\"$compute\",job=~\"libvirt_exporter\"}  * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
-              "format": "table",
-              "instant": true,
-              "interval": "$interval",
-              "legendFormat": "vCPU Total",
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "(avg by (domain) (irate(libvirt_domain_info_cpu_time_seconds_total{compute=~\"$compute\",job=~\"libvirt_exporter\"}[$__rate_interval])) * 100) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "interval": "$interval",
-              "legendFormat": "vCPU Used",
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "libvirt_domain_info_maximum_memory_bytes{compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "interval": "$interval",
-              "legendFormat": "Memory Total",
-              "refId": "C"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "(libvirt_domain_info_maximum_memory_bytes{compute=~\"$compute\", job=~\"libvirt_exporter\"} - libvirt_domain_memory_stats_unused_bytes{compute=~\"$compute\",job=~\"libvirt_exporter\"}) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "interval": "$interval",
-              "legendFormat": "Memory Used",
-              "refId": "D"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "expr": "libvirt_domain_info_meta{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}",
-              "hide": true,
-              "instant": false,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "E"
-            }
-          ],
-          "title": "VMs Stats",
-          "transformations": [
-            {
-              "id": "merge",
-              "options": {}
-            },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "Time": true,
-                  "__name__": true,
-                  "host": true,
-                  "instance": true,
-                  "instance_name": false,
-                  "job": true,
-                  "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": true
-                },
-                "indexByName": {},
-                "renameByName": {
-                  "Value": "vCPU Total",
-                  "Value #A": "vCPU Total",
-                  "Value #B": "vCPU Used",
-                  "Value #C": "Memory Total",
-                  "Value #D": "Memory Used",
-                  "domain": "Domain",
-                  "instanceId": "Instance ID",
-                  "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": ""
-                }
-              }
-            },
-            {
-              "id": "groupBy",
-              "options": {
-                "fields": {
-                  "Domain": {
-                    "aggregations": [],
-                    "operation": "groupby"
-                  },
-                  "Memory Total": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "Memory Used": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "compute": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "flavor": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "instance_name": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "os_region": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "project_name": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "user_name": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "vCPU Total": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "vCPU Used": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  }
-                }
-              }
-            },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "os_region (lastNotNull)": true,
-                  "project_name (lastNotNull)": true,
-                  "user_name (lastNotNull)": true
-                },
-                "indexByName": {},
-                "renameByName": {
-                  "Domain": "Instance ID",
-                  "Memory Total (lastNotNull)": "Memory Total",
-                  "Memory Used (lastNotNull)": "Memory Used",
-                  "compute (lastNotNull)": "Compute",
-                  "flavor (lastNotNull)": "Flavor",
-                  "instance_name (lastNotNull)": "Instance Name",
-                  "os_region (lastNotNull)": "Region",
-                  "project_name (lastNotNull)": "Project",
-                  "user_name (lastNotNull)": "UserName",
-                  "vCPU Total (lastNotNull)": "vCPU Total",
-                  "vCPU Used (lastNotNull)": "vCPU Used"
-                }
-              }
-            }
-          ],
-          "type": "table"
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "libvirt_domain_info_virtual_cpus{compute=~\"$compute\",job=~\"libvirt_exporter\"}  * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
+          "format": "table",
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "vCPU Total",
+          "refId": "A"
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "center",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "filterable": true,
-                "inspect": true
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  }
-                ]
-              },
-              "unit": "decgbytes"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "status"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 146
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "cluster"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 104
-                  }
-                ]
-              }
-            ]
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(avg by (domain) (irate(libvirt_domain_info_cpu_time_seconds_total{compute=~\"$compute\",job=~\"libvirt_exporter\"}[2m])) * 100) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "vCPU Used",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
           },
-          "gridPos": {
-            "h": 9,
-            "w": 24,
-            "x": 0,
-            "y": 35
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "libvirt_domain_info_maximum_memory_bytes{compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"} + on(domain) group_left(status) (0 *label_replace(openstack_nova_server_status,\"domain\",\"$1\",\"uuid\", \"(.+)\"))",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "Memory Total",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
           },
-          "id": 74,
-          "options": {
-            "cellHeight": "md",
-            "footer": {
-              "countRows": false,
-              "enablePagination": false,
-              "fields": [],
-              "reducer": [],
-              "show": true
-            },
-            "frameIndex": 151,
-            "showHeader": true,
-            "sortBy": [
-              {
-                "desc": true,
-                "displayName": "status"
-              }
-            ]
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(libvirt_domain_info_maximum_memory_bytes{compute=~\"$compute\", job=~\"libvirt_exporter\"} - libvirt_domain_memory_stats_unused_bytes{compute=~\"$compute\",job=~\"libvirt_exporter\"}) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "Memory Used",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
           },
-          "pluginVersion": "10.2.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "expr": "openstack_cinder_volume_gb{name=~\"pvc-(.*)\",os_region=~\"$cluster\"}",
-              "instant": false,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Data exporter for PVC Volumes",
-          "transformations": [
-            {
-              "id": "timeSeriesTable",
-              "options": {}
-            },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "Trend": false,
-                  "__name__": true,
-                  "bootable": true,
-                  "instance": true,
-                  "job": true,
-                  "name": false,
-                  "user_id": true
-                },
-                "indexByName": {},
-                "renameByName": {
-                  "os_region": "cluster"
-                }
-              }
-            }
-          ],
-          "type": "table"
+          "editorMode": "code",
+          "expr": "libvirt_domain_info_meta{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
         }
       ],
-      "title": "VM / Storage stats for export",
-      "type": "row"
+      "title": "VMs Stats",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "host": true,
+              "instance": true,
+              "instance_name": false,
+              "job": true,
+              "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value #A": 11,
+              "Value #B": 12,
+              "Value #C": 13,
+              "Value #D": 14,
+              "compute": 1,
+              "domain": 2,
+              "flavor": 3,
+              "instance": 4,
+              "instance_name": 5,
+              "job": 6,
+              "os_region": 7,
+              "project_name": 8,
+              "status": 9,
+              "user_name": 10
+            },
+            "renameByName": {
+              "Value": "vCPU Total",
+              "Value #A": "vCPU Total",
+              "Value #B": "vCPU Used",
+              "Value #C": "Memory Total",
+              "Value #D": "Memory Used",
+              "domain": "Domain",
+              "instanceId": "Instance ID",
+              "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": ""
+            }
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Domain": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Memory Total": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Memory Used": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "compute": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "flavor": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "instance_name": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "os_region": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "project_name": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "status": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "user_name": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "vCPU Total": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "vCPU Used": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "os_region (lastNotNull)": true,
+              "project_name (lastNotNull)": true,
+              "user_name (lastNotNull)": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Domain": "Instance ID",
+              "Memory Total (lastNotNull)": "Memory Total",
+              "Memory Used (lastNotNull)": "Memory Used",
+              "compute (lastNotNull)": "Compute",
+              "flavor (lastNotNull)": "Flavor",
+              "instance_name (lastNotNull)": "Instance Name",
+              "os_region (lastNotNull)": "Region",
+              "project_name (lastNotNull)": "Project",
+              "status (lastNotNull)": "VM State",
+              "user_name (lastNotNull)": "UserName",
+              "vCPU Total (lastNotNull)": "vCPU Total",
+              "vCPU Used (lastNotNull)": "vCPU Used"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decgbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 146
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cluster"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 104
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 74,
+      "options": {
+        "cellHeight": "md",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": [],
+          "reducer": [],
+          "show": true
+        },
+        "frameIndex": 151,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "status"
+          }
+        ]
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "openstack_cinder_volume_gb{name=~\"pvc-(.*)\",os_region=~\"$cluster\"}",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Data exporter for PVC Volumes",
+      "transformations": [
+        {
+          "id": "timeSeriesTable",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Trend": false,
+              "__name__": true,
+              "bootable": true,
+              "instance": true,
+              "job": true,
+              "name": false,
+              "user_id": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "os_region": "cluster"
+            }
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "refresh": "5m",
@@ -3861,6 +3885,6 @@
   "timezone": "",
   "title": "Openstack Project Overview",
   "uid": "b9ea3e8a-cec9-40de-9b34-17bd314e179c",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
