@@ -752,7 +752,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(purefa_info{instance=~\"$instance\",env=~\"$env\"}) by (instance,version)",
+          "expr": "sum(purefa_info{instance=~\"$instance\",env=~\"$env\"}) by (instance,version,class,site)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -853,13 +853,14 @@
             "include": {
               "names": [
                 "instance",
-                "os",
+                "class",
                 "version",
+                "Value #Alerts",
                 "Value #Data Reduction Ratio",
                 "Value #Array Capacity",
                 "Value #Array Free Space",
                 "Value #Utilization %",
-                "Value #Alerts"
+                "site"
               ]
             }
           }
@@ -887,14 +888,16 @@
       "type": "table"
     },
     {
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 19
       },
-      "id": 223,
-      "title": "DE1",
+      "id": 228,
+      "panels": [],
+      "title": "GB4-Retail",
       "type": "row"
     },
     {
@@ -905,6 +908,232 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 20
+      },
+      "id": 234,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_array_space_bytes{space=\"capacity\",os_region=\"gb4-retail\", class=\"tier1\"}) by(instance)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Total - {{instance}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", os_region=\"gb4-retail\", class=\"tier1\"})  by(instance)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Usage - {{instance}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Total Capacity - Tier1",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 20
+      },
+      "id": 235,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_array_space_bytes{space=\"capacity\",os_region=\"gb4-retail\", class=\"tier2\"}) by(instance)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Total - {{instance}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", os_region=\"gb4-retail\", class=\"tier2\"})  by(instance)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Usage - {{instance}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Total Capacity - Tier2",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "continuous-GrYlRd"
           },
           "mappings": [],
@@ -924,31 +1153,15 @@
           },
           "unit": "bytes"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Precentage Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color"
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 10,
+        "h": 6,
+        "w": 9,
         "x": 0,
-        "y": 20
+        "y": 29
       },
-      "id": 214,
+      "id": 229,
       "options": {
         "displayMode": "gradient",
         "minVizHeight": 10,
@@ -973,7 +1186,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"capacity\", instance=\"de1-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"capacity\", instance=\"de1-sn-pure-002\"})",
+          "expr": "sum(purefa_array_space_bytes{space=\"capacity\", os_region=\"gb4-retail\", class=\"tier1\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "Capacity",
@@ -986,7 +1199,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", instance=\"de1-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"total_provisioned\", instance=\"de1-sn-pure-002\"})",
+          "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", os_region=\"gb4-retail\", class=\"tier1\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "Provisioned",
@@ -999,7 +1212,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"de1-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"de1-sn-pure-002\"})",
+          "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",os_region=\"gb4-retail\", class=\"tier1\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "Used",
@@ -1007,7 +1220,7 @@
           "refId": "used"
         }
       ],
-      "title": "Capacity DE1",
+      "title": "Capacity GB4 Tier1",
       "transformations": [],
       "type": "bargauge"
     },
@@ -1016,325 +1229,324 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "fixedColor": "#2ae5f2",
+            "mode": "fixed"
           },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Precentage Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 7,
-        "x": 10,
-        "y": 20
-      },
-      "id": 210,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "top",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{instance=\"de1-sn-pure-001\",space=\"capacity\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Capacity",
-          "range": true,
-          "refId": "total_capacity"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{space=\"total_provisioned\", instance=\"de1-sn-pure-001\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Provisioned",
-          "range": true,
-          "refId": "total_provisioned"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($total_provisioned*100)/$total_capacity",
-          "hide": true,
-          "refId": "used_percentage",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{space=\"total_physical\",instance=\"de1-sn-pure-001\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Used",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Capacity de1-sn-pure-001",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "used_percentage",
-            "renamePattern": "Precentage Used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Precentage Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 7,
-        "x": 17,
-        "y": 20
-      },
-      "id": 208,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "top",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{instance=\"de1-sn-pure-002\",space=\"capacity\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Capacity",
-          "range": true,
-          "refId": "total_capacity"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{space=\"total_provisioned\", instance=\"de1-sn-pure-002\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Provisioned",
-          "range": true,
-          "refId": "total_provisioned"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($total_provisioned*100)/$total_capacity",
-          "hide": true,
-          "refId": "used_percentage",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{space=\"total_physical\",instance=\"de1-sn-pure-002\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Used",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Capacity de1-sn-pure-002",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "used_percentage",
-            "renamePattern": "Precentage Used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 80
-              },
-              {
-                "color": "red",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Precentage Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
                 }
+              },
+              "type": "special"
+            }
+          ],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "white",
+                "value": null
+              }
+            ]
+          },
+          "unit": ":1"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 9,
+        "y": 29
+      },
+      "id": 232,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "avg(purefa_array_space_data_reduction_ratio{instance=~\"^$instance\",os_region=\"gb4-retail\", class=\"tier1\"})",
+          "format": "table",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Average Data Reduction Tier1",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Precentage Used"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "color"
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 2,
-        "w": 10,
+        "h": 6,
+        "w": 9,
+        "x": 12,
+        "y": 29
+      },
+      "id": 230,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "top",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "valueMode": "text"
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_array_space_bytes{space=\"capacity\", os_region=\"gb4-retail\", class=\"tier2\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Capacity",
+          "range": true,
+          "refId": "total_capacity"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", os_region=\"gb4-retail\", class=\"tier2\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Provisioned",
+          "range": true,
+          "refId": "total_provisioned"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",os_region=\"gb4-retail\", class=\"tier2\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Used",
+          "range": true,
+          "refId": "used"
+        }
+      ],
+      "title": "Capacity GB4 Tier2",
+      "transformations": [],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#2ae5f2",
+            "mode": "fixed"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "white",
+                "value": null
+              }
+            ]
+          },
+          "unit": ":1"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 21,
+        "y": 29
+      },
+      "id": 233,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "avg(purefa_array_space_data_reduction_ratio{instance=~\"^$instance\",os_region=\"gb4-retail\", class=\"tier2\"})",
+          "format": "table",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Average Data Reduction tier2",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 12,
         "x": 0,
-        "y": 24
+        "y": 35
       },
-      "id": 211,
+      "id": 236,
       "options": {
         "displayMode": "gradient",
         "minVizHeight": 10,
@@ -1355,42 +1567,19 @@
       "targets": [
         {
           "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A+$B)/2",
-          "hide": false,
-          "refId": "used_percentage",
-          "type": "math"
-        },
-        {
-          "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum(purefa_array_space_utilization{env=\"os-de1\",instance=\"de1-sn-pure-001\"}) by (instance))",
-          "hide": true,
+          "expr": "avg(purefa_array_space_utilization{os_region=\"gb4-retail\", class=\"tier1\"})",
+          "hide": false,
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "(sum(purefa_array_space_utilization{env=\"os-de1\",instance=\"de1-sn-pure-002\"}) by (instance))",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "B"
         }
       ],
-      "title": "Percentage used DE1",
+      "title": "Percentage used Tier1",
       "transformations": [
         {
           "id": "renameByRegex",
@@ -1437,12 +1626,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 2,
-        "w": 7,
-        "x": 10,
-        "y": 24
+        "h": 3,
+        "w": 12,
+        "x": 12,
+        "y": 35
       },
-      "id": 215,
+      "id": 237,
       "options": {
         "displayMode": "gradient",
         "minVizHeight": 10,
@@ -1467,7 +1656,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum(purefa_array_space_utilization{env=\"os-de1\",instance=\"de1-sn-pure-001\"}) by (instance))",
+          "expr": "avg(purefa_array_space_utilization{os_region=\"gb4-retail\", class=\"tier2\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -1475,7 +1664,7 @@
           "refId": "A"
         }
       ],
-      "title": "Percentage used de1-sn-pure-001",
+      "title": "Percentage used Tier2",
       "transformations": [
         {
           "id": "renameByRegex",
@@ -1488,775 +1677,1366 @@
       "type": "bargauge"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 80
-              },
-              {
-                "color": "red",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 7,
-        "x": 17,
-        "y": 24
-      },
-      "id": 224,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "(sum(purefa_array_space_utilization{env=\"os-de1\",instance=\"de1-sn-pure-002\"}) by (instance))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Percentage used de1-sn-pure-002",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "used_percentage",
-            "renamePattern": "Precentage Used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 38
       },
-      "id": 222,
-      "title": "GB4",
+      "id": 223,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 10,
+            "x": 0,
+            "y": 39
+          },
+          "id": 214,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "top",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(purefa_array_space_bytes{space=\"capacity\", instance=\"de1-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"capacity\", instance=\"de1-sn-pure-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Capacity",
+              "range": true,
+              "refId": "total_capacity"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", instance=\"de1-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"total_provisioned\", instance=\"de1-sn-pure-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Provisioned",
+              "range": true,
+              "refId": "total_provisioned"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"de1-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"de1-sn-pure-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Used",
+              "range": true,
+              "refId": "used"
+            }
+          ],
+          "title": "Capacity DE1",
+          "transformations": [],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Precentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 7,
+            "x": 10,
+            "y": 39
+          },
+          "id": 210,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "top",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{instance=\"de1-sn-pure-001\",space=\"capacity\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Capacity",
+              "range": true,
+              "refId": "total_capacity"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{space=\"total_provisioned\", instance=\"de1-sn-pure-001\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Provisioned",
+              "range": true,
+              "refId": "total_provisioned"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($total_provisioned*100)/$total_capacity",
+              "hide": true,
+              "refId": "used_percentage",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{space=\"total_physical\",instance=\"de1-sn-pure-001\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Used",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Capacity de1-sn-pure-001",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Precentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 7,
+            "x": 17,
+            "y": 39
+          },
+          "id": 208,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "top",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{instance=\"de1-sn-pure-002\",space=\"capacity\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Capacity",
+              "range": true,
+              "refId": "total_capacity"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{space=\"total_provisioned\", instance=\"de1-sn-pure-002\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Provisioned",
+              "range": true,
+              "refId": "total_provisioned"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($total_provisioned*100)/$total_capacity",
+              "hide": true,
+              "refId": "used_percentage",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{space=\"total_physical\",instance=\"de1-sn-pure-002\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Used",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Capacity de1-sn-pure-002",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 80
+                  },
+                  {
+                    "color": "red",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Precentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 10,
+            "x": 0,
+            "y": 46
+          },
+          "id": 211,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A+$B)/2",
+              "hide": false,
+              "refId": "used_percentage",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(purefa_array_space_utilization{env=\"os-de1\",instance=\"de1-sn-pure-001\"}) by (instance))",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(purefa_array_space_utilization{env=\"os-de1\",instance=\"de1-sn-pure-002\"}) by (instance))",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Percentage used DE1",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 80
+                  },
+                  {
+                    "color": "red",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 10,
+            "y": 46
+          },
+          "id": 215,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(purefa_array_space_utilization{env=\"os-de1\",instance=\"de1-sn-pure-001\"}) by (instance))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Percentage used de1-sn-pure-001",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 80
+                  },
+                  {
+                    "color": "red",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 46
+          },
+          "id": 224,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(purefa_array_space_utilization{env=\"os-de1\",instance=\"de1-sn-pure-002\"}) by (instance))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Percentage used de1-sn-pure-002",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        }
+      ],
+      "title": "DE1",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Precentage Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color"
-              }
-            ]
-          }
-        ]
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 4,
-        "w": 10,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 27
+        "y": 39
       },
-      "id": 216,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "top",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
+      "id": 222,
+      "panels": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"capacity\", instance=\"gb4-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"capacity\", instance=\"gb4-sn-pure-002\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Capacity",
-          "range": true,
-          "refId": "total_capacity"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", instance=\"gb4-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"total_provisioned\", instance=\"gb4-sn-pure-002\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Provisioned",
-          "range": true,
-          "refId": "total_provisioned"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"gb4-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"gb4-sn-pure-002\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Used",
-          "range": true,
-          "refId": "used"
-        }
-      ],
-      "title": "Capacity GB4",
-      "transformations": [],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Precentage Used"
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
             },
-            "properties": [
+            "overrides": [
               {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color"
+                "matcher": {
+                  "id": "byName",
+                  "options": "Precentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color"
+                  }
+                ]
               }
             ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 7,
-        "x": 10,
-        "y": 27
-      },
-      "id": 218,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "top",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{instance=\"gb4-sn-pure-001\",space=\"capacity\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Capacity",
-          "range": true,
-          "refId": "total_capacity"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+          "gridPos": {
+            "h": 6,
+            "w": 10,
+            "x": 0,
+            "y": 40
           },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{space=\"total_provisioned\", instance=\"gb4-sn-pure-001\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Provisioned",
-          "range": true,
-          "refId": "total_provisioned"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($total_provisioned*100)/$total_capacity",
-          "hide": true,
-          "refId": "used_percentage",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"gb4-sn-pure-001\"}) ",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Used",
-          "range": true,
-          "refId": "used"
-        }
-      ],
-      "title": "Capacity gb4-sn-pure-001",
-      "transformations": [
-        {
-          "id": "renameByRegex",
+          "id": 216,
           "options": {
-            "regex": "used_percentage",
-            "renamePattern": "Precentage Used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Precentage Used"
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "top",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
             },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
               },
-              {
-                "id": "color"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 7,
-        "x": 17,
-        "y": 27
-      },
-      "id": 220,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "top",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{instance=\"gb4-sn-pure-002\",space=\"capacity\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Capacity",
-          "range": true,
-          "refId": "total_capacity"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "purefa_array_space_bytes{space=\"total_provisioned\", instance=\"gb4-sn-pure-002\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Provisioned",
-          "range": true,
-          "refId": "total_provisioned"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($total_provisioned*100)/$total_capacity",
-          "hide": true,
-          "refId": "used_percentage",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"gb4-sn-pure-002\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Used",
-          "range": true,
-          "refId": "used"
-        }
-      ],
-      "title": "Capacity gb4-sn-pure-002",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "used_percentage",
-            "renamePattern": "Precentage Used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 80
-              },
-              {
-                "color": "red",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Precentage Used"
+              "editorMode": "code",
+              "expr": "sum(purefa_array_space_bytes{space=\"capacity\", instance=\"gb4-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"capacity\", instance=\"gb4-sn-pure-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Capacity",
+              "range": true,
+              "refId": "total_capacity"
             },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
               },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 10,
-        "x": 0,
-        "y": 31
-      },
-      "id": 225,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+              "editorMode": "code",
+              "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", instance=\"gb4-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"total_provisioned\", instance=\"gb4-sn-pure-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Provisioned",
+              "range": true,
+              "refId": "total_provisioned"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"gb4-sn-pure-001\"}) + sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"gb4-sn-pure-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Used",
+              "range": true,
+              "refId": "used"
+            }
           ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A+$B)/2",
-          "hide": false,
-          "refId": "used_percentage",
-          "type": "math"
+          "title": "Capacity GB4",
+          "transformations": [],
+          "type": "bargauge"
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "(sum(purefa_array_space_utilization{env=\"os-gb4\",instance=\"gb4-sn-pure-001\"}) by (instance))",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "(sum(purefa_array_space_utilization{env=\"os-gb4\",instance=\"gb4-sn-pure-002\"}) by (instance))",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "Percentage used GB4",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "used_percentage",
-            "renamePattern": "Precentage Used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
               },
-              {
-                "color": "orange",
-                "value": 80
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
               },
+              "unit": "bytes"
+            },
+            "overrides": [
               {
-                "color": "red",
-                "value": 100
+                "matcher": {
+                  "id": "byName",
+                  "options": "Precentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color"
+                  }
+                ]
               }
             ]
           },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 7,
-        "x": 10,
-        "y": 31
-      },
-      "id": 226,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+          "gridPos": {
+            "h": 6,
+            "w": 7,
+            "x": 10,
+            "y": 40
+          },
+          "id": 218,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "top",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{instance=\"gb4-sn-pure-001\",space=\"capacity\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Capacity",
+              "range": true,
+              "refId": "total_capacity"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{space=\"total_provisioned\", instance=\"gb4-sn-pure-001\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Provisioned",
+              "range": true,
+              "refId": "total_provisioned"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($total_provisioned*100)/$total_capacity",
+              "hide": true,
+              "refId": "used_percentage",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"gb4-sn-pure-001\"}) ",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Used",
+              "range": true,
+              "refId": "used"
+            }
           ],
-          "fields": "",
-          "values": false
+          "title": "Capacity gb4-sn-pure-001",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
         },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "(sum(purefa_array_space_utilization{env=\"os-gb4\",instance=\"gb4-sn-pure-001\"}) by (instance))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Percentage used gb4-sn-pure-001",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "used_percentage",
-            "renamePattern": "Precentage Used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
               },
-              {
-                "color": "orange",
-                "value": 80
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
               },
+              "unit": "bytes"
+            },
+            "overrides": [
               {
-                "color": "red",
-                "value": 100
+                "matcher": {
+                  "id": "byName",
+                  "options": "Precentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color"
+                  }
+                ]
               }
             ]
           },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 7,
-        "x": 17,
-        "y": 31
-      },
-      "id": 227,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+          "gridPos": {
+            "h": 6,
+            "w": 7,
+            "x": 17,
+            "y": 40
+          },
+          "id": 220,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "top",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{instance=\"gb4-sn-pure-002\",space=\"capacity\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Capacity",
+              "range": true,
+              "refId": "total_capacity"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "purefa_array_space_bytes{space=\"total_provisioned\", instance=\"gb4-sn-pure-002\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Provisioned",
+              "range": true,
+              "refId": "total_provisioned"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($total_provisioned*100)/$total_capacity",
+              "hide": true,
+              "refId": "used_percentage",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",instance=\"gb4-sn-pure-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Used",
+              "range": true,
+              "refId": "used"
+            }
           ],
-          "fields": "",
-          "values": false
+          "title": "Capacity gb4-sn-pure-002",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
         },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "(sum(purefa_array_space_utilization{env=\"os-gb4\",instance=\"gb4-sn-pure-002\"}) by (instance))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Percentage used gb4-sn-pure-002",
-      "transformations": [
-        {
-          "id": "renameByRegex",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 80
+                  },
+                  {
+                    "color": "red",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Precentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 10,
+            "x": 0,
+            "y": 46
+          },
+          "id": 225,
           "options": {
-            "regex": "used_percentage",
-            "renamePattern": "Precentage Used"
-          }
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A+$B)/2",
+              "hide": false,
+              "refId": "used_percentage",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(purefa_array_space_utilization{env=\"os-gb4\",instance=\"gb4-sn-pure-001\"}) by (instance))",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(purefa_array_space_utilization{env=\"os-gb4\",instance=\"gb4-sn-pure-002\"}) by (instance))",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Percentage used GB4",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 80
+                  },
+                  {
+                    "color": "red",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 10,
+            "y": 46
+          },
+          "id": 226,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(purefa_array_space_utilization{env=\"os-gb4\",instance=\"gb4-sn-pure-001\"}) by (instance))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Percentage used gb4-sn-pure-001",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 80
+                  },
+                  {
+                    "color": "red",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 7,
+            "x": 17,
+            "y": 46
+          },
+          "id": 227,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(purefa_array_space_utilization{env=\"os-gb4\",instance=\"gb4-sn-pure-002\"}) by (instance))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Percentage used gb4-sn-pure-002",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "used_percentage",
+                "renamePattern": "Precentage Used"
+              }
+            }
+          ],
+          "type": "bargauge"
         }
       ],
-      "type": "bargauge"
+      "title": "LON2",
+      "type": "row"
     }
   ],
   "refresh": "",
@@ -2446,6 +3226,6 @@
   "timezone": "",
   "title": "Pure Capacity Dashboard",
   "uid": "b5c4a954-50af-41ef-a911-7f25bd1aac58",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
