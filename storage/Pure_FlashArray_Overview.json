@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.1.5"
+      "version": "10.2.1"
     },
     {
       "type": "panel",
@@ -114,7 +114,7 @@
         "content": "<img src=\"https://www.purestorage.com/content/dam/pure/logos/pure_storage/primary/pure-logo.png\" width=\"100%\">",
         "mode": "markdown"
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "type": "text"
     },
     {
@@ -400,7 +400,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -409,7 +409,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(purefa_info{instance=~\"$instance\",env=~\"$env\"}) by (instance,os,version)",
+          "expr": "sum(purefa_info{instance=~\"$instance\",env=~\"$env\"}) by (instance,os,version,site,class)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -511,12 +511,13 @@
               "names": [
                 "instance",
                 "os",
+                "site",
                 "version",
                 "Value #Data Reduction Ratio",
                 "Value #Array Capacity",
                 "Value #Array Free Space",
                 "Value #Utilization %",
-                "Value #Alerts"
+                "class"
               ]
             }
           }
@@ -564,7 +565,7 @@
         "content": "# **PURE** STORAGE\n\n## Overview\nThis dashboard provides performance and capacity details for Pure Storage FlashArrays.\nGroup arrays by customer defined environment, whole fleets, or view arrays individually.",
         "mode": "markdown"
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -774,7 +775,7 @@
           }
         ]
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -898,7 +899,7 @@
         "content": "## Metrics\n\nAll metrics are prefixed with purefa_\nBelow are the metrics names available\n```\n* alerts_open\n* array_performance_average_bytes\n* array_performance_bandwidth_bytes\n* array_performance_latency_usec\n* array_performance_queue_depth_ops\n* array_performance_throughput_iops\n* array_space_bytes\n* array_space_data_reduction_ratio\n* array_space_utilization\n* directory_performance_average_bytes\n* directory_performance_bandwidth_bytes\n* directory_performance_latency_usec\n* directory_performance_throughput_iops\n* directory_space_bytes\n* directory_space_data_reduction_ratio\n* host_connections_info\n* host_performance_average_bytes\n* host_performance_bandwidth_bytes\n* host_performance_latency_usec\n* host_performance_throughput_iops\n* host_space_bytes\n* host_space_data_reduction_ratio\n* host_space_size_bytes\n* hw_component_status\n* hw_component_temperature_celsius\n* hw_component_voltage_volt\n* info\n* pod_performance_average_bytes\n* pod_performance_bandwidth_bytes\n* pod_performance_latency_usec\n* pod_performance_throughput_iops\n* pod_space_bytes\n* pod_space_data_reduction_ratio\n* volume_performance_average_bytes\n* volume_performance_bandwidth_bytes\n* volume_performance_latency_usec\n* volume_performance_throughput_iops\n* volume_space_bytes\n* volume_space_data_reduction_ratio\n```",
         "mode": "markdown"
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "type": "text"
     },
     {
@@ -962,9 +963,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -1048,12 +1050,14 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
@@ -1130,12 +1134,14 @@
         "text": {
           "valueSize": 100
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
@@ -1536,6 +1542,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1638,6 +1645,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1741,6 +1749,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1846,6 +1855,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1948,6 +1958,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -2055,6 +2066,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -2163,6 +2175,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -2382,6 +2395,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -2601,6 +2615,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -2646,8 +2661,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "white",
-                "value": null
+                "color": "white"
               }
             ]
           },
@@ -2795,7 +2809,6 @@
   "refresh": "",
   "revision": 1,
   "schemaVersion": 38,
-  "style": "dark",
   "tags": [
     "prometheus",
     "flasharray",
@@ -2805,8 +2818,8 @@
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "Prometheus",
+          "selected": false,
+          "text": "prometheus",
           "value": "prometheus"
         },
         "hide": 2,
@@ -2823,7 +2836,7 @@
         "type": "datasource"
       },
       {
-        "allValue": ".+",
+        "allValue": "",
         "current": {},
         "datasource": {
           "type": "prometheus",
@@ -2837,8 +2850,9 @@
         "name": "env",
         "options": [],
         "query": {
+          "qryType": 3,
           "query": "query_result(purefa_info)",
-          "refId": "StandardVariableQuery"
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": ".*env=\"(.*?)\".*",
@@ -2850,13 +2864,13 @@
         "useTags": false
       },
       {
-        "allValue": ".+",
+        "allValue": "",
         "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "query_result(purefa_info{instance=~\".+\"})",
+        "definition": "label_values(purefa_info{env=~\"$env\"},instance)",
         "description": "",
         "hide": 0,
         "includeAll": true,
@@ -2865,11 +2879,12 @@
         "name": "instance",
         "options": [],
         "query": {
-          "query": "query_result(purefa_info{instance=~\".+\"})",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(purefa_info{env=~\"$env\"},instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": ".*instance=\"(.*?)\".*",
+        "regex": "",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
@@ -2984,6 +2999,6 @@
   "timezone": "",
   "title": "Pure Storage FlashArray - Overview",
   "uid": "c7941883-9c73-4ba6-b3ad-22fea935f187",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
