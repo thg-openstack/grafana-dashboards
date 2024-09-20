@@ -971,7 +971,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "min"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -1002,7 +1003,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", os_region=\"gb4-retail\", class=\"tier1\"})  by(instance)",
+          "expr": "sum(purefa_array_space_bytes{space=\"total_physical\",os_region=\"gb4-retail\", class=\"tier1\"})  by(instance)",
           "hide": false,
           "instant": false,
           "legendFormat": "Usage - {{instance}}",
@@ -1084,11 +1085,14 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "min"
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1115,7 +1119,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(purefa_array_space_bytes{space=\"total_provisioned\", os_region=\"gb4-retail\", class=\"tier2\"})  by(instance)",
+          "expr": "sum(purefa_array_space_bytes{space=\"total_physical\", os_region=\"gb4-retail\", class=\"tier2\"})  by(instance)",
           "hide": false,
           "instant": false,
           "legendFormat": "Usage - {{instance}}",
@@ -1142,8 +1146,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1252,8 +1255,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "white",
-                "value": null
+                "color": "white"
               }
             ]
           },
@@ -1324,8 +1326,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1450,8 +1451,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "white",
-                "value": null
+                "color": "white"
               }
             ]
           },
@@ -1523,8 +1523,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "orange",
@@ -1608,8 +1607,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "orange",
@@ -1702,8 +1700,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1800,8 +1797,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1932,8 +1928,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2065,8 +2060,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "orange",
@@ -2192,8 +2186,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "orange",
@@ -2277,8 +2270,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "orange",
@@ -2375,8 +2367,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2489,8 +2480,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2621,8 +2611,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2754,8 +2743,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "orange",
@@ -2881,8 +2869,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "orange",
@@ -2966,8 +2953,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "orange",
@@ -3201,7 +3187,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -3226,6 +3212,6 @@
   "timezone": "",
   "title": "Pure Capacity Dashboard",
   "uid": "b5c4a954-50af-41ef-a911-7f25bd1aac58",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }

@@ -128,7 +128,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -555,7 +556,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1040,7 +1042,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"})",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"}) - 2*max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"})",
               "instant": false,
               "legendFormat": "Memory Total",
               "range": true,
@@ -3606,6 +3608,6 @@
   "timezone": "",
   "title": "Openstack Capacity Dashboard",
   "uid": "affa220d-68ac-4977-a00b-250eb247f7fc",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
