@@ -128,8 +128,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -148,8 +147,7 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green",
-                          "value": null
+                          "color": "green"
                         },
                         {
                           "color": "#EAB839",
@@ -212,7 +210,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",hostname=~\"$st_hosts\",zone=\"gb-lon-3\"})",
+              "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",hostname=~\"$st_hosts\",zone=\"gb-lon-3\"}) or vector(0)",
               "format": "time_series",
               "hide": false,
               "instant": false,
@@ -325,8 +323,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -558,8 +555,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -661,8 +657,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "blue",
-                    "value": null
+                    "color": "blue"
                   },
                   {
                     "color": "red",
@@ -756,8 +751,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "blue",
-                    "value": null
+                    "color": "blue"
                   },
                   {
                     "color": "red",
@@ -851,8 +845,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "blue",
-                    "value": null
+                    "color": "blue"
                   },
                   {
                     "color": "red",
@@ -1004,8 +997,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1048,7 +1040,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"})",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"})",
               "instant": false,
               "legendFormat": "Memory Total",
               "range": true,
@@ -1147,7 +1139,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"})",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"})",
               "hide": false,
               "instant": false,
               "legendFormat": "Available",
@@ -1220,8 +1212,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1334,8 +1325,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1448,8 +1438,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1630,7 +1619,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=~\"$cluster\"}) - sum(openstack_nova_agent_state{adminState=\"enabled\",hostname=~\"$st_hosts\",zone=\"gb-lon-3\"}) or vector(0)",
+          "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=~\"$cluster\",service=\"nova-compute\"}) - (sum(openstack_nova_agent_state{adminState=\"enabled\",hostname=~\"$st_hosts\"}) or vector(0)) or vector(0)",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1645,7 +1634,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=~\"$cluster\"}) - sum(openstack_nova_agent_state{adminState=\"disabled\",hostname=~\"$st_hosts\",zone=\"gb-lon-3\"}) or vector(0)",
+          "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=~\"$cluster\",service=\"nova-compute\"}) - (sum(openstack_nova_agent_state{adminState=\"disabled\",hostname=~\"$st_hosts\"}) or vector(0)) or vector(0)",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1767,7 +1756,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\"})",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\"}) - sum(openstack_placement_resource_reserved{resourcetype=\"VCPU\",os_region=~\"$cluster\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "vCPU Total",
@@ -1888,93 +1877,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\"})",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\"}) - sum(openstack_placement_resource_reserved{resourcetype=\"VCPU\",os_region=~\"$cluster\"})",
           "format": "time_series",
           "hide": false,
           "instant": false,
           "legendFormat": "vCPU core total",
           "range": true,
           "refId": "F"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\", hostname=~\"$az1_hosts\"})",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "vCPU total AZ1",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\", hostname=~\"$az1_hosts\"})",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "vCPU used AZ1",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\", hostname=~\"$az2_hosts\"})",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "vCPU total AZ2",
-          "range": true,
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\", hostname=~\"$az2_hosts\"})",
-          "format": "time_series",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "vCPU core used AZ2",
-          "range": true,
-          "refId": "H"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\", hostname=~\"$az3_hosts\"})",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "vCPU total AZ3",
-          "range": true,
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\", hostname=~\"$az3_hosts\"})",
-          "format": "time_series",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "vCPU core used AZ3",
-          "range": true,
-          "refId": "G"
         }
       ],
       "title": "VCPU Usage Over Time - $cluster",
@@ -2042,10 +1951,10 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"})",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})",
           "hide": true,
           "instant": false,
-          "legendFormat": "Memory Total",
+          "legendFormat": "RAM Total",
           "range": true,
           "refId": "A"
         },
@@ -2056,10 +1965,10 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"})",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) -  max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})",
           "hide": false,
           "instant": false,
-          "legendFormat": "Memory Available",
+          "legendFormat": "RAM  Available",
           "range": true,
           "refId": "B"
         },
@@ -2073,7 +1982,7 @@
           "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"})",
           "hide": false,
           "instant": false,
-          "legendFormat": "Memory Used",
+          "legendFormat": "RAM Used",
           "range": true,
           "refId": "C"
         }
@@ -2174,7 +2083,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"})",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"}) - max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})",
           "instant": false,
           "legendFormat": "Memory Total",
           "range": true,
@@ -2213,7 +2122,7 @@
       "type": "timeseries"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2221,991 +2130,982 @@
         "y": 22
       },
       "id": 85,
-      "panels": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "min": 0,
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disabled"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#F2495C",
+                      "mode": "shades"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 23
+          },
+          "id": 115,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "color"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=~\"$cluster\",zone=\"$availability_zone_1\"}) or vector(0)",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "Enabled",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=~\"$cluster\",zone=\"$availability_zone_1\"}) or vector(0)",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Disabled",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "$A + $B",
+              "hide": false,
+              "refId": "Total",
+              "type": "math"
+            }
+          ],
+          "title": "AZ1 Computes $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "min": 0,
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disabled"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#F2495C",
+                      "mode": "shades"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 23
+          },
+          "id": 114,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "color"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=~\"$cluster\",zone=\"$availability_zone_2\"}) or vector(0)",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "Enabled",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=~\"$cluster\",zone=\"$availability_zone_2\"}) or vector(0)",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Disabled",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "$A + $B",
+              "hide": false,
+              "refId": "Total",
+              "type": "math"
+            }
+          ],
+          "title": "AZ2 Computes $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "min": 0,
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disabled"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#F2495C",
+                      "mode": "shades"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 23
+          },
+          "id": 84,
+          "options": {
+            "displayMode": "basic",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "color"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=~\"$cluster\",zone=\"$availability_zone_3\"}) - sum(openstack_nova_agent_state{adminState=\"enabled\",hostname=~\"$st_hosts\",zone=\"gb-lon-3\"}) or vector(0)",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "Enabled",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=~\"$cluster\",zone=\"$availability_zone_3\"}) - sum(openstack_nova_agent_state{adminState=\"enabled\",hostname=~\"$st_hosts\",zone=\"gb-lon-3\"}) or vector(0)",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Disabled",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "$A + $B",
+              "hide": false,
+              "refId": "Total",
+              "type": "math"
+            }
+          ],
+          "title": "AZ3 Computes $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "red"
+                  },
+                  {
+                    "color": "green",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "decmbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 31
+          },
+          "id": 95,
+          "options": {
+            "displayMode": "lcd",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Total",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Available",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Used",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "AZ1 Memory Usage $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "red"
+                  },
+                  {
+                    "color": "green",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "decmbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 31
+          },
+          "id": 101,
+          "options": {
+            "displayMode": "lcd",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Total",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Available",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Used",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "AZ2 Memory Usage $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "red"
+                  },
+                  {
+                    "color": "green",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "decmbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 31
+          },
+          "id": 102,
+          "options": {
+            "displayMode": "lcd",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - (sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Total",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "(sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"})) - (sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Available",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - (sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Memory Used",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "AZ3 Memory Usage $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 39
+          },
+          "id": 98,
+          "options": {
+            "displayMode": "lcd",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "color"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "vCPU Used",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "vCPU Total",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "AZ1 VCPU usage $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 39
+          },
+          "id": 103,
+          "options": {
+            "displayMode": "lcd",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "color"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "vCPU Used",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "vCPU Total",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "AZ2 VCPU usage $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 39
+          },
+          "id": 104,
+          "options": {
+            "displayMode": "lcd",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "color"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - (sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "vCPU Used",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - (sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "vCPU Total",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "AZ3 VCPU usage $cluster",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 47
+          },
+          "id": 92,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": [],
+              "reducer": [
+                "uniqueValues"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "hostname"
+              }
+            ]
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "openstack_nova_agent_state{os_region=~\"$cluster\",service=\"nova-compute\",adminState=\"disabled\"}",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Disabled Hosts $cluster",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true,
+                  "Value": true,
+                  "__name__": true,
+                  "id": true,
+                  "instance": true,
+                  "job": true,
+                  "os_region": true,
+                  "service": true
+                },
+                "indexByName": {},
+                "renameByName": {}
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
       "title": "AZ overview",
       "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "min": 0,
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Disabled"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#F2495C",
-                  "mode": "shades"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 23
-      },
-      "id": 115,
-      "options": {
-        "displayMode": "basic",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=~\"$cluster\",zone=\"$availability_zone_1\"}) or vector(0)",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "Enabled",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=~\"$cluster\",zone=\"$availability_zone_1\"}) or vector(0)",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Disabled",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "$A + $B",
-          "hide": false,
-          "refId": "Total",
-          "type": "math"
-        }
-      ],
-      "title": "AZ1 Computes $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "min": 0,
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Disabled"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#F2495C",
-                  "mode": "shades"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 23
-      },
-      "id": 114,
-      "options": {
-        "displayMode": "basic",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=~\"$cluster\",zone=\"$availability_zone_2\"}) or vector(0)",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "Enabled",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=~\"$cluster\",zone=\"$availability_zone_2\"}) or vector(0)",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Disabled",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "$A + $B",
-          "hide": false,
-          "refId": "Total",
-          "type": "math"
-        }
-      ],
-      "title": "AZ2 Computes $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "min": 0,
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Disabled"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#F2495C",
-                  "mode": "shades"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 23
-      },
-      "id": 84,
-      "options": {
-        "displayMode": "basic",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=~\"$cluster\",zone=\"$availability_zone_3\"}) - sum(openstack_nova_agent_state{adminState=\"enabled\",hostname=~\"$st_hosts\",zone=\"gb-lon-3\"}) or vector(0)",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "Enabled",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=~\"$cluster\",zone=\"$availability_zone_3\"}) - sum(openstack_nova_agent_state{adminState=\"enabled\",hostname=~\"$st_hosts\",zone=\"gb-lon-3\"}) or vector(0)",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Disabled",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "$A + $B",
-          "hide": false,
-          "refId": "Total",
-          "type": "math"
-        }
-      ],
-      "title": "AZ3 Computes $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "decmbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 31
-      },
-      "id": 95,
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Total",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Available",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Used",
-          "range": true,
-          "refId": "C"
-        }
-      ],
-      "title": "AZ1 Memory Usage $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "decmbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 31
-      },
-      "id": 101,
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Total",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Available",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Used",
-          "range": true,
-          "refId": "C"
-        }
-      ],
-      "title": "AZ2 Memory Usage $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "decmbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 31
-      },
-      "id": 102,
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - (sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Total",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "(sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"})) - (sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Available",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - (sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Memory Used",
-          "range": true,
-          "refId": "C"
-        }
-      ],
-      "title": "AZ3 Memory Usage $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 39
-      },
-      "id": 98,
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "vCPU Used",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az1_hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "vCPU Total",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "AZ1 VCPU usage $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 39
-      },
-      "id": 103,
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "vCPU Used",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az2_hosts\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "vCPU Total",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "AZ2 VCPU usage $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 39
-      },
-      "id": 104,
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - (sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "vCPU Used",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"$cluster\",hostname=~\"$az3_hosts\"}) - (sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) or vector(0))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "vCPU Total",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "AZ3 VCPU usage $cluster",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "filterable": true,
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 47
-      },
-      "id": 92,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": [],
-          "reducer": [
-            "uniqueValues"
-          ],
-          "show": false
-        },
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "hostname"
-          }
-        ]
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "openstack_nova_agent_state{os_region=~\"$cluster\",service=\"nova-compute\",adminState=\"disabled\"}",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Disabled Hosts $cluster",
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value": true,
-              "__name__": true,
-              "id": true,
-              "instance": true,
-              "job": true,
-              "os_region": true,
-              "service": true
-            },
-            "indexByName": {},
-            "renameByName": {}
-          }
-        }
-      ],
-      "type": "table"
     }
   ],
   "refresh": "1d",
@@ -3688,7 +3588,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -3706,6 +3606,6 @@
   "timezone": "",
   "title": "Openstack Capacity Dashboard",
   "uid": "affa220d-68ac-4977-a00b-250eb247f7fc",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
