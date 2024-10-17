@@ -1,0 +1,2881 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    },
+    {
+      "name": "DS_EXPRESSION",
+      "label": "Expression",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "__expr__"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "__expr__",
+      "version": "1.0.0"
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.1"
+    },
+    {
+      "type": "panel",
+      "id": "piechart",
+      "name": "Pie chart",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": 15682,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 128,
+      "panels": [],
+      "title": "Hypervisor",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Disabled"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 1
+                    },
+                    {
+                      "color": "red",
+                      "value": 3
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 93,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(openstack_nova_agent_state{adminState=\"enabled\",os_region=\"$cluster\",service=\"nova-compute\"}) or vector(0)",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "Enabled",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(openstack_nova_agent_state{adminState=\"disabled\",os_region=\"$cluster\",service=\"nova-compute\"}) or vector(0)",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "Disabled",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "${DS_EXPRESSION}"
+          },
+          "expression": "$A + $B",
+          "hide": false,
+          "refId": "Total",
+          "type": "math"
+        }
+      ],
+      "title": "Total Computes ",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "transparent",
+            "mode": "continuous-RdYlGr"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #INSTANCE (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "VCPU"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "custom.width",
+                "value": 76
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #VCPU_USED (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #DISK (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decgbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #Disk Used (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decgbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #RAM (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decmbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #RAM (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 219
+              },
+              {
+                "id": "unit",
+                "value": "decmbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #VCPU _TOTAL (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #RAM (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #RAM TOTAL (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #RAM ALLOCATED (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Consumed Memory %"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "super-light-yellow",
+                      "value": 0.65
+                    },
+                    {
+                      "color": "orange",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM usage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              },
+              {
+                "id": "custom.width",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Instance"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 103
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #VCPU (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #VCPU (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 98
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #DISK (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 121
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #Disk Used (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 137
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Total"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 118
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DISK Usage"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 115
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AZ"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Instances"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "VCPU Total"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 105
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "VCPU Usage"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 102
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Uptime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "days"
+              },
+              {
+                "id": "custom.width",
+                "value": 95
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Compute"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 233
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Consumption"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "light-green",
+                      "value": null
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DISK"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 113
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Allocatable"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 148
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "VMs"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 60
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "string"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "disabled": {
+                        "color": "light-orange",
+                        "index": 1,
+                        "text": "INACTIVE"
+                      },
+                      "enabled": {
+                        "color": "light-green",
+                        "index": 0,
+                        "text": "ACTIVE"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "color"
+              },
+              {
+                "id": "displayName",
+                "value": "STATUS"
+              },
+              {
+                "id": "custom.width",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "availability_zone"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #adminState (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "light-red",
+                        "index": 1,
+                        "text": "DOWN"
+                      },
+                      "1": {
+                        "color": "light-green",
+                        "index": 0,
+                        "text": "UP"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 30,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 131,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": true
+        },
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_nova_memory_available_bytes{os_region=\"$cluster\",availability_zone=~\"$AZ\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "Memory available",
+          "range": false,
+          "refId": "Memory Available"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_nova_running_vms{os_region=\"$cluster\",availability_zone=~\"$AZ\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "Instance",
+          "range": false,
+          "refId": "INSTANCE"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_placement_resource_total{os_region=\"$cluster\", resourcetype=\"VCPU\"} +\non (hostname) group_left(availability_zone) 0 * \n(openstack_nova_running_vms{os_region=\"$cluster\"} )\n",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "VCPU",
+          "range": false,
+          "refId": "VCPU"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_placement_resource_total{os_region=\"$cluster\",resourcetype=\"VCPU\"}*openstack_placement_resource_allocation_ratio{os_region=\"$cluster\",resourcetype=\"VCPU\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "VCPU total",
+          "range": false,
+          "refId": "VCPU _TOTAL"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_placement_resource_usage{os_region=\"$cluster\",resourcetype=\"VCPU\"} +\non (hostname) group_left(availability_zone) 0 * \n(openstack_nova_running_vms{os_region=\"$cluster\"} )",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "VCPU Used",
+          "range": false,
+          "refId": "VCPU_USED"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_placement_resource_total{os_region=\"$cluster\",resourcetype=\"DISK_GB\"} +\non (hostname) group_left(availability_zone) 0 * \n(openstack_nova_running_vms{os_region=\"$cluster\"} )",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "DISK_GB",
+          "range": false,
+          "refId": "DISK"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_placement_resource_usage{os_region=\"$cluster\",resourcetype=\"DISK_GB\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "DISK_GB Used",
+          "range": false,
+          "refId": "Disk Used"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_placement_resource_total{os_region=\"$cluster\",resourcetype=\"MEMORY_MB\"}*1024*1024 +\non (hostname) group_left(availability_zone) 0 * \n(openstack_nova_running_vms{os_region=\"$cluster\"} )",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "RAM",
+          "range": false,
+          "refId": "RAM"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_placement_resource_total{os_region=\"$cluster\",resourcetype=\"MEMORY_MB\"}*openstack_placement_resource_allocation_ratio{os_region=\"$cluster\",resourcetype=\"MEMORY_MB\"}*1024*1024",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "RAM Total",
+          "range": false,
+          "refId": "RAM_TOTAL"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(openstack_placement_resource_usage{os_region=\"$cluster\",resourcetype=\"MEMORY_MB\"}+openstack_placement_resource_reserved{os_region=\"$cluster\",resourcetype=\"MEMORY_MB\"}) * 1024 * 1024",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "RAM_ALLOCATED",
+          "range": false,
+          "refId": "RAM ALLOCATED"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "label_replace(node_memory_MemTotal_bytes{instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\"},\"hostname\",\"$1\",\"instance\",\"(.+)\") - label_replace(node_memory_MemFree_bytes{instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\"},\"hostname\",\"$1\",\"instance\",\"(.+)\") - label_replace(node_memory_Cached_bytes{instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\"},\"hostname\",\"$1\",\"instance\",\"(.+)\") + label_replace(node_memory_Buffers_bytes{instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\"},\"hostname\",\"$1\",\"instance\",\"(.+)\") + on (hostname) group_left(availability_zone) 0 * (openstack_nova_running_vms{os_region=\"$cluster\"} )",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "RAM Usage",
+          "range": false,
+          "refId": "RAM Usage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "round((label_replace(node_time_seconds{instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\"},\"hostname\",\"$1\",\"instance\",\"(.+)\") - label_replace(node_boot_time_seconds{instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\"},\"hostname\",\"$1\",\"instance\",\"(.+)\"))/86400) + on (hostname) group_left(availability_zone) 0 * (openstack_nova_running_vms{os_region=\"$cluster\"} )",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "Uptime",
+          "range": false,
+          "refId": "Uptime"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(sum by(hostname) (irate(label_replace(node_cpu_seconds_total{mode!=\"idle\",instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\"},\"hostname\",\"$1\",\"instance\",\"(.+)\")[3m])) / on(hostname) group_left sum by (hostname)((irate(label_replace(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\"},\"hostname\",\"$1\",\"instance\",\"(.+)\")[3m])))) * 100 + on (hostname) group_left(availability_zone) 0 * (openstack_nova_running_vms{os_region=\"$cluster\"} )",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "CPU consumption",
+          "range": true,
+          "refId": "CPU Usage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openstack_nova_agent_state{os_region=\"$cluster\",service=\"nova-compute\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "adminState",
+          "range": false,
+          "refId": "adminState"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "up{job=\"node\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "hostState",
+          "range": false,
+          "refId": "hostState"
+        }
+      ],
+      "title": "Compute Stats",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "CPU consumption": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "DISK_GB": {
+                "aggregations": []
+              },
+              "Time": {
+                "aggregations": []
+              },
+              "VCPU": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "VCPU Used": {
+                "aggregations": []
+              },
+              "VCPU total": {
+                "aggregations": []
+              },
+              "Value": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "Value #A": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #AZ": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #B": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "groupby"
+              },
+              "Value #C": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "groupby"
+              },
+              "Value #CPU Usage": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #D": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #DISK": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #Disk Used": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #Disk total": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #E": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #F": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #G": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #INSTANCE": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #MEMORY": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #MEMORY USED": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #Memory Available": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #RAM": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #RAM ALLOCATED": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #RAM TOTAL": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #RAM USED": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #RAM Usage": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #RAM_TOTAL": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #RAM_USAGE": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #USAGE": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #Uptime": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #VCPU": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #VCPU Used": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #VCPU _TOTAL": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #VCPU _Total": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #VCPU total": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #VCPU_USED": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #adminState": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #host": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "Value #hostState": {
+                "aggregations": []
+              },
+              "__name__": {
+                "aggregations": []
+              },
+              "adminState": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "aggregates": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "availability_zone": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "hostname": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "instance": {
+                "aggregations": []
+              },
+              "job": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "os_region": {
+                "aggregations": []
+              },
+              "resourcetype": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Value #A": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value #A (lastNotNull)": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #AZ": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #B": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #C": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #CPU Usage": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #D": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #DISK": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #Disk Used": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #Disk total": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #E": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #F": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #G": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #INSTANCE": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #MEMORY": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #MEMORY USED": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #Memory Available": {
+                "aggregations": []
+              },
+              "Value #RAM": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #RAM ALLOCATED": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #RAM TOTAL": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #RAM USED": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #RAM Usage": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #RAM_TOTAL": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #RAM_USAGE": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #USAGE": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #Uptime": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #VCPU": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #VCPU Used": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #VCPU _TOTAL": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #VCPU _Total": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #VCPU total": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #VCPU_USED": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #adminState": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #host": {
+                "aggregations": [],
+                "operation": "aggregate"
+              },
+              "Value #hostState": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "Value (lastNotNull)": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "__name__": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "adminState": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "aggregates": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "availability_zone": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "groupby"
+              },
+              "hostname": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "resourcetype": {
+                "aggregations": []
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Overcommit": true,
+              "Value #AZ (lastNotNull)": true,
+              "Value #RAM (lastNotNull)": false,
+              "Value #RAM ALLOCATED (lastNotNull)": false,
+              "Value #RAM_TOTAL (lastNotNull)": true
+            },
+            "indexByName": {
+              "Value #CPU Usage (lastNotNull)": 12,
+              "Value #DISK (lastNotNull)": 6,
+              "Value #Disk Used (lastNotNull)": 7,
+              "Value #INSTANCE (lastNotNull)": 2,
+              "Value #RAM (lastNotNull)": 8,
+              "Value #RAM ALLOCATED (lastNotNull)": 10,
+              "Value #RAM Usage (lastNotNull)": 13,
+              "Value #RAM_TOTAL (lastNotNull)": 9,
+              "Value #Uptime (lastNotNull)": 14,
+              "Value #VCPU (lastNotNull)": 3,
+              "Value #VCPU _TOTAL (lastNotNull)": 4,
+              "Value #VCPU_USED (lastNotNull)": 5,
+              "adminState (lastNotNull)": 11,
+              "availability_zone": 1,
+              "hostname": 0
+            },
+            "renameByName": {
+              "Overcommit": "",
+              "Value #AZ (lastNotNull)": "AZ",
+              "Value #CPU Usage (lastNotNull)": "CPU Consumption",
+              "Value #DISK (lastNotNull)": "Local Storage (total)",
+              "Value #Disk Used (lastNotNull)": "Local Storage (used)",
+              "Value #INSTANCE (lastNotNull)": "VMs",
+              "Value #RAM (lastNotNull)": "RAM Total",
+              "Value #RAM ALLOCATED (lastNotNull)": "RAM Allocated",
+              "Value #RAM Usage (lastNotNull)": "RAM usage",
+              "Value #RAM_TOTAL (lastNotNull)": "RAM Allocatable",
+              "Value #USAGE (lastNotNull)": "RAM Usage",
+              "Value #Uptime (lastNotNull)": "Uptime",
+              "Value #VCPU (lastNotNull)": "VCPU",
+              "Value #VCPU _TOTAL (lastNotNull)": "VCPU Total",
+              "Value #VCPU_USED (lastNotNull)": "VCPU Usage",
+              "Value #adminState (lastNotNull)": "Host",
+              "Value #host (lastNotNull)": "Host",
+              "Value #hostState (lastNotNull)": "Host",
+              "adminState (lastNotNull)": "Status",
+              "availability_zone": "AZ",
+              "availability_zone (lastNotNull)": "AZ",
+              "hostname": "Compute"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Consumed Memory %",
+            "binary": {
+              "left": "RAM usage",
+              "operator": "/",
+              "right": "RAM Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "VMs"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 106,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisGridShow": false,
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 19,
+            "x": 0,
+            "y": 36
+          },
+          "id": 116,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max",
+                "min"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "timezone": [
+              "browser"
+            ],
+            "tooltip": {
+              "mode": "single",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "vCPU used",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_reserved{resourcetype=\"VCPU\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "vCPU reserved",
+              "range": true,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "vCPU total",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "VCPU Usage Over Time ",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 5,
+            "x": 19,
+            "y": 36
+          },
+          "id": 107,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"VCPU\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": " Used",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"VCPU\",os_region=\"$cluster\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_reserved{resourcetype=\"VCPU\",os_region=\"$cluster\"})",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "Reserved",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "VCPU usage",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisGridShow": false,
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "decmbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 19,
+            "x": 0,
+            "y": 44
+          },
+          "id": 132,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max",
+                "min"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "timezone": [
+              "browser"
+            ],
+            "tooltip": {
+              "mode": "single",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"}) - max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Total",
+              "range": true,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": " sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"})+sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Required",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "Allocated",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(node_memory_MemTotal_bytes{os_region=\"$cluster\"}) - sum(node_memory_MemFree_bytes{os_region=\"$cluster\"}) - (sum(node_memory_Cached_bytes{os_region=\"$cluster\"}) + sum(node_memory_Buffers_bytes{os_region=\"$cluster\"})))/1024/1024",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Usage",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "RAM Usage Over Time ",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": [],
+              "unit": "decmbytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sum(openstack_nova_limits_vcpus_max{os_region=\"de-fra\"})"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Max"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sum(openstack_nova_limits_vcpus_used{os_region=\"de-fra\"})"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Used"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 5,
+            "x": 19,
+            "y": 44
+          },
+          "id": 134,
+          "options": {
+            "displayLabels": [
+              "percent",
+              "name"
+            ],
+            "legend": {
+              "calcs": [],
+              "displayMode": "hidden",
+              "placement": "right",
+              "showLegend": false,
+              "values": []
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": " Used",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=\"$cluster\"})-(sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=\"$cluster\"})+sum(openstack_placement_resource_reserved{resourcetype=\"MEMORY_MB\",os_region=\"$cluster\"}))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Free",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_reserved{resourcetype=\"MEMORY_MB\",os_region=\"$cluster\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Reserved",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "RAM usage",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisGridShow": false,
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "decgbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 19,
+            "x": 0,
+            "y": 52
+          },
+          "id": 133,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max",
+                "min"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "timezone": [
+              "browser"
+            ],
+            "tooltip": {
+              "mode": "single",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"DISK_GB\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "Disk used",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_reserved{resourcetype=\"DISK_GB\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Disk reserved",
+              "range": true,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"DISK_GB\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Disk Total",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "DISK Usage Over Time ",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": [],
+              "unit": "decgbytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sum(openstack_nova_limits_vcpus_max{os_region=\"de-fra\"})"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Max"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sum(openstack_nova_limits_vcpus_used{os_region=\"de-fra\"})"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Used"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 5,
+            "x": 19,
+            "y": 52
+          },
+          "id": 135,
+          "options": {
+            "displayLabels": [
+              "percent",
+              "name"
+            ],
+            "legend": {
+              "calcs": [],
+              "displayMode": "hidden",
+              "placement": "right",
+              "showLegend": false,
+              "values": []
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_usage{resourcetype=\"DISK_GB\",os_region=\"$cluster\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": " Used",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_reserved{resourcetype=\"DISK_GB\",os_region=\"$cluster\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Reserved",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"DISK_GB\",os_region=\"$cluster\"})-(sum(openstack_placement_resource_usage{resourcetype=\"DISK_GB\",os_region=\"$cluster\"})+sum(openstack_placement_resource_reserved{resourcetype=\"DISK_GB\",os_region=\"$cluster\"}))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Free",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "DISK usage",
+          "type": "piechart"
+        }
+      ],
+      "title": "Cluster Stas",
+      "type": "row"
+    }
+  ],
+  "refresh": "1h",
+  "revision": 1,
+  "schemaVersion": 38,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "NetworMeshMon",
+          "value": "45F064FB-7389-4B6D-94BC-C7A926F53936"
+        },
+        "datasource": "Prometheus",
+        "hide": 2,
+        "includeAll": false,
+        "label": "datasource",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_versions_info,os_region)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "query": "label_values(libvirt_versions_info,os_region)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "auto": true,
+        "auto_count": 10,
+        "auto_min": "1m",
+        "current": {
+          "selected": true,
+          "text": "1h",
+          "value": "1h"
+        },
+        "hide": 2,
+        "label": "Interval",
+        "name": "interval",
+        "options": [
+          {
+            "selected": false,
+            "text": "auto",
+            "value": "$__auto_interval_interval"
+          },
+          {
+            "selected": false,
+            "text": "30s",
+            "value": "30s"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "2m",
+            "value": "2m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "15m",
+            "value": "15m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": true,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "2h",
+            "value": "2h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          }
+        ],
+        "query": "30s,1m,2m,5m,15m,30m,1h,2h,1d",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", os_region=\"$cluster\"},project_name)",
+        "description": "Project name",
+        "hide": 2,
+        "includeAll": false,
+        "label": "project",
+        "multi": false,
+        "name": "project",
+        "options": [],
+        "query": {
+          "query": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", os_region=\"$cluster\"},project_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_up{os_region=\"$cluster\"},compute)",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Compute",
+        "multi": true,
+        "name": "compute",
+        "options": [],
+        "query": {
+          "query": "label_values(libvirt_up{os_region=\"$cluster\"},compute)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_up{os_region=\"gb-lon\"},compute)",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Compute_st",
+        "multi": true,
+        "name": "ST",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(libvirt_up{os_region=\"gb-lon\"},compute)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/-st|016/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_cinder_limits_volume_max_gb{os_region=\"$cluster\", tenant=~\"$project\"},tenant_id)",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Tenant",
+        "multi": true,
+        "name": "tenant_id",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_cinder_limits_volume_max_gb{os_region=\"$cluster\", tenant=~\"$project\"},tenant_id)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "AZ",
+        "multi": false,
+        "name": "AZ",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/[^internal$]/g",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
+        "hide": 2,
+        "includeAll": false,
+        "label": "AZ",
+        "multi": false,
+        "name": "availability_zone_1",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/-1$/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
+        "hide": 2,
+        "includeAll": false,
+        "label": "AZ",
+        "multi": false,
+        "name": "availability_zone_2",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/-2$/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
+        "hide": 2,
+        "includeAll": false,
+        "label": "AZ",
+        "multi": false,
+        "name": "availability_zone_3",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/-3$/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{os_region=\"gb-lon\"},zone)",
+        "hide": 2,
+        "includeAll": false,
+        "label": "AZ",
+        "multi": false,
+        "name": "availability_zone_st_gb_lon",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{os_region=\"gb-lon\"},zone)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{zone=\"$availability_zone_1\"},hostname)",
+        "hide": 2,
+        "includeAll": true,
+        "label": "AZ1 Hosts",
+        "multi": true,
+        "name": "az1_hosts",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{zone=\"$availability_zone_1\"},hostname)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{zone=\"$availability_zone_2\"},hostname)",
+        "hide": 2,
+        "includeAll": true,
+        "label": "AZ2 Hosts",
+        "multi": true,
+        "name": "az2_hosts",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{zone=\"$availability_zone_2\"},hostname)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{zone=\"$availability_zone_3\"},hostname)",
+        "hide": 2,
+        "includeAll": true,
+        "label": "AZ3 Hosts",
+        "multi": true,
+        "name": "az3_hosts",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{zone=\"$availability_zone_3\"},hostname)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_nova_agent_state{zone=\"$availability_zone_3\"},hostname)",
+        "hide": 2,
+        "includeAll": true,
+        "label": "AZ3 Hosts",
+        "multi": true,
+        "name": "st_hosts",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_nova_agent_state{zone=\"$availability_zone_3\"},hostname)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/-st|016/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_up{os_region=\"$cluster\"},compute)",
+        "hide": 2,
+        "includeAll": true,
+        "label": "hostnames",
+        "multi": false,
+        "name": "hostnames",
+        "options": [],
+        "query": {
+          "query": "label_values(libvirt_up{os_region=\"$cluster\"},compute)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Openstack Hypervisor Dashboard",
+  "uid": "ee9f49cd-aecc-4a6c-8eb6-776d085bcb0b",
+  "version": 1,
+  "weekStart": ""
+}
