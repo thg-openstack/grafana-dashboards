@@ -148,7 +148,8 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green"
+                          "color": "green",
+                          "value": null
                         },
                         {
                           "color": "#EAB839",
@@ -659,7 +660,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "blue"
+                    "color": "blue",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1012,8 +1014,8 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
-            "w": 20,
+            "h": 9,
+            "w": 16,
             "x": 0,
             "y": 27
           },
@@ -1027,7 +1029,9 @@
               ],
               "displayMode": "table",
               "placement": "right",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Max",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "multi",
@@ -1042,9 +1046,9 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"}) - 2*max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"})",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"}) - 2*(max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"}))",
               "instant": false,
-              "legendFormat": "Memory Total",
+              "legendFormat": "Total",
               "range": true,
               "refId": "A"
             },
@@ -1058,7 +1062,7 @@
               "expr": "sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"})",
               "hide": false,
               "instant": false,
-              "legendFormat": "Memory Used",
+              "legendFormat": "Used",
               "range": true,
               "refId": "C"
             },
@@ -1068,16 +1072,94 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"})",
+              "expr": "(sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - 2*(max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"}))) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"})",
               "hide": false,
               "instant": false,
-              "legendFormat": "Memory Available",
+              "legendFormat": "Free",
               "range": true,
               "refId": "B"
             }
           ],
           "title": "Memory Usage Over Time GB-LON ST",
           "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 4,
+            "x": 16,
+            "y": 27
+          },
+          "id": 128,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "max"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(libvirt_domain_info_maximum_memory_bytes{job=~\"libvirt_exporter\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{job=~\"libvirt_exporter\",os_region=\"gb-lon\",project_name=\"st-retail-dev-test\"}) - sum(libvirt_domain_memory_stats_unused_bytes{job=~\"libvirt_exporter\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{job=~\"libvirt_exporter\",os_region=\"gb-lon\",project_name=\"st-retail-dev-test\"}) + (2.5*sum(openstack_placement_resource_reserved{os_region=~\"gb-lon\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"})*1024*1024)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Used",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(node_memory_MemFree_bytes{os_region=\"gb-lon\",instance=~\"$st_hosts\"}) - (2*max(openstack_placement_resource_total{os_region=\"gb-lon\",resourcetype=\"MEMORY_MB\"})*1024*1024)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Free",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Actual Usage/Free GB-LON ST",
+          "type": "stat"
         },
         {
           "datasource": {
@@ -1102,7 +1184,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 9,
             "w": 4,
             "x": 20,
             "y": 27
@@ -1141,7 +1223,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"})",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb-lon\",hostname=~\"$st_hosts\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"}) - 1.5*(max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\",hostname=~\"$st_hosts\"}))",
               "hide": false,
               "instant": false,
               "legendFormat": "Available",
@@ -1230,7 +1312,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 35
+            "y": 36
           },
           "id": 113,
           "options": {
@@ -1240,9 +1322,7 @@
               ],
               "displayMode": "table",
               "placement": "right",
-              "showLegend": true,
-              "sortBy": "Last *",
-              "sortDesc": true
+              "showLegend": true
             },
             "tooltip": {
               "mode": "single",
@@ -1256,7 +1336,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by(aggregates,os_region) (openstack_nova_memory_used_bytes{os_region=\"gb-lon\",aggregates=\"compute_st-dev-broadwell\"})",
+              "expr": "sum(openstack_nova_memory_used_bytes{os_region=\"gb-lon\",aggregates=\"compute_st-dev-broadwell\"})",
               "instant": false,
               "legendFormat": "Used",
               "range": true,
@@ -1268,7 +1348,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by(aggregates,os_region) (openstack_nova_memory_available_bytes{os_region=\"gb-lon\",aggregates=\"compute_st-dev-broadwell\"})",
+              "expr": "sum(openstack_nova_memory_available_bytes{os_region=\"gb-lon\",aggregates=\"compute_st-dev-broadwell\"} + on(hostname) group_left(hostname,resourcetype) (0* openstack_placement_resource_total{os_region=\"gb-lon\",resourcetype=\"MEMORY_MB\"})) - max((openstack_placement_resource_total{os_region=\"gb-lon\",resourcetype=\"MEMORY_MB\"} + on (hostname) group_left(hostname,aggregates) (0 * openstack_nova_memory_available_bytes{aggregates=\"compute_st-dev-broadwell\"})) * 1024 * 1024)",
               "hide": false,
               "instant": false,
               "legendFormat": "Total",
@@ -1343,7 +1423,7 @@
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 35
+            "y": 36
           },
           "id": 122,
           "options": {
@@ -1381,7 +1461,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by(aggregates,os_region) (openstack_nova_memory_available_bytes{os_region=\"gb-lon\",aggregates=\"compute_st-dev-haswell\"})",
+              "expr": "sum(openstack_nova_memory_available_bytes{os_region=\"gb-lon\",aggregates=\"compute_st-dev-haswell\"} + on(hostname) group_left(hostname,resourcetype) (0* openstack_placement_resource_total{os_region=\"gb-lon\",resourcetype=\"MEMORY_MB\"})) - max((openstack_placement_resource_total{os_region=\"gb-lon\",resourcetype=\"MEMORY_MB\"} + on (hostname) group_left(hostname,aggregates) (0 * openstack_nova_memory_available_bytes{aggregates=\"compute_st-dev-haswell\"})) * 1024 * 1024)",
               "hide": false,
               "instant": false,
               "legendFormat": "Total",
@@ -1456,7 +1536,7 @@
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 35
+            "y": 36
           },
           "id": 123,
           "options": {
@@ -1496,7 +1576,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum by(aggregates,os_region) (openstack_nova_memory_available_bytes{os_region=\"gb-lon\",aggregates=\"compute_st-dev-skylake\"})",
+              "expr": "sum(openstack_nova_memory_available_bytes{os_region=\"gb-lon\",aggregates=\"compute_st-dev-skylake\"} + on(hostname) group_left(hostname,resourcetype) (0* openstack_placement_resource_total{os_region=\"gb-lon\",resourcetype=\"MEMORY_MB\"})) - max((openstack_placement_resource_total{os_region=\"gb-lon\",resourcetype=\"MEMORY_MB\"} + on (hostname) group_left(hostname,aggregates) (0 * openstack_nova_memory_available_bytes{aggregates=\"compute_st-dev-skylake\"})) * 1024 * 1024)",
               "hide": false,
               "instant": false,
               "legendFormat": "Total",
@@ -3608,6 +3688,6 @@
   "timezone": "",
   "title": "Openstack Capacity Dashboard",
   "uid": "affa220d-68ac-4977-a00b-250eb247f7fc",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
