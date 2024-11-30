@@ -536,1255 +536,6 @@
         "x": 0,
         "y": 13
       },
-      "id": 35,
-      "panels": [],
-      "title": "US-DFW",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 11,
-        "x": 0,
-        "y": 14
-      },
-      "id": 75,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"}))",
-          "instant": false,
-          "legendFormat": "Usage",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Usage Total us-dfw",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 13,
-        "x": 11,
-        "y": 14
-      },
-      "id": 72,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})",
-          "instant": false,
-          "legendFormat": "us4-sn-001",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "us4-sn-002",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "us4-sn-003",
-          "range": true,
-          "refId": "C"
-        }
-      ],
-      "title": "Usage - Cluster Breakdown - us-dfw",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 60
-              },
-              {
-                "color": "orange",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Percentage Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
-                }
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 60
-                    },
-                    {
-                      "color": "orange",
-                      "value": 70
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Capacity"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 0,
-        "y": 19
-      },
-      "id": 60,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "value_and_name",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_capacity_bytes{os_region=\"us-dfw\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"}))",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A*100)/$B",
-          "hide": false,
-          "refId": "C",
-          "type": "math"
-        }
-      ],
-      "title": "Pool Capacity us-dfw",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "C",
-            "renamePattern": "Percentage Used"
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Capacity"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Percentage used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 6,
-        "y": 19
-      },
-      "id": 38,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_capacity_bytes{array=\"us4-sn-001\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A*100)/$B",
-          "hide": false,
-          "refId": "F",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"us4-sn-001\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Unused Reserved",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Snapshot",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Reduction",
-          "refId": "E"
-        }
-      ],
-      "title": "Array Capacity us4-sn-001",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "F",
-            "renamePattern": "Percentage used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Capacity"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Percentage used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "continuous-GrYlRd"
-                }
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 12,
-        "y": 19
-      },
-      "id": 63,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_capacity_bytes{array=\"us4-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A*100)/$B",
-          "hide": false,
-          "refId": "F",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"us4-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Unused Reserved",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Snapshot",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Reduction",
-          "refId": "E"
-        }
-      ],
-      "title": "Array Capacity us4-sn-002",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "F",
-            "renamePattern": "Percentage used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Capacity"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Percentage used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "continuous-GrYlRd"
-                }
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 18,
-        "y": 19
-      },
-      "id": 64,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_capacity_bytes{array=\"us4-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A*100)/$B",
-          "hide": false,
-          "refId": "F",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"us4-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Unused Reserved",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Snapshot",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Reduction",
-          "refId": "E"
-        }
-      ],
-      "title": "Array Capacity us4-sn-003",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "F",
-            "renamePattern": "Percentage used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "blue",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 0,
-        "y": 26
-      },
-      "id": 51,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "count(hpe_volume_size_bytes{array=~\"us4-sn-001\"}) + count(hpe_volume_size_bytes{array=~\"us4-sn-002\"}) + count(hpe_volume_size_bytes{array=~\"us4-sn-003\"})",
-          "instant": false,
-          "legendFormat": "Total Volumes",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Volume Count us-dfw",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "text",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 6,
-        "y": 26
-      },
-      "id": 54,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "count(hpe_volume_size_bytes{array=~\"us4-sn-001\"})",
-          "instant": false,
-          "legendFormat": "Total Volumes",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Volume Count us4-sn-001",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "text",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 12,
-        "y": 26
-      },
-      "id": 48,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "count(hpe_volume_size_bytes{array=~\"us4-sn-002\"})",
-          "instant": false,
-          "legendFormat": "Total Volumes",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Volume Count us4-sn-002",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "text",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 18,
-        "y": 26
-      },
-      "id": 74,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "count(hpe_volume_size_bytes{array=~\"us4-sn-002\"})",
-          "instant": false,
-          "legendFormat": "Total Volumes",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Volume Count us4-sn-002",
-      "type": "stat"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 30
-      },
       "id": 30,
       "panels": [],
       "title": "GB-LON",
@@ -1856,7 +607,7 @@
         "h": 5,
         "w": 11,
         "x": 0,
-        "y": 31
+        "y": 14
       },
       "id": 49,
       "options": {
@@ -1956,7 +707,7 @@
         "h": 5,
         "w": 13,
         "x": 11,
-        "y": 31
+        "y": 14
       },
       "id": 76,
       "options": {
@@ -2113,7 +864,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 36
+        "y": 19
       },
       "id": 61,
       "options": {
@@ -2259,6 +1010,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "max",
+                "value": 100
               }
             ]
           }
@@ -2268,7 +1023,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 36
+        "y": 19
       },
       "id": 65,
       "options": {
@@ -2456,6 +1211,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "max",
+                "value": 100
               }
             ]
           }
@@ -2465,7 +1224,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 36
+        "y": 19
       },
       "id": 66,
       "options": {
@@ -2653,6 +1412,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "max",
+                "value": 100
               }
             ]
           }
@@ -2662,7 +1425,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 36
+        "y": 19
       },
       "id": 68,
       "options": {
@@ -2808,7 +1571,7 @@
         "h": 4,
         "w": 6,
         "x": 0,
-        "y": 43
+        "y": 26
       },
       "id": 47,
       "options": {
@@ -2877,7 +1640,7 @@
         "h": 4,
         "w": 6,
         "x": 6,
-        "y": 43
+        "y": 26
       },
       "id": 52,
       "options": {
@@ -2946,7 +1709,7 @@
         "h": 4,
         "w": 6,
         "x": 12,
-        "y": 43
+        "y": 26
       },
       "id": 53,
       "options": {
@@ -3015,7 +1778,7 @@
         "h": 4,
         "w": 6,
         "x": 18,
-        "y": 43
+        "y": 26
       },
       "id": 50,
       "options": {
@@ -3052,1278 +1815,2528 @@
       "type": "stat"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 30
       },
-      "id": 10,
-      "panels": [],
-      "title": "DE-FRA",
+      "id": 35,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 11,
+            "x": 0,
+            "y": 14
+          },
+          "id": 75,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"}))",
+              "instant": false,
+              "legendFormat": "Usage",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Usage Total us-dfw",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 13,
+            "x": 11,
+            "y": 14
+          },
+          "id": 72,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})",
+              "instant": false,
+              "legendFormat": "us4-sn-001",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "us4-sn-002",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "us4-sn-003",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Usage - Cluster Breakdown - us-dfw",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 60
+                  },
+                  {
+                    "color": "orange",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green"
+                        },
+                        {
+                          "color": "#EAB839",
+                          "value": 60
+                        },
+                        {
+                          "color": "orange",
+                          "value": 70
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Capacity"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 19
+          },
+          "id": 60,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "value_and_name",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_capacity_bytes{os_region=\"us-dfw\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Capacity",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"}))",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A*100)/$B",
+              "hide": false,
+              "refId": "C",
+              "type": "math"
+            }
+          ],
+          "title": "Pool Capacity us-dfw",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "C",
+                "renamePattern": "Percentage Used"
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Capacity"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 19
+          },
+          "id": 38,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_capacity_bytes{array=\"us4-sn-001\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Capacity",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A*100)/$B",
+              "hide": false,
+              "refId": "F",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"us4-sn-001\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Unused Reserved",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-001\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Snapshot",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-001\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Reduction",
+              "refId": "E"
+            }
+          ],
+          "title": "Array Capacity us4-sn-001",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "F",
+                "renamePattern": "Percentage used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Capacity"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "continuous-GrYlRd"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green"
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 19
+          },
+          "id": 63,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_capacity_bytes{array=\"us4-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Capacity",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A*100)/$B",
+              "hide": false,
+              "refId": "F",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"us4-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Unused Reserved",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Snapshot",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Reduction",
+              "refId": "E"
+            }
+          ],
+          "title": "Array Capacity us4-sn-002",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "F",
+                "renamePattern": "Percentage used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Capacity"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "continuous-GrYlRd"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green"
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 19
+          },
+          "id": 64,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_capacity_bytes{array=\"us4-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Capacity",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"us4-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"})",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A*100)/$B",
+              "hide": false,
+              "refId": "F",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"us4-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Unused Reserved",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"us4-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Snapshot",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"us4-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Reduction",
+              "refId": "E"
+            }
+          ],
+          "title": "Array Capacity us4-sn-003",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "F",
+                "renamePattern": "Percentage used"
+              }
+            }
+          ],
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "blue",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 0,
+            "y": 26
+          },
+          "id": 51,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(hpe_volume_size_bytes{array=~\"us4-sn-001\"}) + count(hpe_volume_size_bytes{array=~\"us4-sn-002\"}) + count(hpe_volume_size_bytes{array=~\"us4-sn-003\"})",
+              "instant": false,
+              "legendFormat": "Total Volumes",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total Volume Count us-dfw",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "text",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 6,
+            "y": 26
+          },
+          "id": 54,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(hpe_volume_size_bytes{array=~\"us4-sn-001\"})",
+              "instant": false,
+              "legendFormat": "Total Volumes",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Volume Count us4-sn-001",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "text",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 12,
+            "y": 26
+          },
+          "id": 48,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(hpe_volume_size_bytes{array=~\"us4-sn-002\"})",
+              "instant": false,
+              "legendFormat": "Total Volumes",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Volume Count us4-sn-002",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "text",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 18,
+            "y": 26
+          },
+          "id": 74,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(hpe_volume_size_bytes{array=~\"us4-sn-002\"})",
+              "instant": false,
+              "legendFormat": "Total Volumes",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Volume Count us4-sn-002",
+          "type": "stat"
+        }
+      ],
+      "title": "US-DFW",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 31
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
           },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "decbytes"
             },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 11,
+            "x": 0,
+            "y": 16
+          },
+          "id": 77,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
             },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
             }
           },
-          "fieldMinMax": false,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 11,
-        "x": 0,
-        "y": 48
-      },
-      "id": 77,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
+              "editorMode": "code",
+              "expr": "(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})) +\n\n(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})) +\n\n(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"}))",
+              "instant": false,
+              "legendFormat": "Usage",
+              "range": true,
+              "refId": "A"
+            }
           ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
+          "title": "Usage Total de-fra",
+          "type": "timeseries"
         },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})) +\n\n(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})) +\n\n(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"}))",
-          "instant": false,
-          "legendFormat": "Usage",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Usage Total de-fra",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
           },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
+          "gridPos": {
+            "h": 5,
+            "w": 13,
+            "x": 11,
+            "y": 16
+          },
+          "id": 78,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
             },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
             }
           },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 13,
-        "x": 11,
-        "y": 48
-      },
-      "id": 78,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})",
-          "instant": false,
-          "legendFormat": "de1-sn-001",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "de1-sn-002",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "de1-sn-003",
-          "range": true,
-          "refId": "C"
-        }
-      ],
-      "title": "Usage - Cluster Breakdown - de-fra",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 60
-              },
-              {
-                "color": "orange",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Percentage Used"
+              "editorMode": "code",
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})",
+              "instant": false,
+              "legendFormat": "de1-sn-001",
+              "range": true,
+              "refId": "A"
             },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
               },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
-                }
+              "editorMode": "code",
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "de1-sn-002",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
               },
+              "editorMode": "code",
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "de1-sn-003",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Usage - Cluster Breakdown - de-fra",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 60
+                  },
+                  {
+                    "color": "orange",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
               {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 60
-                    },
-                    {
-                      "color": "orange",
-                      "value": 70
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage Used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
                     }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Capacity"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 0,
-        "y": 53
-      },
-      "id": 62,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "value_and_name",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_capacity_bytes{os_region=\"de-fra\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"}))",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A*100)/$B",
-          "hide": false,
-          "refId": "C",
-          "type": "math"
-        }
-      ],
-      "title": "Pool Capacity de-fra",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "C",
-            "renamePattern": "Percentage Used"
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Capacity"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Percentage used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 70
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "#EAB839",
+                          "value": 60
+                        },
+                        {
+                          "color": "orange",
+                          "value": 70
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
                     }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 6,
-        "y": 53
-      },
-      "id": 69,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_capacity_bytes{array=\"de1-sn-001\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A*100)/$B",
-          "hide": false,
-          "refId": "F",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"de1-sn-001\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Unused Reserved",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Snapshot",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Reduction",
-          "refId": "E"
-        }
-      ],
-      "title": "Array Capacity de1-sn-001",
-      "transformations": [
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "F",
-            "renamePattern": "Percentage used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+                  }
+                ]
               },
               {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Capacity"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Percentage used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 70
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
+                "matcher": {
+                  "id": "byName",
+                  "options": "Capacity"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
                     }
-                  ]
-                }
+                  }
+                ]
               }
             ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 12,
-        "y": 53
-      },
-      "id": 70,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_capacity_bytes{array=\"de1-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 0,
+            "y": 21
           },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A*100)/$B",
-          "hide": false,
-          "refId": "F",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"de1-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Unused Reserved",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Snapshot",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Reduction",
-          "refId": "E"
-        }
-      ],
-      "title": "Array Capacity de1-sn-002",
-      "transformations": [
-        {
-          "id": "renameByRegex",
+          "id": 62,
           "options": {
-            "regex": "F",
-            "renamePattern": "Percentage used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "value_and_name",
+            "wideLayout": true
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
               },
-              {
-                "color": "red",
-                "value": 80
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_capacity_bytes{os_region=\"de-fra\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Capacity",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})) +\n(sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"}))",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A*100)/$B",
+              "hide": false,
+              "refId": "C",
+              "type": "math"
+            }
+          ],
+          "title": "Pool Capacity de-fra",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "C",
+                "renamePattern": "Percentage Used"
               }
-            ]
-          },
-          "unit": "bytes"
+            }
+          ],
+          "type": "stat"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Capacity"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
           },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Percentage used"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
             },
-            "properties": [
+            "overrides": [
               {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "color"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 70
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
+                "matcher": {
+                  "id": "byName",
+                  "options": "Capacity"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
                     }
-                  ]
-                }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "#EAB839",
+                          "value": 70
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "max",
+                    "value": 100
+                  }
+                ]
               }
             ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 18,
-        "y": 53
-      },
-      "id": 71,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_capacity_bytes{array=\"de1-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 6,
+            "y": 21
           },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "__expr__",
-            "uid": "${DS_EXPRESSION}"
-          },
-          "expression": "($A*100)/$B",
-          "hide": false,
-          "refId": "F",
-          "type": "math"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"de1-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Unused Reserved",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Snapshot",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"})",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Reduction",
-          "refId": "E"
-        }
-      ],
-      "title": "Array Capacity de1-sn-003",
-      "transformations": [
-        {
-          "id": "renameByRegex",
+          "id": 69,
           "options": {
-            "regex": "F",
-            "renamePattern": "Percentage used"
-          }
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "blue",
-            "mode": "fixed"
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 0,
-        "y": 60
-      },
-      "id": 46,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_capacity_bytes{array=\"de1-sn-001\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Capacity",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-001\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A*100)/$B",
+              "hide": false,
+              "refId": "F",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"de1-sn-001\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Unused Reserved",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-001\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Snapshot",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-001\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Reduction",
+              "refId": "E"
+            }
           ],
-          "fields": "",
-          "values": false
+          "title": "Array Capacity de1-sn-001",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "F",
+                "renamePattern": "Percentage used"
+              }
+            }
+          ],
+          "type": "bargauge"
         },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "count(hpe_volume_size_bytes{array=~\"de1-sn-001\"}) + count(hpe_volume_size_bytes{array=~\"de1-sn-002\"}) + count(hpe_volume_size_bytes{array=~\"de1-sn-003\"})",
-          "instant": false,
-          "legendFormat": "Total Volumes",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Volume Count DE-FRA",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "text",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
               {
-                "color": "green",
-                "value": null
+                "matcher": {
+                  "id": "byName",
+                  "options": "Capacity"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
               },
               {
-                "color": "red",
-                "value": 80
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "#EAB839",
+                          "value": 70
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "max",
+                    "value": 100
+                  }
+                ]
               }
             ]
           },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 6,
-        "y": 60
-      },
-      "id": 43,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 12,
+            "y": 21
+          },
+          "id": 70,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_capacity_bytes{array=\"de1-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Capacity",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-002\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A*100)/$B",
+              "hide": false,
+              "refId": "F",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"de1-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Unused Reserved",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Snapshot",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-002\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Reduction",
+              "refId": "E"
+            }
           ],
-          "fields": "",
-          "values": false
+          "title": "Array Capacity de1-sn-002",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "F",
+                "renamePattern": "Percentage used"
+              }
+            }
+          ],
+          "type": "bargauge"
         },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "count(hpe_volume_size_bytes{array=~\"de1-sn-001\"})",
-          "instant": false,
-          "legendFormat": "Total Volumes",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Volume Count de1-sn-001",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "text",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": [
               {
-                "color": "green",
-                "value": null
+                "matcher": {
+                  "id": "byName",
+                  "options": "Capacity"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
               },
               {
-                "color": "red",
-                "value": 80
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "color"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "#EAB839",
+                          "value": 70
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "max",
+                    "value": 100
+                  }
+                ]
               }
             ]
           },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 12,
-        "y": 60
-      },
-      "id": 44,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+          "gridPos": {
+            "h": 7,
+            "w": 6,
+            "x": 18,
+            "y": 21
+          },
+          "id": 71,
+          "options": {
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true,
+            "valueMode": "text"
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_capacity_bytes{array=\"de1-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Capacity",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_volume_used_bytes{array=\"de1-sn-003\"}) - sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"}) + sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"})",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "${DS_EXPRESSION}"
+              },
+              "expression": "($A*100)/$B",
+              "hide": false,
+              "refId": "F",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_unused_reserve_bytes{array=\"de1-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Unused Reserved",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_snapshot_used_bytes{array=\"de1-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Snapshot",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(hpe_storagepool_data_reduction_bytes{array=\"de1-sn-003\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Reduction",
+              "refId": "E"
+            }
           ],
-          "fields": "",
-          "values": false
+          "title": "Array Capacity de1-sn-003",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "F",
+                "renamePattern": "Percentage used"
+              }
+            }
+          ],
+          "type": "bargauge"
         },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "count(hpe_volume_size_bytes{array=~\"de1-sn-002\"})",
-          "instant": false,
-          "legendFormat": "Total Volumes",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Volume Count de1-sn-002",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "text",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "blue",
+                "mode": "fixed"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
           },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 18,
-        "y": 60
-      },
-      "id": 45,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 0,
+            "y": 28
+          },
+          "id": 46,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(hpe_volume_size_bytes{array=~\"de1-sn-001\"}) + count(hpe_volume_size_bytes{array=~\"de1-sn-002\"}) + count(hpe_volume_size_bytes{array=~\"de1-sn-003\"})",
+              "instant": false,
+              "legendFormat": "Total Volumes",
+              "range": true,
+              "refId": "A"
+            }
           ],
-          "fields": "",
-          "values": false
+          "title": "Total Volume Count DE-FRA",
+          "type": "stat"
         },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "count(hpe_volume_size_bytes{array=~\"de1-sn-003\"})",
-          "instant": false,
-          "legendFormat": "Total Volumes",
-          "range": true,
-          "refId": "A"
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "text",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 6,
+            "y": 28
+          },
+          "id": 43,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(hpe_volume_size_bytes{array=~\"de1-sn-001\"})",
+              "instant": false,
+              "legendFormat": "Total Volumes",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Volume Count de1-sn-001",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "text",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 12,
+            "y": 28
+          },
+          "id": 44,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(hpe_volume_size_bytes{array=~\"de1-sn-002\"})",
+              "instant": false,
+              "legendFormat": "Total Volumes",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Volume Count de1-sn-002",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "text",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 18,
+            "y": 28
+          },
+          "id": 45,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(hpe_volume_size_bytes{array=~\"de1-sn-003\"})",
+              "instant": false,
+              "legendFormat": "Total Volumes",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Volume Count de1-sn-003",
+          "type": "stat"
         }
       ],
-      "title": "Volume Count de1-sn-003",
-      "type": "stat"
+      "title": "DE-FRA",
+      "type": "row"
     }
   ],
   "refresh": "",
@@ -4482,7 +4495,7 @@
         "current": {
           "selected": false,
           "text": "Prometheus",
-          "value": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+          "value": "e2000f63-706c-4926-8569-96324b3454ef"
         },
         "hide": 2,
         "includeAll": false,
