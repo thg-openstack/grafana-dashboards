@@ -30,6 +30,12 @@
       "version": ""
     },
     {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -132,7 +138,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue",
+                "color": "text",
                 "value": null
               }
             ]
@@ -147,12 +153,12 @@
         "x": 0,
         "y": 1
       },
-      "id": 4,
+      "id": 72,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "center",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -172,80 +178,28 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(libvirt_domain_info_vstate{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+          "expr": "sum(libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+          "hide": true,
           "instant": true,
           "interval": "$interval",
           "legendFormat": "Total",
           "refId": "A"
-        }
-      ],
-      "title": "Total VMs",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 4,
-        "y": 1
-      },
-      "id": 5,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(libvirt_domain_info_vstate{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\",os_region=~\"$cluster\"}==1)",
-          "instant": true,
-          "interval": "$interval",
-          "legendFormat": "Running",
-          "refId": "A"
+          "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Running VMs",
+      "title": "Cpu Core Capacity",
       "type": "stat"
     },
     {
@@ -253,38 +207,38 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
+      "description": "This would include max clock speed not base line",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
           "mappings": [],
-          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#7a7676",
+                "color": "text",
                 "value": null
               }
             ]
           },
-          "unit": "short"
+          "unit": "hertz"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 5,
         "w": 4,
-        "x": 7,
+        "x": 4,
         "y": 1
       },
-      "id": 6,
+      "id": 73,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "center",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -304,14 +258,99 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(libvirt_domain_info_vstate{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}==5)",
+          "expr": "sum(node_cpu_scaling_frequency_max_hertz{os_region=~\"$cluster\",instance=~\".+nova.+|.+compute.+\"})/2",
+          "format": "time_series",
           "instant": true,
           "interval": "$interval",
-          "legendFormat": "Shut Off",
+          "legendFormat": "__auto",
           "refId": "A"
         }
       ],
-      "title": "Shut Off VMs",
+      "title": "Cpu Capacity MAX Hz ",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#299c46",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 50
+              },
+              {
+                "color": "#d44a3a",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decmbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 8,
+        "y": 1
+      },
+      "id": 75,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) - sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"}) - 2 * max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Memory Capacity",
       "type": "stat"
     },
     {
@@ -509,23 +548,12 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "index": 0,
-                  "text": "0"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#705da0",
+                "color": "text",
                 "value": null
               }
             ]
@@ -535,17 +563,17 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 4,
         "x": 0,
         "y": 6
       },
-      "id": 54,
+      "id": 10,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "center",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -565,14 +593,14 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(libvirt_domain_state_code{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\",os_region=~\"$cluster\"} ==0)",
+          "expr": "sum(libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
           "instant": true,
           "interval": "$interval",
-          "legendFormat": "Suspend",
+          "legendFormat": "Total",
           "refId": "A"
         }
       ],
-      "title": "No State VMs",
+      "title": "Total vCPU Allocated",
       "type": "stat"
     },
     {
@@ -585,23 +613,12 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "index": 0,
-                  "text": "0"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "orange",
+                "color": "semi-dark-blue",
                 "value": null
               }
             ]
@@ -611,12 +628,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
+        "h": 5,
+        "w": 4,
         "x": 4,
         "y": 6
       },
-      "id": 7,
+      "id": 4,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -641,14 +658,14 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(libvirt_domain_state_code{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}==3)",
+          "expr": "count(libvirt_domain_info_vstate{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
           "instant": true,
           "interval": "$interval",
-          "legendFormat": "Suspend",
+          "legendFormat": "Total",
           "refId": "A"
         }
       ],
-      "title": "Suspend VMs",
+      "title": "Total VMs",
       "type": "stat"
     },
     {
@@ -661,24 +678,22 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "index": 0,
-                  "text": "0"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "text",
                 "value": null
+              },
+              {
+                "color": "dark-yellow",
+                "value": 100
+              },
+              {
+                "color": "orange",
+                "value": 300
               }
             ]
           },
@@ -687,12 +702,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 7,
+        "h": 5,
+        "w": 3,
+        "x": 8,
         "y": 6
       },
-      "id": 48,
+      "id": 6,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -717,14 +732,14 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(libvirt_domain_state_code{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}==6)",
+          "expr": "count(libvirt_domain_info_vstate{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}==5)",
           "instant": true,
           "interval": "$interval",
           "legendFormat": "Shut Off",
           "refId": "A"
         }
       ],
-      "title": "Crashed VMs",
+      "title": "Shut Off VMs",
       "type": "stat"
     },
     {
@@ -738,6 +753,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "fieldMinMax": false,
           "mappings": [
             {
               "options": {
@@ -764,7 +780,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 7,
         "x": 11,
         "y": 6
@@ -799,6 +815,7 @@
           "instant": true,
           "interval": "$interval",
           "legendFormat": "RX Packets",
+          "range": false,
           "refId": "A"
         },
         {
@@ -856,7 +873,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 6,
         "x": 18,
         "y": 6
@@ -922,71 +939,142 @@
           },
           "mappings": [
             {
-              "options": {
-                "0": {
-                  "color": "#705da0",
-                  "index": 0,
-                  "text": "No State"
-                },
-                "1": {
-                  "color": "green",
-                  "index": 1,
-                  "text": "Running"
-                },
-                "2": {
-                  "color": "light-orange",
-                  "index": 2,
-                  "text": "Blocked on Resource"
-                },
-                "3": {
-                  "color": "orange",
-                  "index": 3,
-                  "text": "Suspended"
-                },
-                "4": {
-                  "color": "semi-dark-orange",
-                  "index": 4,
-                  "text": "Shutting Off"
-                },
-                "5": {
-                  "color": "semi-dark-red",
-                  "index": 5,
-                  "text": "Shut Off"
-                },
-                "6": {
-                  "color": "red",
-                  "index": 6,
-                  "text": "Crashed"
-                }
-              },
-              "type": "value"
+              "id": 0,
+              "op": "=",
+              "text": "N/A",
+              "type": 1,
+              "value": "null"
             }
           ],
-          "noValue": "0",
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "#299c46",
                 "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 50
+              },
+              {
+                "color": "#d44a3a",
+                "value": 80
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 11
+      },
+      "id": 76,
+      "links": [],
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_cpu_scaling_frequency_hertz{os_region=~\"$cluster\",instance=~\".+nova.+|.+compute.+\"}) * 100/sum(node_cpu_scaling_frequency_max_hertz{os_region=~\"$cluster\",instance=~\".+nova.+|.+compute.+\"})",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(node_cpu_seconds_total{mode!=\"idle\",instance=~\".*nova.*|.*compute.*\",os_region=~\"$cluster\"}[2m]))\n / sum(irate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=~\"$cluster\"}[2m])) * 100",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "100 - (avg(rate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=~\"$cluster\",mode=\"idle\"}[2m])) * 100) + 10",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Cluster CPU usage",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 2
+              }
+            ]
+          },
+          "unit": "short"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 5,
         "w": 7,
-        "x": 0,
-        "y": 10
+        "x": 4,
+        "y": 11
       },
-      "id": 53,
+      "id": 7,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
-        "justifyMode": "auto",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -1007,10 +1095,10 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "0+(sum(libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}) == 0) or (sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}) - sum(libvirt_domain_memory_stats_unused_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}))",
+          "expr": "count(libvirt_domain_state_code{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}==3) or vector(0)",
           "instant": true,
           "interval": "$interval",
-          "legendFormat": "Memory Unsed",
+          "legendFormat": "Suspend",
           "refId": "A"
         },
         {
@@ -1019,79 +1107,28 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+          "expr": "count(libvirt_domain_state_code{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}==0) or vector(0)",
           "hide": false,
-          "legendFormat": "Memory Allocated",
+          "instant": false,
+          "legendFormat": "Unknown state",
           "range": true,
           "refId": "B"
-        }
-      ],
-      "title": "Memory Used",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 7,
-        "y": 10
-      },
-      "id": 10,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
-          "instant": true,
-          "interval": "$interval",
-          "legendFormat": "Total",
-          "refId": "A"
+          "expr": "count(libvirt_domain_state_code{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}==6) or vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Crashed",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Total vCPU Allocated",
+      "title": "Suspend VMs",
       "type": "stat"
     },
     {
@@ -1134,7 +1171,7 @@
         "h": 5,
         "w": 7,
         "x": 11,
-        "y": 10
+        "y": 11
       },
       "id": 56,
       "options": {
@@ -1225,7 +1262,7 @@
         "h": 5,
         "w": 6,
         "x": 18,
-        "y": 10
+        "y": 11
       },
       "id": 64,
       "interval": "$interval",
@@ -1285,42 +1322,51 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "#705da0",
+                  "index": 0,
+                  "text": "No State"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Running"
+                },
+                "2": {
+                  "color": "light-orange",
+                  "index": 2,
+                  "text": "Blocked on Resource"
+                },
+                "3": {
+                  "color": "orange",
+                  "index": 3,
+                  "text": "Suspended"
+                },
+                "4": {
+                  "color": "semi-dark-orange",
+                  "index": 4,
+                  "text": "Shutting Off"
+                },
+                "5": {
+                  "color": "semi-dark-red",
+                  "index": 5,
+                  "text": "Shut Off"
+                },
+                "6": {
+                  "color": "red",
+                  "index": 6,
+                  "text": "Crashed"
+                }
+              },
+              "type": "value"
             }
-          },
-          "fieldMinMax": false,
-          "mappings": [],
+          ],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1330,7 +1376,7 @@
               }
             ]
           },
-          "unit": "iops"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -1338,21 +1384,23 @@
         "h": 5,
         "w": 11,
         "x": 0,
-        "y": 15
+        "y": 16
       },
-      "id": 63,
-      "interval": "$interval",
+      "id": 77,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right",
-          "showLegend": true
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "asc"
-        }
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "10.2.1",
       "targets": [
@@ -1363,13 +1411,10 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
+          "expr": "(sum(node_memory_MemTotal_bytes{os_region=~\"$cluster\",instance=~\"$compute\"}) - sum(node_memory_MemFree_bytes{os_region=~\"$cluster\",instance=~\"$compute\"}) - (sum(node_memory_Cached_bytes{os_region=~\"$cluster\",instance=~\"$compute\"}) + sum(node_memory_Buffers_bytes{os_region=~\"$cluster\",instance=~\"$compute\"})))",
+          "instant": true,
           "interval": "$interval",
-          "legendFormat": "Read",
-          "range": true,
+          "legendFormat": "Memory Used",
           "refId": "A"
         },
         {
@@ -1378,68 +1423,15 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+          "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
           "hide": false,
-          "instant": false,
-          "legendFormat": "Write",
+          "legendFormat": "Memory Allocated",
           "range": true,
           "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "read_bytes",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "write_bytes",
-          "range": true,
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_read_time_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "read_time",
-          "range": true,
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_write_time_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "write_time",
-          "range": true,
-          "refId": "F"
         }
       ],
-      "title": "IOPS R/W on VMs",
-      "type": "timeseries"
+      "title": "Memory Usage",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -1502,9 +1494,9 @@
         "h": 5,
         "w": 13,
         "x": 11,
-        "y": 15
+        "y": 16
       },
-      "id": 70,
+      "id": 63,
       "interval": "$interval",
       "options": {
         "legend": {
@@ -1527,11 +1519,12 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+          "expr": "sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
           "format": "time_series",
+          "hide": false,
           "instant": false,
           "interval": "$interval",
-          "legendFormat": "receive",
+          "legendFormat": "Read",
           "range": true,
           "refId": "A"
         },
@@ -1541,49 +1534,10 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_bytes_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+          "expr": "sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
           "hide": false,
           "instant": false,
-          "legendFormat": "transmit",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_interface_stats_receive_packets_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "receive_packets",
-          "range": true,
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "transmit_packets",
-          "range": true,
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "transmit_errors",
+          "legendFormat": "Write",
           "range": true,
           "refId": "B"
         },
@@ -1593,16 +1547,239 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": false,
+          "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+          "hide": true,
           "instant": false,
-          "legendFormat": "transmit_errors",
+          "legendFormat": "read_bytes",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "write_bytes",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(libvirt_domain_block_stats_read_time_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "read_time",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(libvirt_domain_block_stats_write_time_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "write_time",
           "range": true,
           "refId": "F"
         }
       ],
-      "title": "IOPS on Network",
+      "title": "IOPS R/W on VMs",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Price a year with commit and without commit",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#299c46",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 50
+              },
+              {
+                "color": "#d44a3a",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyUSD"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 11,
+        "x": 0,
+        "y": 21
+      },
+      "id": 78,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2 * 350",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Without commit",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2 * 338",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "With commit",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Price per year running on VMware",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "vSphere Enterprise, 150$ a core",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#299c46",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 50
+              },
+              {
+                "color": "#d44a3a",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyUSD"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 13,
+        "x": 11,
+        "y": 21
+      },
+      "id": 79,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2 * 150",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Reduced price running on VMware Enterprise Plus",
+      "type": "stat"
     },
     {
       "collapsed": true,
@@ -1610,7 +1787,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 29
       },
       "id": 67,
       "panels": [
@@ -1684,7 +1861,7 @@
             "h": 4,
             "w": 24,
             "x": 0,
-            "y": 21
+            "y": 77
           },
           "id": 68,
           "options": {
@@ -2336,7 +2513,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 25
+            "y": 81
           },
           "id": 69,
           "options": {
@@ -3182,7 +3359,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 30
       },
       "id": 15,
       "panels": [
@@ -3248,7 +3425,7 @@
             "h": 13,
             "w": 24,
             "x": 0,
-            "y": 40
+            "y": 59
           },
           "id": 61,
           "options": {
@@ -3347,7 +3524,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 53
+            "y": 72
           },
           "id": 22,
           "interval": "$interval",
@@ -3444,7 +3621,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 62
+            "y": 81
           },
           "id": 18,
           "options": {
@@ -3506,10 +3683,118 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 31
       },
       "id": 31,
       "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "binBps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 71
+          },
+          "id": 71,
+          "interval": "$interval",
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "asc"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "read_bytes",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total{compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "write_bytes",
+              "range": true,
+              "refId": "D"
+            }
+          ],
+          "title": "Cluster Disk Read And Write",
+          "type": "timeseries"
+        },
         {
           "datasource": {
             "type": "prometheus",
@@ -3569,7 +3854,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 73
+            "y": 80
           },
           "id": 32,
           "interval": "$interval",
@@ -3668,7 +3953,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 73
+            "y": 80
           },
           "id": 33,
           "interval": "$interval",
@@ -3765,7 +4050,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 81
+            "y": 88
           },
           "id": 34,
           "interval": "$interval",
@@ -3863,7 +4148,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 81
+            "y": 88
           },
           "id": 35,
           "options": {
@@ -3966,7 +4251,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 89
+            "y": 96
           },
           "id": 59,
           "interval": "$interval",
@@ -4070,7 +4355,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 89
+            "y": 96
           },
           "id": 58,
           "interval": "$interval",
@@ -4133,7 +4418,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 32
       },
       "id": 24,
       "panels": [
@@ -4220,7 +4505,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 42
+            "y": 98
           },
           "id": 47,
           "options": {
@@ -4372,7 +4657,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 52
+            "y": 108
           },
           "id": 19,
           "options": {
@@ -4471,7 +4756,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 52
+            "y": 108
           },
           "id": 26,
           "options": {
@@ -4593,7 +4878,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 60
+            "y": 116
           },
           "id": 21,
           "options": {
@@ -4690,7 +4975,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 60
+            "y": 116
           },
           "id": 20,
           "options": {
@@ -4789,7 +5074,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 68
+            "y": 124
           },
           "id": 25,
           "options": {
@@ -4888,7 +5173,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 68
+            "y": 124
           },
           "id": 27,
           "options": {
@@ -4950,10 +5235,172 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 33
       },
       "id": 37,
       "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 58
+          },
+          "id": 70,
+          "interval": "$interval",
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "asc"
+            }
+          },
+          "pluginVersion": "10.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(rate(libvirt_domain_interface_stats_receive_bytes_total{compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval])) * 8",
+              "format": "time_series",
+              "instant": false,
+              "interval": "$interval",
+              "legendFormat": "receive",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(libvirt_domain_interface_stats_transmit_bytes_total{compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval])) * 8",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "transmit",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(libvirt_domain_interface_stats_receive_packets_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "receive_packets",
+              "range": true,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "transmit_packets",
+              "range": true,
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "transmit_errors",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "transmit_errors",
+              "range": true,
+              "refId": "F"
+            }
+          ],
+          "title": "RX/TX VMs Network",
+          "type": "timeseries"
+        },
         {
           "datasource": {
             "type": "prometheus",
@@ -5013,7 +5460,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 43
+            "y": 67
           },
           "id": 38,
           "options": {
@@ -5111,7 +5558,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 43
+            "y": 67
           },
           "id": 39,
           "interval": "$interval",
@@ -5209,7 +5656,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 51
+            "y": 75
           },
           "id": 40,
           "options": {
@@ -5305,7 +5752,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 51
+            "y": 75
           },
           "id": 41,
           "interval": "$interval",
@@ -5404,7 +5851,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 59
+            "y": 83
           },
           "id": 44,
           "options": {
@@ -5517,7 +5964,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 71
+            "y": 95
           },
           "id": 42,
           "options": {
@@ -5590,7 +6037,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 34
       },
       "id": 29,
       "panels": [
@@ -5617,8 +6064,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -5690,7 +6136,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 26
+            "y": 82
           },
           "id": 66,
           "options": {
@@ -5934,7 +6380,8 @@
   "schemaVersion": 38,
   "tags": [
     "openstack",
-    "openstack-nova"
+    "openstack-nova",
+    "openstack-cluster"
   ],
   "templating": {
     "list": [
@@ -6190,6 +6637,6 @@
   "timezone": "browser",
   "title": "Openstack VMs Overview Admin",
   "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 14,
+  "version": 15,
   "weekStart": ""
 }
