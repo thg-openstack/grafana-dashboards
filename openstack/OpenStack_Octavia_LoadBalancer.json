@@ -11186,15 +11186,15 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(octavia_loadbalancer_cpu, instance)",
+        "definition": "label_values(octavia_loadbalancer_cpu, os_region)",
         "hide": 0,
         "includeAll": true,
-        "label": "Load Balancer",
+        "label": "Region",
         "multi": true,
-        "name": "lb",
+        "name": "region",
         "options": [],
         "query": {
-          "query": "label_values(octavia_loadbalancer_cpu, instance)",
+          "query": "label_values(octavia_loadbalancer_cpu, os_region)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -11210,15 +11210,15 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(octavia_loadbalancer_cpu, os_region)",
+        "definition": "label_values(octavia_loadbalancer_cpu, instance)",
         "hide": 0,
         "includeAll": true,
-        "label": "Region",
+        "label": "Load Balancer",
         "multi": true,
-        "name": "region",
+        "name": "lb",
         "options": [],
         "query": {
-          "query": "label_values(octavia_loadbalancer_cpu, os_region)",
+          "query": "label_values(octavia_loadbalancer_cpu, instance)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
