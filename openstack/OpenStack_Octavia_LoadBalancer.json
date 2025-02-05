@@ -174,7 +174,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "max(octavia_loadbalancer_cpu{instance=~'${lb}'})",
+          "expr": "max(octavia_loadbalancer_cpu{os_region=~'${region}',instance=~'${lb}'})",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -247,7 +247,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "max(octavia_loadbalancer_memory{instance=~'${lb}'})",
+          "expr": "max(octavia_loadbalancer_memory{os_region=~'${region}',instance=~'${lb}'})",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -318,7 +318,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "sum(octavia_loadbalancer_current_connection_rate{instance=~'${lb}'})",
+          "expr": "sum(octavia_loadbalancer_current_connection_rate{os_region=~'${region}',instance=~'${lb}'})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -331,7 +331,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "sum(octavia_loadbalancer_max_connections{instance=~'${lb}'})",
+          "expr": "sum(octavia_loadbalancer_max_connections{os_region=~'${region}',instance=~'${lb}'})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -402,7 +402,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "sum(irate(octavia_listener_bytes_in_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])*8)",
+          "expr": "sum(irate(octavia_listener_bytes_in_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])*8)",
           "interval": "",
           "legendFormat": "In",
           "refId": "A"
@@ -413,7 +413,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "sum(irate(octavia_listener_bytes_out_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])*8)",
+          "expr": "sum(irate(octavia_listener_bytes_out_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])*8)",
           "hide": false,
           "interval": "",
           "legendFormat": "Out",
@@ -545,7 +545,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "count(octavia_member_status{instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 0)",
+          "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 0)",
           "instant": true,
           "interval": "",
           "legendFormat": "Error",
@@ -557,7 +557,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "count(octavia_member_status{instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 1)",
+          "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 1)",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -570,7 +570,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "count(octavia_member_status{instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 2)",
+          "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 2)",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -583,7 +583,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "count(octavia_member_status{instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 3)",
+          "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 3)",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -651,7 +651,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "count(octavia_loadbalancer_cpu{instance=~'${lb}'})",
+          "expr": "count(octavia_loadbalancer_cpu{os_region=~'${region}',instance=~'${lb}'})",
           "instant": true,
           "interval": "",
           "legendFormat": "Load Balancers",
@@ -663,7 +663,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "count(octavia_listener_status{instance=~'${lb}',listener=~'${listener}'})",
+          "expr": "count(octavia_listener_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -676,7 +676,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "count(octavia_pool_status{instance=~'${lb}',listener=~'${listener}',pool=~'${pool}'})",
+          "expr": "count(octavia_pool_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',pool=~'${pool}'})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -689,7 +689,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "count(group by (member) (octavia_member_status{instance=~'${lb}',listener=~'${listener}',pool=~'${pool}',member=~'${member}'}))",
+          "expr": "count(group by (member) (octavia_member_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',pool=~'${pool}',member=~'${member}'}))",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -895,7 +895,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "sum(irate(octavia_listener_http_responses_total{instance=~\"$lb\",listener=~\"$listener\"}[$__rate_interval])) by (code)",
+          "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~\"$lb\",listener=~\"$listener\"}[$__rate_interval])) by (code)",
           "interval": "",
           "legendFormat": "Front {{ code }}",
           "refId": "A"
@@ -906,7 +906,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "sum(irate(octavia_pool_http_responses_total{instance=~\"$lb\",pool=~\"$pool\"}[$__rate_interval])) by (code)",
+          "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~\"$lb\",pool=~\"$pool\"}[$__rate_interval])) by (code)",
           "hide": false,
           "interval": "",
           "legendFormat": "Pool {{ code }}",
@@ -975,7 +975,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "max(octavia_loadbalancer_max_connection_rate{instance=~'${lb}'})",
+          "expr": "max(octavia_loadbalancer_max_connection_rate{os_region=~'${region}',instance=~'${lb}'})",
           "instant": true,
           "interval": "",
           "legendFormat": "Connections Per Second",
@@ -987,7 +987,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "max(octavia_loadbalancer_max_ssl_rate{instance=~'${lb}'})",
+          "expr": "max(octavia_loadbalancer_max_ssl_rate{os_region=~'${region}',instance=~'${lb}'})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -1000,7 +1000,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "max(sum by (instance) (octavia_listener_http_requests_rate_max{instance=~'${lb}', listener=~'${listener}'}))",
+          "expr": "max(sum by (instance) (octavia_listener_http_requests_rate_max{os_region=~'${region}',instance=~'${lb}', listener=~'${listener}'}))",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -1106,7 +1106,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_loadbalancer_cpu{instance=~'${lb}'}",
+              "expr": "octavia_loadbalancer_cpu{os_region=~'${region}',instance=~'${lb}'}",
               "interval": "",
               "legendFormat": "{{ instance }}",
               "refId": "A"
@@ -1196,7 +1196,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_loadbalancer_memory{instance=~'${lb}'}",
+              "expr": "octavia_loadbalancer_memory{os_region=~'${region}',instance=~'${lb}'}",
               "interval": "",
               "legendFormat": "{{ instance }}",
               "refId": "A"
@@ -1285,7 +1285,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_loadbalancer_connections_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_loadbalancer_connections_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ instance }}",
               "refId": "A"
@@ -1296,7 +1296,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_loadbalancer_ssl_connections_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_loadbalancer_ssl_connections_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "legendFormat": "TLS {{ instance }}",
@@ -1387,7 +1387,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_loadbalancer_requests_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_loadbalancer_requests_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ instance }}",
               "refId": "A"
@@ -1489,7 +1489,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_loadbalancer_current_frontend_ssl_key_rate{instance=~'${lb}'}",
+              "expr": "octavia_loadbalancer_current_frontend_ssl_key_rate{os_region=~'${region}',instance=~'${lb}'}",
               "instant": false,
               "interval": "",
               "legendFormat": "Listener {{ instance }}",
@@ -1501,7 +1501,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_loadbalancer_current_backend_ssl_key_rate{instance=~'${lb}'}",
+              "expr": "octavia_loadbalancer_current_backend_ssl_key_rate{os_region=~'${region}',instance=~'${lb}'}",
               "hide": false,
               "interval": "",
               "legendFormat": "Pool {{ instance }}",
@@ -1592,7 +1592,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_loadbalancer_frontent_ssl_reuse{instance=~'${lb}'}",
+              "expr": "octavia_loadbalancer_frontent_ssl_reuse{os_region=~'${region}',instance=~'${lb}'}",
               "interval": "",
               "legendFormat": "{{ instance }}",
               "refId": "A"
@@ -1681,7 +1681,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_loadbalancer_ssl_cache_lookups_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_loadbalancer_ssl_cache_lookups_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "Lookups {{ instance }}",
               "refId": "A"
@@ -1692,7 +1692,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_loadbalancer_ssl_cache_misses_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_loadbalancer_ssl_cache_misses_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "legendFormat": "Miss {{ instance }}",
@@ -1796,7 +1796,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_loadbalancer_http_comp_bytes_in_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_loadbalancer_http_comp_bytes_in_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "In {{ instance }}",
               "refId": "A"
@@ -1807,7 +1807,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_loadbalancer_http_comp_bytes_out_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_loadbalancer_http_comp_bytes_out_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "legendFormat": "Out {{ instance }}",
@@ -1898,7 +1898,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "count by (instance) (octavia_listener_status{instance=~'${lb}'})",
+              "expr": "count by (instance) (octavia_listener_status{os_region=~'${region}',instance=~'${lb}'})",
               "interval": "",
               "legendFormat": "{{ instance }}",
               "refId": "A"
@@ -1988,7 +1988,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_loadbalancer_dropped_logs_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_loadbalancer_dropped_logs_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ instance }}",
               "refId": "A"
@@ -2091,7 +2091,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_memory_pool_allocated_bytes{instance=~'${lb}'}",
+              "expr": "octavia_memory_pool_allocated_bytes{os_region=~'${region}',instance=~'${lb}'}",
               "interval": "",
               "legendFormat": "Allocated {{ instance }}",
               "refId": "A"
@@ -2102,7 +2102,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_memory_pool_used_bytes{instance=~'${lb}'}",
+              "expr": "octavia_memory_pool_used_bytes{os_region=~'${region}',instance=~'${lb}'}",
               "hide": false,
               "interval": "",
               "legendFormat": "Used {{ instance }}",
@@ -2114,7 +2114,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_memory_pool_failures_total{instance=~'${lb}'}[$__rate_interval])",
+              "expr": "irate(octavia_memory_pool_failures_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "legendFormat": "Failures {{ instance }}",
@@ -2258,7 +2258,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_listener_status{instance=~'${lb}',listener=~'${listener}'} == 0)",
+              "expr": "count(octavia_listener_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'} == 0)",
               "instant": true,
               "interval": "",
               "legendFormat": "Offline",
@@ -2270,7 +2270,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_listener_status{instance=~'${lb}',listener=~'${listener}'} == 1)",
+              "expr": "count(octavia_listener_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'} == 1)",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2283,7 +2283,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_listener_status{instance=~'${lb}',listener=~'${listener}'} == 2)",
+              "expr": "count(octavia_listener_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'} == 2)",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2352,7 +2352,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_listener_max_sessions{instance=~'${lb}',listener=~'${listener}'})",
+              "expr": "max(octavia_listener_max_sessions{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Concurrent Sessions",
@@ -2364,7 +2364,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_listener_max_session_rate{instance=~'${lb}',listener=~'${listener}'})",
+              "expr": "max(octavia_listener_max_session_rate{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2377,7 +2377,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_listener_http_requests_rate_max{instance=~'${lb}',listener=~'${listener}'})",
+              "expr": "max(octavia_listener_http_requests_rate_max{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2540,7 +2540,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='1xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='1xx'})",
               "instant": true,
               "interval": "",
               "legendFormat": "1xx",
@@ -2552,7 +2552,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='2xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='2xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2565,7 +2565,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='3xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='3xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2578,7 +2578,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='4xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='4xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2591,7 +2591,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='5xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='5xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2604,7 +2604,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='other'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='other'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2761,7 +2761,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='1xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='1xx'})",
               "instant": true,
               "interval": "",
               "legendFormat": "1xx",
@@ -2773,7 +2773,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='2xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='2xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2786,7 +2786,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='3xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='3xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2799,7 +2799,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='4xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='4xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2812,7 +2812,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='5xx'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='5xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -2825,7 +2825,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='other'})",
+              "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='other'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -3010,7 +3010,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='1xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='1xx'}[$__rate_interval]))",
               "instant": false,
               "interval": "",
               "legendFormat": "1xx",
@@ -3022,7 +3022,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='2xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='2xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -3035,7 +3035,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='3xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='3xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -3048,7 +3048,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='4xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='4xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -3061,7 +3061,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='5xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='5xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -3074,7 +3074,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_listener_http_responses_total{instance=~'${lb}',listener=~'${listener}',code='other'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='other'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -3165,7 +3165,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_connections_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_connections_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3254,7 +3254,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_sessions_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_sessions_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3345,7 +3345,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_bytes_in_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_bytes_in_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3436,7 +3436,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_bytes_out_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_bytes_out_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3525,7 +3525,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_denied_connections_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_denied_connections_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3614,7 +3614,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_denied_sessions_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_denied_sessions_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3704,7 +3704,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_requests_denied_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_requests_denied_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3793,7 +3793,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_responses_denied_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_responses_denied_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3882,7 +3882,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_http_requests_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_http_requests_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -3971,7 +3971,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_request_errors_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_request_errors_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -4061,7 +4061,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "(irate(octavia_listener_http_cache_hits_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])/irate(octavia_listener_http_cache_lookups_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval]))*100",
+              "expr": "(irate(octavia_listener_http_cache_hits_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])/irate(octavia_listener_http_cache_lookups_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval]))*100",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -4152,7 +4152,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_listener_http_comp_responses_total{instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
+              "expr": "irate(octavia_listener_http_comp_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ listener }}",
               "refId": "A"
@@ -4281,7 +4281,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_pool_status{instance=~'${lb}',pool=~'${pool}'} == 0)",
+              "expr": "count(octavia_pool_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'} == 0)",
               "instant": true,
               "interval": "",
               "legendFormat": "Error",
@@ -4293,7 +4293,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_pool_status{instance=~'${lb}',pool=~'${pool}'} == 1)",
+              "expr": "count(octavia_pool_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'} == 1)",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4361,7 +4361,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_max_sessions{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_max_sessions{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Concurrent Sessions",
@@ -4373,7 +4373,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_max_session_rate{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_max_session_rate{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4386,7 +4386,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_max_queue{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_max_queue{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4549,7 +4549,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='1xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='1xx'})",
               "instant": true,
               "interval": "",
               "legendFormat": "1xx",
@@ -4561,7 +4561,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='2xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='2xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4574,7 +4574,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='3xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='3xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4587,7 +4587,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='4xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='4xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4600,7 +4600,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='5xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='5xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4613,7 +4613,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='other'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='other'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4770,7 +4770,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='1xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='1xx'})",
               "instant": true,
               "interval": "",
               "legendFormat": "1xx",
@@ -4782,7 +4782,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='2xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='2xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4795,7 +4795,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='3xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='3xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4808,7 +4808,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='4xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='4xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4821,7 +4821,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='5xx'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='5xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -4834,7 +4834,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='other'})",
+              "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='other'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -5019,7 +5019,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='1xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='1xx'}[$__rate_interval]))",
               "instant": false,
               "interval": "",
               "legendFormat": "1xx",
@@ -5031,7 +5031,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='2xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='2xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -5044,7 +5044,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='3xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='3xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -5057,7 +5057,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='4xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='4xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -5070,7 +5070,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='5xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='5xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -5083,7 +5083,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_pool_http_responses_total{instance=~'${lb}',pool=~'${pool}',code='other'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='other'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -5175,7 +5175,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_client_aborts_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_client_aborts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -5265,7 +5265,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_member_aborts_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_member_aborts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -5354,7 +5354,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_sessions_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_sessions_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -5445,7 +5445,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_pool_current_queue{instance=~'${lb}',pool=~'${pool}'}",
+              "expr": "octavia_pool_current_queue{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -5536,7 +5536,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_connection_attempts_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_connection_attempts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -5627,7 +5627,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_connection_reuses_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_connection_reuses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -5718,7 +5718,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_bytes_in_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_bytes_in_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -5809,7 +5809,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_bytes_out_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_bytes_out_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -5874,7 +5874,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum by (member) (octavia_member_loadbalanced_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "sum by (member) (octavia_member_loadbalanced_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "format": "table",
               "instant": true,
               "interval": "",
@@ -5981,7 +5981,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_http_requests_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_http_requests_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6072,7 +6072,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_pool_active_members{instance=~'${lb}',pool=~'${pool}'}",
+              "expr": "octavia_pool_active_members{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6163,7 +6163,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_pool_backup_members{instance=~'${lb}',pool=~'${pool}'}",
+              "expr": "octavia_pool_backup_members{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6254,7 +6254,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_requests_denied_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_requests_denied_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6345,7 +6345,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_responses_denied_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_responses_denied_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6436,7 +6436,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_connection_errors_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_connection_errors_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6527,7 +6527,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_response_errors_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_response_errors_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6618,7 +6618,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_retry_warnings_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_retry_warnings_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6709,7 +6709,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_redispatch_warnings_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_redispatch_warnings_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6800,7 +6800,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_check_up_down_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_check_up_down_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -6891,7 +6891,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_pool_check_up_down_total{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "sum(octavia_pool_check_up_down_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Total Transitions",
@@ -6903,7 +6903,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_check_last_change_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_check_last_change_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -6916,7 +6916,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_downtime_seconds_total{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_downtime_seconds_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7008,7 +7008,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "(irate(octavia_pool_http_cache_hits_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])/irate(octavia_pool_http_cache_lookups_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval]))*100",
+              "expr": "(irate(octavia_pool_http_cache_hits_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])/irate(octavia_pool_http_cache_lookups_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval]))*100",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -7099,7 +7099,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_pool_http_comp_responses_total{instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
+              "expr": "irate(octavia_pool_http_comp_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -7192,7 +7192,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_queue_time_average_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_queue_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Queue Time",
@@ -7204,7 +7204,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_connect_time_average_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_connect_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7217,7 +7217,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_response_time_average_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_response_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7230,7 +7230,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_total_time_average_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_total_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7298,7 +7298,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_max_queue_time_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_max_queue_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Queue Time",
@@ -7310,7 +7310,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_max_connect_time_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_max_connect_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7323,7 +7323,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_max_response_time_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_max_response_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7336,7 +7336,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_pool_max_total_time_seconds{instance=~'${lb}',pool=~'${pool}'})",
+              "expr": "max(octavia_pool_max_total_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7429,7 +7429,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_pool_queue_time_average_seconds{instance=~'${lb}',pool=~'${pool}'}",
+              "expr": "octavia_pool_queue_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -7520,7 +7520,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_pool_connect_time_average_seconds{instance=~'${lb}',pool=~'${pool}'}",
+              "expr": "octavia_pool_connect_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -7611,7 +7611,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_pool_response_time_average_seconds{instance=~'${lb}',pool=~'${pool}'}",
+              "expr": "octavia_pool_response_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -7702,7 +7702,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_pool_total_time_average_seconds{instance=~'${lb}',pool=~'${pool}'}",
+              "expr": "octavia_pool_total_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
               "interval": "",
               "legendFormat": "{{ pool }}",
               "refId": "A"
@@ -7860,7 +7860,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_member_status{instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 0)",
+              "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 0)",
               "instant": true,
               "interval": "",
               "legendFormat": "Error",
@@ -7872,7 +7872,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_member_status{instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 1)",
+              "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 1)",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7885,7 +7885,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_member_status{instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 2)",
+              "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 2)",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7898,7 +7898,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "count(octavia_member_status{instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 3)",
+              "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 3)",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7966,7 +7966,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_max_sessions{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_max_sessions{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Concurrent Sessions",
@@ -7978,7 +7978,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_max_session_rate{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_max_session_rate{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -7991,7 +7991,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_max_queue{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_max_queue{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8154,7 +8154,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'})",
               "instant": true,
               "interval": "",
               "legendFormat": "1xx",
@@ -8166,7 +8166,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8179,7 +8179,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8192,7 +8192,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8205,7 +8205,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8218,7 +8218,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8375,7 +8375,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'})",
               "instant": true,
               "interval": "",
               "legendFormat": "1xx",
@@ -8387,7 +8387,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8400,7 +8400,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8413,7 +8413,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8426,7 +8426,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8439,7 +8439,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'})",
+              "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -8624,7 +8624,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'}[$__rate_interval]))",
               "instant": false,
               "interval": "",
               "legendFormat": "1xx",
@@ -8636,7 +8636,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -8649,7 +8649,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -8662,7 +8662,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -8675,7 +8675,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -8688,7 +8688,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(irate(octavia_member_http_responses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'}[$__rate_interval]))",
+              "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'}[$__rate_interval]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -8780,7 +8780,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_client_aborts_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_client_aborts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -8870,7 +8870,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_server_aborts_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_server_aborts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -8959,7 +8959,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_sessions_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_sessions_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9050,7 +9050,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_member_current_queue{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
+              "expr": "octavia_member_current_queue{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9141,7 +9141,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_bytes_in_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_bytes_in_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9232,7 +9232,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_bytes_out_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_bytes_out_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9323,7 +9323,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_connection_attempts_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_connection_attempts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9414,7 +9414,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_connection_reuses_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_connection_reuses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9479,7 +9479,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum by (member) (octavia_member_loadbalanced_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "sum by (member) (octavia_member_loadbalanced_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "format": "table",
               "instant": true,
               "interval": "",
@@ -9586,7 +9586,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_member_idle_connections_current{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
+              "expr": "octavia_member_idle_connections_current{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9677,7 +9677,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_responses_denied_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_responses_denied_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9768,7 +9768,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_connection_errors_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_connection_errors_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9859,7 +9859,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_response_errors_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_response_errors_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -9950,7 +9950,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_retry_warnings_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_retry_warnings_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -10041,7 +10041,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_redispatch_warnings_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_redispatch_warnings_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -10132,7 +10132,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_check_failures_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_check_failures_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -10223,7 +10223,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "irate(octavia_member_check_up_down_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
+              "expr": "irate(octavia_member_check_up_down_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -10314,7 +10314,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "sum(octavia_member_check_up_down_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "sum(octavia_member_check_up_down_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Total Transitions",
@@ -10326,7 +10326,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_check_last_change_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_check_last_change_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -10339,7 +10339,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_downtime_seconds_total{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_downtime_seconds_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -10432,7 +10432,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_member_weight{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
+              "expr": "octavia_member_weight{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -10524,7 +10524,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_member_current_throttle{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
+              "expr": "octavia_member_current_throttle{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
               "instant": false,
               "interval": "",
               "legendFormat": "{{ member }}",
@@ -10618,7 +10618,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_queue_time_average_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_queue_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Queue Time",
@@ -10630,7 +10630,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_connect_time_average_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_connect_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -10643,7 +10643,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_response_time_average_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_response_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -10656,7 +10656,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_total_time_average_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_total_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -10724,7 +10724,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_max_queue_time_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_max_queue_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "instant": true,
               "interval": "",
               "legendFormat": "Queue Time",
@@ -10736,7 +10736,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_max_connect_time_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_max_connect_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -10749,7 +10749,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_max_response_time_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_max_response_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -10762,7 +10762,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
-              "expr": "max(octavia_member_max_total_time_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
+              "expr": "max(octavia_member_max_total_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
               "hide": false,
               "instant": true,
               "interval": "",
@@ -10855,7 +10855,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_member_queue_time_average_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
+              "expr": "octavia_member_queue_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -10946,7 +10946,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_member_connect_time_average_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
+              "expr": "octavia_member_connect_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -11037,7 +11037,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_member_response_time_average_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
+              "expr": "octavia_member_response_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -11128,7 +11128,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "octavia_member_total_time_average_seconds{instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
+              "expr": "octavia_member_total_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
               "interval": "",
               "legendFormat": "{{ member }}",
               "refId": "A"
@@ -11210,7 +11210,31 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(octavia_listener_status{instance=~'${lb:raw}', listener!=\"native-prometheus\"}, listener)",
+        "definition": "label_values(octavia_loadbalancer_cpu, os_region)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Region",
+        "multi": true,
+        "name": "region",
+        "options": [],
+        "query": {
+          "query": "label_values(octavia_loadbalancer_cpu, os_region)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(octavia_listener_status{os_region=~'${region}',instance=~'${lb:raw}', listener!=\"native-prometheus\"}, listener)",
         "description": "Filter to a specific listener.",
         "hide": 0,
         "includeAll": true,
@@ -11219,7 +11243,7 @@
         "name": "listener",
         "options": [],
         "query": {
-          "query": "label_values(octavia_listener_status{instance=~'${lb:raw}', listener!=\"native-prometheus\"}, listener)",
+          "query": "label_values(octavia_listener_status{os_region=~'${region}',instance=~'${lb:raw}', listener!=\"native-prometheus\"}, listener)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -11235,7 +11259,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(octavia_pool_status{instance=~'${lb:raw}'}, pool)",
+        "definition": "label_values(octavia_pool_status{os_region=~'${region}',instance=~'${lb:raw}'}, pool)",
         "hide": 0,
         "includeAll": true,
         "label": "Pool",
@@ -11243,7 +11267,7 @@
         "name": "pool",
         "options": [],
         "query": {
-          "query": "label_values(octavia_pool_status{instance=~'${lb:raw}'}, pool)",
+          "query": "label_values(octavia_pool_status{os_region=~'${region}',instance=~'${lb:raw}'}, pool)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -11259,7 +11283,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(octavia_member_status{instance=~'${lb:raw}', pool=~'${pool:raw}'}, member)",
+        "definition": "label_values(octavia_member_status{os_region=~'${region}',instance=~'${lb:raw}', pool=~'${pool:raw}'}, member)",
         "hide": 0,
         "includeAll": true,
         "label": "Member",
@@ -11267,7 +11291,7 @@
         "name": "member",
         "options": [],
         "query": {
-          "query": "label_values(octavia_member_status{instance=~'${lb:raw}', pool=~'${pool:raw}'}, member)",
+          "query": "label_values(octavia_member_status{os_region=~'${region}',instance=~'${lb:raw}', pool=~'${pool:raw}'}, member)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
