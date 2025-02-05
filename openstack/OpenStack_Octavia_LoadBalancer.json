@@ -11210,7 +11210,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(octavia_loadbalancer_cpu, instance)",
+        "definition": "label_values(octavia_loadbalancer_cpu{os_region=~'${region}'}, instance)",
         "hide": 0,
         "includeAll": true,
         "label": "Load Balancer",
@@ -11218,7 +11218,7 @@
         "name": "lb",
         "options": [],
         "query": {
-          "query": "label_values(octavia_loadbalancer_cpu, instance)",
+          "query": "label_values(octavia_loadbalancer_cpu{os_region=~'${region}'}, instance)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
