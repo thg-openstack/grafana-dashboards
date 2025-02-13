@@ -11305,13 +11305,9 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": [
-            "de-fra"
-          ],
-          "value": [
-            "de-fra"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
@@ -11337,13 +11333,9 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": [
-            "de1-lb_site_c"
-          ],
-          "value": [
-            "de1-lb_site_c"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
@@ -11459,8 +11451,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Octavia Loadbalancer TEST",
-  "uid": "4yHpTrB7y",
+  "title": "Octavia Loadbalancer",
+  "uid": "4yHpTrB67",
   "version": 2,
   "weekStart": ""
 }
