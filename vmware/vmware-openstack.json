@@ -136,8 +136,7 @@
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -233,8 +232,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -330,8 +328,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -428,8 +425,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -588,7 +584,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - sum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - 1.5*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - sum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - 2*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
           "instant": false,
           "legendFormat": "Total",
           "range": true,
@@ -2485,10 +2481,10 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) -  max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
               "hide": false,
               "instant": false,
-              "legendFormat": "RAM  Available",
+              "legendFormat": "RAM Available",
               "range": true,
               "refId": "B"
             },
@@ -2559,8 +2555,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2599,7 +2594,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - sum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - 1.5*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
+              "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - sum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - 2*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
               "instant": false,
               "legendFormat": "Total",
               "range": true,
@@ -2663,8 +2658,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2736,8 +2730,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-blue",
-                    "value": null
+                    "color": "semi-dark-blue"
                   }
                 ]
               },
@@ -2778,7 +2771,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(node_memory_MemTotal_bytes{os_region=\"gb4-retail\",instance=~\"gb4-li-compute.*\"}) - (max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})*1024*1024)",
+              "expr": "sum(node_memory_MemTotal_bytes{os_region=\"gb4-retail\",instance=~\"gb4-li-compute.*\"}) - (2*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})*1024*1024)",
               "hide": false,
               "instant": false,
               "legendFormat": "Total",
@@ -2844,8 +2837,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -2998,8 +2990,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "transparent",
-                    "value": null
+                    "color": "transparent"
                   }
                 ]
               },
@@ -3151,8 +3142,7 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "transparent",
-                          "value": null
+                          "color": "transparent"
                         },
                         {
                           "color": "green",
@@ -3991,8 +3981,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "transparent",
-                    "value": null
+                    "color": "transparent"
                   }
                 ]
               },
@@ -4144,8 +4133,7 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "transparent",
-                          "value": null
+                          "color": "transparent"
                         },
                         {
                           "color": "green",
@@ -5149,13 +5137,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "VMware2Openstack",
   "uid": "fed41fc9-33ee-4bad-87c9-ecbd04c7e1b7",
-  "version": 199,
+  "version": 203,
   "weekStart": ""
 }
