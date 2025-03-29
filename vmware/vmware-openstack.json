@@ -584,7 +584,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - sum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - 2*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - \nsum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - \nsum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"} * on(hostname) \n  (openstack_nova_agent_state{os_region=\"gb4-retail\",service=\"nova-compute\"} == 0 or \n   openstack_nova_agent_state{adminState=\"disabled\",os_region=\"gb4-retail\", service=\"nova-compute\"} == 1)) - 2*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
           "instant": false,
           "legendFormat": "Total",
           "range": true,
@@ -895,7 +895,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) * 100)/(sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - sum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})) ",
+          "expr": "(sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) * 100)/\n(sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"} * on(hostname) \n  (openstack_nova_agent_state{os_region=\"gb4-retail\",service=\"nova-compute\"} == 1 and \n   openstack_nova_agent_state{adminState=\"enabled\",os_region=\"gb4-retail\",service=\"nova-compute\"} == 1)) - \nsum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"} * on(hostname) \n  (openstack_nova_agent_state{os_region=\"gb4-retail\",service=\"nova-compute\"} == 1 and \n   openstack_nova_agent_state{adminState=\"enabled\",os_region=\"gb4-retail\",service=\"nova-compute\"} == 1)) - \n2*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"} * on(hostname) \n  (openstack_nova_agent_state{os_region=\"gb4-retail\",service=\"nova-compute\"} == 1 and \n   openstack_nova_agent_state{adminState=\"enabled\",os_region=\"gb4-retail\",service=\"nova-compute\"} == 1)))",
           "instant": false,
           "legendFormat": "Total",
           "range": true,
@@ -5144,6 +5144,6 @@
   "timezone": "",
   "title": "VMware2Openstack",
   "uid": "fed41fc9-33ee-4bad-87c9-ecbd04c7e1b7",
-  "version": 203,
+  "version": 207,
   "weekStart": ""
 }
