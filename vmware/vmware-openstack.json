@@ -626,8 +626,16 @@
                 "value": null
               },
               {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 50
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 120
               }
             ]
           }
@@ -636,7 +644,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 3,
+        "w": 4,
         "x": 0,
         "y": 5
       },
@@ -671,6 +679,19 @@
           "legendFormat": "Total VMs",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (hour) (\n  count_over_time(\n    ((vmware2openstack_migration_status == 13 or vmware2openstack_migration_status == 14) and \n     vmware2openstack_migrated_at > time() - 86400)  # Last 24 hours (fixed)\n    * on (vm_name) group_left(os,service,team) vmware2openstack_vm_metadata\n    [1h:1h]\n  )\n)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Last 24h",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "VM Migrated Count",
@@ -691,12 +712,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "blue",
                 "value": null
               },
               {
                 "color": "yellow",
-                "value": 1
+                "value": 30
               }
             ]
           }
@@ -706,7 +727,7 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 3,
+        "x": 4,
         "y": 5
       },
       "id": 6,
@@ -776,8 +797,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
-        "x": 6,
+        "w": 5,
+        "x": 7,
         "y": 5
       },
       "id": 10,
@@ -2430,7 +2451,7 @@
             "h": 11,
             "w": 6,
             "x": 0,
-            "y": 62
+            "y": 54
           },
           "id": 20,
           "options": {
@@ -2555,7 +2576,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2571,7 +2593,7 @@
             "h": 22,
             "w": 18,
             "x": 6,
-            "y": 62
+            "y": 54
           },
           "id": 17,
           "options": {
@@ -2658,7 +2680,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2674,7 +2697,7 @@
             "h": 7,
             "w": 6,
             "x": 0,
-            "y": 73
+            "y": 65
           },
           "id": 25,
           "options": {
@@ -2730,7 +2753,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-blue"
+                    "color": "semi-dark-blue",
+                    "value": null
                   }
                 ]
               },
@@ -2742,7 +2766,7 @@
             "h": 4,
             "w": 6,
             "x": 0,
-            "y": 80
+            "y": 72
           },
           "id": 26,
           "options": {
@@ -2864,7 +2888,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 93
+            "y": 123
           },
           "id": 24,
           "options": {
@@ -3415,7 +3439,7 @@
             "h": 24,
             "w": 24,
             "x": 0,
-            "y": 102
+            "y": 132
           },
           "id": 14,
           "options": {
@@ -4406,7 +4430,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 126
+            "y": 156
           },
           "id": 15,
           "options": {
@@ -5020,7 +5044,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 105
+            "y": 135
           },
           "id": 11,
           "options": {
@@ -5144,6 +5168,6 @@
   "timezone": "",
   "title": "VMware2Openstack",
   "uid": "fed41fc9-33ee-4bad-87c9-ecbd04c7e1b7",
-  "version": 207,
+  "version": 212,
   "weekStart": ""
 }
