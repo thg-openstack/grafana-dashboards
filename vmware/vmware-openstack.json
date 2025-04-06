@@ -827,7 +827,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "((sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 13) * 0.012644) - (sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 13) *0.00454)) * 730 or on() vector(0)",
+          "expr": "((sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status == 14) * 0.012644) - (sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 14) *0.00454)) * 730 or on() vector(0)",
           "hide": true,
           "instant": false,
           "legendFormat": "Savings a month",
@@ -840,7 +840,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "((sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 13) * 0.012644) - (sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 13) *0.003700)) * 730 * 12 or on() vector(0)",
+          "expr": "((sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status == 14) * 0.012644) - (sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status == 14) *0.003700)) * 730 * 12 or on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "Savings a year",
@@ -1209,7 +1209,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "((sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 13) * 0.012634) - (sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 13) *0.004654)) * 730",
+          "expr": "((sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status == 14) * 0.012634) - (sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status == 14) *0.004654)) * 730",
           "instant": false,
           "legendFormat": "Savings a month",
           "range": true,
@@ -1221,7 +1221,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "((sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 13) * 0.012634) - (sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status >= 13) *0.004400)) * 730 * 12 or on() vector(0)",
+          "expr": "((sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status == 14) * 0.012634) - (sum(vmware2openstack_vm_cpu and vmware2openstack_migration_status == 14) *0.004400)) * 730 * 12 or on() vector(0)",
           "hide": true,
           "instant": false,
           "legendFormat": "Savings a year",
@@ -3029,7 +3029,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "count(vmware2openstack_migration_status >= 13)",
+              "expr": "count(vmware2openstack_migration_status >= 13 and vmware2openstack_migration_status != 15)",
               "hide": false,
               "instant": false,
               "legendFormat": "Migrated",
@@ -5283,6 +5283,6 @@
   "timezone": "",
   "title": "VMware2Openstack",
   "uid": "fed41fc9-33ee-4bad-87c9-ecbd04c7e1b7",
-  "version": 213,
+  "version": 216,
   "weekStart": ""
 }
