@@ -528,90 +528,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "RAM Info including capacity of VMs that are in a queue. \n\nRequired = Usage + Migration queue",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": ""
-              }
-            ]
-          },
-          "unit": "decmbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 24,
-        "x": 0,
-        "y": 2
-      },
-      "id": 22,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.4.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - \nsum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - \nsum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"} * on(hostname) \n  (openstack_nova_agent_state{os_region=\"gb4-retail\",service=\"nova-compute\"} == 0 or \n   openstack_nova_agent_state{adminState=\"disabled\",os_region=\"gb4-retail\", service=\"nova-compute\"} == 1)) - 2*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})",
-          "instant": false,
-          "legendFormat": "Total",
-          "range": true,
-          "refId": "Total"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(vmware2openstack_vm_memory and (0 < vmware2openstack_migration_status <= 12)) + sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Required",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "RAM +  VMs in queue",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -646,7 +562,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 5
+        "y": 2
       },
       "id": 3,
       "options": {
@@ -728,7 +644,7 @@
         "h": 8,
         "w": 3,
         "x": 4,
-        "y": 5
+        "y": 2
       },
       "id": 6,
       "options": {
@@ -799,7 +715,7 @@
         "h": 8,
         "w": 4,
         "x": 7,
-        "y": 5
+        "y": 2
       },
       "id": 10,
       "options": {
@@ -888,7 +804,7 @@
         "h": 8,
         "w": 4,
         "x": 11,
-        "y": 5
+        "y": 2
       },
       "id": 19,
       "options": {
@@ -960,7 +876,7 @@
         "h": 8,
         "w": 3,
         "x": 15,
-        "y": 5
+        "y": 2
       },
       "id": 21,
       "options": {
@@ -1027,43 +943,11 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
+      "description": "RAM Info including capacity of VMs that are in a queue. \n\nRequired = Usage + Migration queue",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -1074,12 +958,12 @@
                 "value": null
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "orange",
+                "value": ""
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "decmbytes"
         },
         "overrides": []
       },
@@ -1087,20 +971,25 @@
         "h": 8,
         "w": 6,
         "x": 18,
-        "y": 5
+        "y": 2
       },
-      "id": 1,
+      "id": 22,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "11.4.2",
       "targets": [
@@ -1110,15 +999,28 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(vmware2openstack_vm_storage and vmware2openstack_migration_status >= 7)",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"}) - \nsum(openstack_placement_resource_reserved{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"}) - \n(sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"} * on(hostname)  \n  (openstack_nova_agent_state{adminState=\"disabled\",os_region=\"gb4-retail\", service=\"nova-compute\"} == 1)) or vector(0))- 3*max(openstack_placement_resource_total{os_region=~\"gb4-retail\",resourcetype=\"MEMORY_MB\"})\n\n",
           "instant": false,
-          "legendFormat": "Storage Total",
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "Total"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(vmware2openstack_vm_memory and (0 < vmware2openstack_migration_status <= 12)) + sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Required",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Storage Migrated",
-      "type": "timeseries"
+      "title": "RAM +  VMs in queue",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -1184,9 +1086,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 6,
+        "w": 5,
         "x": 0,
-        "y": 13
+        "y": 10
       },
       "id": 9,
       "options": {
@@ -1295,9 +1197,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 6,
-        "x": 6,
-        "y": 13
+        "w": 4,
+        "x": 5,
+        "y": 10
       },
       "id": 4,
       "options": {
@@ -1393,9 +1295,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 6,
-        "x": 12,
-        "y": 13
+        "w": 5,
+        "x": 9,
+        "y": 10
       },
       "id": 5,
       "options": {
@@ -1426,6 +1328,104 @@
         }
       ],
       "title": "VCPU Migrated",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 14,
+        "y": 10
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(vmware2openstack_vm_storage and vmware2openstack_migration_status >= 7)",
+          "instant": false,
+          "legendFormat": "Storage Total",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Storage Migrated",
       "type": "timeseries"
     },
     {
@@ -1498,9 +1498,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 6,
-        "x": 18,
-        "y": 13
+        "w": 5,
+        "x": 19,
+        "y": 10
       },
       "id": 37,
       "options": {
@@ -1997,7 +1997,7 @@
         "h": 31,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 19
       },
       "id": 12,
       "options": {
@@ -2539,7 +2539,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 50
       },
       "id": 16,
       "panels": [
@@ -2694,7 +2694,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2797,7 +2798,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2869,7 +2871,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-blue"
+                    "color": "semi-dark-blue",
+                    "value": null
                   }
                 ]
               },
@@ -2957,7 +2960,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 51
       },
       "id": 13,
       "panels": [
@@ -2976,7 +2979,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -3003,7 +3007,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 123
+            "y": 55
           },
           "id": 24,
           "options": {
@@ -3129,7 +3133,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "transparent"
+                    "color": "transparent",
+                    "value": null
                   }
                 ]
               },
@@ -3281,7 +3286,8 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "transparent"
+                          "color": "transparent",
+                          "value": null
                         },
                         {
                           "color": "green",
@@ -3554,7 +3560,7 @@
             "h": 24,
             "w": 24,
             "x": 0,
-            "y": 132
+            "y": 64
           },
           "id": 14,
           "options": {
@@ -4545,7 +4551,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 156
+            "y": 88
           },
           "id": 15,
           "options": {
@@ -5091,7 +5097,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 55
+        "y": 52
       },
       "id": 8,
       "panels": [
@@ -5159,7 +5165,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 135
+            "y": 220
           },
           "id": 11,
           "options": {
@@ -5276,13 +5282,13 @@
     ]
   },
   "time": {
-    "from": "now-2d",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "VMware2Openstack",
   "uid": "fed41fc9-33ee-4bad-87c9-ecbd04c7e1b7",
-  "version": 216,
+  "version": 224,
   "weekStart": ""
 }
