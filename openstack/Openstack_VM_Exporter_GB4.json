@@ -598,7 +598,7 @@
         "sortBy": [
           {
             "desc": false,
-            "displayName": "Service"
+            "displayName": "Instance ID"
           }
         ]
       },
@@ -611,7 +611,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "label_replace(sum(libvirt_domain_info_virtual_cpus{job=\"libvirt_exporter\",os_region=\"$cluster\"}) by (domain) * on(domain) group_left(flavor,instance_name,project_name) libvirt_domain_info_meta{job=\"libvirt_exporter\",project_name=\"$project\",os_region=\"$cluster\"} * on(domain) group_left(ip_address,cinder_backend_host,service,team) openstack_db_metadata{os_region=\"$cluster\"}, \"subservice\", \"$3\", \"instance_name\", \".*-.*-(.*)-.*\")",
+          "expr": "label_replace(sum(libvirt_domain_info_virtual_cpus{job=\"libvirt_exporter\",os_region=\"$cluster\"}) by (domain) * on(domain) group_left(flavor,instance_name,project_name) libvirt_domain_info_meta{job=\"libvirt_exporter\",project_name=\"$project\",os_region=\"$cluster\"} * on(domain) group_left(ip_address,cinder_backend_host,service,team) openstack_db_metadata{os_region=\"$cluster\",service!=\"None\"}, \"subservice\", \"$3\", \"instance_name\", \".*-.*-(.*)-.*\")",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1044,9 +1044,9 @@
       "1d"
     ]
   },
-  "timezone": "",
+  "timezone": "utc",
   "title": "Openstack VM Exporter Retail Projects",
   "uid": "ef51b704-0c4b-40f1-ad58-5fa60a9fe136",
-  "version": 7,
+  "version": 9,
   "weekStart": ""
 }
