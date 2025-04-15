@@ -598,7 +598,7 @@
         "sortBy": [
           {
             "desc": false,
-            "displayName": "Instance ID"
+            "displayName": "Service"
           }
         ]
       },
