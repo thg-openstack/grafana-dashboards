@@ -626,7 +626,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(avg by (domain) (irate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}[$__rate_interval])) * 100)",
+          "expr": "(avg by (domain) (irate(libvirt_domain_info_cpu_time_seconds_total{compute=~\"$compute\",job=~\"libvirt_exporter\"}[$__rate_interval])) * 100)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -641,7 +641,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"}",
+          "expr": "libvirt_domain_info_maximum_memory_bytes{compute=~\"$compute\", job=~\"libvirt_exporter\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -842,7 +842,11 @@
   ],
   "refresh": "5m",
   "schemaVersion": 40,
-  "tags": [],
+  "tags": [
+    "openstack",
+    "openstack/project",
+    "openstack/retail"
+  ],
   "templating": {
     "list": [
       {
@@ -1006,29 +1010,6 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", project_name=\"${project}\", os_region=\"$cluster\", instance_name=~\"$instance_name\"},domain)",
-        "hide": 2,
-        "includeAll": true,
-        "label": "VM",
-        "multi": true,
-        "name": "virtual_machine",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", project_name=\"${project}\", os_region=\"$cluster\", instance_name=~\"$instance_name\"},domain)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "current": {},
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
         "definition": "label_values(openstack_cinder_limits_volume_max_gb{os_region=\"$cluster\", tenant=~\"$project\"},tenant_id)",
         "hide": 2,
         "includeAll": true,
@@ -1067,6 +1048,6 @@
   "timezone": "",
   "title": "Openstack VM Exporter Retail Projects",
   "uid": "ef51b704-0c4b-40f1-ad58-5fa60a9fe136",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
