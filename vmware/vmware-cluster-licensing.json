@@ -162,7 +162,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n)\r\n",
+          "expr": "sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n)\r\n",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -234,7 +234,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n))\r\n*350\r\n",
+          "expr": "(sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n))\r\n*350\r\n",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -304,7 +304,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n))\r\n*350\r\n",
+          "expr": "(sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n))\r\n*350\r\n",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -403,7 +403,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"}==1) OR vector(0)",
+          "expr": "count(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"}==1) OR vector(0)",
           "format": "time_series",
           "intervalFactor": 1,
           "range": true,
@@ -486,7 +486,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "count(vmware_host_connection_state{vmware_cluster_name=~\"$cluster\"})",
+          "expr": "count(vmware_host_connection_state{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -595,7 +595,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n)\r\n",
+          "expr": "sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=\"$cluster\",dc_name=~\"$DC\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\",dc_name=~\"$DC\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n)\r\n",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -668,7 +668,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "(\r\n  sum(\r\n    first_over_time(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}[$__range])\r\n  ) \r\n  - \r\n  sum(\r\n    first_over_time(\r\n      vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}[$__range]\r\n      * on(instance, host_name) group_left()\r\n      (vmware_host_maintenance_mode == 1) or vector(0)\r\n    )\r\n  )\r\n) * 350\r\n",
+          "expr": "(\r\n  sum(\r\n    first_over_time(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}[$__range],dc_name=~\"$DC\")\r\n  ) \r\n  - \r\n  sum(\r\n    first_over_time(\r\n      vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}[$__range]\r\n      * on(instance, host_name) group_left()\r\n      (vmware_host_maintenance_mode == 1) or vector(0)\r\n    )\r\n  )\r\n) * 350\r\n",
           "fullMetaSearch": false,
           "hide": true,
           "includeNullMetadata": true,
@@ -684,7 +684,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n))\r\n*350\r\n",
+          "expr": "(sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=\"$cluster\",dc_name=~\"$DC\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\",dc_name=~\"$DC\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n))\r\n*350\r\n",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -755,7 +755,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "(\r\n  sum(\r\n    first_over_time(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}[$__range])\r\n  ) \r\n  - \r\n  sum(\r\n    first_over_time(\r\n      vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}[$__range]\r\n      * on(instance, host_name) group_left()\r\n      (vmware_host_maintenance_mode == 1) or vector(0)\r\n    )\r\n  )\r\n) * 350\r\n",
+          "expr": "(\r\n  sum(\r\n    first_over_time(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\",dc_name=~\"$DC\"}[$__range])\r\n  ) \r\n  - \r\n  sum(\r\n    first_over_time(\r\n      vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}[$__range]\r\n      * on(instance, host_name) group_left()\r\n      (vmware_host_maintenance_mode == 1) or vector(0)\r\n    )\r\n  )\r\n) * 350\r\n",
           "fullMetaSearch": false,
           "hide": true,
           "includeNullMetadata": true,
@@ -771,7 +771,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n))\r\n*350\r\n",
+          "expr": "(sum(\r\n  vmware_host_num_cpu{vmware_cluster_name=\"$cluster\",dc_name=~\"$DC\"}\r\n  )\r\n  -\r\n  sum(vmware_host_num_cpu{vmware_cluster_name=\"$cluster\",dc_name=~\"$DC\"}\r\n  * on(instance, host_name) group_left()\r\n  (vmware_host_maintenance_mode == 1) or vector(0)\r\n))\r\n*350\r\n",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -855,7 +855,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "count(vmware_host_connection_state{vmware_cluster_name=~\"$cluster\"})",
+          "expr": "count(vmware_host_connection_state{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -952,7 +952,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"}==1) OR vector(0)",
+          "expr": "count(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"}==1) OR vector(0)",
           "format": "time_series",
           "intervalFactor": 1,
           "range": true,
@@ -1052,7 +1052,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\"}) * 100 / sum(vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})",
+          "expr": "sum(vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"}) * 100 / sum(vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{ $cluster }}",
@@ -1153,7 +1153,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum((vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"}) * 100) / sum(vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})",
+          "expr": "sum((vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"}) * 100) / sum(vmware_host_memory_max{vmware_cluster_name=~\"$cluster\",dc_name=~\"$DC\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{ $cluster }}",
@@ -1277,6 +1277,6 @@
   "timezone": "browser",
   "title": "VMware Cluster Licensing",
   "uid": "a073c109-1b15-45a2-89a3-0c4b64b5bbb5",
-  "version": 11,
+  "version": 12,
   "weekStart": ""
 }
