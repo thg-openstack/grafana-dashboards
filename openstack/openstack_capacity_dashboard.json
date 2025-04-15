@@ -2134,7 +2134,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(\n  sum(\n    irate(node_cpu_seconds_total{mode!=\"idle\", instance=~\".*nova.*|.*compute.*\", os_region=\"$cluster\"}[3m])\n  )\n)\n/\nsum(\n  irate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\", os_region=\"$cluster\"}[3m])\n)\n* 100\n",
+          "expr": "100 - 100 * (avg(irate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=\"$cluster\",mode=\"idle\"}[1m])))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -4280,6 +4280,6 @@
   "timezone": "",
   "title": "Openstack Capacity Dashboard",
   "uid": "affa220d-68ac-4977-a00b-250eb247f7fc",
-  "version": 10,
+  "version": 12,
   "weekStart": ""
 }
