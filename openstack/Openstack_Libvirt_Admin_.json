@@ -39,7 +39,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.2.1"
+      "version": "11.4.2"
     },
     {
       "type": "datasource",
@@ -88,10 +88,8 @@
       }
     ]
   },
-  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": 15682,
   "graphTooltip": 0,
   "id": null,
   "links": [],
@@ -99,10 +97,6 @@
   "panels": [
     {
       "collapsed": false,
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -111,15 +105,6 @@
       },
       "id": 9,
       "panels": [],
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Summary",
       "type": "row"
     },
@@ -159,6 +144,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -166,10 +152,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -239,6 +226,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -246,10 +234,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -318,13 +307,13 @@
         "y": 1
       },
       "id": 75,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "none",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -332,10 +321,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -401,6 +391,7 @@
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "max"
@@ -408,10 +399,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -495,6 +487,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -502,10 +495,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -574,6 +568,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -581,10 +576,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -639,6 +635,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -646,10 +643,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -713,6 +711,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -720,10 +719,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -792,6 +792,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -799,10 +800,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -884,6 +886,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -891,10 +894,11 @@
           "fields": "",
           "values": true
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -976,7 +980,6 @@
         "y": 11
       },
       "id": 76,
-      "links": [],
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
@@ -989,9 +992,10 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -1076,6 +1080,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1083,10 +1088,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -1179,6 +1185,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1186,10 +1193,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -1271,6 +1279,7 @@
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1278,10 +1287,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -1392,6 +1402,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1399,10 +1410,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -1450,6 +1462,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1491,7 +1504,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 13,
         "w": 13,
         "x": 11,
         "y": 16
@@ -1510,7 +1523,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -1540,58 +1553,6 @@
           "legendFormat": "Write",
           "range": true,
           "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "read_bytes",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "write_bytes",
-          "range": true,
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_read_time_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "read_time",
-          "range": true,
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(libvirt_domain_block_stats_write_time_total{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}[$__rate_interval]))",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "write_time",
-          "range": true,
-          "refId": "F"
         }
       ],
       "title": "IOPS R/W on VMs",
@@ -1647,13 +1608,13 @@
         "y": 21
       },
       "id": 78,
-      "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "none",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1661,10 +1622,11 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.2.1",
+      "pluginVersion": "11.4.2",
       "targets": [
         {
           "datasource": {
@@ -1694,91 +1656,6 @@
         }
       ],
       "title": "Price per year running on VMware",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "vSphere Enterprise, 150$ a core",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#299c46",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 50
-              },
-              {
-                "color": "#d44a3a",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "currencyUSD"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 13,
-        "x": 11,
-        "y": 21
-      },
-      "id": 79,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2 * 150",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Reduced price running on VMware Enterprise Plus",
       "type": "stat"
     },
     {
@@ -1861,7 +1738,7 @@
             "h": 4,
             "w": 24,
             "x": 0,
-            "y": 77
+            "y": 327
           },
           "id": 68,
           "options": {
@@ -2513,7 +2390,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 81
+            "y": 331
           },
           "id": 69,
           "options": {
@@ -3351,10 +3228,6 @@
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3425,7 +3298,7 @@
             "h": 13,
             "w": 24,
             "x": 0,
-            "y": 59
+            "y": 301
           },
           "id": 61,
           "options": {
@@ -3524,7 +3397,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 72
+            "y": 322
           },
           "id": 22,
           "interval": "$interval",
@@ -3621,7 +3494,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 81
+            "y": 331
           },
           "id": 18,
           "options": {
@@ -3661,24 +3534,11 @@
           "type": "timeseries"
         }
       ],
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "CPU",
       "type": "row"
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3704,6 +3564,241 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "iops"
+            },
+            "overrides": [
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "b36199e6-593c-477d-bdce-c164997a1151 gb4sn-008 gb4-li-ecrmcb-007-185-2001 tier1-5000"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 20,
+            "w": 24,
+            "x": 0,
+            "y": 32
+          },
+          "id": 79,
+          "options": {
+            "legend": {
+              "calcs": [
+                "max",
+                "last"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true,
+              "sortBy": "Last",
+              "sortDesc": false
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "# First, extract the ID from the Pure volume name and add it as a label\nlabel_replace(\n  avg(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\", dimension=\"reads_per_sec\", name=~\"volume-.*\"}) by (instance,name),\n  \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n)\n* on(id) group_left(volume_name, size, status, tenant_id, volume_type)\n# Then, rename the name label to volume_name in the Cinder data\n(label_replace(\n  label_replace(\n    openstack_cinder_volume_gb{os_region=~\"$cluster\"},\n    \"volume_name\", \"$1\", \"name\", \"(.*)\"\n  ),\n  \"name\", \"volume-$1-cinder\", \"id\", \"(.*)\"\n) * 0 + 1)\nand\ntopk($TopItems, \n  label_replace(\n    avg(rate(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\", dimension=\"reads_per_sec\", name=~\"volume-.*\"}[$__range] @ end() )) by (instance,name),\n    \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n  )\n  * on(id) group_left(volume_name, size, status, tenant_id, volume_type)\n  (label_replace(\n    label_replace(\n      openstack_cinder_volume_gb{os_region=~\"$cluster\"},\n      \"volume_name\", \"$1\", \"name\", \"(.*)\"\n    ),\n    \"name\", \"volume-$1-cinder\", \"id\", \"(.*)\"\n  ) * 0 + 1)\n)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{id}} {{instance}} {{volume_name}} {{volume_type}}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Top $TopItems Volumes for Read IOPs Pure",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "iops"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 24,
+            "x": 0,
+            "y": 52
+          },
+          "id": 80,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "min",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "label_replace(\n  avg(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\", dimension=\"writes_per_sec\", name=~\"volume-.*\"}) by (instance,name),\n  \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n)\n* on(id) group_left(volume_name, size, status, tenant_id, volume_type)\n# Then, rename the name label to volume_name in the Cinder data\n(label_replace(\n  label_replace(\n    openstack_cinder_volume_gb{os_region=~\"$cluster\"},\n    \"volume_name\", \"$1\", \"name\", \"(.*)\"\n  ),\n  \"name\", \"volume-$1-cinder\", \"id\", \"(.*)\"\n) * 0 + 1)\nand\ntopk($TopItems, \n  label_replace(\n    avg(rate(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\", dimension=\"writes_per_sec\", name=~\"volume-.*\"}[$__range] @ end() )) by (instance,name),\n    \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n  )\n  * on(id) group_left(volume_name, size, status, tenant_id, volume_type)\n  (label_replace(\n    label_replace(\n      openstack_cinder_volume_gb{os_region=~\"$cluster\"},\n      \"volume_name\", \"$1\", \"name\", \"(.*)\"\n    ),\n    \"name\", \"volume-$1-cinder\", \"id\", \"(.*)\"\n  ) * 0 + 1)\n)\n",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{id}} {{instance}} {{volume_name}} {{volume_type}}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Top $TopItems Volumes for Write IOPs Pure",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -3735,7 +3830,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -3747,7 +3843,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 71
+            "y": 66
           },
           "id": 71,
           "interval": "$interval",
@@ -3763,7 +3859,7 @@
               "sort": "asc"
             }
           },
-          "pluginVersion": "10.2.1",
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -3812,6 +3908,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -3842,7 +3939,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -3854,7 +3952,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 80
+            "y": 75
           },
           "id": 32,
           "interval": "$interval",
@@ -3868,13 +3966,14 @@
               "placement": "right",
               "showLegend": true,
               "sortBy": "Last *",
-              "sortDesc": true
+              "sortDesc": false
             },
             "tooltip": {
               "mode": "multi",
               "sort": "asc"
             }
           },
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -3883,7 +3982,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))*0",
+              "expr": "avg(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg(rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end())",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
               "range": true,
@@ -3891,7 +3990,6 @@
             }
           ],
           "title": "Top $TopItems IOPS Read",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -3911,6 +4009,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -3941,7 +4040,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -3953,7 +4053,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 80
+            "y": 75
           },
           "id": 33,
           "interval": "$interval",
@@ -3965,13 +4065,16 @@
               ],
               "displayMode": "table",
               "placement": "right",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "multi",
               "sort": "asc"
             }
           },
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -3980,7 +4083,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0\n\n",
+              "expr": "avg(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+\ntopk($TopItems,(avg(rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device, compute)@ end()))\n\n",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
               "range": true,
@@ -3988,7 +4091,6 @@
             }
           ],
           "title": "Top $TopItems IOPS Write",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -4008,6 +4110,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -4050,7 +4153,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 88
+            "y": 83
           },
           "id": 34,
           "interval": "$interval",
@@ -4063,13 +4166,14 @@
               "placement": "right",
               "showLegend": true,
               "sortBy": "Last *",
-              "sortDesc": true
+              "sortDesc": false
             },
             "tooltip": {
               "mode": "multi",
               "sort": "none"
             }
           },
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -4078,7 +4182,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk(10,avg_over_time(sum(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end()))*0",
+              "expr": "avg(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end())*0",
               "interval": "",
               "legendFormat": "{{domain}} - {{target_device}} - {{compute}}",
               "range": true,
@@ -4086,7 +4190,6 @@
             }
           ],
           "title": "Top $TopItems Throughput Read",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -4106,6 +4209,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -4148,7 +4252,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 88
+            "y": 83
           },
           "id": 35,
           "options": {
@@ -4165,6 +4269,7 @@
               "sort": "desc"
             }
           },
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -4173,7 +4278,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))*0\n",
+              "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(avg(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))\n",
               "interval": "$interval",
               "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
               "range": true,
@@ -4181,7 +4286,6 @@
             }
           ],
           "title": "Top $TopItems Throughput Write",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -4202,6 +4306,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 10,
                 "gradientMode": "none",
@@ -4251,7 +4356,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 96
+            "y": 91
           },
           "id": 59,
           "interval": "$interval",
@@ -4271,7 +4376,7 @@
               "sort": "desc"
             }
           },
-          "pluginVersion": "10.2.1",
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -4310,6 +4415,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 10,
                 "gradientMode": "opacity",
@@ -4355,7 +4461,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 96
+            "y": 91
           },
           "id": 58,
           "interval": "$interval",
@@ -4375,6 +4481,7 @@
               "sort": "desc"
             }
           },
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -4396,24 +4503,11 @@
           "type": "timeseries"
         }
       ],
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Disk",
       "type": "row"
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -4505,7 +4599,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 98
+            "y": 348
           },
           "id": 47,
           "options": {
@@ -4570,7 +4664,6 @@
             }
           ],
           "title": "Memory on VMs",
-          "transformations": [],
           "type": "bargauge"
         },
         {
@@ -4657,7 +4750,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 108
+            "y": 358
           },
           "id": 19,
           "options": {
@@ -4693,7 +4786,6 @@
             }
           ],
           "title": "Total",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -4756,7 +4848,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 108
+            "y": 358
           },
           "id": 26,
           "options": {
@@ -4791,7 +4883,6 @@
             }
           ],
           "title": "Top $TopItems Resident Set Size",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -4878,7 +4969,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 116
+            "y": 366
           },
           "id": 21,
           "options": {
@@ -4913,7 +5004,6 @@
             }
           ],
           "title": "Used",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -4975,7 +5065,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 116
+            "y": 366
           },
           "id": 20,
           "options": {
@@ -5010,7 +5100,6 @@
             }
           ],
           "title": "Top $TopItems Available",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -5074,7 +5163,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 124
+            "y": 374
           },
           "id": 25,
           "options": {
@@ -5109,7 +5198,6 @@
             }
           ],
           "title": "Swap Read",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -5173,7 +5261,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 124
+            "y": 374
           },
           "id": 27,
           "options": {
@@ -5209,17 +5297,7 @@
             }
           ],
           "title": "Swap Written",
-          "transformations": [],
           "type": "timeseries"
-        }
-      ],
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "refId": "A"
         }
       ],
       "title": "Memory",
@@ -5227,10 +5305,6 @@
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -5299,7 +5373,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 58
+            "y": 300
           },
           "id": 70,
           "interval": "$interval",
@@ -5460,7 +5534,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 67
+            "y": 309
           },
           "id": 38,
           "options": {
@@ -5496,7 +5570,6 @@
             }
           ],
           "title": "Top $TopItems RX Throughput",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -5558,7 +5631,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 67
+            "y": 309
           },
           "id": 39,
           "interval": "$interval",
@@ -5593,7 +5666,6 @@
             }
           ],
           "title": "Top $TopItems TX Throughput",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -5656,7 +5728,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 75
+            "y": 325
           },
           "id": 40,
           "options": {
@@ -5689,7 +5761,6 @@
             }
           ],
           "title": "Top $TopItems RX Packets",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -5752,7 +5823,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 75
+            "y": 325
           },
           "id": 41,
           "interval": "$interval",
@@ -5788,7 +5859,6 @@
             }
           ],
           "title": "TX Packets",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -5851,7 +5921,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 83
+            "y": 333
           },
           "id": 44,
           "options": {
@@ -5900,7 +5970,6 @@
             }
           ],
           "title": "Top $TopItems RX/TX Packets Drop",
-          "transformations": [],
           "type": "timeseries"
         },
         {
@@ -5964,7 +6033,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 95
+            "y": 345
           },
           "id": 42,
           "options": {
@@ -6011,17 +6080,7 @@
             }
           ],
           "title": "RX/TX Packets Error",
-          "transformations": [],
           "type": "timeseries"
-        }
-      ],
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "refId": "A"
         }
       ],
       "title": "Network",
@@ -6029,10 +6088,6 @@
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -6136,7 +6191,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 82
+            "y": 242
           },
           "id": 66,
           "options": {
@@ -6161,7 +6216,7 @@
               }
             ]
           },
-          "pluginVersion": "10.2.1",
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -6362,27 +6417,13 @@
           "type": "table"
         }
       ],
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Data Exporter",
       "type": "row"
     }
   ],
-  "refresh": "1m",
-  "revision": 1,
-  "schemaVersion": 38,
-  "tags": [
-    "openstack",
-    "openstack-nova",
-    "openstack-cluster"
-  ],
+  "refresh": "30s",
+  "schemaVersion": 40,
+  "tags": [],
   "templating": {
     "list": [
       {
@@ -6393,7 +6434,6 @@
         },
         "definition": "label_values(os_region)",
         "description": "Cluster",
-        "hide": 0,
         "includeAll": true,
         "label": "Cluster",
         "multi": true,
@@ -6405,28 +6445,19 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "Prometheus",
-          "value": "e2000f63-706c-4926-8569-96324b3454ef"
-        },
-        "datasource": "Prometheus",
+        "current": {},
         "hide": 2,
         "includeAll": false,
         "label": "datasource",
-        "multi": false,
         "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -6434,19 +6465,13 @@
         "auto_count": 10,
         "auto_min": "1m",
         "current": {
-          "selected": false,
-          "text": "auto",
-          "value": "$__auto_interval_interval"
+          "text": "$__auto",
+          "value": "$__auto"
         },
         "hide": 2,
         "label": "Interval",
         "name": "interval",
         "options": [
-          {
-            "selected": true,
-            "text": "auto",
-            "value": "$__auto_interval_interval"
-          },
           {
             "selected": false,
             "text": "1m",
@@ -6489,9 +6514,7 @@
           }
         ],
         "query": "1m,2m,5m,15m,30m,1h,2h,1d",
-        "queryValue": "",
         "refresh": 2,
-        "skipUrlSync": false,
         "type": "interval"
       },
       {
@@ -6501,7 +6524,6 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(libvirt_up{os_region=~\"$cluster\"},compute)",
-        "hide": 0,
         "includeAll": true,
         "label": "Compute",
         "multi": true,
@@ -6514,8 +6536,6 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -6539,20 +6559,16 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
         "current": {
-          "selected": false,
           "text": "10",
           "value": "10"
         },
-        "hide": 0,
         "includeAll": false,
         "label": "Top Items",
-        "multi": false,
         "name": "TopItems",
         "options": [
           {
@@ -6587,8 +6603,6 @@
           }
         ],
         "query": "5,8,10,15,20,25",
-        "queryValue": "",
-        "skipUrlSync": false,
         "type": "custom"
       },
       {
@@ -6598,10 +6612,8 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(openstack_nova_agent_state{os_region=\"$cluster\"},zone)",
-        "hide": 0,
         "includeAll": true,
         "label": "AZ",
-        "multi": false,
         "name": "AZ",
         "options": [],
         "query": {
@@ -6611,14 +6623,12 @@
         },
         "refresh": 1,
         "regex": "/[^internal$]/g",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -6637,6 +6647,6 @@
   "timezone": "browser",
   "title": "Openstack VMs Overview Admin",
   "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 15,
+  "version": 18,
   "weekStart": ""
 }
