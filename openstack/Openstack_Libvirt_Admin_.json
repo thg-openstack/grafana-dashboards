@@ -1029,7 +1029,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "100 - (avg(rate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=~\"$cluster\",mode=\"idle\"}[2m])) * 100) + 10",
+          "expr": "100 - (avg(rate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=~\"$cluster\",mode=\"idle\"}[2m])) * 100) + 5",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -1504,7 +1504,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 11,
         "w": 13,
         "x": 11,
         "y": 16
@@ -1602,7 +1602,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 11,
         "x": 0,
         "y": 21
@@ -1659,12 +1659,299 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 13,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 3600000,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "displayName": "CPU consumption",
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "displayName",
+                "value": "vCPU Usage"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 11,
+        "x": 0,
+        "y": 27
+      },
+      "id": 82,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "single",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "11.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "100 - 100 * (avg(irate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=~\"$cluster\",mode=\"idle\"}[1m]))) + 5",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Cluster CPU usage % - $cluster",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 13,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 3600000,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 1,
+          "fieldMinMax": true,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.1
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "RAM Usage"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Total"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 13,
+        "x": 11,
+        "y": 27
+      },
+      "id": 83,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "single",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "11.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum(\n    node_memory_MemTotal_bytes{instance=~\".*nova.*|.*compute.*\", os_region=~\"$cluster\"}\n    - node_memory_MemFree_bytes{instance=~\".*nova.*|.*compute.*\", os_region=~\"$cluster\"}\n    - node_memory_Cached_bytes{instance=~\".*nova.*|.*compute.*\", os_region=~\"$cluster\"}\n    + node_memory_Buffers_bytes{instance=~\".*nova.*|.*compute.*\", os_region=~\"$cluster\"}\n  )\n) * 1.04\n",
+          "format": "time_series",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "RAM usage",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})\n- 3*(max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"}))\n- sum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})\n- (sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",hostname=~\"$disabled_hosts\"}) or vector(0))\n- ((sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\",hostname=~\"$compute_st_gb_lon\"}) or vector(0))))*1024*1024",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "RAM Total",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "${DS_EXPRESSION}"
+          },
+          "expression": "($B/$A)",
+          "hide": false,
+          "refId": "C",
+          "type": "math"
+        }
+      ],
+      "title": "Cluster Memory usage % - $cluster",
+      "type": "timeseries"
+    },
+    {
       "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 35
       },
       "id": 67,
       "panels": [
@@ -1738,7 +2025,7 @@
             "h": 4,
             "w": 24,
             "x": 0,
-            "y": 396
+            "y": 468
           },
           "id": 68,
           "options": {
@@ -2390,7 +2677,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 400
+            "y": 472
           },
           "id": 69,
           "options": {
@@ -3232,7 +3519,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 36
       },
       "id": 15,
       "panels": [
@@ -3253,6 +3540,138 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 13,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": 3600000,
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "A"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "decimals",
+                    "value": 1
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "vCPU Usage"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 18,
+            "w": 24,
+            "x": 0,
+            "y": 37
+          },
+          "id": 81,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "timezone": [
+              "browser"
+            ],
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "11.4.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "topk($TopItems, 100 - 100 * (max by (instance) (irate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\", os_region=~\"$cluster\", mode=\"idle\"}[3m]))))",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "CPU usage {{instance}}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Top $TopItems HVs by CPU Usage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -3286,7 +3705,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -3298,14 +3718,14 @@
             "h": 13,
             "w": 24,
             "x": 0,
-            "y": 370
+            "y": 55
           },
           "id": 61,
           "options": {
             "legend": {
               "calcs": [
                 "max",
-                "mean"
+                "lastNotNull"
               ],
               "displayMode": "table",
               "placement": "right",
@@ -3318,6 +3738,7 @@
               "sort": "asc"
             }
           },
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -3334,7 +3755,7 @@
               "refId": "A"
             }
           ],
-          "title": "Top $TopItems vCPU Steal Time",
+          "title": "Top $TopItems VMs by vCPU Steal Time",
           "type": "timeseries"
         },
         {
@@ -3355,6 +3776,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -3385,7 +3807,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -3397,14 +3820,15 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 391
+            "y": 68
           },
           "id": 22,
           "interval": "$interval",
           "options": {
             "legend": {
               "calcs": [
-                "last"
+                "last",
+                "max"
               ],
               "displayMode": "table",
               "placement": "right",
@@ -3417,6 +3841,7 @@
               "sort": "desc"
             }
           },
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -3432,7 +3857,7 @@
               "refId": "A"
             }
           ],
-          "title": "Top $TopItems vCPU Usage",
+          "title": "Top $TopItems VMS by vCPU Usage",
           "type": "timeseries"
         },
         {
@@ -3452,6 +3877,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -3482,7 +3908,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -3494,7 +3921,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 400
+            "y": 77
           },
           "id": 18,
           "options": {
@@ -3513,7 +3940,7 @@
               "sort": "none"
             }
           },
-          "pluginVersion": "8.3.4",
+          "pluginVersion": "11.4.2",
           "targets": [
             {
               "datasource": {
@@ -3543,7 +3970,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 37
       },
       "id": 31,
       "panels": [
@@ -3595,8 +4022,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -3612,7 +4038,7 @@
             "h": 20,
             "w": 24,
             "x": 0,
-            "y": 32
+            "y": 104
           },
           "id": 79,
           "options": {
@@ -3699,8 +4125,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -3716,7 +4141,7 @@
             "h": 14,
             "w": 24,
             "x": 0,
-            "y": 52
+            "y": 124
           },
           "id": 80,
           "options": {
@@ -3805,8 +4230,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -3818,7 +4242,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 66
+            "y": 138
           },
           "id": 71,
           "interval": "$interval",
@@ -3914,8 +4338,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -3927,7 +4350,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 75
+            "y": 147
           },
           "id": 32,
           "interval": "$interval",
@@ -4015,8 +4438,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -4028,7 +4450,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 75
+            "y": 147
           },
           "id": 33,
           "interval": "$interval",
@@ -4116,8 +4538,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -4129,7 +4550,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 83
+            "y": 155
           },
           "id": 34,
           "interval": "$interval",
@@ -4216,8 +4637,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -4229,7 +4649,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 83
+            "y": 155
           },
           "id": 35,
           "options": {
@@ -4333,7 +4753,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 91
+            "y": 163
           },
           "id": 59,
           "interval": "$interval",
@@ -4438,7 +4858,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 91
+            "y": 163
           },
           "id": 58,
           "interval": "$interval",
@@ -4489,7 +4909,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 38
       },
       "id": 24,
       "panels": [
@@ -4576,7 +4996,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 417
+            "y": 489
           },
           "id": 47,
           "options": {
@@ -4727,7 +5147,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 427
+            "y": 499
           },
           "id": 19,
           "options": {
@@ -4825,7 +5245,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 427
+            "y": 499
           },
           "id": 26,
           "options": {
@@ -4946,7 +5366,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 435
+            "y": 507
           },
           "id": 21,
           "options": {
@@ -5042,7 +5462,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 435
+            "y": 507
           },
           "id": 20,
           "options": {
@@ -5140,7 +5560,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 443
+            "y": 515
           },
           "id": 25,
           "options": {
@@ -5238,7 +5658,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 443
+            "y": 515
           },
           "id": 27,
           "options": {
@@ -5286,7 +5706,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 39
       },
       "id": 37,
       "panels": [
@@ -5350,7 +5770,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 369
+            "y": 441
           },
           "id": 70,
           "interval": "$interval",
@@ -5511,7 +5931,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 378
+            "y": 450
           },
           "id": 38,
           "options": {
@@ -5608,7 +6028,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 378
+            "y": 450
           },
           "id": 39,
           "interval": "$interval",
@@ -5705,7 +6125,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 394
+            "y": 466
           },
           "id": 40,
           "options": {
@@ -5800,7 +6220,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 394
+            "y": 466
           },
           "id": 41,
           "interval": "$interval",
@@ -5898,7 +6318,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 402
+            "y": 474
           },
           "id": 44,
           "options": {
@@ -6010,7 +6430,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 414
+            "y": 486
           },
           "id": 42,
           "options": {
@@ -6069,7 +6489,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 40
       },
       "id": 29,
       "panels": [
@@ -6168,7 +6588,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 311
+            "y": 383
           },
           "id": 66,
           "options": {
@@ -6541,15 +6961,15 @@
       },
       {
         "current": {
-          "text": "20",
-          "value": "20"
+          "text": "5",
+          "value": "5"
         },
         "includeAll": false,
         "label": "Top Items",
         "name": "TopItems",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "5",
             "value": "5"
           },
@@ -6569,7 +6989,7 @@
             "value": "15"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "20",
             "value": "20"
           },
@@ -6605,7 +7025,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {
@@ -6624,6 +7044,6 @@
   "timezone": "browser",
   "title": "Openstack VMs Overview Admin",
   "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 20,
+  "version": 22,
   "weekStart": ""
 }
