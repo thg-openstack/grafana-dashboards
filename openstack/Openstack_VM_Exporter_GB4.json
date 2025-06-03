@@ -678,7 +678,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(label_replace(openstack_cinder_volume_gb, \"domain\", \"$1\", \"server_id\", \"(.*)\")* on(domain) group_left(flavor,instance_name,project_name) libvirt_domain_info_meta{job=\"libvirt_exporter\",project_name=\"li-retail-gb4\",os_region=\"gb4-retail\"}) by (domain)",
+          "expr": "sum(label_replace(openstack_cinder_volume_gb, \"domain\", \"$1\", \"server_id\", \"(.*)\")* on(domain) group_left(flavor,instance_name,project_name) libvirt_domain_info_meta{job=\"libvirt_exporter\",project_name=\"$project\",os_region=\"$cluster\"}) by (domain)",
           "format": "table",
           "hide": false,
           "instant": true,
