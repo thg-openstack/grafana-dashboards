@@ -1,5 +1,5 @@
 {
-  "__inputs": [
+    "__inputs": [
     {
       "name": "DS_VICTORIAMETRICS",
       "label": "Prometheus",
@@ -62,7 +62,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 252,
   "links": [],
   "panels": [
     {
@@ -95,8 +95,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -132,7 +131,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -184,8 +183,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -216,7 +214,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -269,8 +267,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -302,7 +299,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -355,8 +352,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -392,7 +388,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -454,8 +450,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -569,6 +564,18 @@
                 "value": 211
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Disk Total"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decgbytes"
+              }
+            ]
           }
         ]
       },
@@ -602,7 +609,7 @@
           }
         ]
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -663,6 +670,21 @@
           "interval": "$interval",
           "legendFormat": "Memory Used",
           "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(label_replace(openstack_cinder_volume_gb, \"domain\", \"$1\", \"server_id\", \"(.*)\")* on(domain) group_left(flavor,instance_name,project_name) libvirt_domain_info_meta{job=\"libvirt_exporter\",project_name=\"li-retail-gb4\",os_region=\"gb4-retail\"}) by (domain)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "$interval",
+          "legendFormat": "Disk Total",
+          "refId": "E"
         }
       ],
       "title": "VMs Stats",
@@ -694,6 +716,7 @@
               "Value #B": "vCPU Used",
               "Value #C": "Memory Total",
               "Value #D": "Memory Used",
+              "Value #E": "Disk Total",
               "domain": "Domain",
               "instanceId": "Instance ID",
               "os_region": "",
@@ -705,6 +728,12 @@
           "id": "groupBy",
           "options": {
             "fields": {
+              "Disk Total": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
               "Domain": {
                 "aggregations": [],
                 "operation": "groupby"
@@ -800,22 +829,24 @@
             "excludeByName": {},
             "includeByName": {},
             "indexByName": {
+              "Disk Total (lastNotNull)": 11,
               "Domain": 0,
               "Memory Total (lastNotNull)": 9,
               "Memory Used (lastNotNull)": 10,
-              "cinder_backend_host": 11,
+              "cinder_backend_host": 12,
               "compute (lastNotNull)": 7,
               "flavor (lastNotNull)": 1,
               "instance_name (lastNotNull)": 2,
               "ip_address (lastNotNull)": 3,
               "os_region (lastNotNull)": 8,
               "project_name (lastNotNull)": 4,
-              "service": 12,
-              "team": 13,
+              "service": 13,
+              "team": 14,
               "vCPU Total (lastNotNull)": 5,
               "vCPU Used (lastNotNull)": 6
             },
             "renameByName": {
+              "Disk Total (lastNotNull)": "Disk Total",
               "Domain": "Instance ID",
               "Memory Total (lastNotNull)": "Memory Total",
               "Memory Used (lastNotNull)": "Memory Used",
@@ -840,16 +871,17 @@
       "type": "table"
     }
   ],
+  "preload": false,
   "refresh": "5m",
-  "schemaVersion": 40,
-  "tags": [
-    "openstack",
-    "openstack/retail"
-  ],
+  "schemaVersion": 41,
+  "tags": [],
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "text": "LinuxPOC",
+          "value": "96a2febc-e31b-4fe7-85e6-a65106f618a0"
+        },
         "hide": 2,
         "includeAll": false,
         "label": "datasource",
@@ -861,7 +893,10 @@
         "type": "datasource"
       },
       {
-        "current": {},
+        "current": {
+          "text": "gb4-retail",
+          "value": "gb4-retail"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -941,7 +976,10 @@
         "type": "interval"
       },
       {
-        "current": {},
+        "current": {
+          "text": "li-retail-gb4",
+          "value": "li-retail-gb4"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -962,7 +1000,12 @@
         "type": "query"
       },
       {
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -982,7 +1025,12 @@
         "type": "query"
       },
       {
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -1004,7 +1052,12 @@
         "type": "query"
       },
       {
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -1047,6 +1100,6 @@
   "timezone": "",
   "title": "Openstack VM Exporter Retail Projects",
   "uid": "ef51b704-0c4b-40f1-ad58-5fa60a9fe136",
-  "version": 16,
+  "version": 17,
   "weekStart": ""
 }
