@@ -39,7 +39,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.4.2"
+      "version": "11.6.2"
     },
     {
       "type": "datasource",
@@ -123,8 +123,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "text",
-                "value": null
+                "color": "text"
               }
             ]
           },
@@ -156,7 +155,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -205,8 +204,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "text",
-                "value": null
+                "color": "text"
               }
             ]
           },
@@ -238,7 +236,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -283,8 +281,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
-                "value": null
+                "color": "#299c46"
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -325,7 +322,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -369,8 +366,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-green",
-                "value": null
+                "color": "semi-dark-green"
               }
             ]
           },
@@ -403,7 +399,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -466,8 +462,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -499,7 +494,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -547,8 +542,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "text",
-                "value": null
+                "color": "text"
               }
             ]
           },
@@ -580,7 +574,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -614,8 +608,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue",
-                "value": null
+                "color": "semi-dark-blue"
               }
             ]
           },
@@ -647,7 +640,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -682,8 +675,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "text",
-                "value": null
+                "color": "text"
               },
               {
                 "color": "dark-yellow",
@@ -723,7 +715,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -770,8 +762,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -804,7 +795,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -865,8 +856,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -898,7 +888,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -956,8 +946,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
-                "value": null
+                "color": "#299c46"
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -995,7 +984,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1055,8 +1044,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "text",
-                "value": null
+                "color": "text"
               },
               {
                 "color": "#EAB839",
@@ -1092,7 +1080,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1164,8 +1152,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1197,7 +1184,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1257,8 +1244,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1291,7 +1277,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1381,8 +1367,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1414,7 +1399,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1494,8 +1479,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1519,11 +1503,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1584,8 +1569,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
-                "value": null
+                "color": "#299c46"
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -1626,7 +1610,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1711,8 +1695,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1763,11 +1746,12 @@
           "browser"
         ],
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1842,8 +1826,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1898,11 +1881,12 @@
           "browser"
         ],
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2025,7 +2009,7 @@
             "h": 4,
             "w": 24,
             "x": 0,
-            "y": 468
+            "y": 36
           },
           "id": 68,
           "options": {
@@ -2033,6 +2017,7 @@
             "graphMode": "none",
             "justifyMode": "auto",
             "orientation": "auto",
+            "percentChangeColorMode": "standard",
             "reduceOptions": {
               "calcs": [
                 "lastNotNull"
@@ -2040,10 +2025,11 @@
               "fields": "",
               "values": false
             },
+            "showPercentChange": false,
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "10.2.1",
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -2677,7 +2663,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 472
+            "y": 117
           },
           "id": 69,
           "options": {
@@ -2700,7 +2686,7 @@
               }
             ]
           },
-          "pluginVersion": "10.2.1",
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -3575,8 +3561,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -3613,7 +3598,7 @@
             "h": 18,
             "w": 24,
             "x": 0,
-            "y": 37
+            "y": 148
           },
           "id": 81,
           "options": {
@@ -3705,8 +3690,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -3718,7 +3702,7 @@
             "h": 13,
             "w": 24,
             "x": 0,
-            "y": 55
+            "y": 166
           },
           "id": 61,
           "options": {
@@ -3807,8 +3791,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -3820,7 +3803,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 68
+            "y": 179
           },
           "id": 22,
           "interval": "$interval",
@@ -3908,8 +3891,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -3921,7 +3903,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 77
+            "y": 188
           },
           "id": 18,
           "options": {
@@ -4038,7 +4020,7 @@
             "h": 20,
             "w": 24,
             "x": 0,
-            "y": 104
+            "y": 38
           },
           "id": 79,
           "options": {
@@ -4054,11 +4036,12 @@
               "sortDesc": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "multi",
               "sort": "none"
             }
           },
-          "pluginVersion": "11.4.2",
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -4141,7 +4124,7 @@
             "h": 14,
             "w": 24,
             "x": 0,
-            "y": 124
+            "y": 66
           },
           "id": 80,
           "options": {
@@ -4242,7 +4225,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 138
+            "y": 80
           },
           "id": 71,
           "interval": "$interval",
@@ -4350,7 +4333,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 147
+            "y": 89
           },
           "id": 32,
           "interval": "$interval",
@@ -4450,7 +4433,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 147
+            "y": 89
           },
           "id": 33,
           "interval": "$interval",
@@ -4550,7 +4533,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 155
+            "y": 97
           },
           "id": 34,
           "interval": "$interval",
@@ -4649,7 +4632,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 155
+            "y": 97
           },
           "id": 35,
           "options": {
@@ -4753,7 +4736,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 163
+            "y": 105
           },
           "id": 59,
           "interval": "$interval",
@@ -4858,7 +4841,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 163
+            "y": 105
           },
           "id": 58,
           "interval": "$interval",
@@ -4996,7 +4979,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 489
+            "y": 600
           },
           "id": 47,
           "options": {
@@ -5147,7 +5130,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 499
+            "y": 610
           },
           "id": 19,
           "options": {
@@ -5245,7 +5228,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 499
+            "y": 610
           },
           "id": 26,
           "options": {
@@ -5366,7 +5349,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 507
+            "y": 618
           },
           "id": 21,
           "options": {
@@ -5462,7 +5445,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 507
+            "y": 618
           },
           "id": 20,
           "options": {
@@ -5560,7 +5543,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 515
+            "y": 626
           },
           "id": 25,
           "options": {
@@ -5658,7 +5641,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 515
+            "y": 626
           },
           "id": 27,
           "options": {
@@ -5770,7 +5753,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 441
+            "y": 552
           },
           "id": 70,
           "interval": "$interval",
@@ -5931,7 +5914,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 450
+            "y": 561
           },
           "id": 38,
           "options": {
@@ -6028,7 +6011,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 450
+            "y": 561
           },
           "id": 39,
           "interval": "$interval",
@@ -6125,7 +6108,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 466
+            "y": 577
           },
           "id": 40,
           "options": {
@@ -6220,7 +6203,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 466
+            "y": 577
           },
           "id": 41,
           "interval": "$interval",
@@ -6318,7 +6301,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 474
+            "y": 585
           },
           "id": 44,
           "options": {
@@ -6430,7 +6413,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 486
+            "y": 597
           },
           "id": 42,
           "options": {
@@ -6581,6 +6564,22 @@
                     "value": "bytes"
                   }
                 ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disk Total"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "decgbytes"
+                  },
+                  {
+                    "id": "noValue",
+                    "value": "0 GB"
+                  }
+                ]
               }
             ]
           },
@@ -6588,7 +6587,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 383
+            "y": 41
           },
           "id": 66,
           "options": {
@@ -6608,12 +6607,12 @@
             "showHeader": true,
             "sortBy": [
               {
-                "desc": true,
-                "displayName": "Memory Used"
+                "desc": false,
+                "displayName": "Instance ID"
               }
             ]
           },
-          "pluginVersion": "11.4.2",
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -6624,6 +6623,7 @@
               "exemplar": false,
               "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain,compute) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
               "format": "table",
+              "hide": false,
               "instant": true,
               "interval": "$interval",
               "legendFormat": "vCPU Total",
@@ -6686,6 +6686,21 @@
               "legendFormat": "__auto",
               "range": true,
               "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum(label_replace(openstack_cinder_volume_gb, \"domain\", \"$1\", \"server_id\", \"(.*)\")) by (domain)  * on(domain) group_left libvirt_domain_info_meta{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "$interval",
+              "legendFormat": "Disk Total",
+              "refId": "F"
             }
           ],
           "title": "VMs Stats",
@@ -6706,6 +6721,7 @@
                   "job": true,
                   "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": true
                 },
+                "includeByName": {},
                 "indexByName": {},
                 "renameByName": {
                   "Value": "vCPU Total",
@@ -6713,6 +6729,7 @@
                   "Value #B": "vCPU Used",
                   "Value #C": "Memory Total",
                   "Value #D": "Memory Used",
+                  "Value #F": "Disk Total",
                   "domain": "Domain",
                   "instanceId": "Instance ID",
                   "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": ""
@@ -6723,6 +6740,12 @@
               "id": "groupBy",
               "options": {
                 "fields": {
+                  "Disk Total": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
                   "Domain": {
                     "aggregations": [],
                     "operation": "groupby"
@@ -6794,8 +6817,10 @@
               "id": "organize",
               "options": {
                 "excludeByName": {},
+                "includeByName": {},
                 "indexByName": {},
                 "renameByName": {
+                  "Disk Total (lastNotNull)": "Disk Total",
                   "Domain": "Instance ID",
                   "Memory Total (lastNotNull)": "Memory Total",
                   "Memory Used (lastNotNull)": "Memory Used",
@@ -6819,7 +6844,7 @@
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 40,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
@@ -7042,8 +7067,8 @@
     ]
   },
   "timezone": "browser",
-  "title": "Openstack VMs Overview Admin",
-  "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 22,
+  "title": "Openstack VMs Overview Admin SAHIB",
+  "uid": "aenu8hcygosu8c",
+  "version": 10,
   "weekStart": ""
 }
