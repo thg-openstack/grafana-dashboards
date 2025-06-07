@@ -649,7 +649,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(libvirt_domain_info_vstate{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+          "expr": "count(libvirt_domain_info_vstate{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"}) or count(libvirt_domain_info_state{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
           "instant": true,
           "interval": "$interval",
           "legendFormat": "Total",
@@ -1018,7 +1018,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "100 - (avg(rate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=~\"$cluster\",mode=\"idle\"}[2m])) * 100) + 5",
+          "expr": "100 - (avg(rate(node_cpu_seconds_total{instance=~\".*nova.*|.*compute.*\",os_region=~\"$cluster\",mode=\"idle\"}[2m])) * 100) + 3",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
@@ -7050,7 +7050,7 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -7069,6 +7069,6 @@
   "timezone": "browser",
   "title": "Openstack VMs Overview Admin",
   "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 23,
+  "version": 5,
   "weekStart": ""
 }
