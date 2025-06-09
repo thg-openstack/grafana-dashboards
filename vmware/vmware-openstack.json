@@ -839,7 +839,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "RAM Info including capacity of VMs that are in a queue. \n\nRequired = Usage + Migration queue",
+      "description": "RAM Info including capacity of VMs that are in a queue. Cluster compute failure domain is 1\n\nRequired = Usage + Migration queue",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -894,7 +894,8 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) - \nsum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"}) - \n(sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"} * on(hostname)  \n  (openstack_nova_agent_state{adminState=\"disabled\",os_region=\"$cluster\", service=\"nova-compute\"} == 1)) or vector(0))- 3*max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})\n\n",
+          "expr": "sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"}) - \nsum(openstack_placement_resource_reserved{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"}) - \n(sum(openstack_placement_resource_total{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"} * on(hostname)  \n  (openstack_nova_agent_state{adminState=\"disabled\",os_region=\"$cluster\", service=\"nova-compute\"} == 1)) or vector(0))- 1*max(openstack_placement_resource_total{os_region=~\"$cluster\",resourcetype=\"MEMORY_MB\"})\n\n",
+          "hide": false,
           "instant": false,
           "legendFormat": "Total",
           "range": true,
@@ -906,7 +907,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(vmware2openstack_vm_memory and (0 < vmware2openstack_migration_status <= 12)) + sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"gb4-retail\"})",
+          "expr": "(sum(vmware2openstack_vm_memory{site=~\"$site\"} and (0 < vmware2openstack_migration_status{site=~\"$site\"} <= 12)) + sum(openstack_placement_resource_usage{resourcetype=\"MEMORY_MB\",os_region=~\"$cluster\"})) or vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "Required",
@@ -5414,6 +5415,6 @@
   "timezone": "",
   "title": "VMware2Openstack",
   "uid": "fed41fc9-33ee-4bad-87c9-ecbd04c7e1b7",
-  "version": 229,
+  "version": 232,
   "weekStart": ""
 }
