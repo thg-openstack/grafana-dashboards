@@ -1,7 +1,7 @@
 {
-    "__inputs": [
+  "__inputs": [
     {
-      "name": "DS_VICTORIAMETRICS",
+      "name": "DS_PROMETHEUS",
       "label": "Prometheus",
       "description": "",
       "type": "datasource",
@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.4.2"
+      "version": "11.6.2"
     },
     {
       "type": "datasource",
@@ -62,7 +62,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 252,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -871,17 +871,13 @@
       "type": "table"
     }
   ],
-  "preload": false,
   "refresh": "5m",
   "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
-        "current": {
-          "text": "LinuxPOC",
-          "value": "96a2febc-e31b-4fe7-85e6-a65106f618a0"
-        },
+        "current": {},
         "hide": 2,
         "includeAll": false,
         "label": "datasource",
@@ -893,21 +889,18 @@
         "type": "datasource"
       },
       {
-        "current": {
-          "text": "gb4-retail",
-          "value": "gb4-retail"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_versions_info{os_region=~\"gb-lon|gb4-retail\"},os_region)",
+        "definition": "label_values(openstack_identity_up{os_region=~\"gb-lon|gb4-retail|gb1\"},os_region)",
         "includeAll": false,
         "name": "cluster",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(libvirt_versions_info{os_region=~\"gb-lon|gb4-retail\"},os_region)",
+          "query": "label_values(openstack_identity_up{os_region=~\"gb-lon|gb4-retail|gb1\"},os_region)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -976,15 +969,12 @@
         "type": "interval"
       },
       {
-        "current": {
-          "text": "li-retail-gb4",
-          "value": "li-retail-gb4"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", os_region=\"$cluster\", project_name=~\"st-retail-dev-test|li-retail-gb4\"},project_name)",
+        "definition": "label_values(openstack_identity_project_info{os_region=\"$cluster\", name=~\"st-retail-dev-test|li-retail-gb4|li-retail-gb1\"},name)",
         "description": "Project name",
         "includeAll": false,
         "label": "project",
@@ -992,7 +982,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", os_region=\"$cluster\", project_name=~\"st-retail-dev-test|li-retail-gb4\"},project_name)",
+          "query": "label_values(openstack_identity_project_info{os_region=\"$cluster\", name=~\"st-retail-dev-test|li-retail-gb4|li-retail-gb1\"},name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1000,12 +990,7 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -1025,12 +1010,7 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -1052,12 +1032,7 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -1100,6 +1075,6 @@
   "timezone": "",
   "title": "Openstack VM Exporter Retail Projects",
   "uid": "ef51b704-0c4b-40f1-ad58-5fa60a9fe136",
-  "version": 17,
+  "version": 21,
   "weekStart": ""
 }
