@@ -1236,7 +1236,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(vmware2openstack_vm_memory{site=\"${site}\"} and vmware2openstack_migration_status{site=\"${site}\"} >= 13) or vector(0)",
+          "expr": "sum(vmware2openstack_vm_memory{site=\"${site}\"} and vmware2openstack_migration_status{site=\"${site}\"} >= 13)",
           "instant": false,
           "legendFormat": "RAM TOTAL",
           "range": true,
@@ -1280,7 +1280,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1341,7 +1341,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count(vmware2openstack_migration_status{site=\"$site\"} == 13 or vmware2openstack_migration_status{site=\"$site\"} == 14) or vector(0)",
+          "expr": "count(vmware2openstack_migration_status{site=\"$site\"} == 13 or vmware2openstack_migration_status{site=\"$site\"} == 14)",
           "instant": false,
           "legendFormat": "Total VMs",
           "range": true,
@@ -1452,7 +1452,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(vmware2openstack_vm_cpu{site=\"${site}\"} and vmware2openstack_migration_status{site=\"${site}\"} >= 13) or vector(0)",
+          "expr": "sum(vmware2openstack_vm_cpu{site=\"${site}\"} and vmware2openstack_migration_status{site=\"${site}\"} >= 13)",
           "instant": false,
           "legendFormat": "VCPU Total",
           "range": true,
@@ -1550,7 +1550,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(vmware2openstack_vm_storage{site=\"${site}\"} and vmware2openstack_migration_status{site=\"${site}\"} >= 7) or vector(0)",
+          "expr": "sum(vmware2openstack_vm_storage{site=\"${site}\"} and vmware2openstack_migration_status{site=\"${site}\"} >= 7)",
           "instant": false,
           "legendFormat": "Storage Total",
           "range": true,
@@ -2637,7 +2637,7 @@
               "refId": "C"
             }
           ],
-          "title": "Memory GB4 Openstack",
+          "title": "Memory $cluster Openstack",
           "type": "piechart"
         },
         {
@@ -2948,7 +2948,7 @@
       "type": "row"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2956,2131 +2956,2132 @@
         "y": 51
       },
       "id": 13,
-      "panels": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sync Failed"
+                },
+                "properties": [
+                  {
+                    "id": "color"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 74
+          },
+          "id": 24,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(vmware2openstack_migration_status{site=\"$site\"} >= 13 and vmware2openstack_migration_status{site=\"$site\"} != 15)",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Migrated",
+              "range": false,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(vmware2openstack_migration_status{site=\"$site\"} >= 7 and vmware2openstack_migration_status{site=\"$site\"} < 13 and vmware2openstack_migration_status{site=\"$site\"} != 8) or vector(0)",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Migration",
+              "range": false,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(vmware2openstack_migration_status{site=\"$site\"} <= 6) or vector(0)",
+              "instant": true,
+              "legendFormat": "Queue",
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count(vmware2openstack_migration_status{site=\"$site\"} == 6) or vector(0)",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "Prepared",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(vmware2openstack_migration_status{site=\"$site\"} == 8) + count(vmware2openstack_migration_status{site=~\"$site\"} == 11) or vector(0)",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Sync Failed",
+              "range": false,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "count(vmware2openstack_migration_status{site=\"$site\"} == 1) or vector(0)",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "Prepare",
+              "range": false,
+              "refId": "E"
+            }
+          ],
+          "title": "Status",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "transparent"
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 176
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "1": {
+                            "color": "light-yellow",
+                            "index": 0,
+                            "text": "Preparation in progress"
+                          },
+                          "2": {
+                            "color": "red",
+                            "index": 1,
+                            "text": "Preparation failed"
+                          },
+                          "3": {
+                            "color": "green",
+                            "index": 2,
+                            "text": "Preparation completed"
+                          },
+                          "4": {
+                            "color": "yellow",
+                            "index": 3,
+                            "text": "Pre-check in progress"
+                          },
+                          "5": {
+                            "color": "red",
+                            "index": 4,
+                            "text": "Pre-check failed"
+                          },
+                          "6": {
+                            "color": "green",
+                            "index": 5,
+                            "text": "Pre-check completed"
+                          },
+                          "7": {
+                            "color": "yellow",
+                            "index": 6,
+                            "text": "Sync in progress"
+                          },
+                          "8": {
+                            "color": "red",
+                            "index": 7,
+                            "text": "Sync failed"
+                          },
+                          "9": {
+                            "color": "green",
+                            "index": 8,
+                            "text": "Sync completed"
+                          },
+                          "10": {
+                            "color": "yellow",
+                            "index": 9,
+                            "text": "Cutover in progress"
+                          },
+                          "11": {
+                            "color": "red",
+                            "index": 10,
+                            "text": "Cutover failed"
+                          },
+                          "12": {
+                            "color": "green",
+                            "index": 11,
+                            "text": "Cutover completed"
+                          },
+                          "13": {
+                            "color": "light-yellow",
+                            "index": 12,
+                            "text": "Completed"
+                          },
+                          "14": {
+                            "color": "green",
+                            "index": 13,
+                            "text": "Completed"
+                          },
+                          "15": {
+                            "color": "light-blue",
+                            "index": 14,
+                            "text": "Cancelled"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "VM"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 309
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disk Total"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bytes"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 111
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Downtime"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "s"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 114
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "transparent"
+                        },
+                        {
+                          "color": "green",
+                          "value": 1
+                        },
+                        {
+                          "color": "light-yellow",
+                          "value": 300
+                        },
+                        {
+                          "color": "orange",
+                          "value": 600
+                        },
+                        {
+                          "color": "red",
+                          "value": 700
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Region"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 69
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disks"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 59
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Memory"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 112
+                  },
+                  {
+                    "id": "unit",
+                    "value": "mbytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "IP"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 143
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "vmware2openstack_cutover_at (lastNotNull)"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 103
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Pre-check time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 177
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Migrate time"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 128
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Stop time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 150
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Prepare time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 182
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CutOver time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 174
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "VCPU"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 71
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Service"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 165
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 24,
+            "w": 24,
+            "x": 0,
+            "y": 83
+          },
+          "id": 14,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": [
+                "vmware2openstack_vm_disks (lastNotNull)",
+                "vmware2openstack_vm_cpu (lastNotNull)",
+                "vmware2openstack_vm_memory (lastNotNull)",
+                "vmware2openstack_vm_storage (lastNotNull)"
+              ],
+              "reducer": [
+                "sum"
+              ],
+              "show": true
+            },
+            "frameIndex": 9,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Status"
+              }
+            ]
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "((0 < vmware2openstack_migration_status{site=\"$site\"} <= 8) or (vmware2openstack_migration_status{site=\"$site\"} == 11)) * on (vm_name) group_left (os,service,team) vmware2openstack_vm_metadata{site=\"$site\"}",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_disks",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_storage",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_memory",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_downtime_seconds",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_precheck_at",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_stopped_at",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_cutover_at",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "H"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_prepare_at",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "I"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_migrated_at",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "J"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_cpu",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "K"
+            }
+          ],
+          "title": "Pre-migration readiness and failed",
+          "transformations": [
+            {
+              "id": "labelsToFields",
+              "options": {
+                "keepLabels": [
+                  "database",
+                  "env",
+                  "instance",
+                  "ip_address",
+                  "job",
+                  "site",
+                  "vm_name",
+                  "service",
+                  "team"
+                ]
+              }
+            },
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true,
+                  "Value": false,
+                  "app": false
+                },
+                "indexByName": {},
+                "renameByName": {
+                  "app": "",
+                  "vmware2openstack_downtime_seconds": "",
+                  "vmware2openstack_migration_status": "Status",
+                  "vmware2openstack_vm_disks": "",
+                  "vmware2openstack_vm_memory": "",
+                  "vmware2openstack_vm_storage": "",
+                  "{__name__=\"vmware2openstack_downtime_seconds\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Downtime",
+                  "{__name__=\"vmware2openstack_migration_status\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Status",
+                  "{__name__=\"vmware2openstack_vm_disks\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "DIsks Count",
+                  "{__name__=\"vmware2openstack_vm_memory\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Memory_Gb",
+                  "{__name__=\"vmware2openstack_vm_storage\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Storage_Gb"
+                }
+              }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "Status": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "app": {
+                    "aggregations": []
+                  },
+                  "database": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "ip_address": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "service": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "site": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "team": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vm_name": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "vmware2openstack_cutover_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_downtime_seconds": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_migrated_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_stopped_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_cpu": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_disks": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_memory": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_precheck_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_prepare_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_storage": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  }
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "database (lastNotNull)": true,
+                  "vmware2openstack_cutover_at (lastNotNull)": false
+                },
+                "indexByName": {},
+                "renameByName": {
+                  "Status (lastNotNull)": "Status",
+                  "Value (lastNotNull)": "Status",
+                  "app (lastNotNull)": "App",
+                  "database (lastNotNull)": "DB",
+                  "ip_address (lastNotNull)": "IP",
+                  "service (lastNotNull)": "Service",
+                  "site (lastNotNull)": "Region",
+                  "team (lastNotNull)": "Team",
+                  "vm_name": "VM",
+                  "vmware2openstack_cutover_at (lastNotNull)": "",
+                  "vmware2openstack_downtime_seconds (lastNotNull)": "Downtime",
+                  "vmware2openstack_migrated_at (lastNotNull)": "",
+                  "vmware2openstack_stopped_at (lastNotNull)": "",
+                  "vmware2openstack_vm_cpu (lastNotNull)": "VCPU",
+                  "vmware2openstack_vm_disks (lastNotNull)": "Disks",
+                  "vmware2openstack_vm_memory (lastNotNull)": "Memory",
+                  "vmware2openstack_vm_precheck_at (lastNotNull)": "",
+                  "vmware2openstack_vm_prepare_at (lastNotNull)": "",
+                  "vmware2openstack_vm_storage (lastNotNull)": "Disk Total"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "CutOver time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_cutover_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Pre-check time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_vm_precheck_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Migrate time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_migrated_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Prepare time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_vm_prepare_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Stop time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_stopped_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "CutOver time"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "Pre-check time"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "Migrate time"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "Prepare time"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "Stop time"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "CutOver time": false,
+                  "Migrate time": false,
+                  "Pre-check time": true,
+                  "Prepare time": true,
+                  "vmware2openstack_cutover_at (lastNotNull)": true,
+                  "vmware2openstack_migrated_at (lastNotNull)": true,
+                  "vmware2openstack_stopped_at (lastNotNull)": true,
+                  "vmware2openstack_vm_precheck_at (lastNotNull)": true,
+                  "vmware2openstack_vm_prepare_at (lastNotNull)": true
+                },
+                "indexByName": {
+                  "CutOver time": 16,
+                  "Disk Total": 5,
+                  "Disks": 4,
+                  "Downtime": 18,
+                  "IP": 2,
+                  "Memory": 6,
+                  "Migrate time": 15,
+                  "Pre-check time": 14,
+                  "Prepare time": 13,
+                  "Region": 3,
+                  "Status": 1,
+                  "Stop time": 17,
+                  "VCPU": 7,
+                  "VM": 0,
+                  "vmware2openstack_cutover_at (lastNotNull)": 10,
+                  "vmware2openstack_migrated_at (lastNotNull)": 12,
+                  "vmware2openstack_stopped_at (lastNotNull)": 9,
+                  "vmware2openstack_vm_precheck_at (lastNotNull)": 8,
+                  "vmware2openstack_vm_prepare_at (lastNotNull)": 11
+                },
+                "renameByName": {
+                  "Migrate time": "",
+                  "Pre-check time": ""
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNotNull",
+                      "options": {}
+                    },
+                    "fieldName": "Status"
+                  }
+                ],
+                "match": "any",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "List of Migrated and Ready for migration VMs",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "transparent"
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 176
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "1": {
+                            "color": "light-yellow",
+                            "index": 0,
+                            "text": "Preparation in progress"
+                          },
+                          "2": {
+                            "color": "red",
+                            "index": 1,
+                            "text": "Preparation failed"
+                          },
+                          "3": {
+                            "color": "green",
+                            "index": 2,
+                            "text": "Preparation completed"
+                          },
+                          "4": {
+                            "color": "yellow",
+                            "index": 3,
+                            "text": "Pre-check in progress"
+                          },
+                          "5": {
+                            "color": "red",
+                            "index": 4,
+                            "text": "Pre-check failed"
+                          },
+                          "6": {
+                            "color": "green",
+                            "index": 5,
+                            "text": "Pre-check completed"
+                          },
+                          "7": {
+                            "color": "yellow",
+                            "index": 6,
+                            "text": "Sync in progress"
+                          },
+                          "8": {
+                            "color": "red",
+                            "index": 7,
+                            "text": "Sync failed"
+                          },
+                          "9": {
+                            "color": "green",
+                            "index": 8,
+                            "text": "Sync completed"
+                          },
+                          "10": {
+                            "color": "yellow",
+                            "index": 9,
+                            "text": "Cutover in progress"
+                          },
+                          "11": {
+                            "color": "red",
+                            "index": 10,
+                            "text": "Cutover failed"
+                          },
+                          "12": {
+                            "color": "green",
+                            "index": 11,
+                            "text": "Cutover completed"
+                          },
+                          "13": {
+                            "color": "light-yellow",
+                            "index": 12,
+                            "text": "Completed"
+                          },
+                          "14": {
+                            "color": "green",
+                            "index": 13,
+                            "text": "Completed"
+                          },
+                          "15": {
+                            "color": "light-blue",
+                            "index": 14,
+                            "text": "Cancelled"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "VM"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 309
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disk Total"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bytes"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 111
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Downtime"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "s"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 114
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "transparent"
+                        },
+                        {
+                          "color": "green",
+                          "value": 1
+                        },
+                        {
+                          "color": "light-yellow",
+                          "value": 300
+                        },
+                        {
+                          "color": "orange",
+                          "value": 600
+                        },
+                        {
+                          "color": "red",
+                          "value": 700
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Region"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 69
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disks"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 59
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Memory"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 112
+                  },
+                  {
+                    "id": "unit",
+                    "value": "mbytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "IP"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 143
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "vmware2openstack_cutover_at (lastNotNull)"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 103
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Pre-check time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 177
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Migrate time"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 178
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Stop time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 194
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Prepare time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 182
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CutOver time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 174
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "index": 0,
+                            "text": "-"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "VCPU"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 71
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Service"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 165
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 30,
+            "w": 24,
+            "x": 0,
+            "y": 107
+          },
+          "id": 15,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 9,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "Status"
+              }
+            ]
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_migration_status{site=\"$site\"} * on (vm_name) group_left (os,service,team) vmware2openstack_vm_metadata{site=\"$site\"}",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_disks{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_storage{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_memory{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_downtime_seconds{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_precheck_at{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_stopped_at{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_cutover_at{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "H"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_prepare_at{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "I"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_migrated_at{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "J"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "vmware2openstack_vm_cpu{site=\"$site\"}",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "K"
+            }
+          ],
+          "title": "All VMs ",
+          "transformations": [
+            {
+              "id": "labelsToFields",
+              "options": {
+                "keepLabels": [
+                  "database",
+                  "env",
+                  "instance",
+                  "ip_address",
+                  "job",
+                  "site",
+                  "vm_name",
+                  "service",
+                  "team"
+                ]
+              }
+            },
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true,
+                  "Value": false,
+                  "app": false
+                },
+                "indexByName": {},
+                "renameByName": {
+                  "app": "",
+                  "vmware2openstack_downtime_seconds": "",
+                  "vmware2openstack_migration_status": "Status",
+                  "vmware2openstack_vm_disks": "",
+                  "vmware2openstack_vm_memory": "",
+                  "vmware2openstack_vm_storage": "",
+                  "{__name__=\"vmware2openstack_downtime_seconds\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Downtime",
+                  "{__name__=\"vmware2openstack_migration_status\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Status",
+                  "{__name__=\"vmware2openstack_vm_disks\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "DIsks Count",
+                  "{__name__=\"vmware2openstack_vm_memory\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Memory_Gb",
+                  "{__name__=\"vmware2openstack_vm_storage\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Storage_Gb"
+                }
+              }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "Status": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "app": {
+                    "aggregations": []
+                  },
+                  "database": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "ip_address": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "service": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "site": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "team": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vm_name": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "vmware2openstack_cutover_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_downtime_seconds": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_migrated_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_stopped_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_cpu": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_disks": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_memory": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_precheck_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_prepare_at": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "vmware2openstack_vm_storage": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  }
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "database (lastNotNull)": true,
+                  "vmware2openstack_cutover_at (lastNotNull)": false
+                },
+                "indexByName": {},
+                "renameByName": {
+                  "Status (lastNotNull)": "Status",
+                  "Value (lastNotNull)": "Status",
+                  "app (lastNotNull)": "App",
+                  "database (lastNotNull)": "DB",
+                  "ip_address (lastNotNull)": "IP",
+                  "service (lastNotNull)": "Service",
+                  "site (lastNotNull)": "Region",
+                  "team (lastNotNull)": "Team",
+                  "vm_name": "VM",
+                  "vmware2openstack_cutover_at (lastNotNull)": "",
+                  "vmware2openstack_downtime_seconds (lastNotNull)": "Downtime",
+                  "vmware2openstack_migrated_at (lastNotNull)": "",
+                  "vmware2openstack_stopped_at (lastNotNull)": "",
+                  "vmware2openstack_vm_cpu (lastNotNull)": "VCPU",
+                  "vmware2openstack_vm_disks (lastNotNull)": "Disks",
+                  "vmware2openstack_vm_memory (lastNotNull)": "Memory",
+                  "vmware2openstack_vm_precheck_at (lastNotNull)": "",
+                  "vmware2openstack_vm_prepare_at (lastNotNull)": "",
+                  "vmware2openstack_vm_storage (lastNotNull)": "Disk Total"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "CutOver time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_cutover_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Pre-check time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_vm_precheck_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Migrate time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_migrated_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Prepare time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_vm_prepare_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Stop time",
+                "binary": {
+                  "left": "1000",
+                  "operator": "*",
+                  "right": "vmware2openstack_stopped_at (lastNotNull)"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "CutOver time"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "Pre-check time"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "Migrate time"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "Prepare time"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "Stop time"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "CutOver time": false,
+                  "Migrate time": true,
+                  "Pre-check time": true,
+                  "Prepare time": true,
+                  "vmware2openstack_cutover_at (lastNotNull)": true,
+                  "vmware2openstack_migrated_at (lastNotNull)": true,
+                  "vmware2openstack_stopped_at (lastNotNull)": true,
+                  "vmware2openstack_vm_precheck_at (lastNotNull)": true,
+                  "vmware2openstack_vm_prepare_at (lastNotNull)": true
+                },
+                "indexByName": {
+                  "CutOver time": 16,
+                  "Disk Total": 5,
+                  "Disks": 4,
+                  "Downtime": 18,
+                  "IP": 2,
+                  "Memory": 6,
+                  "Migrate time": 15,
+                  "Pre-check time": 14,
+                  "Prepare time": 13,
+                  "Region": 3,
+                  "Status": 1,
+                  "Stop time": 17,
+                  "VCPU": 7,
+                  "VM": 0,
+                  "vmware2openstack_cutover_at (lastNotNull)": 10,
+                  "vmware2openstack_migrated_at (lastNotNull)": 12,
+                  "vmware2openstack_stopped_at (lastNotNull)": 9,
+                  "vmware2openstack_vm_precheck_at (lastNotNull)": 8,
+                  "vmware2openstack_vm_prepare_at (lastNotNull)": 11
+                },
+                "renameByName": {
+                  "Migrate time": "",
+                  "Pre-check time": ""
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNotNull",
+                      "options": {}
+                    },
+                    "fieldName": "Status"
+                  }
+                ],
+                "match": "any",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
       "title": "List of all VMs",
       "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Sync Failed"
-            },
-            "properties": [
-              {
-                "id": "color"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 24,
-        "x": 0,
-        "y": 52
-      },
-      "id": 24,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.6.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(vmware2openstack_migration_status{site=\"$site\"} >= 13 and vmware2openstack_migration_status{site=\"$site\"} != 15)",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "Migrated",
-          "range": false,
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(vmware2openstack_migration_status{site=\"$site\"} >= 7 and vmware2openstack_migration_status{site=\"$site\"} < 13 and vmware2openstack_migration_status{site=\"$site\"} != 8) or vector(0)",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "Migration",
-          "range": false,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(vmware2openstack_migration_status{site=\"$site\"} <= 6) or vector(0)",
-          "instant": true,
-          "legendFormat": "Queue",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "count(vmware2openstack_migration_status{site=\"$site\"} == 6) or vector(0)",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "Prepared",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(vmware2openstack_migration_status{site=\"$site\"} == 8) + count(vmware2openstack_migration_status{site=~\"$site\"} == 11) or vector(0)",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "Sync Failed",
-          "range": false,
-          "refId": "F"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(vmware2openstack_migration_status{site=\"$site\"} == 1) or vector(0)",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "Prepare",
-          "range": false,
-          "refId": "E"
-        }
-      ],
-      "title": "Status",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "mode": "gradient",
-              "type": "color-background"
-            },
-            "filterable": true,
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent"
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Status"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 176
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "1": {
-                        "color": "light-yellow",
-                        "index": 0,
-                        "text": "Preparation in progress"
-                      },
-                      "2": {
-                        "color": "red",
-                        "index": 1,
-                        "text": "Preparation failed"
-                      },
-                      "3": {
-                        "color": "green",
-                        "index": 2,
-                        "text": "Preparation completed"
-                      },
-                      "4": {
-                        "color": "yellow",
-                        "index": 3,
-                        "text": "Pre-check in progress"
-                      },
-                      "5": {
-                        "color": "red",
-                        "index": 4,
-                        "text": "Pre-check failed"
-                      },
-                      "6": {
-                        "color": "green",
-                        "index": 5,
-                        "text": "Pre-check completed"
-                      },
-                      "7": {
-                        "color": "yellow",
-                        "index": 6,
-                        "text": "Sync in progress"
-                      },
-                      "8": {
-                        "color": "red",
-                        "index": 7,
-                        "text": "Sync failed"
-                      },
-                      "9": {
-                        "color": "green",
-                        "index": 8,
-                        "text": "Sync completed"
-                      },
-                      "10": {
-                        "color": "yellow",
-                        "index": 9,
-                        "text": "Cutover in progress"
-                      },
-                      "11": {
-                        "color": "red",
-                        "index": 10,
-                        "text": "Cutover failed"
-                      },
-                      "12": {
-                        "color": "green",
-                        "index": 11,
-                        "text": "Cutover completed"
-                      },
-                      "13": {
-                        "color": "light-yellow",
-                        "index": 12,
-                        "text": "Completed"
-                      },
-                      "14": {
-                        "color": "green",
-                        "index": 13,
-                        "text": "Completed"
-                      },
-                      "15": {
-                        "color": "light-blue",
-                        "index": 14,
-                        "text": "Cancelled"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "VM"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 309
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Disk Total"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "bytes"
-              },
-              {
-                "id": "custom.width",
-                "value": 111
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Downtime"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "s"
-              },
-              {
-                "id": "custom.width",
-                "value": 114
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "transparent"
-                    },
-                    {
-                      "color": "green",
-                      "value": 1
-                    },
-                    {
-                      "color": "light-yellow",
-                      "value": 300
-                    },
-                    {
-                      "color": "orange",
-                      "value": 600
-                    },
-                    {
-                      "color": "red",
-                      "value": 700
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Region"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 69
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Disks"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 59
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 112
-              },
-              {
-                "id": "unit",
-                "value": "mbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "IP"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 143
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "vmware2openstack_cutover_at (lastNotNull)"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 103
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Pre-check time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 177
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Migrate time"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              },
-              {
-                "id": "custom.width",
-                "value": 128
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Stop time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 150
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Prepare time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 182
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CutOver time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 174
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "VCPU"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 71
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Service"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 165
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 24,
-        "w": 24,
-        "x": 0,
-        "y": 61
-      },
-      "id": 14,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": true,
-          "fields": [
-            "vmware2openstack_vm_disks (lastNotNull)",
-            "vmware2openstack_vm_cpu (lastNotNull)",
-            "vmware2openstack_vm_memory (lastNotNull)",
-            "vmware2openstack_vm_storage (lastNotNull)"
-          ],
-          "reducer": [
-            "sum"
-          ],
-          "show": true
-        },
-        "frameIndex": 9,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Status"
-          }
-        ]
-      },
-      "pluginVersion": "11.6.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "((0 < vmware2openstack_migration_status{site=\"$site\"} <= 8) or (vmware2openstack_migration_status{site=\"$site\"} == 11)) * on (vm_name) group_left (os,service,team) vmware2openstack_vm_metadata{site=\"$site\"}",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_disks",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_storage",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_memory",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_downtime_seconds",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_precheck_at",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "F"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_stopped_at",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "G"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_cutover_at",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "H"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_prepare_at",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "I"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_migrated_at",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "J"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_cpu",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "K"
-        }
-      ],
-      "title": "Pre-migration readiness and failed",
-      "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {
-            "keepLabels": [
-              "database",
-              "env",
-              "instance",
-              "ip_address",
-              "job",
-              "site",
-              "vm_name",
-              "service",
-              "team"
-            ]
-          }
-        },
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value": false,
-              "app": false
-            },
-            "indexByName": {},
-            "renameByName": {
-              "app": "",
-              "vmware2openstack_downtime_seconds": "",
-              "vmware2openstack_migration_status": "Status",
-              "vmware2openstack_vm_disks": "",
-              "vmware2openstack_vm_memory": "",
-              "vmware2openstack_vm_storage": "",
-              "{__name__=\"vmware2openstack_downtime_seconds\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Downtime",
-              "{__name__=\"vmware2openstack_migration_status\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Status",
-              "{__name__=\"vmware2openstack_vm_disks\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "DIsks Count",
-              "{__name__=\"vmware2openstack_vm_memory\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Memory_Gb",
-              "{__name__=\"vmware2openstack_vm_storage\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Storage_Gb"
-            }
-          }
-        },
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "Status": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "Value": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "app": {
-                "aggregations": []
-              },
-              "database": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "ip_address": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "service": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "site": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "team": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vm_name": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "vmware2openstack_cutover_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_downtime_seconds": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_migrated_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_stopped_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_cpu": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_disks": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_memory": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_precheck_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_prepare_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_storage": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              }
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "database (lastNotNull)": true,
-              "vmware2openstack_cutover_at (lastNotNull)": false
-            },
-            "indexByName": {},
-            "renameByName": {
-              "Status (lastNotNull)": "Status",
-              "Value (lastNotNull)": "Status",
-              "app (lastNotNull)": "App",
-              "database (lastNotNull)": "DB",
-              "ip_address (lastNotNull)": "IP",
-              "service (lastNotNull)": "Service",
-              "site (lastNotNull)": "Region",
-              "team (lastNotNull)": "Team",
-              "vm_name": "VM",
-              "vmware2openstack_cutover_at (lastNotNull)": "",
-              "vmware2openstack_downtime_seconds (lastNotNull)": "Downtime",
-              "vmware2openstack_migrated_at (lastNotNull)": "",
-              "vmware2openstack_stopped_at (lastNotNull)": "",
-              "vmware2openstack_vm_cpu (lastNotNull)": "VCPU",
-              "vmware2openstack_vm_disks (lastNotNull)": "Disks",
-              "vmware2openstack_vm_memory (lastNotNull)": "Memory",
-              "vmware2openstack_vm_precheck_at (lastNotNull)": "",
-              "vmware2openstack_vm_prepare_at (lastNotNull)": "",
-              "vmware2openstack_vm_storage (lastNotNull)": "Disk Total"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "CutOver time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_cutover_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": false
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Pre-check time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_vm_precheck_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Migrate time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_migrated_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Prepare time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_vm_prepare_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Stop time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_stopped_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "convertFieldType",
-          "options": {
-            "conversions": [
-              {
-                "destinationType": "time",
-                "targetField": "CutOver time"
-              },
-              {
-                "destinationType": "time",
-                "targetField": "Pre-check time"
-              },
-              {
-                "destinationType": "time",
-                "targetField": "Migrate time"
-              },
-              {
-                "destinationType": "time",
-                "targetField": "Prepare time"
-              },
-              {
-                "destinationType": "time",
-                "targetField": "Stop time"
-              }
-            ],
-            "fields": {}
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "CutOver time": false,
-              "Migrate time": false,
-              "Pre-check time": true,
-              "Prepare time": true,
-              "vmware2openstack_cutover_at (lastNotNull)": true,
-              "vmware2openstack_migrated_at (lastNotNull)": true,
-              "vmware2openstack_stopped_at (lastNotNull)": true,
-              "vmware2openstack_vm_precheck_at (lastNotNull)": true,
-              "vmware2openstack_vm_prepare_at (lastNotNull)": true
-            },
-            "indexByName": {
-              "CutOver time": 16,
-              "Disk Total": 5,
-              "Disks": 4,
-              "Downtime": 18,
-              "IP": 2,
-              "Memory": 6,
-              "Migrate time": 15,
-              "Pre-check time": 14,
-              "Prepare time": 13,
-              "Region": 3,
-              "Status": 1,
-              "Stop time": 17,
-              "VCPU": 7,
-              "VM": 0,
-              "vmware2openstack_cutover_at (lastNotNull)": 10,
-              "vmware2openstack_migrated_at (lastNotNull)": 12,
-              "vmware2openstack_stopped_at (lastNotNull)": 9,
-              "vmware2openstack_vm_precheck_at (lastNotNull)": 8,
-              "vmware2openstack_vm_prepare_at (lastNotNull)": 11
-            },
-            "renameByName": {
-              "Migrate time": "",
-              "Pre-check time": ""
-            }
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "isNotNull",
-                  "options": {}
-                },
-                "fieldName": "Status"
-              }
-            ],
-            "match": "any",
-            "type": "include"
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "List of Migrated and Ready for migration VMs",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "mode": "gradient",
-              "type": "color-background"
-            },
-            "filterable": true,
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent"
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Status"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 176
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "1": {
-                        "color": "light-yellow",
-                        "index": 0,
-                        "text": "Preparation in progress"
-                      },
-                      "2": {
-                        "color": "red",
-                        "index": 1,
-                        "text": "Preparation failed"
-                      },
-                      "3": {
-                        "color": "green",
-                        "index": 2,
-                        "text": "Preparation completed"
-                      },
-                      "4": {
-                        "color": "yellow",
-                        "index": 3,
-                        "text": "Pre-check in progress"
-                      },
-                      "5": {
-                        "color": "red",
-                        "index": 4,
-                        "text": "Pre-check failed"
-                      },
-                      "6": {
-                        "color": "green",
-                        "index": 5,
-                        "text": "Pre-check completed"
-                      },
-                      "7": {
-                        "color": "yellow",
-                        "index": 6,
-                        "text": "Sync in progress"
-                      },
-                      "8": {
-                        "color": "red",
-                        "index": 7,
-                        "text": "Sync failed"
-                      },
-                      "9": {
-                        "color": "green",
-                        "index": 8,
-                        "text": "Sync completed"
-                      },
-                      "10": {
-                        "color": "yellow",
-                        "index": 9,
-                        "text": "Cutover in progress"
-                      },
-                      "11": {
-                        "color": "red",
-                        "index": 10,
-                        "text": "Cutover failed"
-                      },
-                      "12": {
-                        "color": "green",
-                        "index": 11,
-                        "text": "Cutover completed"
-                      },
-                      "13": {
-                        "color": "light-yellow",
-                        "index": 12,
-                        "text": "Completed"
-                      },
-                      "14": {
-                        "color": "green",
-                        "index": 13,
-                        "text": "Completed"
-                      },
-                      "15": {
-                        "color": "light-blue",
-                        "index": 14,
-                        "text": "Cancelled"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "VM"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 309
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Disk Total"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "bytes"
-              },
-              {
-                "id": "custom.width",
-                "value": 111
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Downtime"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "s"
-              },
-              {
-                "id": "custom.width",
-                "value": 114
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "transparent"
-                    },
-                    {
-                      "color": "green",
-                      "value": 1
-                    },
-                    {
-                      "color": "light-yellow",
-                      "value": 300
-                    },
-                    {
-                      "color": "orange",
-                      "value": 600
-                    },
-                    {
-                      "color": "red",
-                      "value": 700
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Region"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 69
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Disks"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 59
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 112
-              },
-              {
-                "id": "unit",
-                "value": "mbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "IP"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 143
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "vmware2openstack_cutover_at (lastNotNull)"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 103
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Pre-check time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 177
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Migrate time"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              },
-              {
-                "id": "custom.width",
-                "value": 178
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Stop time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 194
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Prepare time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 182
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CutOver time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 174
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "0": {
-                        "index": 0,
-                        "text": "-"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "VCPU"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 71
-              },
-              {
-                "id": "custom.align",
-                "value": "center"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Service"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 165
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 30,
-        "w": 24,
-        "x": 0,
-        "y": 85
-      },
-      "id": 15,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": true,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "frameIndex": 9,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "Status"
-          }
-        ]
-      },
-      "pluginVersion": "11.6.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_migration_status{site=\"$site\"} * on (vm_name) group_left (os,service,team) vmware2openstack_vm_metadata{site=\"$site\"}",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_disks{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_storage{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_memory{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_downtime_seconds{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_precheck_at{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "F"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_stopped_at{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "G"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_cutover_at{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "H"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_prepare_at{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "I"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_migrated_at{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "J"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "vmware2openstack_vm_cpu{site=\"$site\"}",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "K"
-        }
-      ],
-      "title": "All VMs ",
-      "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {
-            "keepLabels": [
-              "database",
-              "env",
-              "instance",
-              "ip_address",
-              "job",
-              "site",
-              "vm_name",
-              "service",
-              "team"
-            ]
-          }
-        },
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value": false,
-              "app": false
-            },
-            "indexByName": {},
-            "renameByName": {
-              "app": "",
-              "vmware2openstack_downtime_seconds": "",
-              "vmware2openstack_migration_status": "Status",
-              "vmware2openstack_vm_disks": "",
-              "vmware2openstack_vm_memory": "",
-              "vmware2openstack_vm_storage": "",
-              "{__name__=\"vmware2openstack_downtime_seconds\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Downtime",
-              "{__name__=\"vmware2openstack_migration_status\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Status",
-              "{__name__=\"vmware2openstack_vm_disks\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "DIsks Count",
-              "{__name__=\"vmware2openstack_vm_memory\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Memory_Gb",
-              "{__name__=\"vmware2openstack_vm_storage\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Storage_Gb"
-            }
-          }
-        },
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "Status": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "Value": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "app": {
-                "aggregations": []
-              },
-              "database": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "ip_address": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "service": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "site": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "team": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vm_name": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "vmware2openstack_cutover_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_downtime_seconds": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_migrated_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_stopped_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_cpu": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_disks": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_memory": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_precheck_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_prepare_at": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "vmware2openstack_vm_storage": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              }
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "database (lastNotNull)": true,
-              "vmware2openstack_cutover_at (lastNotNull)": false
-            },
-            "indexByName": {},
-            "renameByName": {
-              "Status (lastNotNull)": "Status",
-              "Value (lastNotNull)": "Status",
-              "app (lastNotNull)": "App",
-              "database (lastNotNull)": "DB",
-              "ip_address (lastNotNull)": "IP",
-              "service (lastNotNull)": "Service",
-              "site (lastNotNull)": "Region",
-              "team (lastNotNull)": "Team",
-              "vm_name": "VM",
-              "vmware2openstack_cutover_at (lastNotNull)": "",
-              "vmware2openstack_downtime_seconds (lastNotNull)": "Downtime",
-              "vmware2openstack_migrated_at (lastNotNull)": "",
-              "vmware2openstack_stopped_at (lastNotNull)": "",
-              "vmware2openstack_vm_cpu (lastNotNull)": "VCPU",
-              "vmware2openstack_vm_disks (lastNotNull)": "Disks",
-              "vmware2openstack_vm_memory (lastNotNull)": "Memory",
-              "vmware2openstack_vm_precheck_at (lastNotNull)": "",
-              "vmware2openstack_vm_prepare_at (lastNotNull)": "",
-              "vmware2openstack_vm_storage (lastNotNull)": "Disk Total"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "CutOver time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_cutover_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": false
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Pre-check time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_vm_precheck_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Migrate time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_migrated_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Prepare time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_vm_prepare_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Stop time",
-            "binary": {
-              "left": "1000",
-              "operator": "*",
-              "right": "vmware2openstack_stopped_at (lastNotNull)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "convertFieldType",
-          "options": {
-            "conversions": [
-              {
-                "destinationType": "time",
-                "targetField": "CutOver time"
-              },
-              {
-                "destinationType": "time",
-                "targetField": "Pre-check time"
-              },
-              {
-                "destinationType": "time",
-                "targetField": "Migrate time"
-              },
-              {
-                "destinationType": "time",
-                "targetField": "Prepare time"
-              },
-              {
-                "destinationType": "time",
-                "targetField": "Stop time"
-              }
-            ],
-            "fields": {}
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "CutOver time": false,
-              "Migrate time": true,
-              "Pre-check time": true,
-              "Prepare time": true,
-              "vmware2openstack_cutover_at (lastNotNull)": true,
-              "vmware2openstack_migrated_at (lastNotNull)": true,
-              "vmware2openstack_stopped_at (lastNotNull)": true,
-              "vmware2openstack_vm_precheck_at (lastNotNull)": true,
-              "vmware2openstack_vm_prepare_at (lastNotNull)": true
-            },
-            "indexByName": {
-              "CutOver time": 16,
-              "Disk Total": 5,
-              "Disks": 4,
-              "Downtime": 18,
-              "IP": 2,
-              "Memory": 6,
-              "Migrate time": 15,
-              "Pre-check time": 14,
-              "Prepare time": 13,
-              "Region": 3,
-              "Status": 1,
-              "Stop time": 17,
-              "VCPU": 7,
-              "VM": 0,
-              "vmware2openstack_cutover_at (lastNotNull)": 10,
-              "vmware2openstack_migrated_at (lastNotNull)": 12,
-              "vmware2openstack_stopped_at (lastNotNull)": 9,
-              "vmware2openstack_vm_precheck_at (lastNotNull)": 8,
-              "vmware2openstack_vm_prepare_at (lastNotNull)": 11
-            },
-            "renameByName": {
-              "Migrate time": "",
-              "Pre-check time": ""
-            }
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "isNotNull",
-                  "options": {}
-                },
-                "fieldName": "Status"
-              }
-            ],
-            "match": "any",
-            "type": "include"
-          }
-        }
-      ],
-      "type": "table"
     },
     {
       "collapsed": true,
@@ -5088,7 +5089,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 115
+        "y": 52
       },
       "id": 8,
       "panels": [
@@ -5157,7 +5158,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 272
+            "y": 294
           },
           "id": 11,
           "options": {
@@ -5270,7 +5271,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 284
+            "y": 306
           },
           "id": 9,
           "options": {
@@ -5322,7 +5323,7 @@
       "type": "row"
     }
   ],
-  "refresh": "30s",
+  "refresh": "1m",
   "schemaVersion": 41,
   "tags": [],
   "templating": {
@@ -5417,6 +5418,6 @@
   "timezone": "",
   "title": "VMware2Openstack",
   "uid": "fed41fc9-33ee-4bad-87c9-ecbd04c7e1b7",
-  "version": 234,
+  "version": 235,
   "weekStart": ""
 }
