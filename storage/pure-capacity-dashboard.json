@@ -691,7 +691,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(purefa_info{instance=~\"$instance\",env=~\"$env\"}) by (instance,version,class,site)",
+          "expr": "sum(purefa_info{instance=~\"$instance\",env=~\"$env\", site=~\"$site\"}) by (instance,version,class,site)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -706,7 +706,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(purefa_alerts_open{instance=~\"$instance\",env=~\"$env\"}) by (instance)",
+          "expr": "sum(purefa_alerts_open{instance=~\"$instance\",env=~\"$env\",site=~\"$site\"}) by (instance)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -721,7 +721,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(purefa_array_space_data_reduction_ratio{instance=~\"$instance\",env=~\"$env\"}) by (instance)",
+          "expr": "sum(purefa_array_space_data_reduction_ratio{instance=~\"$instance\",env=~\"$env\",site=~\"$site\"}) by (instance)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -736,7 +736,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(purefa_array_space_bytes{instance=~\"$instance\",env=~\"$env\",space=\"capacity\"}) by (instance) /1024/1024/1024/1024",
+          "expr": "sum(purefa_array_space_bytes{instance=~\"$instance\",env=~\"$env\",space=\"capacity\",site=~\"$site\"}) by (instance) /1024/1024/1024/1024",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -752,7 +752,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(purefa_array_space_bytes{instance=~\"$instance\",env=~\"$env\",space=\"empty\"}) by (instance) /1024/1024/1024/1024",
+          "expr": "sum(purefa_array_space_bytes{instance=~\"$instance\",env=~\"$env\",space=\"empty\",site=~\"$site\"}) by (instance) /1024/1024/1024/1024",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -767,7 +767,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(purefa_array_space_utilization{instance=~\"$instance\",env=~\"$env\"}) by (instance)",
+          "expr": "sum(purefa_array_space_utilization{instance=~\"$instance\",env=~\"$env\",site=~\"$site\"}) by (instance)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1655,7 +1655,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 33
       },
       "id": 223,
       "panels": [
@@ -1691,7 +1691,7 @@
             "h": 7,
             "w": 10,
             "x": 0,
-            "y": 158
+            "y": 358
           },
           "id": 214,
           "options": {
@@ -1811,7 +1811,7 @@
             "h": 7,
             "w": 7,
             "x": 10,
-            "y": 158
+            "y": 358
           },
           "id": 210,
           "options": {
@@ -1950,7 +1950,7 @@
             "h": 7,
             "w": 7,
             "x": 17,
-            "y": 158
+            "y": 358
           },
           "id": 208,
           "options": {
@@ -2097,7 +2097,7 @@
             "h": 2,
             "w": 10,
             "x": 0,
-            "y": 165
+            "y": 365
           },
           "id": 211,
           "options": {
@@ -2212,7 +2212,7 @@
             "h": 2,
             "w": 7,
             "x": 10,
-            "y": 165
+            "y": 365
           },
           "id": 215,
           "options": {
@@ -2304,7 +2304,7 @@
             "h": 2,
             "w": 7,
             "x": 17,
-            "y": 165
+            "y": 365
           },
           "id": 224,
           "options": {
@@ -2369,7 +2369,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 34
       },
       "id": 222,
       "panels": [
@@ -2421,7 +2421,7 @@
             "h": 6,
             "w": 10,
             "x": 0,
-            "y": 168
+            "y": 368
           },
           "id": 216,
           "options": {
@@ -2541,7 +2541,7 @@
             "h": 6,
             "w": 7,
             "x": 10,
-            "y": 168
+            "y": 368
           },
           "id": 218,
           "options": {
@@ -2680,7 +2680,7 @@
             "h": 6,
             "w": 7,
             "x": 17,
-            "y": 168
+            "y": 368
           },
           "id": 220,
           "options": {
@@ -2827,7 +2827,7 @@
             "h": 2,
             "w": 10,
             "x": 0,
-            "y": 174
+            "y": 374
           },
           "id": 225,
           "options": {
@@ -2942,7 +2942,7 @@
             "h": 2,
             "w": 7,
             "x": 10,
-            "y": 174
+            "y": 374
           },
           "id": 226,
           "options": {
@@ -3034,7 +3034,7 @@
             "h": 2,
             "w": 7,
             "x": 17,
-            "y": 174
+            "y": 374
           },
           "id": 227,
           "options": {
@@ -3269,6 +3269,6 @@
   "timezone": "",
   "title": "Pure Capacity Dashboard",
   "uid": "b5c4a954-50af-41ef-a911-7f25bd1aac58",
-  "version": 8,
+  "version": 10,
   "weekStart": ""
 }

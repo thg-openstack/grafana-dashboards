@@ -21,7 +21,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.4.2"
+      "version": "11.6.2"
     },
     {
       "type": "datasource",
@@ -106,8 +106,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -126,8 +125,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "red",
-                      "value": null
+                      "color": "red"
                     },
                     {
                       "color": "#EAB839",
@@ -154,8 +152,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "#EAB839",
@@ -203,7 +200,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -293,8 +290,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -326,7 +322,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -372,8 +368,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -405,7 +400,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -465,8 +460,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -498,7 +492,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -580,8 +574,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -605,11 +598,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -669,8 +663,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-green",
-                "value": null
+                "color": "semi-dark-green"
               }
             ]
           },
@@ -702,7 +695,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -765,8 +758,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -798,7 +790,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -858,8 +850,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -891,7 +882,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -951,8 +942,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -985,7 +975,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1041,8 +1031,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1139,7 +1128,7 @@
           }
         ]
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1400,8 +1389,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1428,11 +1416,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1501,8 +1490,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1529,11 +1517,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1600,8 +1589,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1627,11 +1615,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1711,8 +1700,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1737,11 +1725,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1808,8 +1797,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1836,11 +1824,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1907,8 +1896,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2006,8 +1994,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2109,8 +2096,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2214,8 +2200,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2326,8 +2311,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2425,8 +2409,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2524,8 +2507,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2624,8 +2606,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2725,8 +2706,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2826,8 +2806,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2939,8 +2918,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3039,8 +3017,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3140,8 +3117,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3240,8 +3216,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3341,8 +3316,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3441,8 +3415,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3542,8 +3515,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3643,8 +3615,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3696,7 +3667,7 @@
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 40,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
@@ -3718,12 +3689,13 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_versions_info,os_region)",
+        "definition": "label_values(openstack_identity_up,os_region)",
         "includeAll": false,
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(libvirt_versions_info,os_region)",
+          "qryType": 1,
+          "query": "label_values(openstack_identity_up,os_region)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -3798,14 +3770,15 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", os_region=\"$cluster\"},project_name)",
+        "definition": "label_values({job=\"libvirt_exporter\", os_region=\"$cluster\", __name__=~\"libvirt_domain_openstack_info|libvirt_domain_info_meta\"},project_name)",
         "description": "Project name",
         "includeAll": false,
         "label": "project",
         "name": "project",
         "options": [],
         "query": {
-          "query": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", os_region=\"$cluster\"},project_name)",
+          "qryType": 1,
+          "query": "label_values({job=\"libvirt_exporter\", os_region=\"$cluster\", __name__=~\"libvirt_domain_openstack_info|libvirt_domain_info_meta\"},project_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -3921,6 +3894,6 @@
   "timezone": "",
   "title": "Openstack VM Overview",
   "uid": "f4561742-da51-44ab-8bd2-9bc4b120a988",
-  "version": 11,
+  "version": 12,
   "weekStart": ""
 }
