@@ -2,7 +2,7 @@
   "__inputs": [
     {
       "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
+      "label": "VictoriaMetrics",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -331,7 +331,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "libvirt_domain_info_vstate{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"}",
+          "expr": "libvirt_domain_info_vstate{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"} or libvirt_domain_info_state{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"}",
           "instant": true,
           "interval": "$interval",
           "legendFormat": "Running",
@@ -1430,7 +1430,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(20, libvirt_domain_info_virtual_cpus{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "topk(20, libvirt_domain_info_virtual_cpus{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "format": "time_series",
           "instant": false,
           "interval": "1m",
@@ -1531,7 +1531,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(20, avg by (domain,instance_name) (irate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) * 100)",
+          "expr": "topk(20, avg by (domain,instance_name) (irate(libvirt_domain_info_cpu_time_seconds_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})) * 100)",
           "instant": false,
           "interval": "$interval",
           "legendFormat": "{{instance_name}}",
@@ -1629,7 +1629,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(20, avg by (domain,instance_name) (irate(libvirt_domain_vcpu_delay_seconds_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) * 100)",
+          "expr": "topk(20, avg by (domain,instance_name) (irate(libvirt_domain_vcpu_delay_seconds_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})) * 100)",
           "interval": "1m",
           "legendFormat": "{{instance_name}}",
           "range": true,
@@ -1739,7 +1739,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
+          "expr": "topk(10, rate(libvirt_domain_block_stats_read_requests_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})))",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -1838,7 +1838,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "topk(10, rate(libvirt_domain_block_stats_write_requests_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -1923,11 +1923,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -1936,7 +1937,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) or on() vector(0)",
+          "expr": "topk(10, rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})) or on() vector(0)",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -2021,11 +2022,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2034,7 +2036,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) or on() vector(0)",
+          "expr": "topk(10, rate(libvirt_domain_block_stats_write_bytes_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})) or on() vector(0)",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -2123,11 +2125,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2136,7 +2139,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "topk(20, irate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$domain\", job=~\"libvirt_exporter\", compute=~\"$compute\"}[$__rate_interval]* on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
+          "expr": "irate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$domain\", job=~\"libvirt_exporter\"}[$__rate_interval]* on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\"}))",
           "format": "time_series",
           "instant": false,
           "interval": "$interval",
@@ -2225,11 +2228,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2338,11 +2342,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2351,7 +2356,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, libvirt_domain_info_maximum_memory_bytes{domain=~\"$domain\", job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "topk(10, libvirt_domain_info_maximum_memory_bytes{domain=~\"$domain\", job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "1m",
           "legendFormat": "{{instance_name}}",
           "range": true,
@@ -2436,11 +2441,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2449,7 +2455,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(20, libvirt_domain_memory_stats_unused_bytes{domain=~\"$domain\", job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "topk(20, libvirt_domain_memory_stats_unused_bytes{domain=~\"$domain\", job=~\"libvirt_exporter\",compute=~\"$compute\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "1m",
           "legendFormat": "{{instance_name}}",
           "range": true,
@@ -2534,11 +2540,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2547,7 +2554,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(20, libvirt_domain_info_maximum_memory_bytes{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} - libvirt_domain_memory_stats_unused_bytes{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
+          "expr": "topk(20, libvirt_domain_info_maximum_memory_bytes{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} - libvirt_domain_memory_stats_unused_bytes{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}) * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
           "interval": "1m",
           "legendFormat": "{{instance_name}}",
           "range": true,
@@ -2633,11 +2640,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2646,7 +2654,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(20, libvirt_domain_memory_stats_rss_bytes{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "topk(20, libvirt_domain_memory_stats_rss_bytes{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "1m",
           "legendFormat": "{{instance_name}}",
           "range": true,
@@ -2733,11 +2741,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2833,11 +2842,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2946,11 +2956,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -2959,7 +2970,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})*8)",
+          "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_bytes_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))*8)",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -3045,11 +3056,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -3058,7 +3070,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_bytes_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})*8)",
+          "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_bytes_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))*8)",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -3144,11 +3156,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -3157,7 +3170,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_packets_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_packets_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -3243,11 +3256,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -3256,7 +3270,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_packets_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -3343,11 +3357,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -3356,7 +3371,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
+          "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_errors_total{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})))",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -3442,11 +3457,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -3455,7 +3471,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "rate(libvirt_domain_interface_stats_transmit_errors_total{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -3542,11 +3558,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -3555,7 +3572,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(libvirt_domain_interface_stats_receive_drops_total{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "rate(libvirt_domain_interface_stats_receive_drops_total{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -3642,11 +3659,12 @@
           "sortDesc": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.2",
+      "pluginVersion": "11.6.2",
       "targets": [
         {
           "datasource": {
@@ -3655,7 +3673,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(libvirt_domain_interface_stats_transmit_drops_total{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "expr": "rate(libvirt_domain_interface_stats_transmit_drops_total{domain=~\"$domain\",compute=~\"$compute\", job=~\"libvirt_exporter\"}[$__rate_interval] * on(domain) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}))",
           "interval": "$interval",
           "legendFormat": "{{instance_name}} - {{target_device}}",
           "range": true,
@@ -3894,6 +3912,6 @@
   "timezone": "",
   "title": "Openstack VM Overview",
   "uid": "f4561742-da51-44ab-8bd2-9bc4b120a988",
-  "version": 12,
+  "version": 13,
   "weekStart": ""
 }
