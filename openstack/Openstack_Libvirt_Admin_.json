@@ -25,6 +25,12 @@
     },
     {
       "type": "panel",
+      "id": "barchart",
+      "name": "Bar chart",
+      "version": ""
+    },
+    {
+      "type": "panel",
       "id": "bargauge",
       "name": "Bar gauge",
       "version": ""
@@ -2649,7 +2655,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 194
+            "y": 739
           },
           "id": 69,
           "options": {
@@ -3584,7 +3590,7 @@
             "h": 18,
             "w": 24,
             "x": 0,
-            "y": 225
+            "y": 37
           },
           "id": 81,
           "options": {
@@ -3601,11 +3607,12 @@
               "browser"
             ],
             "tooltip": {
+              "hideZeros": false,
               "mode": "multi",
               "sort": "desc"
             }
           },
-          "pluginVersion": "11.4.2",
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -3688,7 +3695,7 @@
             "h": 13,
             "w": 24,
             "x": 0,
-            "y": 243
+            "y": 481
           },
           "id": 61,
           "options": {
@@ -3704,11 +3711,12 @@
               "sortDesc": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "multi",
               "sort": "asc"
             }
           },
-          "pluginVersion": "11.4.2",
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -3789,7 +3797,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 256
+            "y": 494
           },
           "id": 22,
           "interval": "$interval",
@@ -3889,7 +3897,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 265
+            "y": 503
           },
           "id": 18,
           "options": {
@@ -3956,30 +3964,152 @@
                 "axisBorderShow": false,
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
+                "axisGridShow": true,
                 "axisLabel": "",
                 "axisPlacement": "auto",
-                "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 0,
+                "fillOpacity": 80,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
                 "lineWidth": 1,
-                "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
                 },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "iops"
+            },
+            "overrides": [
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "write-6ae80d96-7b51-4e0c-9ff4-659aa1289014 tier1-5000 gb4-li-coreamqpsql-006-2001",
+                      "write-70ef0ef9-9cb3-4396-95ef-688acc58c11b tier1-5000 gb4-li-diamondstorage-002-2001",
+                      "write-af06d57f-ab8b-43bc-93ad-5af50fab1efe tier1-5000 gb4-li-coreamqpsql-004-2001",
+                      "write-e3636e56-fb73-44eb-a069-5acc46dc595f tier1-5000 gb4-li-coreamqpsql-005-2001",
+                      "write-1ceecff1-c897-418f-a38a-df121abc7f66 tier2-5000 gb4-li-personifyrunner-001-2001",
+                      "write-4e191b1a-4a67-450c-ab44-2155566034ac tier2-5000 gb4-li-beunityv3build-001-2001",
+                      "write-8af7f5f3-29db-4de9-9fbe-e3267b29af61 tier2-5000 gb4-li-dbmarlinpsql-002-2001",
+                      "write-f44baba3-0403-400d-835d-42580b7095d9 tier2-5000 gb4-li-dbmarlinpsql-001-2001"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 19,
+            "w": 12,
+            "x": 0,
+            "y": 38
+          },
+          "id": 85,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.96,
+            "legend": {
+              "calcs": [
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "orientation": "auto",
+            "showValue": "auto",
+            "stacking": "none",
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 45,
+            "xTickLabelSpacing": 100
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "(label_replace(\n    purefa_volume_performance_throughput_iops{\n      os_region=~\"$cluster\",\n      dimension=\"writes_per_sec\"\n    },\n    \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n  )\n  + on(id) group_left(volume_type, volume_name)\n  (\n    0 * (label_replace(\n      openstack_cinder_volume_gb{\n        os_region=~\"$cluster\",\n        volume_type=~\".*-${iops_limit}$\"\n      },\n      \"volume_name\", \"$1\", \"name\", \"(.*)\"\n      )\n    )\n  )\n) > (${iops_limit} * 0.85)",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "write-{{ id }} {{ volume_type }} {{ volume_name }}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Volumes Close to ${iops_limit} write iOPS Limit",
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisGridShow": true,
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
                 },
                 "thresholdsStyle": {
                   "mode": "off"
@@ -4003,29 +4133,35 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 20,
-            "w": 24,
-            "x": 0,
+            "h": 19,
+            "w": 12,
+            "x": 12,
             "y": 38
           },
           "id": 79,
           "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.96,
             "legend": {
               "calcs": [
-                "max",
-                "last"
+                "max"
               ],
               "displayMode": "table",
               "placement": "bottom",
-              "showLegend": true,
-              "sortBy": "Max",
-              "sortDesc": true
+              "showLegend": true
             },
+            "orientation": "auto",
+            "showValue": "auto",
+            "stacking": "none",
             "tooltip": {
               "hideZeros": false,
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
-            }
+            },
+            "xTickLabelRotation": 45,
+            "xTickLabelSpacing": 100
           },
           "pluginVersion": "11.6.2",
           "targets": [
@@ -4035,16 +4171,18 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "# First, extract the ID from the Pure volume name and add it as a label\nlabel_replace(\n  avg(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\", dimension=\"reads_per_sec\", name=~\"volume-.*\"}) by (instance,name),\n  \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n)\n* on(id) group_left(volume_name, size, status, tenant_id, volume_type)\n# Then, rename the name label to volume_name in the Cinder data\n(label_replace(\n  label_replace(\n    openstack_cinder_volume_gb{os_region=~\"$cluster\"},\n    \"volume_name\", \"$1\", \"name\", \"(.*)\"\n  ),\n  \"name\", \"volume-$1-cinder\", \"id\", \"(.*)\"\n) * 0 + 1)\nand\ntopk($TopItems, \n  label_replace(\n    avg(rate(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\", dimension=\"reads_per_sec\", name=~\"volume-.*\"}[$__range] @ end() )) by (instance,name),\n    \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n  )\n  * on(id) group_left(volume_name, size, status, tenant_id, volume_type)\n  (label_replace(\n    label_replace(\n      openstack_cinder_volume_gb{os_region=~\"$cluster\"},\n      \"volume_name\", \"$1\", \"name\", \"(.*)\"\n    ),\n    \"name\", \"volume-$1-cinder\", \"id\", \"(.*)\"\n  ) * 0 + 1)\n)",
+              "exemplar": false,
+              "expr": "(label_replace(\n    purefa_volume_performance_throughput_iops{\n      os_region=~\"$cluster\",\n      dimension=\"reads_per_sec\"\n    },\n    \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n  )\n  + on(id) group_left(volume_type, volume_name)\n  (\n    0 * (label_replace(\n      openstack_cinder_volume_gb{\n        os_region=~\"$cluster\",\n        volume_type=~\".*-${iops_limit}$\"\n      },\n      \"volume_name\", \"$1\", \"name\", \"(.*)\"\n      )\n    )\n  )\n) > (${iops_limit} * 0.90)",
+              "format": "time_series",
               "hide": false,
               "instant": false,
-              "legendFormat": "{{id}} {{instance}} {{volume_name}} {{volume_type}}",
+              "legendFormat": "read-{{ id }} {{ volume_type }} {{ volume_name }}",
               "range": true,
               "refId": "B"
             }
           ],
-          "title": "Top $TopItems Volumes for Read IOPs Pure",
-          "type": "timeseries"
+          "title": "Volumes Close to $iops_limit Read iOPS Limit",
+          "type": "barchart"
         },
         {
           "datasource": {
@@ -4107,10 +4245,10 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 14,
-            "w": 24,
+            "h": 17,
+            "w": 12,
             "x": 0,
-            "y": 58
+            "y": 57
           },
           "id": 80,
           "options": {
@@ -4194,6 +4332,110 @@
                   "mode": "off"
                 }
               },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "iops"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 17,
+            "w": 12,
+            "x": 12,
+            "y": 57
+          },
+          "id": 84,
+          "options": {
+            "legend": {
+              "calcs": [
+                "max",
+                "last"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true,
+              "sortBy": "Max",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "# First, extract the ID from the Pure volume name and add it as a label\nlabel_replace(\n  avg(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\", dimension=\"reads_per_sec\", name=~\"volume-.*\"}) by (instance,name),\n  \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n)\n* on(id) group_left(volume_name, size, status, tenant_id, volume_type)\n# Then, rename the name label to volume_name in the Cinder data\n(label_replace(\n  label_replace(\n    openstack_cinder_volume_gb{os_region=~\"$cluster\"},\n    \"volume_name\", \"$1\", \"name\", \"(.*)\"\n  ),\n  \"name\", \"volume-$1-cinder\", \"id\", \"(.*)\"\n) * 0 + 1)\nand\ntopk($TopItems, \n  label_replace(\n    avg(rate(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\", dimension=\"reads_per_sec\", name=~\"volume-.*\"}[$__range] @ end() )) by (instance,name),\n    \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\"\n  )\n  * on(id) group_left(volume_name, size, status, tenant_id, volume_type)\n  (label_replace(\n    label_replace(\n      openstack_cinder_volume_gb{os_region=~\"$cluster\"},\n      \"volume_name\", \"$1\", \"name\", \"(.*)\"\n    ),\n    \"name\", \"volume-$1-cinder\", \"id\", \"(.*)\"\n  ) * 0 + 1)\n)",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{id}} {{instance}} {{volume_name}} {{volume_type}}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Top $TopItems Volumes for Read IOPs Pure",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
               "fieldMinMax": false,
               "mappings": [],
               "thresholds": {
@@ -4212,7 +4454,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 72
+            "y": 74
           },
           "id": 71,
           "interval": "$interval",
@@ -4313,6 +4555,203 @@
                   }
                 ]
               },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 83
+          },
+          "id": 34,
+          "interval": "$interval",
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": false
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "avg(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end())*0",
+              "interval": "",
+              "legendFormat": "{{domain}} - {{target_device}} - {{compute}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems Throughput Read",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 83
+          },
+          "id": 35,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(avg(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))\n",
+              "interval": "$interval",
+              "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems Throughput Write",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
               "unit": "iops"
             },
             "overrides": []
@@ -4321,7 +4760,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 81
+            "y": 91
           },
           "id": 32,
           "interval": "$interval",
@@ -4422,7 +4861,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 81
+            "y": 91
           },
           "id": 33,
           "interval": "$interval",
@@ -4461,203 +4900,6 @@
             }
           ],
           "title": "Top $TopItems IOPS Write",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 15,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  }
-                ]
-              },
-              "unit": "bytes"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 89
-          },
-          "id": 34,
-          "interval": "$interval",
-          "options": {
-            "legend": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "sortBy": "Last *",
-              "sortDesc": false
-            },
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "11.6.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)\n+ \ntopk($TopItems,avg(rate(libvirt_domain_block_stats_read_bytes_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain, target_device,compute)@ end())*0",
-              "interval": "",
-              "legendFormat": "{{domain}} - {{target_device}} - {{compute}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Top $TopItems Throughput Read",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 15,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  }
-                ]
-              },
-              "unit": "bytes"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 89
-          },
-          "id": 35,
-          "options": {
-            "legend": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true
-            },
-            "tooltip": {
-              "hideZeros": false,
-              "mode": "multi",
-              "sort": "desc"
-            }
-          },
-          "pluginVersion": "11.6.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "sum(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)\n+ \ntopk($TopItems,avg_over_time(avg(rate(libvirt_domain_block_stats_write_bytes_total\n{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval])) by (domain,target_device,compute)@ end()))\n",
-              "interval": "$interval",
-              "legendFormat": "{{domain}} - {{target_device}} - {{ compute }}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Top $TopItems Throughput Write",
           "type": "timeseries"
         },
         {
@@ -4728,7 +4970,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 97
+            "y": 99
           },
           "id": 59,
           "interval": "$interval",
@@ -4834,7 +5076,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 97
+            "y": 99
           },
           "id": 58,
           "interval": "$interval",
@@ -4973,7 +5215,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 677
+            "y": 1222
           },
           "id": 47,
           "options": {
@@ -5124,7 +5366,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 687
+            "y": 1232
           },
           "id": 19,
           "options": {
@@ -5222,7 +5464,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 687
+            "y": 1232
           },
           "id": 26,
           "options": {
@@ -5343,7 +5585,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 695
+            "y": 1240
           },
           "id": 21,
           "options": {
@@ -5439,7 +5681,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 695
+            "y": 1240
           },
           "id": 20,
           "options": {
@@ -5537,7 +5779,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 703
+            "y": 1248
           },
           "id": 25,
           "options": {
@@ -5635,7 +5877,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 703
+            "y": 1248
           },
           "id": 27,
           "options": {
@@ -5747,7 +5989,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 629
+            "y": 1174
           },
           "id": 70,
           "interval": "$interval",
@@ -5908,7 +6150,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 638
+            "y": 1183
           },
           "id": 38,
           "options": {
@@ -6005,7 +6247,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 638
+            "y": 1183
           },
           "id": 39,
           "interval": "$interval",
@@ -6102,7 +6344,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 654
+            "y": 1199
           },
           "id": 40,
           "options": {
@@ -6197,7 +6439,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 654
+            "y": 1199
           },
           "id": 41,
           "interval": "$interval",
@@ -6295,7 +6537,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 662
+            "y": 1207
           },
           "id": 44,
           "options": {
@@ -6407,7 +6649,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 674
+            "y": 1219
           },
           "id": 42,
           "options": {
@@ -6581,7 +6823,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 118
+            "y": 663
           },
           "id": 66,
           "options": {
@@ -6837,7 +7079,7 @@
       "type": "row"
     }
   ],
-  "refresh": "30s",
+  "refresh": "",
   "schemaVersion": 41,
   "tags": [],
   "templating": {
@@ -6980,15 +7222,15 @@
       },
       {
         "current": {
-          "text": "10",
-          "value": "10"
+          "text": "5",
+          "value": "5"
         },
         "includeAll": false,
         "label": "Top Items",
         "name": "TopItems",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "5",
             "value": "5"
           },
@@ -6998,7 +7240,7 @@
             "value": "8"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "10",
             "value": "10"
           },
@@ -7040,6 +7282,27 @@
         "refresh": 1,
         "regex": "/[^internal$]/g",
         "type": "query"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_cinder_volume_gb,volume_type)",
+        "includeAll": false,
+        "label": "I/O Limit",
+        "name": "iops_limit",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_cinder_volume_gb,volume_type)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/(?!$|null$)([0-9]+)?$/",
+        "type": "query"
       }
     ]
   },
@@ -7063,6 +7326,6 @@
   "timezone": "browser",
   "title": "Openstack VMs Overview Admin",
   "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
