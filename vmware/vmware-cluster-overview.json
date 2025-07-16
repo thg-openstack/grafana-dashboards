@@ -2,7 +2,7 @@
   "__inputs": [
     {
       "name": "DS_PROMETHEUS",
-      "label": "VictoriaMetrics",
+      "label": "PROMETHEUS",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -1993,6 +1993,18 @@
                     "value": 130
                   }
                 ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Build"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "none"
+                  }
+                ]
               }
             ]
           },
@@ -2022,7 +2034,7 @@
               }
             ]
           },
-          "pluginVersion": "10.2.1",
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -2091,7 +2103,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum by (host_name,vmware_cluster_name,dc_name)(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"})  +\non (host_name) group_left(hardware_cpu_model,hardware_model) 0 *\n(vmware_host_hardware_info{vmware_cluster_name=~\"$cluster\"} )",
+              "expr": "(\n  sum by (host_name, vmware_cluster_name, dc_name)(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"})\n  +\n  on (host_name) group_left(hardware_cpu_model, hardware_model)\n  0 * vmware_host_hardware_info{vmware_cluster_name=~\"$cluster\"}\n)\n+\non (host_name) group_left(build, version)\n0 * vmware_host_product_info{vmware_cluster_name=~\"$cluster\"}\n",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -2152,6 +2164,11 @@
                     ],
                     "operation": "aggregate"
                   },
+                  "Value #HOST_INFO": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ]
+                  },
                   "Value #MAINTENACE_MODE": {
                     "aggregations": []
                   }
@@ -2164,38 +2181,44 @@
                 "excludeByName": {
                   "Time": true,
                   "Value #CPU_USAGE_Hz": false,
+                  "Value #HOST_INFO": false,
                   "host_name": true
                 },
+                "includeByName": {},
                 "indexByName": {
                   "Time": 0,
-                  "Value #CPU_COUNT": 5,
-                  "Value #CPU_MAX_Hz": 9,
-                  "Value #CPU_USAGE_Hz": 10,
-                  "Value #MAINTENACE_MODE": 13,
-                  "Value #RAM_TOTAL": 11,
-                  "Value #RAM_USAGE": 12,
-                  "Value #VM_COUNT": 7,
+                  "Value #CPU_COUNT": 6,
+                  "Value #CPU_MAX_Hz": 10,
+                  "Value #CPU_USAGE_Hz": 11,
+                  "Value #HOST_INFO": 3,
+                  "Value #MAINTENACE_MODE": 14,
+                  "Value #RAM_TOTAL": 12,
+                  "Value #RAM_USAGE": 13,
+                  "Value #VM_COUNT": 8,
                   "dc_name": 1,
-                  "hardware_cpu_model": 3,
-                  "hardware_model": 4,
+                  "hardware_cpu_model": 4,
+                  "hardware_model": 5,
                   "host": 2,
-                  "host_name": 6,
-                  "vmware_cluster_name": 8
+                  "host_name": 7,
+                  "vmware_cluster_name": 9
                 },
                 "renameByName": {
                   "Value #A": "VMs",
                   "Value #CPU_COUNT": "CPU Count",
                   "Value #CPU_MAX_Hz": "CPU Capacity Hz",
                   "Value #CPU_USAGE_Hz": "CPU Usage Hz",
+                  "Value #HOST_INFO": "Build",
                   "Value #MAINTENACE_MODE": "Status",
                   "Value #RAM_TOTAL": "RAM Total",
                   "Value #RAM_USAGE": "RAM Usage",
                   "Value #VM_COUNT": "VMs",
+                  "build": "Build",
                   "dc_name": "DC",
                   "hardware_cpu_model": "CPU Model",
                   "hardware_model": "HW Model",
                   "host": "Host",
                   "host_name": "Hostname",
+                  "version": "Version",
                   "vmware_cluster_name": "Cluster"
                 }
               }
@@ -2205,9 +2228,19 @@
               "options": {
                 "alias": "Consumed Memory %",
                 "binary": {
-                  "left": "RAM Usage",
+                  "left": {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "RAM Usage"
+                    }
+                  },
                   "operator": "/",
-                  "right": "RAM Total"
+                  "right": {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "RAM Total"
+                    }
+                  }
                 },
                 "mode": "binary",
                 "reduce": {
@@ -2220,9 +2253,19 @@
               "options": {
                 "alias": "CPU Consumption %",
                 "binary": {
-                  "left": "CPU Usage Hz",
+                  "left": {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "CPU Usage Hz"
+                    }
+                  },
                   "operator": "/",
-                  "right": "CPU Capacity Hz"
+                  "right": {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "CPU Capacity Hz"
+                    }
+                  }
                 },
                 "mode": "binary",
                 "reduce": {
@@ -2236,7 +2279,25 @@
                 "excludeByName": {
                   "CPU Capacity Hz": true
                 },
-                "indexByName": {},
+                "includeByName": {},
+                "indexByName": {
+                  "Build": 2,
+                  "CPU Capacity Hz": 9,
+                  "CPU Consumption %": 15,
+                  "CPU Count": 6,
+                  "CPU Model": 4,
+                  "CPU Usage Hz": 10,
+                  "Cluster": 8,
+                  "Consumed Memory %": 14,
+                  "DC": 0,
+                  "HW Model": 5,
+                  "Host": 1,
+                  "RAM Total": 11,
+                  "RAM Usage": 12,
+                  "Status": 13,
+                  "VMs": 7,
+                  "Version": 3
+                },
                 "renameByName": {}
               }
             }
@@ -2322,7 +2383,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 33
+            "y": 60
           },
           "id": 20,
           "options": {
@@ -2453,7 +2514,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 45
+            "y": 72
           },
           "id": 51,
           "options": {
@@ -2571,7 +2632,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 57
+            "y": 84
           },
           "id": 50,
           "options": {
@@ -2805,7 +2866,7 @@
             "h": 15,
             "w": 24,
             "x": 0,
-            "y": 42
+            "y": 69
           },
           "id": 27,
           "options": {
@@ -2921,7 +2982,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 57
+            "y": 84
           },
           "id": 29,
           "options": {
@@ -2979,9 +3040,7 @@
   ],
   "refresh": "",
   "schemaVersion": 41,
-  "tags": [
-    "vmware"
-  ],
+  "tags": [],
   "templating": {
     "list": [
       {
@@ -3042,13 +3101,13 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "VMware Cluster",
   "uid": "MRvkcY2Zz",
-  "version": 67,
+  "version": 68,
   "weekStart": ""
 }
