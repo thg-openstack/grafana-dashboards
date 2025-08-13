@@ -91,6 +91,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
+      "description": "CPU core capacity, enabled hosts only",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -160,7 +161,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"})",
+          "expr": "sum(\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"} \n  unless \n  on(host_name) vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"} == 1\n)",
           "format": "time_series",
           "intervalFactor": 1,
           "range": true,
@@ -1667,7 +1668,7 @@
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1675,638 +1676,637 @@
         "y": 31
       },
       "id": 48,
-      "panels": [
+      "panels": [],
+      "title": "Hypervisors",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#299c46"
+              }
+            ]
+          },
+          "unit": "hertz"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #RAM_TOTAL"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decmbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #RAM_USAGE"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decmbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Consumed Memory %"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "color"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.65
+                    },
+                    {
+                      "color": "orange",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Consumption %"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "index": 1,
+                        "text": "Enabled"
+                      },
+                      "1": {
+                        "color": "yellow",
+                        "index": 0,
+                        "text": "Maintenance"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "VMs"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "index": 0,
+                        "text": "0"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              },
+              {
+                "id": "unit"
+              },
+              {
+                "id": "custom.width",
+                "value": 57
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Host"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 135
+              },
+              {
+                "id": "filterable"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DC"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 92
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cluster"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 162
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Model"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 345
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Capacity Hz"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 169
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Count"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "custom.width",
+                "value": 113
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Total"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Usage"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 130
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Build"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 27,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 49,
+      "maxDataPoints": 100,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "CPU Consumption %"
+          }
+        ]
+      },
+      "pluginVersion": "11.6.2",
+      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})*1000000",
+          "format": "table",
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "VPCU Max Hz",
+          "range": false,
+          "refId": "CPU_MAX_Hz"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_cpu_usage{vmware_cluster_name=~\"$cluster\"})*1000000",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "VPCU Usage Hz",
+          "range": false,
+          "refId": "CPU_USAGE_Hz"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "Memory Max",
+          "range": false,
+          "refId": "RAM_TOTAL"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (host_name,vmware_cluster_name,dc_name,host) (label_replace(vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"},\"host\",\"$1\",\"host_name\",\"([^.]+)(.+)\"))",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "RAM_USAGE"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(\n  sum by (host_name, vmware_cluster_name, dc_name)(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"})\n  +\n  on (host_name) group_left(hardware_cpu_model, hardware_model)\n  0 * vmware_host_hardware_info{vmware_cluster_name=~\"$cluster\"}\n)\n+\non (host_name) group_left(build, version)\n0 * vmware_host_product_info{vmware_cluster_name=~\"$cluster\"}\n",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "MAINTENACE_MODE"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count by (host_name,vmware_cluster_name,dc_name) (vmware_vm_power_state{vmware_cluster_name=~\"$cluster\"}==1)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "VM_COUNT"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "CPU_COUNT"
+        }
+      ],
+      "title": "Cluster Usage",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Value #A": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
               },
-              "custom": {
-                "align": "center",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "filterable": true,
-                "inspect": false
+              "Value #B": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
               },
-              "mappings": [
-                {
-                  "options": {
-                    "match": "null",
-                    "result": {
-                      "text": "N/A"
-                    }
-                  },
-                  "type": "special"
-                }
-              ],
-              "max": 100,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "#299c46"
-                  }
+              "Value #HOST_INFO": {
+                "aggregations": [
+                  "lastNotNull"
                 ]
               },
-              "unit": "hertz"
+              "Value #MAINTENACE_MODE": {
+                "aggregations": []
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #CPU_USAGE_Hz": false,
+              "Value #HOST_INFO": false,
+              "host_name": true
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Value #RAM_TOTAL"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "decmbytes"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Value #RAM_USAGE"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "decmbytes"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Consumed Memory %"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "percentunit"
-                  },
-                  {
-                    "id": "color"
-                  },
-                  {
-                    "id": "thresholds",
-                    "value": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "green"
-                        },
-                        {
-                          "color": "#EAB839",
-                          "value": 0.65
-                        },
-                        {
-                          "color": "orange",
-                          "value": 0.8
-                        },
-                        {
-                          "color": "red",
-                          "value": 0.9
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "id": "custom.cellOptions",
-                    "value": {
-                      "mode": "gradient",
-                      "type": "color-background"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "CPU Consumption %"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "percentunit"
-                  },
-                  {
-                    "id": "custom.cellOptions",
-                    "value": {
-                      "type": "color-background"
-                    }
-                  },
-                  {
-                    "id": "thresholds",
-                    "value": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "green"
-                        },
-                        {
-                          "color": "#EAB839",
-                          "value": 60
-                        },
-                        {
-                          "color": "red",
-                          "value": 80
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Status"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "none"
-                  },
-                  {
-                    "id": "mappings",
-                    "value": [
-                      {
-                        "options": {
-                          "0": {
-                            "index": 1,
-                            "text": "Enabled"
-                          },
-                          "1": {
-                            "color": "yellow",
-                            "index": 0,
-                            "text": "Maintenance"
-                          }
-                        },
-                        "type": "value"
-                      }
-                    ]
-                  },
-                  {
-                    "id": "custom.cellOptions",
-                    "value": {
-                      "type": "color-background"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "VMs"
-                },
-                "properties": [
-                  {
-                    "id": "mappings",
-                    "value": [
-                      {
-                        "options": {
-                          "match": "null+nan",
-                          "result": {
-                            "index": 0,
-                            "text": "0"
-                          }
-                        },
-                        "type": "special"
-                      }
-                    ]
-                  },
-                  {
-                    "id": "unit"
-                  },
-                  {
-                    "id": "custom.width",
-                    "value": 57
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Host"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 135
-                  },
-                  {
-                    "id": "filterable"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "DC"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 92
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Cluster"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 162
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "CPU Model"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 345
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "CPU Capacity Hz"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 169
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "CPU Count"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "none"
-                  },
-                  {
-                    "id": "custom.width",
-                    "value": 113
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "RAM Total"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 120
-                  }
-                ]
-              },
-              {
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #CPU_COUNT": 6,
+              "Value #CPU_MAX_Hz": 10,
+              "Value #CPU_USAGE_Hz": 11,
+              "Value #HOST_INFO": 3,
+              "Value #MAINTENACE_MODE": 14,
+              "Value #RAM_TOTAL": 12,
+              "Value #RAM_USAGE": 13,
+              "Value #VM_COUNT": 8,
+              "dc_name": 1,
+              "hardware_cpu_model": 4,
+              "hardware_model": 5,
+              "host": 2,
+              "host_name": 7,
+              "vmware_cluster_name": 9
+            },
+            "renameByName": {
+              "Value #A": "VMs",
+              "Value #CPU_COUNT": "CPU Count",
+              "Value #CPU_MAX_Hz": "CPU Capacity Hz",
+              "Value #CPU_USAGE_Hz": "CPU Usage Hz",
+              "Value #HOST_INFO": "Build",
+              "Value #MAINTENACE_MODE": "Status",
+              "Value #RAM_TOTAL": "RAM Total",
+              "Value #RAM_USAGE": "RAM Usage",
+              "Value #VM_COUNT": "VMs",
+              "build": "Build",
+              "dc_name": "DC",
+              "hardware_cpu_model": "CPU Model",
+              "hardware_model": "HW Model",
+              "host": "Host",
+              "host_name": "Hostname",
+              "version": "Version",
+              "vmware_cluster_name": "Cluster"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Consumed Memory %",
+            "binary": {
+              "left": {
                 "matcher": {
                   "id": "byName",
                   "options": "RAM Usage"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 130
-                  }
-                ]
+                }
               },
-              {
+              "operator": "/",
+              "right": {
                 "matcher": {
                   "id": "byName",
-                  "options": "Build"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "none"
-                  }
-                ]
+                  "options": "RAM Total"
+                }
               }
-            ]
-          },
-          "gridPos": {
-            "h": 27,
-            "w": 24,
-            "x": 0,
-            "y": 32
-          },
-          "id": 49,
-          "maxDataPoints": 100,
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
           "options": {
-            "cellHeight": "sm",
-            "footer": {
-              "countRows": false,
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": true
-            },
-            "showHeader": true,
-            "sortBy": [
-              {
-                "desc": false,
-                "displayName": "CPU Consumption %"
+            "alias": "CPU Consumption %",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU Usage Hz"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU Capacity Hz"
+                }
               }
-            ]
-          },
-          "pluginVersion": "11.6.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})*1000000",
-              "format": "table",
-              "instant": true,
-              "intervalFactor": 1,
-              "legendFormat": "VPCU Max Hz",
-              "range": false,
-              "refId": "CPU_MAX_Hz"
             },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_cpu_usage{vmware_cluster_name=~\"$cluster\"})*1000000",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "legendFormat": "VPCU Usage Hz",
-              "range": false,
-              "refId": "CPU_USAGE_Hz"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "legendFormat": "Memory Max",
-              "range": false,
-              "refId": "RAM_TOTAL"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "sum by (host_name,vmware_cluster_name,dc_name,host) (label_replace(vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"},\"host\",\"$1\",\"host_name\",\"([^.]+)(.+)\"))",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "legendFormat": "__auto",
-              "range": false,
-              "refId": "RAM_USAGE"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "(\n  sum by (host_name, vmware_cluster_name, dc_name)(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"})\n  +\n  on (host_name) group_left(hardware_cpu_model, hardware_model)\n  0 * vmware_host_hardware_info{vmware_cluster_name=~\"$cluster\"}\n)\n+\non (host_name) group_left(build, version)\n0 * vmware_host_product_info{vmware_cluster_name=~\"$cluster\"}\n",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "legendFormat": "__auto",
-              "range": false,
-              "refId": "MAINTENACE_MODE"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "count by (host_name,vmware_cluster_name,dc_name) (vmware_vm_power_state{vmware_cluster_name=~\"$cluster\"}==1)",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "legendFormat": "__auto",
-              "range": false,
-              "refId": "VM_COUNT"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"})",
-              "format": "table",
-              "hide": false,
-              "instant": true,
-              "legendFormat": "__auto",
-              "range": false,
-              "refId": "CPU_COUNT"
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
             }
-          ],
-          "title": "Cluster Usage",
-          "transformations": [
-            {
-              "id": "merge",
-              "options": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "CPU Capacity Hz": true
             },
-            {
-              "id": "groupBy",
-              "options": {
-                "fields": {
-                  "Value #A": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "Value #B": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "Value #HOST_INFO": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ]
-                  },
-                  "Value #MAINTENACE_MODE": {
-                    "aggregations": []
-                  }
-                }
-              }
+            "includeByName": {},
+            "indexByName": {
+              "Build": 2,
+              "CPU Capacity Hz": 9,
+              "CPU Consumption %": 15,
+              "CPU Count": 6,
+              "CPU Model": 4,
+              "CPU Usage Hz": 10,
+              "Cluster": 8,
+              "Consumed Memory %": 14,
+              "DC": 0,
+              "HW Model": 5,
+              "Host": 1,
+              "RAM Total": 11,
+              "RAM Usage": 12,
+              "Status": 13,
+              "VMs": 7,
+              "Version": 3
             },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "Time": true,
-                  "Value #CPU_USAGE_Hz": false,
-                  "Value #HOST_INFO": false,
-                  "host_name": true
-                },
-                "includeByName": {},
-                "indexByName": {
-                  "Time": 0,
-                  "Value #CPU_COUNT": 6,
-                  "Value #CPU_MAX_Hz": 10,
-                  "Value #CPU_USAGE_Hz": 11,
-                  "Value #HOST_INFO": 3,
-                  "Value #MAINTENACE_MODE": 14,
-                  "Value #RAM_TOTAL": 12,
-                  "Value #RAM_USAGE": 13,
-                  "Value #VM_COUNT": 8,
-                  "dc_name": 1,
-                  "hardware_cpu_model": 4,
-                  "hardware_model": 5,
-                  "host": 2,
-                  "host_name": 7,
-                  "vmware_cluster_name": 9
-                },
-                "renameByName": {
-                  "Value #A": "VMs",
-                  "Value #CPU_COUNT": "CPU Count",
-                  "Value #CPU_MAX_Hz": "CPU Capacity Hz",
-                  "Value #CPU_USAGE_Hz": "CPU Usage Hz",
-                  "Value #HOST_INFO": "Build",
-                  "Value #MAINTENACE_MODE": "Status",
-                  "Value #RAM_TOTAL": "RAM Total",
-                  "Value #RAM_USAGE": "RAM Usage",
-                  "Value #VM_COUNT": "VMs",
-                  "build": "Build",
-                  "dc_name": "DC",
-                  "hardware_cpu_model": "CPU Model",
-                  "hardware_model": "HW Model",
-                  "host": "Host",
-                  "host_name": "Hostname",
-                  "version": "Version",
-                  "vmware_cluster_name": "Cluster"
-                }
-              }
-            },
-            {
-              "id": "calculateField",
-              "options": {
-                "alias": "Consumed Memory %",
-                "binary": {
-                  "left": {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "RAM Usage"
-                    }
-                  },
-                  "operator": "/",
-                  "right": {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "RAM Total"
-                    }
-                  }
-                },
-                "mode": "binary",
-                "reduce": {
-                  "reducer": "sum"
-                }
-              }
-            },
-            {
-              "id": "calculateField",
-              "options": {
-                "alias": "CPU Consumption %",
-                "binary": {
-                  "left": {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "CPU Usage Hz"
-                    }
-                  },
-                  "operator": "/",
-                  "right": {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "CPU Capacity Hz"
-                    }
-                  }
-                },
-                "mode": "binary",
-                "reduce": {
-                  "reducer": "sum"
-                }
-              }
-            },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "CPU Capacity Hz": true
-                },
-                "includeByName": {},
-                "indexByName": {
-                  "Build": 2,
-                  "CPU Capacity Hz": 9,
-                  "CPU Consumption %": 15,
-                  "CPU Count": 6,
-                  "CPU Model": 4,
-                  "CPU Usage Hz": 10,
-                  "Cluster": 8,
-                  "Consumed Memory %": 14,
-                  "DC": 0,
-                  "HW Model": 5,
-                  "Host": 1,
-                  "RAM Total": 11,
-                  "RAM Usage": 12,
-                  "Status": 13,
-                  "VMs": 7,
-                  "Version": 3
-                },
-                "renameByName": {}
-              }
-            }
-          ],
-          "type": "table"
+            "renameByName": {}
+          }
         }
       ],
-      "title": "Hypervisors",
-      "type": "row"
+      "type": "table"
     },
     {
       "collapsed": true,
@@ -2314,7 +2314,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 59
       },
       "id": 42,
       "panels": [
@@ -2383,7 +2383,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 60
+            "y": 87
           },
           "id": 20,
           "options": {
@@ -2514,7 +2514,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 72
+            "y": 99
           },
           "id": 51,
           "options": {
@@ -2632,7 +2632,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 84
+            "y": 111
           },
           "id": 50,
           "options": {
@@ -2681,7 +2681,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 60
       },
       "id": 40,
       "panels": [
@@ -2866,7 +2866,7 @@
             "h": 15,
             "w": 24,
             "x": 0,
-            "y": 69
+            "y": 96
           },
           "id": 27,
           "options": {
@@ -2982,7 +2982,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 84
+            "y": 111
           },
           "id": 29,
           "options": {
@@ -3101,13 +3101,13 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "VMware Cluster",
   "uid": "MRvkcY2Zz",
-  "version": 68,
+  "version": 70,
   "weekStart": ""
 }
