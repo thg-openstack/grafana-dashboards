@@ -2030,7 +2030,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "((vmware2openstack_migration_status{site=~\"$cluster\"} and vmware2openstack_migrated_at{site=~\"$cluster\"} > ${__from:date:seconds}) * on (vm_name) group_left (os,service,team) vmware2openstack_vm_metadata{site=~\"$cluster\"}) <= 14",
+          "expr": "((vmware2openstack_migration_status{site=~\"$site\"} and vmware2openstack_migrated_at{site=~\"$site\"} > ${__from:date:seconds}) * on (vm_name) group_left (os,service,team) vmware2openstack_vm_metadata{site=~\"$site\"}) <= 14",
           "hide": false,
           "instant": true,
           "legendFormat": "__auto",
@@ -2044,7 +2044,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "vmware2openstack_vm_disks{site=~\"$cluster\"} and vmware2openstack_migrated_at{site=~\"$cluster\"} > ${__from:date:seconds}",
+          "expr": "vmware2openstack_vm_disks{site=~\"$site\"} and vmware2openstack_migrated_at{site=~\"$site\"} > ${__from:date:seconds}",
           "hide": false,
           "instant": true,
           "legendFormat": "__auto",
@@ -5344,7 +5344,7 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "/gb4.*|gb1.*/",
+        "regex": "/gb4.*|gb1.*|.*ua-retail-gb4/",
         "type": "query"
       },
       {
@@ -5363,7 +5363,7 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "/li-retail-.*/",
+        "regex": "/li-retail-.*|ua-retail-gb4/",
         "type": "query"
       },
       {
@@ -5411,13 +5411,13 @@
     ]
   },
   "time": {
-    "from": "now-14d",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "VMware2Openstack",
   "uid": "fed41fc9-33ee-4bad-87c9-ecbd04c7e1b7",
-  "version": 238,
+  "version": 239,
   "weekStart": ""
 }
