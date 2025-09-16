@@ -163,7 +163,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "luceneQueryType": "Metric",
@@ -248,7 +248,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -301,7 +301,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${cluster}"
       },
       "fieldConfig": {
         "defaults": {
@@ -420,7 +420,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -477,7 +477,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -570,7 +570,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -662,7 +662,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -757,7 +757,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -841,7 +841,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -894,7 +894,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${cluster}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1013,7 +1013,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -1070,7 +1070,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -1163,7 +1163,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -1252,7 +1252,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -1309,7 +1309,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -1368,7 +1368,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -1464,7 +1464,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -1548,7 +1548,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": true,
@@ -1610,7 +1610,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -1663,7 +1663,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${cluster}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1782,7 +1782,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -1839,7 +1839,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -1932,7 +1932,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -2021,7 +2021,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -2078,7 +2078,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -2137,7 +2137,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -2233,7 +2233,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -2317,7 +2317,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -2370,7 +2370,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${cluster}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2489,7 +2489,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -2546,7 +2546,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -2639,7 +2639,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -2728,7 +2728,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -2785,7 +2785,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -2844,7 +2844,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -2940,7 +2940,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -3024,7 +3024,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -3077,7 +3077,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${cluster}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3196,7 +3196,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -3253,7 +3253,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -3346,7 +3346,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -3435,7 +3435,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -3492,7 +3492,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -3551,7 +3551,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -3647,7 +3647,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -3731,7 +3731,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -3784,7 +3784,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${cluster}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3903,7 +3903,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -3960,7 +3960,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -4053,7 +4053,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -4142,7 +4142,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
@@ -4199,7 +4199,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "hide": false,
@@ -4258,7 +4258,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${cluster}"
           },
           "format": "table",
           "metrics": [
