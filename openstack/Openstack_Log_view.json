@@ -1,14 +1,29 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_OPENSEARCH_DE1",
-      "label": "OpenSearch_de1",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "grafana-opensearch-datasource",
-      "pluginName": "OpenSearch"
-    }
-  ],
+    "__inputs": [
+      {
+        "name": "DS_OPENSEARCH_GB4",
+        "label": "OpenSearch_gb4",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "grafana-opensearch-datasource",
+        "pluginName": "OpenSearch"
+      },
+      {
+        "name": "DS_OPENSEARCH_DE1",
+        "label": "OpenSearch_de1",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "grafana-opensearch-datasource",
+        "pluginName": "OpenSearch"
+      },      {
+        "name": "DS_OPENSEARCH_US4",
+        "label": "OpenSearch_us4",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "grafana-opensearch-datasource",
+        "pluginName": "OpenSearch"
+      }
+    ],
   "__elements": {},
   "__requires": [
     {
@@ -84,7 +99,7 @@
   "panels": [
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -147,8 +162,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "luceneQueryType": "Metric",
@@ -169,7 +184,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -232,8 +247,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -263,7 +278,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -285,8 +300,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "type": "grafana-opensearch-datasource",
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -376,7 +391,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -404,8 +419,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -432,7 +447,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -461,8 +476,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -483,7 +498,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -554,8 +569,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -575,7 +590,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -646,8 +661,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -680,7 +695,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -741,8 +756,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -762,7 +777,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -825,8 +840,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -856,7 +871,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -878,8 +893,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "type": "grafana-opensearch-datasource",
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -969,7 +984,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -997,8 +1012,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -1025,7 +1040,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -1054,8 +1069,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -1076,7 +1091,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -1147,8 +1162,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -1168,7 +1183,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -1236,8 +1251,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -1257,7 +1272,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -1293,8 +1308,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -1315,7 +1330,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -1352,8 +1367,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -1387,7 +1402,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -1448,8 +1463,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -1469,7 +1484,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -1532,8 +1547,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": true,
@@ -1563,7 +1578,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -1594,8 +1609,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -1625,7 +1640,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -1647,8 +1662,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "type": "grafana-opensearch-datasource",
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1738,7 +1753,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -1766,8 +1781,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -1794,7 +1809,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -1823,8 +1838,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -1845,7 +1860,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -1916,8 +1931,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -1937,7 +1952,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -2005,8 +2020,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -2026,7 +2041,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -2062,8 +2077,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -2084,7 +2099,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -2121,8 +2136,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -2156,7 +2171,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -2217,8 +2232,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -2238,7 +2253,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -2301,8 +2316,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -2332,7 +2347,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -2354,8 +2369,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "type": "grafana-opensearch-datasource",
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2445,7 +2460,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -2473,8 +2488,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -2501,7 +2516,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -2530,8 +2545,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -2552,7 +2567,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -2623,8 +2638,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -2644,7 +2659,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -2712,8 +2727,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -2733,7 +2748,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -2769,8 +2784,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -2791,7 +2806,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -2828,8 +2843,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -2863,7 +2878,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -2924,8 +2939,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -2945,7 +2960,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -3008,8 +3023,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -3039,7 +3054,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -3061,8 +3076,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "type": "grafana-opensearch-datasource",
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3152,7 +3167,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -3180,8 +3195,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -3208,7 +3223,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -3237,8 +3252,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -3259,7 +3274,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -3330,8 +3345,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -3351,7 +3366,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -3419,8 +3434,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -3440,7 +3455,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -3476,8 +3491,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -3498,7 +3513,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -3535,8 +3550,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -3570,7 +3585,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -3631,8 +3646,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -3652,7 +3667,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -3715,8 +3730,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -3746,7 +3761,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -3768,8 +3783,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_VICTORIAMETRICS}"
+        "type": "grafana-opensearch-datasource",
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3859,7 +3874,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -3887,8 +3902,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -3915,7 +3930,7 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
+            "type": "grafana-opensearch-datasource",
             "uid": "${cluster}"
           },
           "format": "table",
@@ -3944,8 +3959,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -3966,7 +3981,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -4037,8 +4052,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -4058,7 +4073,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "fieldConfig": {
@@ -4126,8 +4141,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -4147,7 +4162,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -4183,8 +4198,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "hide": false,
@@ -4205,7 +4220,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
+        "type": "grafana-opensearch-datasource",
         "uid": "${cluster}"
       },
       "gridPos": {
@@ -4242,8 +4257,8 @@
             }
           ],
           "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_VICTORIAMETRICS}"
+            "type": "grafana-opensearch-datasource",
+            "uid": "${DS_PROMETHEUS}"
           },
           "format": "table",
           "metrics": [
@@ -4271,7 +4286,7 @@
       {
         "baseFilters": [],
         "datasource": {
-          "type": "prometheus",
+          "type": "grafana-opensearch-datasource",
           "uid": "vLvioif4z"
         },
         "filters": [],
