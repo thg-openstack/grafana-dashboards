@@ -460,9 +460,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "max",
+            "min",
+            "lastNotNull"
           ],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -607,9 +609,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "max",
+            "min",
+            "lastNotNull"
           ],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -735,9 +739,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "max",
+            "min",
+            "last"
           ],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -878,9 +884,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "max",
+            "min",
+            "lastNotNull"
           ],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -985,12 +993,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Latency"
+              "options": "Bytes"
             },
             "properties": [
               {
                 "id": "unit",
-                "value": "ms"
+                "value": "bytes"
               }
             ]
           }
@@ -1006,9 +1014,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "lastNotNull",
+            "max",
+            "min"
           ],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1030,7 +1040,7 @@
           "expr": "purefa_volume_performance_bandwidth_bytes{name=~\"volume-$name-cinder\",dimension=\"read_bytes_per_sec\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "IOPS",
+          "legendFormat": "Bytes",
           "range": true,
           "refId": "A"
         }
@@ -1100,7 +1110,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Value"
+              "options": "Bytes"
             },
             "properties": [
               {
@@ -1115,12 +1125,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Latency"
+              "options": "Bytes"
             },
             "properties": [
               {
                 "id": "unit",
-                "value": "ms"
+                "value": "bytes"
               }
             ]
           }
@@ -1136,9 +1146,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "last",
+            "max",
+            "min"
           ],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1160,7 +1172,7 @@
           "expr": "purefa_volume_performance_bandwidth_bytes{name=~\"volume-$name-cinder\",dimension=\"read_bytes_per_sec\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "IOPS",
+          "legendFormat": "Bytes",
           "range": true,
           "refId": "A"
         }
@@ -1230,12 +1242,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Latency"
+              "options": "Bytes"
             },
             "properties": [
               {
                 "id": "unit",
-                "value": "ms"
+                "value": "bytes"
               }
             ]
           }
@@ -1251,9 +1263,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "lastNotNull",
+            "max",
+            "min"
           ],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1275,7 +1289,7 @@
           "expr": "purefa_volume_performance_average_bytes{name=~\"volume-$name-cinder\",dimension=\"bytes_per_read\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "IOPS",
+          "legendFormat": "Bytes",
           "range": true,
           "refId": "A"
         }
@@ -1360,12 +1374,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Latency"
+              "options": "Bytes"
             },
             "properties": [
               {
                 "id": "unit",
-                "value": "ms"
+                "value": "bytes"
               }
             ]
           }
@@ -1381,9 +1395,11 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "lastNotNull",
+            "max",
+            "min"
           ],
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1405,7 +1421,7 @@
           "expr": "purefa_volume_performance_average_bytes{name=~\"volume-$name-cinder\",dimension=\"bytes_per_write\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "IOPS",
+          "legendFormat": "Bytes",
           "range": true,
           "refId": "A"
         }
@@ -1796,6 +1812,6 @@
   "timezone": "",
   "title": "Tenant VM  Storage Dashboard",
   "uid": "3b24cfcd-323c-4d2d-9a19-20b034a5a974",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }
