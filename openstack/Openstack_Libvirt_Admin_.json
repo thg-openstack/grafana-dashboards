@@ -2655,7 +2655,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 739
+            "y": 797
           },
           "id": 69,
           "options": {
@@ -3695,7 +3695,7 @@
             "h": 13,
             "w": 24,
             "x": 0,
-            "y": 481
+            "y": 539
           },
           "id": 61,
           "options": {
@@ -3797,7 +3797,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 494
+            "y": 552
           },
           "id": 22,
           "interval": "$interval",
@@ -3897,7 +3897,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 503
+            "y": 561
           },
           "id": 18,
           "options": {
@@ -4248,7 +4248,7 @@
             "h": 17,
             "w": 12,
             "x": 0,
-            "y": 57
+            "y": 115
           },
           "id": 80,
           "options": {
@@ -4353,7 +4353,7 @@
             "h": 17,
             "w": 12,
             "x": 12,
-            "y": 57
+            "y": 115
           },
           "id": 84,
           "options": {
@@ -4454,7 +4454,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 74
+            "y": 132
           },
           "id": 71,
           "interval": "$interval",
@@ -4563,7 +4563,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 83
+            "y": 141
           },
           "id": 34,
           "interval": "$interval",
@@ -4663,7 +4663,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 83
+            "y": 141
           },
           "id": 35,
           "options": {
@@ -4760,7 +4760,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 91
+            "y": 149
           },
           "id": 32,
           "interval": "$interval",
@@ -4861,7 +4861,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 91
+            "y": 149
           },
           "id": 33,
           "interval": "$interval",
@@ -4970,7 +4970,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 99
+            "y": 157
           },
           "id": 59,
           "interval": "$interval",
@@ -5076,7 +5076,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 99
+            "y": 157
           },
           "id": 58,
           "interval": "$interval",
@@ -5215,11 +5215,18 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 1222
+            "y": 39
           },
           "id": 47,
           "options": {
             "displayMode": "gradient",
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "maxVizHeight": 300,
             "minVizHeight": 10,
             "minVizWidth": 0,
             "namePlacement": "auto",
@@ -5232,9 +5239,10 @@
               "values": false
             },
             "showUnfilled": true,
+            "sizing": "auto",
             "valueMode": "color"
           },
-          "pluginVersion": "10.2.1",
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -5299,6 +5307,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -5366,7 +5375,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 1232
+            "y": 49
           },
           "id": 19,
           "options": {
@@ -5381,10 +5390,12 @@
               "sortDesc": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "multi",
               "sort": "desc"
             }
           },
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -5422,6 +5433,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -5464,7 +5476,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 1232
+            "y": 49
           },
           "id": 26,
           "options": {
@@ -5479,10 +5491,12 @@
               "sortDesc": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "single",
               "sort": "none"
             }
           },
+          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -5585,7 +5599,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 1240
+            "y": 57
           },
           "id": 21,
           "options": {
@@ -5681,7 +5695,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 1240
+            "y": 57
           },
           "id": 20,
           "options": {
@@ -5779,7 +5793,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 1248
+            "y": 65
           },
           "id": 25,
           "options": {
@@ -5877,7 +5891,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 1248
+            "y": 65
           },
           "id": 27,
           "options": {
@@ -5989,7 +6003,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 1174
+            "y": 1232
           },
           "id": 70,
           "interval": "$interval",
@@ -6150,7 +6164,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 1183
+            "y": 1241
           },
           "id": 38,
           "options": {
@@ -6247,7 +6261,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 1183
+            "y": 1241
           },
           "id": 39,
           "interval": "$interval",
@@ -6344,7 +6358,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 1199
+            "y": 1257
           },
           "id": 40,
           "options": {
@@ -6439,7 +6453,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 1199
+            "y": 1257
           },
           "id": 41,
           "interval": "$interval",
@@ -6537,7 +6551,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 1207
+            "y": 1265
           },
           "id": 44,
           "options": {
@@ -6649,7 +6663,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 1219
+            "y": 1277
           },
           "id": 42,
           "options": {
@@ -6823,7 +6837,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 663
+            "y": 75
           },
           "id": 66,
           "options": {
@@ -6857,7 +6871,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain,compute) group_left(flavor,instance_name,project_name,user_name) libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
+              "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain,compute) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -6930,7 +6944,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(label_replace(openstack_cinder_volume_gb, \"domain\", \"$1\", \"server_id\", \"(.*)\")) by (domain)  * on(domain) group_left libvirt_domain_info_meta{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}",
+              "expr": "sum(label_replace(openstack_cinder_volume_gb, \"domain\", \"$1\", \"server_id\", \"(.*)\")) by (domain)  * on(domain) group_left libvirt_domain_info_meta{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"} or libvirt_domain_openstack_info{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"} ",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -7079,7 +7093,7 @@
       "type": "row"
     }
   ],
-  "refresh": "",
+  "refresh": "30s",
   "schemaVersion": 41,
   "tags": [],
   "templating": {
@@ -7222,15 +7236,15 @@
       },
       {
         "current": {
-          "text": "5",
-          "value": "5"
+          "text": "10",
+          "value": "10"
         },
         "includeAll": false,
         "label": "Top Items",
         "name": "TopItems",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "5",
             "value": "5"
           },
@@ -7240,7 +7254,7 @@
             "value": "8"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "10",
             "value": "10"
           },
@@ -7326,6 +7340,6 @@
   "timezone": "browser",
   "title": "Openstack VMs Overview Admin",
   "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
