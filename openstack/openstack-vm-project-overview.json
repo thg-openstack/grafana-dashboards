@@ -1,4 +1,59 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "VictoriaMetrics",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.6.2"
+    },
+    {
+      "type": "panel",
+      "id": "piechart",
+      "name": "Pie chart",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -25,7 +80,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 291,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -723,7 +778,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(libvirt_domain_info_state{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}) or on() vector(0)",
+          "expr": "count(libvirt_domain_info_state{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"} or libvirt_domain_info_vstate{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"}) or on() vector(0)",
           "instant": true,
           "interval": "$interval",
           "legendFormat": "Total",
@@ -4893,17 +4948,13 @@
       "type": "table"
     }
   ],
-  "preload": false,
-  "refresh": "5m",
+  "refresh": "1m",
   "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
-        "current": {
-          "text": "NetworMeshMon",
-          "value": "45F064FB-7389-4B6D-94BC-C7A926F53936"
-        },
+        "current": {},
         "hide": 2,
         "includeAll": false,
         "label": "datasource",
@@ -4915,10 +4966,7 @@
         "type": "datasource"
       },
       {
-        "current": {
-          "text": "de-fra",
-          "value": "de-fra"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -4998,10 +5046,7 @@
         "type": "interval"
       },
       {
-        "current": {
-          "text": "li-awx",
-          "value": "li-awx"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -5022,12 +5067,7 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -5047,12 +5087,7 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -5074,12 +5109,7 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -5102,12 +5132,7 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -5148,7 +5173,8 @@
     ]
   },
   "timezone": "",
-  "title": "Openstack VM/Project Overview",
+  "title": "Openstack VM/Project Overview Copy",
   "uid": "ef895ad8-e433-4d30-b749-4e3ebce7bce5",
-  "version": 2
+  "version": 3,
+  "weekStart": ""
 }
