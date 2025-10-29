@@ -2655,7 +2655,7 @@
             "h": 30,
             "w": 24,
             "x": 0,
-            "y": 797
+            "y": 747
           },
           "id": 69,
           "options": {
@@ -3695,7 +3695,7 @@
             "h": 13,
             "w": 24,
             "x": 0,
-            "y": 539
+            "y": 489
           },
           "id": 61,
           "options": {
@@ -3797,7 +3797,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 552
+            "y": 502
           },
           "id": 22,
           "interval": "$interval",
@@ -3897,7 +3897,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 561
+            "y": 511
           },
           "id": 18,
           "options": {
@@ -4248,7 +4248,7 @@
             "h": 17,
             "w": 12,
             "x": 0,
-            "y": 115
+            "y": 65
           },
           "id": 80,
           "options": {
@@ -4353,7 +4353,7 @@
             "h": 17,
             "w": 12,
             "x": 12,
-            "y": 115
+            "y": 65
           },
           "id": 84,
           "options": {
@@ -4454,7 +4454,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 132
+            "y": 82
           },
           "id": 71,
           "interval": "$interval",
@@ -4563,7 +4563,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 141
+            "y": 91
           },
           "id": 34,
           "interval": "$interval",
@@ -4663,7 +4663,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 141
+            "y": 91
           },
           "id": 35,
           "options": {
@@ -4760,7 +4760,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 149
+            "y": 99
           },
           "id": 32,
           "interval": "$interval",
@@ -4861,7 +4861,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 149
+            "y": 99
           },
           "id": 33,
           "interval": "$interval",
@@ -4970,7 +4970,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 157
+            "y": 107
           },
           "id": 59,
           "interval": "$interval",
@@ -5076,7 +5076,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 157
+            "y": 107
           },
           "id": 58,
           "interval": "$interval",
@@ -5215,18 +5215,11 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 39
+            "y": 1230
           },
           "id": 47,
           "options": {
             "displayMode": "gradient",
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": false
-            },
-            "maxVizHeight": 300,
             "minVizHeight": 10,
             "minVizWidth": 0,
             "namePlacement": "auto",
@@ -5239,10 +5232,9 @@
               "values": false
             },
             "showUnfilled": true,
-            "sizing": "auto",
             "valueMode": "color"
           },
-          "pluginVersion": "11.6.2",
+          "pluginVersion": "10.2.1",
           "targets": [
             {
               "datasource": {
@@ -5307,7 +5299,6 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -5375,7 +5366,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 49
+            "y": 1240
           },
           "id": 19,
           "options": {
@@ -5390,12 +5381,10 @@
               "sortDesc": true
             },
             "tooltip": {
-              "hideZeros": false,
               "mode": "multi",
               "sort": "desc"
             }
           },
-          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -5433,7 +5422,6 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 15,
                 "gradientMode": "none",
@@ -5476,7 +5464,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 49
+            "y": 1240
           },
           "id": 26,
           "options": {
@@ -5491,12 +5479,10 @@
               "sortDesc": true
             },
             "tooltip": {
-              "hideZeros": false,
               "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "11.6.2",
           "targets": [
             {
               "datasource": {
@@ -5599,7 +5585,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 57
+            "y": 1248
           },
           "id": 21,
           "options": {
@@ -5695,7 +5681,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 57
+            "y": 1248
           },
           "id": 20,
           "options": {
@@ -5793,7 +5779,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 65
+            "y": 1256
           },
           "id": 25,
           "options": {
@@ -5891,7 +5877,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 65
+            "y": 1256
           },
           "id": 27,
           "options": {
@@ -6003,7 +5989,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 1232
+            "y": 1182
           },
           "id": 70,
           "interval": "$interval",
@@ -6164,7 +6150,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 1241
+            "y": 1191
           },
           "id": 38,
           "options": {
@@ -6261,7 +6247,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 1241
+            "y": 1191
           },
           "id": 39,
           "interval": "$interval",
@@ -6358,7 +6344,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 1257
+            "y": 1207
           },
           "id": 40,
           "options": {
@@ -6453,7 +6439,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 1257
+            "y": 1207
           },
           "id": 41,
           "interval": "$interval",
@@ -6551,7 +6537,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 1265
+            "y": 1215
           },
           "id": 44,
           "options": {
@@ -6663,7 +6649,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 1277
+            "y": 1227
           },
           "id": 42,
           "options": {
@@ -6837,7 +6823,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 75
+            "y": 41
           },
           "id": 66,
           "options": {
@@ -6871,7 +6857,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain,compute) group_left(flavor,instance_name,project_name,user_name) (libvirt_domain_info_meta{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"} or libvirt_domain_openstack_info{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+              "expr": "libvirt_domain_info_virtual_cpus{domain=~\"$virtual_machine\",compute=~\"$compute\", job=~\"libvirt_exporter\"} * on(domain,compute) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\"}",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -6944,7 +6930,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(label_replace(openstack_cinder_volume_gb, \"domain\", \"$1\", \"server_id\", \"(.*)\")) by (domain)  * on(domain) group_left libvirt_domain_info_meta{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"} or libvirt_domain_openstack_info{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"} ",
+              "expr": "sum(label_replace(openstack_cinder_volume_gb, \"domain\", \"$1\", \"server_id\", \"(.*)\")) by (domain)  * on(domain) group_left libvirt_domain_openstack_info{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\"} ",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -6981,6 +6967,7 @@
                   "Value #D": "Memory Used",
                   "Value #F": "Disk Total",
                   "domain": "Domain",
+                  "flavor_name": "",
                   "instanceId": "Instance ID",
                   "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": ""
                 }
@@ -6999,6 +6986,12 @@
                   "Domain": {
                     "aggregations": [],
                     "operation": "groupby"
+                  },
+                  "Flavor": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
                   },
                   "Memory Total": {
                     "aggregations": [
@@ -7019,6 +7012,12 @@
                     "operation": "aggregate"
                   },
                   "flavor": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "flavor_name": {
                     "aggregations": [
                       "lastNotNull"
                     ],
@@ -7076,6 +7075,7 @@
                   "Memory Used (lastNotNull)": "Memory Used",
                   "compute (lastNotNull)": "Compute",
                   "flavor (lastNotNull)": "Flavor",
+                  "flavor_name (lastNotNull)": "Flavor",
                   "instance_name (lastNotNull)": "Instance Name",
                   "os_region (lastNotNull)": "Region",
                   "project_name (lastNotNull)": "Project",
@@ -7340,6 +7340,6 @@
   "timezone": "browser",
   "title": "Openstack VMs Overview Admin",
   "uid": "e0dddf4f-ee1f-41d2-b934-c4b38169c9de",
-  "version": 8,
+  "version": 9,
   "weekStart": ""
 }
