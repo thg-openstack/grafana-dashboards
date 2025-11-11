@@ -2233,7 +2233,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 47
+            "y": 55
           },
           "id": 61,
           "options": {
@@ -2541,7 +2541,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 48
+            "y": 56
           },
           "id": 34,
           "options": {
@@ -2640,7 +2640,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 48
+            "y": 56
           },
           "id": 35,
           "options": {
@@ -2743,7 +2743,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 56
+            "y": 64
           },
           "id": 58,
           "options": {
@@ -2848,7 +2848,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 56
+            "y": 64
           },
           "id": 59,
           "options": {
@@ -2984,7 +2984,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 83
+            "y": 91
           },
           "id": 64,
           "options": {
@@ -3119,7 +3119,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 93
+            "y": 101
           },
           "id": 19,
           "options": {
@@ -3218,7 +3218,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 93
+            "y": 101
           },
           "id": 20,
           "options": {
@@ -3317,7 +3317,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 101
+            "y": 109
           },
           "id": 21,
           "options": {
@@ -3417,7 +3417,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 101
+            "y": 109
           },
           "id": 26,
           "options": {
@@ -3518,7 +3518,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 109
+            "y": 117
           },
           "id": 25,
           "options": {
@@ -3619,7 +3619,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 109
+            "y": 117
           },
           "id": 27,
           "options": {
@@ -3733,7 +3733,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 84
+            "y": 92
           },
           "id": 38,
           "options": {
@@ -3833,7 +3833,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 84
+            "y": 92
           },
           "id": 39,
           "options": {
@@ -3934,7 +3934,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 92
+            "y": 100
           },
           "id": 40,
           "options": {
@@ -4034,7 +4034,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 92
+            "y": 100
           },
           "id": 41,
           "options": {
@@ -4135,7 +4135,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 100
+            "y": 108
           },
           "id": 42,
           "options": {
@@ -4235,7 +4235,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 100
+            "y": 108
           },
           "id": 43,
           "options": {
@@ -4336,7 +4336,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 108
+            "y": 116
           },
           "id": 44,
           "options": {
@@ -4437,7 +4437,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 108
+            "y": 116
           },
           "id": 45,
           "options": {
@@ -4593,6 +4593,30 @@
                     ]
                   }
                 ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disk Size"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "gbytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Project"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 232
+                  }
+                ]
               }
             ]
           },
@@ -4600,7 +4624,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 85
+            "y": 43
           },
           "id": 65,
           "options": {
@@ -4698,6 +4722,21 @@
               "legendFormat": "__auto",
               "range": true,
               "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "label_replace(openstack_vm_total_disk_size_gb{instance_uuid=~\"$virtual_machine\"}, \"domain\", \"$1\", \"instance_uuid\", \"(.+)\")",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "F"
             }
           ],
           "title": "VMs Stats",
@@ -4718,6 +4757,7 @@
                   "job": true,
                   "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": true
                 },
+                "includeByName": {},
                 "indexByName": {},
                 "renameByName": {
                   "Value": "vCPU Total",
@@ -4725,9 +4765,12 @@
                   "Value #B": "vCPU Used",
                   "Value #C": "Memory Total",
                   "Value #D": "Memory Used",
+                  "Value #F": "DIsk Size",
                   "domain": "Domain",
                   "instanceId": "Instance ID",
-                  "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": ""
+                  "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": "",
+                  "{__name__=\"openstack_vm_total_disk_size_gb\", app=\"vmexporter\", database=\"openstack\", domain=\"1205057d-995d-496c-b0d2-40003fea6021\", instance=\"eu-lon2-control-003\", instance_name=\"lbtest1\", instance_uuid=\"1205057d-995d-496c-b0d2-40003fea6021\", job=\"vm_exporter\", os_region=\"eu-lon2\", project_uuid=\"c02e290ef2f3495892eb8560189706a8\"}": "",
+                  "{__name__=\"openstack_vm_total_disk_size_gb\", app=\"vmexporter\", database=\"openstack\", instance=\"eu-lon2-control-003\", instance_name=\"lbtest1\", instance_uuid=\"domain\", job=\"vm_exporter\", os_region=\"eu-lon2\", project_uuid=\"c02e290ef2f3495892eb8560189706a8\"}": ""
                 }
               }
             },
@@ -4735,6 +4778,12 @@
               "id": "groupBy",
               "options": {
                 "fields": {
+                  "DIsk Size": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
                   "Domain": {
                     "aggregations": [],
                     "operation": "groupby"
@@ -4750,6 +4799,16 @@
                       "lastNotNull"
                     ],
                     "operation": "aggregate"
+                  },
+                  "Value #D": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ]
+                  },
+                  "Value #F": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ]
                   },
                   "compute": {
                     "aggregations": [
@@ -4829,6 +4888,7 @@
                   "vCPU Used (lastNotNull)": 8
                 },
                 "renameByName": {
+                  "DIsk Size (lastNotNull)": "Disk Size",
                   "Domain": "Instance ID",
                   "Memory Total (lastNotNull)": "Memory Total",
                   "Memory Used (lastNotNull)": "Memory Used",
@@ -4921,7 +4981,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 86
+            "y": 94
           },
           "id": 74,
           "options": {
@@ -5216,6 +5276,6 @@
   "timezone": "",
   "title": "Openstack VM/Project Overview",
   "uid": "ef895ad8-e433-4d30-b749-4e3ebce7bce5",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
