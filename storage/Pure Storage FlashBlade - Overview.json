@@ -1,4 +1,29 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.1"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -21,7 +46,7 @@
       }
     ]
   },
-  "description": "Get real-time visibility into your FlashBlade environment with a powerful, high-level dashboard built for speed, scale, and clarity. Instantly surface performance, capacity, and top talkers—so you can troubleshoot smarter and act faster.",
+  "description": "Get real-time visibility into your FlashBlade environment with a powerful, high-level dashboard built for speed, scale, and clarity. Instantly surface performance, capacity, and top talkers\u2014so you can troubleshoot smarter and act faster.",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
@@ -31,7 +56,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -354,7 +379,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -369,7 +394,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -384,7 +409,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -400,7 +425,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -416,7 +441,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -431,7 +456,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -447,7 +472,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -514,7 +539,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -729,7 +754,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -744,7 +769,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -759,7 +784,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -773,7 +798,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -835,7 +860,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -934,7 +959,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1406,7 +1431,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -1496,7 +1521,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "purefb_array_performance_bandwidth_bytes{env=~\"$env\", instance=~\"$instance\", dimension=\"read_bytes_per_sec\", protocol=~\"$protocol\", job=~\".+array.+\"}\nand\ntopk($TopItems, rate(purefb_array_performance_bandwidth_bytes{env=~\"$env\", instance=~\"$instance\", dimension=\"read_bytes_per_sec\", protocol=~\"$protocol\", job=~\".+array.+\"}[$__range] @ end() ))",
@@ -1631,7 +1656,7 @@
         "type": "prometheus",
         "uid": "$datasource"
       },
-      "description": "#### Requirements\n`/metrics/filesystems` endpoint required for this panel.\n\n#### Panel Overview\nThis graph displays the top `$TopItems` values, based on their average across the selected time range.\n\nIt combines two Prometheus queries:\n- The first shows the average values over time for all matching entities.\n- The second uses `topk()` with `avg_over_time(... @ end())` to select the top N values, based on total usage across the full range.\n- Only entities present in both queries are shown, meaning the graph displays only the top-N performers.\n\n---\n\n#### Why It’s Set Up This Way\nPrometheus doesn’t support filtering a time series dynamically by top N across time, so this setup is a workaround.\n\nUsing `@ end()` ensures the `topk()` query selects exactly N entities based on a single, consistent snapshot taken at the end of the selected time range.  \nThis avoids the issue where the top N can vary over time and result in more than N lines being shown on the graph.\n\nWe also use `avg_over_time`, not `rate()`, because the metric is pre-aggregated — it's not a counter. Using `rate()` would give incorrect results.\n\n---\n\n#### Tips for Best Use\n- This panel works best for focused time windows, ideally 20 minutes to 3 hours.  \n  Longer ranges (e.g. days) smooth out the signal and may hide short-lived spikes.\n- Use it to quickly spot heavy resource consumers over time, then drill into specific panels or metrics.\n- If graph lines look broken or inconsistent, try zooming in or shifting the time range slightly before \"now\" to avoid scrape alignment issues.\n- Combine with filters (e.g., instance or protocol) to reduce clutter and highlight key trends.\n- For troubleshooting or spot checks, reduce the time range to 15–30 minutes for clearer insight.",
+      "description": "#### Requirements\n`/metrics/filesystems` endpoint required for this panel.\n\n#### Panel Overview\nThis graph displays the top `$TopItems` values, based on their average across the selected time range.\n\nIt combines two Prometheus queries:\n- The first shows the average values over time for all matching entities.\n- The second uses `topk()` with `avg_over_time(... @ end())` to select the top N values, based on total usage across the full range.\n- Only entities present in both queries are shown, meaning the graph displays only the top-N performers.\n\n---\n\n#### Why It\u2019s Set Up This Way\nPrometheus doesn\u2019t support filtering a time series dynamically by top N across time, so this setup is a workaround.\n\nUsing `@ end()` ensures the `topk()` query selects exactly N entities based on a single, consistent snapshot taken at the end of the selected time range.  \nThis avoids the issue where the top N can vary over time and result in more than N lines being shown on the graph.\n\nWe also use `avg_over_time`, not `rate()`, because the metric is pre-aggregated \u2014 it's not a counter. Using `rate()` would give incorrect results.\n\n---\n\n#### Tips for Best Use\n- This panel works best for focused time windows, ideally 20 minutes to 3 hours.  \n  Longer ranges (e.g. days) smooth out the signal and may hide short-lived spikes.\n- Use it to quickly spot heavy resource consumers over time, then drill into specific panels or metrics.\n- If graph lines look broken or inconsistent, try zooming in or shifting the time range slightly before \"now\" to avoid scrape alignment issues.\n- Combine with filters (e.g., instance or protocol) to reduce clutter and highlight key trends.\n- For troubleshooting or spot checks, reduce the time range to 15\u201330 minutes for clearer insight.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1740,7 +1765,7 @@
         "type": "prometheus",
         "uid": "$datasource"
       },
-      "description": "#### Requirements\n`/metrics/filesystems` endpoint required for this panel.\n\n#### Panel Overview\nThis graph displays the top `$TopItems` values, based on their average across the selected time range.\n\nIt combines two Prometheus queries:\n- The first shows the average values over time for all matching entities.\n- The second uses `topk()` with `avg_over_time(... @ end())` to select the top N values, based on total usage across the full range.\n- Only entities present in both queries are shown, meaning the graph displays only the top-N performers.\n\n---\n\n#### Why It’s Set Up This Way\nPrometheus doesn’t support filtering a time series dynamically by top N across time, so this setup is a workaround.\n\nUsing `@ end()` ensures the `topk()` query selects exactly N entities based on a single, consistent snapshot taken at the end of the selected time range.  \nThis avoids the issue where the top N can vary over time and result in more than N lines being shown on the graph.\n\nWe also use `avg_over_time`, not `rate()`, because the metric is pre-aggregated — it's not a counter. Using `rate()` would give incorrect results.\n\n---\n\n#### Tips for Best Use\n- This panel works best for focused time windows, ideally 20 minutes to 3 hours.  \n  Longer ranges (e.g. days) smooth out the signal and may hide short-lived spikes.\n- Use it to quickly spot heavy resource consumers over time, then drill into specific panels or metrics.\n- If graph lines look broken or inconsistent, try zooming in or shifting the time range slightly before \"now\" to avoid scrape alignment issues.\n- Combine with filters (e.g., instance or protocol) to reduce clutter and highlight key trends.\n- For troubleshooting or spot checks, reduce the time range to 15–30 minutes for clearer insight.",
+      "description": "#### Requirements\n`/metrics/filesystems` endpoint required for this panel.\n\n#### Panel Overview\nThis graph displays the top `$TopItems` values, based on their average across the selected time range.\n\nIt combines two Prometheus queries:\n- The first shows the average values over time for all matching entities.\n- The second uses `topk()` with `avg_over_time(... @ end())` to select the top N values, based on total usage across the full range.\n- Only entities present in both queries are shown, meaning the graph displays only the top-N performers.\n\n---\n\n#### Why It\u2019s Set Up This Way\nPrometheus doesn\u2019t support filtering a time series dynamically by top N across time, so this setup is a workaround.\n\nUsing `@ end()` ensures the `topk()` query selects exactly N entities based on a single, consistent snapshot taken at the end of the selected time range.  \nThis avoids the issue where the top N can vary over time and result in more than N lines being shown on the graph.\n\nWe also use `avg_over_time`, not `rate()`, because the metric is pre-aggregated \u2014 it's not a counter. Using `rate()` would give incorrect results.\n\n---\n\n#### Tips for Best Use\n- This panel works best for focused time windows, ideally 20 minutes to 3 hours.  \n  Longer ranges (e.g. days) smooth out the signal and may hide short-lived spikes.\n- Use it to quickly spot heavy resource consumers over time, then drill into specific panels or metrics.\n- If graph lines look broken or inconsistent, try zooming in or shifting the time range slightly before \"now\" to avoid scrape alignment issues.\n- Combine with filters (e.g., instance or protocol) to reduce clutter and highlight key trends.\n- For troubleshooting or spot checks, reduce the time range to 15\u201330 minutes for clearer insight.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1792,7 +1817,7 @@
               }
             ]
           },
-          "unit": "µs"
+          "unit": "\u00b5s"
         },
         "overrides": []
       },
@@ -1856,7 +1881,7 @@
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "description": "#### Requirements\n`/metrics/objectstore` endpoint required for this panel.\n\n#### Panel Overview\nThis graph displays the top `$TopItems` values, based on their average across the selected time range.\n\nIt combines two Prometheus queries:\n- The first shows the average values over time for all matching entities.\n- The second uses `topk()` with `avg_over_time(... @ end())` to select the top N values, based on total usage across the full range.\n- Only entities present in both queries are shown, meaning the graph displays only the top-N performers.\n\n---\n\n#### Why It’s Set Up This Way\nPrometheus doesn’t support filtering a time series dynamically by top N across time, so this setup is a workaround.\n\nUsing `@ end()` ensures the `topk()` query selects exactly N entities based on a single, consistent snapshot taken at the end of the selected time range.  \nThis avoids the issue where the top N can vary over time and result in more than N lines being shown on the graph.\n\nWe also use `avg_over_time`, not `rate()`, because the metric is pre-aggregated — it's not a counter. Using `rate()` would give incorrect results.\n\n---\n\n#### Tips for Best Use\n- This panel works best for focused time windows, ideally 20 minutes to 3 hours.  \n  Longer ranges (e.g. days) smooth out the signal and may hide short-lived spikes.\n- Use it to quickly spot heavy resource consumers over time, then drill into specific panels or metrics.\n- If graph lines look broken or inconsistent, try zooming in or shifting the time range slightly before \"now\" to avoid scrape alignment issues.\n- Combine with filters (e.g., instance or protocol) to reduce clutter and highlight key trends.\n- For troubleshooting or spot checks, reduce the time range to 15–30 minutes for clearer insight.",
+          "description": "#### Requirements\n`/metrics/objectstore` endpoint required for this panel.\n\n#### Panel Overview\nThis graph displays the top `$TopItems` values, based on their average across the selected time range.\n\nIt combines two Prometheus queries:\n- The first shows the average values over time for all matching entities.\n- The second uses `topk()` with `avg_over_time(... @ end())` to select the top N values, based on total usage across the full range.\n- Only entities present in both queries are shown, meaning the graph displays only the top-N performers.\n\n---\n\n#### Why It\u2019s Set Up This Way\nPrometheus doesn\u2019t support filtering a time series dynamically by top N across time, so this setup is a workaround.\n\nUsing `@ end()` ensures the `topk()` query selects exactly N entities based on a single, consistent snapshot taken at the end of the selected time range.  \nThis avoids the issue where the top N can vary over time and result in more than N lines being shown on the graph.\n\nWe also use `avg_over_time`, not `rate()`, because the metric is pre-aggregated \u2014 it's not a counter. Using `rate()` would give incorrect results.\n\n---\n\n#### Tips for Best Use\n- This panel works best for focused time windows, ideally 20 minutes to 3 hours.  \n  Longer ranges (e.g. days) smooth out the signal and may hide short-lived spikes.\n- Use it to quickly spot heavy resource consumers over time, then drill into specific panels or metrics.\n- If graph lines look broken or inconsistent, try zooming in or shifting the time range slightly before \"now\" to avoid scrape alignment issues.\n- Combine with filters (e.g., instance or protocol) to reduce clutter and highlight key trends.\n- For troubleshooting or spot checks, reduce the time range to 15\u201330 minutes for clearer insight.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1966,7 +1991,7 @@
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "description": "#### Requirements\n`/metrics/objectstore` endpoint required for this panel.\n\n#### Panel Overview\nThis graph displays the top `$TopItems` values, based on their average across the selected time range.\n\nIt combines two Prometheus queries:\n- The first shows the average values over time for all matching entities.\n- The second uses `topk()` with `avg_over_time(... @ end())` to select the top N values, based on total usage across the full range.\n- Only entities present in both queries are shown, meaning the graph displays only the top-N performers.\n\n---\n\n#### Why It’s Set Up This Way\nPrometheus doesn’t support filtering a time series dynamically by top N across time, so this setup is a workaround.\n\nUsing `@ end()` ensures the `topk()` query selects exactly N entities based on a single, consistent snapshot taken at the end of the selected time range.  \nThis avoids the issue where the top N can vary over time and result in more than N lines being shown on the graph.\n\nWe also use `avg_over_time`, not `rate()`, because the metric is pre-aggregated — it's not a counter. Using `rate()` would give incorrect results.\n\n---\n\n#### Tips for Best Use\n- This panel works best for focused time windows, ideally 20 minutes to 3 hours.  \n  Longer ranges (e.g. days) smooth out the signal and may hide short-lived spikes.\n- Use it to quickly spot heavy resource consumers over time, then drill into specific panels or metrics.\n- If graph lines look broken or inconsistent, try zooming in or shifting the time range slightly before \"now\" to avoid scrape alignment issues.\n- Combine with filters (e.g., instance or protocol) to reduce clutter and highlight key trends.\n- For troubleshooting or spot checks, reduce the time range to 15–30 minutes for clearer insight.",
+          "description": "#### Requirements\n`/metrics/objectstore` endpoint required for this panel.\n\n#### Panel Overview\nThis graph displays the top `$TopItems` values, based on their average across the selected time range.\n\nIt combines two Prometheus queries:\n- The first shows the average values over time for all matching entities.\n- The second uses `topk()` with `avg_over_time(... @ end())` to select the top N values, based on total usage across the full range.\n- Only entities present in both queries are shown, meaning the graph displays only the top-N performers.\n\n---\n\n#### Why It\u2019s Set Up This Way\nPrometheus doesn\u2019t support filtering a time series dynamically by top N across time, so this setup is a workaround.\n\nUsing `@ end()` ensures the `topk()` query selects exactly N entities based on a single, consistent snapshot taken at the end of the selected time range.  \nThis avoids the issue where the top N can vary over time and result in more than N lines being shown on the graph.\n\nWe also use `avg_over_time`, not `rate()`, because the metric is pre-aggregated \u2014 it's not a counter. Using `rate()` would give incorrect results.\n\n---\n\n#### Tips for Best Use\n- This panel works best for focused time windows, ideally 20 minutes to 3 hours.  \n  Longer ranges (e.g. days) smooth out the signal and may hide short-lived spikes.\n- Use it to quickly spot heavy resource consumers over time, then drill into specific panels or metrics.\n- If graph lines look broken or inconsistent, try zooming in or shifting the time range slightly before \"now\" to avoid scrape alignment issues.\n- Combine with filters (e.g., instance or protocol) to reduce clutter and highlight key trends.\n- For troubleshooting or spot checks, reduce the time range to 15\u201330 minutes for clearer insight.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2018,7 +2043,7 @@
                   }
                 ]
               },
-              "unit": "µs"
+              "unit": "\u00b5s"
             },
             "overrides": []
           },
@@ -2140,7 +2165,7 @@
               }
             ]
           },
-          "unit": "µs"
+          "unit": "\u00b5s"
         },
         "overrides": [
           {
@@ -2711,7 +2736,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Recommended for single array only.\n\nPanel will display \"No Data\" until there is at least 12 hours of data in the data source as this panel displays the last 90 days at 12 hour intervals.",
       "fieldConfig": {
@@ -2973,7 +2998,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(purefb_array_space_bytes{instance=~\"^$instance\",env=~\"^$env\",type=\"file-system\",space=~\"snapshots|unique|destroyed\"}) by (space)\n#\"optional granular detail\"\n#\"using sum() to show total of all arrays\"",
@@ -2986,7 +3011,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(purefb_array_space_bytes{instance=~\"^$instance\",env=~\"^$env\",type=\"object-store\",space=~\"snapshots|unique|destroyed\"}) by (space)\n#\"optional granular detail\"\n#\"using sum() to show total of all arrays\"",
@@ -2999,7 +3024,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(purefb_array_space_bytes{instance=~\"^$instance\",env=~\"^$env\",type=\"array\",space=~\"total_physical|capacity\"}) by (space)\n#\"using sum() to show total of all arrays\"",
@@ -3012,7 +3037,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "avg(purefb_array_space_data_reduction_ratio{instance=~\"^$instance\",env=~\"^$env\",type=\"array\"}) ",
@@ -3061,8 +3086,8 @@
       },
       {
         "current": {
-          "text": "VictoriaMetrics",
-          "value": "VictoriaMetrics"
+          "text": "Prometheus",
+          "value": "${DS_PROMETHEUS}"
         },
         "includeAll": false,
         "label": "Datasource",
@@ -3084,7 +3109,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "VictoriaMetrics"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(purefb_info,env)",
         "description": "Dependency: Prometheus metrics MUST be tagged with an environment.",

@@ -1,4 +1,29 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.1"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -40,7 +65,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -134,7 +159,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -184,7 +209,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "CPU core capacity, enabled hosts only",
       "fieldConfig": {
@@ -253,7 +278,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"} \n  unless \n  on(host_name) vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"} == 1\n)",
@@ -269,7 +294,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -337,7 +362,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -357,7 +382,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -425,7 +450,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -442,7 +467,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -510,7 +535,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "count(vmware_host_connection_state{vmware_cluster_name=~\"$cluster\"})",
@@ -526,7 +551,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -608,7 +633,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "count(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"}==1) OR vector(0)",
@@ -624,7 +649,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -706,7 +731,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -720,7 +745,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "count(\n  vmware_vm_power_state{\n    vmware_cluster_name=~\"$cluster\",\n    vm_name!~\"^ubuntu.*\"\n  } == 0\n) OR vector(0)",
@@ -737,7 +762,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -802,7 +827,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum by (vmware_cluster_name)(\n  vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\"}\n  unless on (host_name) (vmware_host_maintenance_mode == 1)\n) * 100\n/\nsum by (vmware_cluster_name)(\n  vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"}\n  unless on (host_name) (vmware_host_maintenance_mode == 1)\n)",
@@ -818,7 +843,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The time your VM is waiting in line to use the CPU on the host.",
       "fieldConfig": {
@@ -884,7 +909,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "max(vmware_vm_cpu_ready_summation{vmware_cluster_name=~\"$cluster\"})/ 200",
@@ -900,7 +925,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -965,7 +990,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "max(vmware_vm_cpu_costop_summation{vmware_cluster_name=~\"$cluster\"})/200",
@@ -981,7 +1006,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1066,7 +1091,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "(\n  sum by (host_name) (vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\"})\n/\n  sum by (host_name) (vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})\n) * 100",
@@ -1082,7 +1107,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1150,7 +1175,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1168,7 +1193,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1234,7 +1259,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "max(vmware_vm_mem_vmmemctl_average{vmware_cluster_name=~\"$cluster\"})",
@@ -1250,7 +1275,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Percentage of total provisioned memory for Powered on VM's",
       "fieldConfig": {
@@ -1306,7 +1331,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 *\nsum by (dc_name, vmware_cluster_name) (\n  (vmware_vm_memory_max or vmware_vm_memory_size_mb)\n  * on (vm_name) group_left () (vmware_vm_power_state == 1)\n  * on (host_name) group_left (dc_name, vmware_cluster_name)\n    vmware_host_hardware_info{dc_name=~\"$DC\", vmware_cluster_name=~\"$cluster\"}\n)\n/ sum by (dc_name, vmware_cluster_name) (\n  (\n    (vmware_host_memory_max or vmware_host_memory_total or vmware_host_memory_capacity)\n    unless on (host_name) (vmware_host_maintenance_mode == 1)\n  )\n  * on (host_name) group_left (dc_name, vmware_cluster_name)\n    vmware_host_hardware_info{dc_name=~\"$DC\", vmware_cluster_name=~\"$cluster\"}\n)",
@@ -1322,7 +1347,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Percentage of total provisioned memory for Powered on VM's",
       "fieldConfig": {
@@ -1378,7 +1403,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 *\nsum by (dc_name, vmware_cluster_name) (\n  (vmware_vm_num_cpu or vmware_vm_cpu_count or vmware_vm_vcpu or vmware_vm_vcpu_count)\n  * on (vm_name) group_left () (vmware_vm_power_state == 1)\n  * on (host_name) group_left (dc_name, vmware_cluster_name)\n    vmware_host_hardware_info{dc_name=~\"$DC\", vmware_cluster_name=~\"$cluster\"}\n)\n/ sum by (dc_name, vmware_cluster_name) (\n  (\n    vmware_host_num_cpu\n    unless on (host_name) (vmware_host_maintenance_mode == 1)\n  )\n  * on (host_name) group_left (dc_name, vmware_cluster_name)\n    vmware_host_hardware_info{dc_name=~\"$DC\", vmware_cluster_name=~\"$cluster\"}\n)",
@@ -1394,7 +1419,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1482,7 +1507,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "(\n  sum by (host_name) (vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"})\n/\n  sum by (host_name) (vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})\n) * 100",
@@ -1511,7 +1536,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1906,7 +1931,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1920,7 +1945,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1935,7 +1960,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1950,7 +1975,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1965,7 +1990,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1980,7 +2005,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1995,7 +2020,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2231,7 +2256,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2317,7 +2342,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum((vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"}) * 100) / sum(vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})",
@@ -2343,7 +2368,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The time your VM is waiting in line to use the CPU on the host.",
           "fieldConfig": {
@@ -2445,7 +2470,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "VictoriaMetrics"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "(avg(vmware_vm_cpu_ready_summation{vmware_cluster_name=~\"$cluster\"}/200) by(vmware_cluster_name,vm_name) + topk(20,avg(vmware_vm_cpu_ready_summation{vmware_cluster_name=~\"$cluster\"}/200) by(vmware_cluster_name,vm_name) @ end()))/2",
@@ -2478,7 +2503,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2568,7 +2593,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "avg(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
@@ -2580,7 +2605,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "avg(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
@@ -2593,7 +2618,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
@@ -2610,7 +2635,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2700,7 +2725,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"})",
@@ -2712,7 +2737,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"})",
@@ -2729,7 +2754,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2818,7 +2843,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
@@ -2844,7 +2869,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2930,7 +2955,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "VictoriaMetrics"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_received_average{vmware_cluster_name=~\"$cluster\"})",
@@ -2943,7 +2968,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "VictoriaMetrics"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_transmitted_average{vmware_cluster_name=~\"$cluster\"})",
@@ -2960,7 +2985,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -3046,7 +3071,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "VictoriaMetrics"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_broadcastRx_summation{vmware_cluster_name=~\"$cluster\"})",
@@ -3059,7 +3084,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "VictoriaMetrics"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_broadcastTx_summation{vmware_cluster_name=~\"$cluster\"})",
@@ -3076,7 +3101,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -3162,7 +3187,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "VictoriaMetrics"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_multicastRx_summation{vmware_cluster_name=~\"$cluster\"})",
@@ -3175,7 +3200,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "VictoriaMetrics"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_multicastTx_summation{vmware_cluster_name=~\"$cluster\"})",
@@ -3203,7 +3228,7 @@
       {
         "current": {
           "text": "Mimir",
-          "value": "VictoriaMetrics"
+          "value": "${DS_PROMETHEUS}"
         },
         "hide": 2,
         "includeAll": false,
@@ -3226,7 +3251,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "VictoriaMetrics"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(vmware_host_hardware_info,dc_name)",
         "description": "VMware DC name",
@@ -3253,7 +3278,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "VictoriaMetrics"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(vmware_host_hardware_info{dc_name=~\"$DC\"},vmware_cluster_name)",
         "includeAll": true,
