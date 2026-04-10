@@ -1,53 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "PROMETHEUS",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "gauge",
-      "name": "Gauge",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "11.6.2"
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -66,11 +17,11 @@
       }
     ]
   },
-  "description": "VMware ESXi single instance graphs.",
+  "description": "Overview of all VMware vCenter Clusters",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": null,
+  "id": 449,
   "links": [],
   "panels": [
     {
@@ -81,6 +32,150 @@
         "x": 0,
         "y": 0
       },
+      "id": 53,
+      "panels": [],
+      "title": "vCenter SSL ",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "VictoriaMetrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Days until SSL Expiry"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "applyToRow": false,
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "color": "dark-red",
+                        "index": 0
+                      },
+                      "to": 10
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 11,
+                      "result": {
+                        "color": "dark-yellow",
+                        "index": 1
+                      },
+                      "to": 30
+                    },
+                    "type": "range"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 23,
+        "x": 0,
+        "y": 1
+      },
+      "id": 54,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "floor(\n  (\n    label_replace(\n      ( max_over_time(probe_ssl_earliest_cert_expiry{job=\"blackbox_vcenter_ssl\"}[36h])\n        or\n        max_over_time(probe_ssl_last_chain_expiry_timestamp_seconds{job=\"blackbox_vcenter_ssl\"}[36h])\n      ),\n      \"vcenter\", \"$1\", \"instance\", \"https?://([^:/]+)\"\n    ) - time()\n  ) / 86400\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "SSL Expiry",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "cluster_name": true,
+              "instance": true,
+              "job": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value": "Days until SSL Expiry"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
       "id": 39,
       "panels": [],
       "title": "Overview",
@@ -89,7 +184,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "description": "CPU core capacity, enabled hosts only",
       "fieldConfig": {
@@ -132,7 +227,7 @@
         "h": 5,
         "w": 4,
         "x": 0,
-        "y": 1
+        "y": 16
       },
       "id": 14,
       "maxDataPoints": 100,
@@ -153,17 +248,17 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "expr": "sum(\n  vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"} \n  unless \n  on(host_name) vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"} == 1\n)",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "instant": false,
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -174,7 +269,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -216,7 +311,7 @@
         "h": 5,
         "w": 4,
         "x": 4,
-        "y": 1
+        "y": 16
       },
       "id": 38,
       "maxDataPoints": 100,
@@ -237,19 +332,23 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
+          "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})*1000000",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "expr": "sum(\n  vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"}\n  unless on(host_name) (vmware_host_maintenance_mode == 1)\n) * 1000000",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "title": "Cpu Capacity",
@@ -258,7 +357,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -300,7 +399,7 @@
         "h": 5,
         "w": 4,
         "x": 8,
-        "y": 1
+        "y": 16
       },
       "id": 15,
       "maxDataPoints": 100,
@@ -321,16 +420,19 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
-          "expr": "sum(vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(\n  vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"}\n  unless on(host_name) (vmware_host_maintenance_mode == 1)\n)",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
           "refId": "A"
         }
       ],
@@ -340,7 +442,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -382,7 +484,7 @@
         "h": 5,
         "w": 4,
         "x": 12,
-        "y": 1
+        "y": 16
       },
       "id": 36,
       "maxDataPoints": 100,
@@ -403,16 +505,18 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
+          "editorMode": "code",
           "expr": "count(vmware_host_connection_state{vmware_cluster_name=~\"$cluster\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -422,7 +526,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -478,7 +582,7 @@
         "h": 5,
         "w": 4,
         "x": 16,
-        "y": 1
+        "y": 16
       },
       "id": 37,
       "maxDataPoints": 100,
@@ -499,17 +603,17 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "expr": "count(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"}==1) OR vector(0)",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "instant": false,
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -520,7 +624,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -576,7 +680,7 @@
         "h": 5,
         "w": 4,
         "x": 20,
-        "y": 1
+        "y": 16
       },
       "id": 41,
       "maxDataPoints": 100,
@@ -597,28 +701,29 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
+          "exemplar": false,
           "expr": "count(vmware_vm_power_state{vmware_cluster_name=~\"$cluster\"}==1) OR vector(0)",
           "format": "time_series",
-          "intervalFactor": 1,
+          "instant": true,
           "legendFormat": "UP",
-          "range": true,
+          "range": false,
           "refId": "A"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
-          "expr": "count(vmware_vm_power_state{vmware_cluster_name=~\"$cluster\"}==0) OR vector(0)",
+          "expr": "count(\n  vmware_vm_power_state{\n    vmware_cluster_name=~\"$cluster\",\n    vm_name!~\"^ubuntu.*\"\n  } == 0\n) OR vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "DOWN",
@@ -632,7 +737,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -674,7 +779,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 6
+        "y": 21
       },
       "id": 12,
       "options": {
@@ -692,18 +797,17 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
-          "expr": "sum(vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\"}) * 100 / sum(vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{ $cluster }",
+          "expr": "sum by (vmware_cluster_name)(\n  vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\"}\n  unless on (host_name) (vmware_host_maintenance_mode == 1)\n) * 100\n/\nsum by (vmware_cluster_name)(\n  vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"}\n  unless on (host_name) (vmware_host_maintenance_mode == 1)\n)",
+          "instant": false,
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -714,7 +818,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "description": "The time your VM is waiting in line to use the CPU on the host.",
       "fieldConfig": {
@@ -757,7 +861,7 @@
         "h": 6,
         "w": 4,
         "x": 4,
-        "y": 6
+        "y": 21
       },
       "id": 25,
       "options": {
@@ -775,18 +879,17 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "expr": "max(vmware_vm_cpu_ready_summation{vmware_cluster_name=~\"$cluster\"})/ 200",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{ cluster }}",
+          "instant": false,
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -797,7 +900,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -839,7 +942,7 @@
         "h": 6,
         "w": 4,
         "x": 8,
-        "y": 6
+        "y": 21
       },
       "id": 26,
       "options": {
@@ -857,17 +960,18 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
+          "editorMode": "code",
           "expr": "max(vmware_vm_cpu_costop_summation{vmware_cluster_name=~\"$cluster\"})/200",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{ $cluster }}",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -877,7 +981,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -941,7 +1045,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 6
+        "y": 21
       },
       "id": 17,
       "options": {
@@ -957,27 +1061,28 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
-          "expr": "sum(vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\"}) * 100 / sum(vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "editorMode": "code",
+          "expr": "(\n  sum by (host_name) (vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\"})\n/\n  sum by (host_name) (vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})\n) * 100",
+          "instant": false,
           "legendFormat": "{{ $cluster }}",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Cluster CPU usage %",
+      "title": "Host CPU usage %",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1021,7 +1126,7 @@
         "h": 7,
         "w": 4,
         "x": 0,
-        "y": 12
+        "y": 27
       },
       "id": 13,
       "maxDataPoints": 100,
@@ -1040,18 +1145,19 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
-          "expr": "sum(vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"}) * 100 / sum(vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})",
+          "exemplar": false,
+          "expr": "sum(\n  vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"}\n  unless on (host_name) (vmware_host_maintenance_mode == 1)\n) * 100\n/\nsum(\n  vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"}\n  unless on (host_name) (vmware_host_maintenance_mode == 1)\n)",
           "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{ $cluster }}",
+          "instant": false,
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -1062,7 +1168,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1105,7 +1211,7 @@
         "h": 7,
         "w": 4,
         "x": 4,
-        "y": 12
+        "y": 27
       },
       "id": 31,
       "options": {
@@ -1123,16 +1229,18 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
+          "editorMode": "code",
           "expr": "max(vmware_vm_mem_vmmemctl_average{vmware_cluster_name=~\"$cluster\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -1142,42 +1250,32 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
+      "description": "Percentage of total provisioned memory for Powered on VM's",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 2,
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "max": 100,
-          "min": 0,
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46"
+                "color": "green"
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 20000
+                "color": "orange",
+                "value": 80
               },
               {
-                "color": "#d44a3a",
-                "value": 60009
+                "color": "dark-red",
+                "value": 90
               }
             ]
           },
-          "unit": "deckbytes"
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -1185,16 +1283,16 @@
         "h": 7,
         "w": 4,
         "x": 8,
-        "y": 12
+        "y": 27
       },
-      "id": 35,
+      "id": 55,
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "max"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -1203,26 +1301,100 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
-          "expr": "max(vmware_vm_mem_swapped_average{vmware_cluster_name=~\"$cluster\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "editorMode": "code",
+          "expr": "100 *\nsum by (dc_name, vmware_cluster_name) (\n  (vmware_vm_memory_max or vmware_vm_memory_size_mb)\n  * on (vm_name) group_left () (vmware_vm_power_state == 1)\n  * on (host_name) group_left (dc_name, vmware_cluster_name)\n    vmware_host_hardware_info{dc_name=~\"$DC\", vmware_cluster_name=~\"$cluster\"}\n)\n/ sum by (dc_name, vmware_cluster_name) (\n  (\n    (vmware_host_memory_max or vmware_host_memory_total or vmware_host_memory_capacity)\n    unless on (host_name) (vmware_host_maintenance_mode == 1)\n  )\n  * on (host_name) group_left (dc_name, vmware_cluster_name)\n    vmware_host_hardware_info{dc_name=~\"$DC\", vmware_cluster_name=~\"$cluster\"}\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Max VM Swapped",
+      "title": "Total Provisioned Memory in cluster",
       "type": "gauge"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
+      },
+      "description": "Percentage of total provisioned memory for Powered on VM's",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 12,
+        "y": 27
+      },
+      "id": 56,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "expr": "100 *\nsum by (dc_name, vmware_cluster_name) (\n  (vmware_vm_num_cpu or vmware_vm_cpu_count or vmware_vm_vcpu or vmware_vm_vcpu_count)\n  * on (vm_name) group_left () (vmware_vm_power_state == 1)\n  * on (host_name) group_left (dc_name, vmware_cluster_name)\n    vmware_host_hardware_info{dc_name=~\"$DC\", vmware_cluster_name=~\"$cluster\"}\n)\n/ sum by (dc_name, vmware_cluster_name) (\n  (\n    vmware_host_num_cpu\n    unless on (host_name) (vmware_host_maintenance_mode == 1)\n  )\n  * on (host_name) group_left (dc_name, vmware_cluster_name)\n    vmware_host_hardware_info{dc_name=~\"$DC\", vmware_cluster_name=~\"$cluster\"}\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total Provisioned CPU in cluster",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1239,8 +1411,8 @@
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
+            "fillOpacity": 5,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -1248,6 +1420,9 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -1266,221 +1441,6 @@
           "decimals": 1,
           "links": [],
           "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "rothz"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 12
-      },
-      "id": 52,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.6.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(vmware_host_cpu_usagemhz_average{vmware_cluster_name=~\"$cluster\"})*1000000",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{ $cluster }}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Cluster CPU usage Hz",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "Price a year with commit and without commit",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#299c46"
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 50
-              },
-              {
-                "color": "#d44a3a",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "currencyUSD"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 11,
-        "w": 12,
-        "x": 0,
-        "y": 19
-      },
-      "id": 44,
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}) * 350",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Without commit",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}) * 338",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "With commit",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(vmware_host_num_cpu{vmware_cluster_name=~\"$cluster\"}) * 150",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "Enterprise Plus License",
-          "range": true,
-          "refId": "C"
-        }
-      ],
-      "title": "License price per year",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "decimals": 1,
-          "links": [],
-          "mappings": [],
-          "max": 100,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1498,12 +1458,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 11,
-        "w": 12,
-        "x": 12,
-        "y": 19
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 27
       },
-      "id": 18,
+      "id": 52,
       "options": {
         "legend": {
           "calcs": [],
@@ -1517,155 +1477,23 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
-          "expr": "sum((vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"}) * 100) / sum(vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
+          "editorMode": "code",
+          "expr": "(\n  sum by (host_name) (vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"})\n/\n  sum by (host_name) (vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})\n) * 100",
+          "instant": false,
           "legendFormat": "{{ $cluster }}",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Cluster Memory usage",
+      "title": "Cluster RAM Usage %",
       "type": "timeseries"
-    },
-    {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 30
-      },
-      "id": 46,
-      "panels": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "The time your VM is waiting in line to use the CPU on the host.",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [
-                {
-                  "id": 0,
-                  "op": "=",
-                  "text": "N/A",
-                  "type": 1,
-                  "value": "null"
-                }
-              ],
-              "max": 20,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "#299c46"
-                  },
-                  {
-                    "color": "rgba(237, 129, 40, 0.89)",
-                    "value": 5
-                  },
-                  {
-                    "color": "#d44a3a",
-                    "value": 10
-                  }
-                ]
-              },
-              "unit": "percent"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 31
-          },
-          "id": 47,
-          "options": {
-            "legend": {
-              "calcs": [
-                "lastNotNull",
-                "max"
-              ],
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "sortBy": "Max",
-              "sortDesc": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "10.2.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "(avg(vmware_vm_cpu_ready_summation{vmware_cluster_name=~\"$cluster\"}/200) by(vmware_cluster_name,vm_name) + topk(20,avg(vmware_vm_cpu_ready_summation{vmware_cluster_name=~\"$cluster\"}/200) by(vmware_cluster_name,vm_name) @ end()))/2",
-              "format": "time_series",
-              "instant": false,
-              "intervalFactor": 1,
-              "legendFormat": "{{ vmware_cluster_name }} - {{ vm_name }}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Max VM Cpu Ready on Cluster",
-          "type": "timeseries"
-        }
-      ],
-      "title": "CPU",
-      "type": "row"
     },
     {
       "collapsed": false,
@@ -1673,7 +1501,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 34
       },
       "id": 48,
       "panels": [],
@@ -1683,7 +1511,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1712,7 +1540,7 @@
           "max": 100,
           "min": 0,
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "#299c46"
@@ -1802,28 +1630,32 @@
                 "value": "percentunit"
               },
               {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-background"
-                }
-              },
-              {
                 "id": "thresholds",
                 "value": {
-                  "mode": "absolute",
+                  "mode": "percentage",
                   "steps": [
                     {
                       "color": "green"
                     },
                     {
                       "color": "#EAB839",
-                      "value": 60
+                      "value": 0.6
                     },
                     {
-                      "color": "red",
-                      "value": 80
+                      "color": "dark-orange",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 0.9
                     }
                   ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
                 }
               }
             ]
@@ -1844,6 +1676,7 @@
                   {
                     "options": {
                       "0": {
+                        "color": "green",
                         "index": 1,
                         "text": "Enabled"
                       },
@@ -2009,6 +1842,36 @@
                 "value": "none"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Version"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "7.0.3": {
+                        "color": "dark-red",
+                        "index": 0
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background",
+                  "wrapText": false
+                }
+              }
+            ]
           }
         ]
       },
@@ -2016,7 +1879,7 @@
         "h": 27,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 35
       },
       "id": 49,
       "maxDataPoints": 100,
@@ -2034,31 +1897,30 @@
         "sortBy": [
           {
             "desc": false,
-            "displayName": "CPU Consumption %"
+            "displayName": "Host"
           }
         ]
       },
-      "pluginVersion": "11.6.2",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by (host_name,vmware_cluster_name,dc_name) (vmware_host_cpu_max{vmware_cluster_name=~\"$cluster\"})*1000000",
           "format": "table",
           "instant": true,
-          "intervalFactor": 1,
-          "legendFormat": "VPCU Max Hz",
+          "legendFormat": "VCPU Max Hz",
           "range": false,
           "refId": "CPU_MAX_Hz"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2066,14 +1928,14 @@
           "format": "table",
           "hide": false,
           "instant": true,
-          "legendFormat": "VPCU Usage Hz",
+          "legendFormat": "VPCU USAGE Hz",
           "range": false,
           "refId": "CPU_USAGE_Hz"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2088,7 +1950,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2103,22 +1965,22 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(\n  sum by (host_name, vmware_cluster_name, dc_name)(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"})\n  +\n  on (host_name) group_left(hardware_cpu_model, hardware_model)\n  0 * vmware_host_hardware_info{vmware_cluster_name=~\"$cluster\"}\n)\n+\non (host_name) group_left(build, version)\n0 * vmware_host_product_info{vmware_cluster_name=~\"$cluster\"}\n",
+          "expr": "(\n  sum by (host_name, vmware_cluster_name, dc_name)(vmware_host_maintenance_mode{vmware_cluster_name=~\"$cluster\"})\n  +\n  on (host_name) group_left(hardware_cpu_model, hardware_model)\n  0 * vmware_host_hardware_info{vmware_cluster_name=~\"$cluster\"}\n)\n+\non (host_name) group_left(build, version)\n0 * vmware_host_product_info{vmware_cluster_name=~\"$cluster\"}",
           "format": "table",
           "hide": false,
           "instant": true,
-          "legendFormat": "__auto",
+          "legendFormat": "Status",
           "range": false,
-          "refId": "MAINTENACE_MODE"
+          "refId": "MAINTENANCE_MODE"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2133,7 +1995,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -2168,12 +2030,57 @@
                 ],
                 "operation": "aggregate"
               },
+              "Value #CPU_COUNT": {
+                "aggregations": []
+              },
+              "Value #CPU_MAX_Hz": {
+                "aggregations": []
+              },
+              "Value #CPU_USAGE_Hz": {
+                "aggregations": []
+              },
               "Value #HOST_INFO": {
                 "aggregations": [
                   "lastNotNull"
                 ]
               },
               "Value #MAINTENACE_MODE": {
+                "aggregations": []
+              },
+              "Value #MAINTENANCE_MODE": {
+                "aggregations": []
+              },
+              "Value #RAM_TOTAL": {
+                "aggregations": []
+              },
+              "Value #RAM_USAGE": {
+                "aggregations": []
+              },
+              "Value #VM_COUNT": {
+                "aggregations": []
+              },
+              "build": {
+                "aggregations": []
+              },
+              "dc_name": {
+                "aggregations": []
+              },
+              "hardware_cpu_model": {
+                "aggregations": []
+              },
+              "hardware_model": {
+                "aggregations": []
+              },
+              "host": {
+                "aggregations": []
+              },
+              "host_name": {
+                "aggregations": []
+              },
+              "version": {
+                "aggregations": []
+              },
+              "vmware_cluster_name": {
                 "aggregations": []
               }
             }
@@ -2184,9 +2091,15 @@
           "options": {
             "excludeByName": {
               "Time": true,
+              "Value #CPU_COUNT": true,
+              "Value #CPU_MAX_Hz": false,
               "Value #CPU_USAGE_Hz": false,
               "Value #HOST_INFO": false,
-              "host_name": true
+              "Value #RAM_TOTAL": false,
+              "Value #RAM_USAGE": false,
+              "Value #VM_COUNT": false,
+              "host_name": true,
+              "vmware_cluster_name": false
             },
             "includeByName": {},
             "indexByName": {
@@ -2213,6 +2126,7 @@
               "Value #CPU_USAGE_Hz": "CPU Usage Hz",
               "Value #HOST_INFO": "Build",
               "Value #MAINTENACE_MODE": "Status",
+              "Value #MAINTENANCE_MODE": "Status",
               "Value #RAM_TOTAL": "RAM Total",
               "Value #RAM_USAGE": "RAM Usage",
               "Value #VM_COUNT": "VMs",
@@ -2249,7 +2163,8 @@
             "mode": "binary",
             "reduce": {
               "reducer": "sum"
-            }
+            },
+            "replaceFields": false
           }
         },
         {
@@ -2281,7 +2196,10 @@
           "id": "organize",
           "options": {
             "excludeByName": {
-              "CPU Capacity Hz": true
+              "CPU Capacity Hz": true,
+              "CPU Usage Hz": true,
+              "RAM Total": true,
+              "RAM Usage": true
             },
             "includeByName": {},
             "indexByName": {
@@ -2302,11 +2220,115 @@
               "VMs": 7,
               "Version": 3
             },
-            "renameByName": {}
+            "renameByName": {
+              "Value #MAINTENANCE_MODE": "Status"
+            }
           }
         }
       ],
       "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "VictoriaMetrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 1,
+          "links": [],
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 0,
+        "y": 62
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "expr": "sum((vmware_host_memory_usage{vmware_cluster_name=~\"$cluster\"}) * 100) / sum(vmware_host_memory_max{vmware_cluster_name=~\"$cluster\"})",
+          "instant": false,
+          "legendFormat": "{{ $cluster }}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cluster Memory usage",
+      "type": "timeseries"
     },
     {
       "collapsed": true,
@@ -2314,15 +2336,16 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 73
       },
-      "id": 42,
+      "id": 46,
       "panels": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
+          "description": "The time your VM is waiting in line to use the CPU on the host.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2335,8 +2358,9 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
-                "fillOpacity": 10,
+                "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -2360,22 +2384,34 @@
                   "mode": "off"
                 }
               },
-              "decimals": 1,
-              "links": [],
-              "mappings": [],
+              "mappings": [
+                {
+                  "id": 0,
+                  "op": "=",
+                  "text": "N/A",
+                  "type": 1,
+                  "value": "null"
+                }
+              ],
+              "max": 20,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "#299c46"
                   },
                   {
-                    "color": "red",
-                    "value": 80
+                    "color": "rgba(237, 129, 40, 0.89)",
+                    "value": 5
+                  },
+                  {
+                    "color": "#d44a3a",
+                    "value": 10
                   }
                 ]
               },
-              "unit": "KBs"
+              "unit": "percent"
             },
             "overrides": []
           },
@@ -2383,297 +2419,417 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 87
+            "y": 126
           },
-          "id": 20,
+          "id": 47,
           "options": {
             "legend": {
               "calcs": [
-                "mean",
-                "max",
-                "min"
+                "lastNotNull",
+                "max"
               ],
               "displayMode": "table",
               "placement": "right",
               "showLegend": true,
-              "sortBy": "Min",
+              "sortBy": "Max",
               "sortDesc": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "multi",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.2.1",
+          "pluginVersion": "12.0.2",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
-              "expr": "avg(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "{{ vmware_cluster_name }} - {{ vm_name }} Read",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "expr": "avg(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
-              "hide": false,
+              "expr": "(avg(vmware_vm_cpu_ready_summation{vmware_cluster_name=~\"$cluster\"}/200) by(vmware_cluster_name,vm_name) + topk(20,avg(vmware_vm_cpu_ready_summation{vmware_cluster_name=~\"$cluster\"}/200) by(vmware_cluster_name,vm_name) @ end()))/2",
               "instant": false,
-              "legendFormat": "{{ vmware_cluster_name }} - {{ vm_name }} Write",
-              "range": true,
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "expr": "avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
-              "hide": true,
-              "instant": false,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "C"
-            }
-          ],
-          "title": "Top  Disk Read And Write VMs",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "always",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "decimals": 1,
-              "links": [],
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "KBs"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 99
-          },
-          "id": 51,
-          "options": {
-            "legend": {
-              "calcs": [
-                "mean",
-                "max",
-                "min"
-              ],
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "sortBy": "Mean",
-              "sortDesc": false
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "10.2.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "expr": "sum(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"})",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": " Read",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "expr": "sum(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"})",
-              "hide": false,
-              "instant": false,
-              "legendFormat": "Write",
-              "range": true,
-              "refId": "B"
-            }
-          ],
-          "title": "Cluster Disk Read And Write",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "decimals": 0,
-              "links": [],
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "dtdurationms"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 111
-          },
-          "id": 50,
-          "options": {
-            "legend": {
-              "calcs": [
-                "max",
-                "min"
-              ],
-              "displayMode": "table",
-              "placement": "right",
-              "showLegend": true,
-              "sortBy": "Min",
-              "sortDesc": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "10.2.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "expr": "avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
-              "format": "time_series",
-              "intervalFactor": 1,
               "legendFormat": "{{ vmware_cluster_name }} - {{ vm_name }}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "VM Disk Latency",
+          "title": "Max VM Cpu Ready on Cluster",
           "type": "timeseries"
         }
       ],
+      "title": "CPU",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 74
+      },
+      "id": 42,
+      "panels": [],
       "title": "Disk",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "VictoriaMetrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 1,
+          "links": [],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "KBs"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 75
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Min",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "expr": "avg(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
+          "instant": false,
+          "legendFormat": "{{ vmware_cluster_name }} - {{ vm_name }} Read",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "expr": "avg(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{ vmware_cluster_name }} - {{ vm_name }} Write",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "expr": "avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Top  Disk Read And Write VMs",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "VictoriaMetrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 1,
+          "links": [],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "KBs"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 87
+      },
+      "id": 51,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Mean",
+          "sortDesc": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "expr": "sum(vmware_vm_disk_read_average{vmware_cluster_name=~\"$cluster\"})",
+          "instant": false,
+          "legendFormat": "Read",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "expr": "sum(vmware_vm_disk_write_average{vmware_cluster_name=~\"$cluster\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Write",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Cluster Disk Read And Write",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "VictoriaMetrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "links": [],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "dtdurationms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 99
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Min",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
+          },
+          "editorMode": "code",
+          "expr": "avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) + topk(10,avg(vmware_vm_disk_maxTotalLatency_latest{vmware_cluster_name=~\"$cluster\"}) by(vmware_cluster_name,vm_name) )@ end()/2",
+          "instant": false,
+          "legendFormat": "{{ vmware_cluster_name }} - {{ vm_name }}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "VM Disk Latency",
+      "type": "timeseries"
     },
     {
       "collapsed": true,
@@ -2681,14 +2837,14 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 60
+        "y": 111
       },
       "id": 40,
       "panels": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "fieldConfig": {
             "defaults": {
@@ -2750,7 +2906,7 @@
             "h": 11,
             "w": 24,
             "x": 0,
-            "y": 31
+            "y": 422
           },
           "id": 19,
           "options": {
@@ -2774,7 +2930,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_received_average{vmware_cluster_name=~\"$cluster\"})",
@@ -2787,7 +2943,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_transmitted_average{vmware_cluster_name=~\"$cluster\"})",
@@ -2804,7 +2960,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "fieldConfig": {
             "defaults": {
@@ -2866,7 +3022,7 @@
             "h": 15,
             "w": 24,
             "x": 0,
-            "y": 96
+            "y": 541
           },
           "id": 27,
           "options": {
@@ -2890,7 +3046,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_broadcastRx_summation{vmware_cluster_name=~\"$cluster\"})",
@@ -2903,7 +3059,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_broadcastTx_summation{vmware_cluster_name=~\"$cluster\"})",
@@ -2920,7 +3076,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "VictoriaMetrics"
           },
           "fieldConfig": {
             "defaults": {
@@ -2982,7 +3138,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 111
+            "y": 556
           },
           "id": 29,
           "options": {
@@ -3006,7 +3162,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_multicastRx_summation{vmware_cluster_name=~\"$cluster\"})",
@@ -3019,7 +3175,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "VictoriaMetrics"
               },
               "editorMode": "code",
               "expr": "sum(vmware_vm_net_multicastTx_summation{vmware_cluster_name=~\"$cluster\"})",
@@ -3038,13 +3194,17 @@
       "type": "row"
     }
   ],
+  "preload": false,
   "refresh": "",
   "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "text": "Mimir",
+          "value": "VictoriaMetrics"
+        },
         "hide": 2,
         "includeAll": false,
         "label": "Datasource",
@@ -3056,10 +3216,17 @@
         "type": "datasource"
       },
       {
-        "current": {},
+        "current": {
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "VictoriaMetrics"
         },
         "definition": "label_values(vmware_host_hardware_info,dc_name)",
         "description": "VMware DC name",
@@ -3078,10 +3245,15 @@
         "type": "query"
       },
       {
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "VictoriaMetrics"
         },
         "definition": "label_values(vmware_host_hardware_info{dc_name=~\"$DC\"},vmware_cluster_name)",
         "includeAll": true,
@@ -3101,13 +3273,12 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "VMware Cluster",
   "uid": "MRvkcY2Zz",
-  "version": 70,
-  "weekStart": ""
+  "version": 43
 }

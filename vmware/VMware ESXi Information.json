@@ -17,176 +17,91 @@
       }
     ]
   },
-  "description": "VMware Virtual Machines information",
+  "description": "VMware ESXi single instance graphs.",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 461,
+  "id": 462,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 45,
-      "panels": [],
-      "title": "Virtual Machine Snapshot info",
-      "type": "row"
-    },
-    {
       "datasource": {
-        "type": "prometheus",
-        "uid": "VictoriaMetrics"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "#299c46"
               },
               {
-                "color": "red",
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 50
+              },
+              {
+                "color": "#d44a3a",
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "short"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Value"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "s"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Snapshot Age"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "from": 0,
-                      "result": {
-                        "color": "dark-green",
-                        "index": 0
-                      },
-                      "to": 604800
-                    },
-                    "type": "range"
-                  },
-                  {
-                    "options": {
-                      "from": 604800,
-                      "result": {
-                        "color": "dark-red",
-                        "index": 1
-                      },
-                      "to": 999999999999
-                    },
-                    "type": "range"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Snapshot Age"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-background"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 18,
-        "w": 22,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 1
+        "y": 0
       },
-      "id": 44,
+      "id": 32,
+      "maxDataPoints": 100,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
           ],
-          "show": false
+          "fields": "",
+          "values": false
         },
-        "showHeader": true
+        "showPercentChange": false,
+        "textMode": "name",
+        "wideLayout": true
       },
       "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "VictoriaMetrics"
+            "uid": "$datasource"
           },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "max by (vm_name, dc_name) (time() - vmware_vm_snapshot_timestamp_seconds)",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
+          "expr": "(vmware_host_product_info{host_name=~\"$esxhost\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{ version }}",
           "refId": "A"
         }
       ],
-      "title": "Virtual Machine Snapshots",
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true
-            },
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Value": "Snapshot Age",
-              "dc_name": "DC",
-              "vm_name": "Virtual Machine"
-            }
-          }
-        }
-      ],
-      "type": "table"
+      "title": "Version",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -226,10 +141,89 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 4,
-        "x": 0,
-        "y": 19
+        "x": 4,
+        "y": 0
+      },
+      "id": 33,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "expr": "(vmware_host_product_info{host_name=~\"$esxhost\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{ build }}",
+          "refId": "A"
+        }
+      ],
+      "title": "Build",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "$datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#299c46"
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 50
+              },
+              {
+                "color": "#d44a3a",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 0
       },
       "id": 36,
       "maxDataPoints": 100,
@@ -256,269 +250,15 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "(vmware_vm_boot_timestamp_seconds{vm_name=~\"$vm\"}) ",
+          "expr": "(vmware_host_hardware_info{host_name=~\"$esxhost\"}) ",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "{{ host_name }}",
+          "legendFormat": "{{ hardware_model }}",
           "refId": "A"
         }
       ],
-      "title": "Host",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {
-              "options": {
-                "1": {
-                  "text": "Template"
-                }
-              },
-              "type": "value"
-            },
-            {
-              "options": {
-                "0": {
-                  "text": "VM"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#299c46"
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)"
-              },
-              {
-                "color": "#d44a3a"
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 4,
-        "y": 19
-      },
-      "id": 6,
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "vmware_vm_template{vm_name=~\"$vm\"}",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "VM Type",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {
-              "options": {
-                "1": {
-                  "text": "PoweredOn"
-                }
-              },
-              "type": "value"
-            },
-            {
-              "options": {
-                "0": {
-                  "text": "PoweredOff"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#d44a3a"
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0.1
-              },
-              {
-                "color": "#299c46",
-                "value": 0.2
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 8,
-        "y": 19
-      },
-      "id": 38,
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "vmware_vm_power_state{vm_name=~\"$vm\"}==1",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "VM State",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {
-              "options": {
-                "1": {
-                  "text": "OK"
-                }
-              },
-              "type": "value"
-            },
-            {
-              "options": {
-                "0": {
-                  "text": "NOK"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#d44a3a"
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0.1
-              },
-              {
-                "color": "#299c46",
-                "value": 0.2
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 12,
-        "y": 19
-      },
-      "id": 32,
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "(vmware_vm_guest_tools_running_status{vm_name=~\"$vm\"})",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "legendFormat": "{{ tools_status }}",
-          "refId": "A"
-        }
-      ],
-      "title": "Tools Status",
+      "title": "Model",
       "type": "stat"
     },
     {
@@ -559,10 +299,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 16,
-        "y": 19
+        "h": 4,
+        "w": 8,
+        "x": 12,
+        "y": 0
       },
       "id": 37,
       "maxDataPoints": 100,
@@ -589,15 +329,133 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "(vmware_vm_guest_tools_version{vm_name=~\"$vm\"})",
+          "expr": "(vmware_host_hardware_info{host_name=~\"$esxhost\"}) ",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "{{ tools_version}}",
+          "legendFormat": "{{ hardware_cpu_model }}",
           "refId": "A"
         }
       ],
-      "title": "Tools Version",
+      "title": "Cpu Model",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "$datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#299c46"
+              },
+              {
+                "color": "#d44a3a",
+                "value": 129600
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 7776000
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "lastNotNull",
+                "value": 0
+              }
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "color": "dark-red",
+                        "index": 0
+                      },
+                      "to": 86400
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 86400,
+                      "result": {
+                        "color": "dark-green",
+                        "index": 1
+                      },
+                      "to": 9999999
+                    },
+                    "type": "range"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "id": 6,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "expr": "time()-vmware_host_boot_timestamp_seconds{host_name=~\"$esxhost\"} ",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "ESXi host uptime",
       "type": "stat"
     },
     {
@@ -638,10 +496,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 22
+        "y": 4
       },
       "id": 14,
       "maxDataPoints": 100,
@@ -668,7 +526,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "(vmware_vm_num_cpu{vm_name=~\"$vm\"}) ",
+          "expr": "(vmware_host_num_cpu{host_name=~\"$esxhost\"})",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -676,6 +534,84 @@
         }
       ],
       "title": "Cpu Number",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "$datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#299c46"
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 50
+              },
+              {
+                "color": "#d44a3a",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decmbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 4
+      },
+      "id": 15,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "expr": "(vmware_host_memory_max{host_name=~\"$esxhost\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Memory Capaciy",
       "type": "stat"
     },
     {
@@ -706,11 +642,11 @@
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
-                "value": 90
+                "value": 50
               },
               {
                 "color": "#d44a3a",
-                "value": 95
+                "value": 80
               }
             ]
           },
@@ -719,10 +655,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 3,
-        "y": 22
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 4
       },
       "id": 12,
       "options": {
@@ -746,14 +682,14 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "vmware_vm_cpu_usagemhz_average{vm_name=~\"$vm\"}/vmware_vm_max_cpu_usage{vm_name=~\"$vm\"}*100",
+          "expr": "(vmware_host_cpu_usagemhz_average{host_name=~\"$esxhost\"}) * 100 / (vmware_host_cpu_max{host_name=~\"$esxhost\"})",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "title": "VM CPU Usage",
+      "title": "Host CPU Usage",
       "type": "gauge"
     },
     {
@@ -797,10 +733,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 6,
-        "y": 22
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 4
       },
       "id": 25,
       "options": {
@@ -824,14 +760,12 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "(vmware_vm_cpu_ready_summation{vm_name=~\"$vm\"})/200",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "refId": "A"
+          "expr": "vmware_host_cpu_ready_summation{host_name=~\"$esxhost\"}/200",
+          "legendFormat": "Cpu Ready",
+          "refId": "B"
         }
       ],
-      "title": "VM Cpu Ready",
+      "title": "Current Cpu Ready",
       "type": "gauge"
     },
     {
@@ -875,10 +809,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 9,
-        "y": 22
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 4
       },
       "id": 26,
       "options": {
@@ -902,93 +836,15 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "vmware_vm_cpu_costop_summation{vm_name=~\"$vm\"}/200",
+          "expr": "vmware_host_cpu_costop_summation{host_name=~\"$esxhost\"}/200",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "title": "VM Cpu Co-Stop",
+      "title": "Current Cpu Co-Stop",
       "type": "gauge"
-    },
-    {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#299c46"
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 50
-              },
-              {
-                "color": "#d44a3a",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decmbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 12,
-        "y": 22
-      },
-      "id": 15,
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "(vmware_vm_memory_max{vm_name=~\"$vm\"})  ",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory Capacity",
-      "type": "stat"
     },
     {
       "datasource": {
@@ -1017,11 +873,11 @@
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
-                "value": 90
+                "value": 50
               },
               {
                 "color": "#d44a3a",
-                "value": 95
+                "value": 80
               }
             ]
           },
@@ -1030,10 +886,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 15,
-        "y": 22
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 4
       },
       "id": 13,
       "maxDataPoints": 100,
@@ -1060,147 +916,197 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "(vmware_vm_mem_usage_average{vm_name=~\"$vm\"}) * 100 / (vmware_vm_memory_max{vm_name=~\"$vm\"})",
+          "expr": "(vmware_host_memory_usage{host_name=~\"$esxhost\"}) * 100 / (vmware_host_memory_max{host_name=~\"$esxhost\"})",
           "format": "time_series",
-          "instant": false,
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "title": "VM Memory usage",
+      "title": "Host Memory usage",
       "type": "stat"
     },
     {
       "datasource": {
-        "uid": "$datasource"
+        "type": "prometheus",
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 1,
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "max": 100,
-          "min": 0,
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46"
+                "color": "green"
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 1024
-              },
-              {
-                "color": "#d44a3a",
-                "value": 2048
+                "color": "red",
+                "value": 80
               }
             ]
-          },
-          "unit": "deckbytes"
+          }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Power State"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "index": 1,
+                        "text": "Powered Off"
+                      },
+                      "1": {
+                        "index": 0,
+                        "text": "Powered On"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 18,
-        "y": 22
+        "h": 12,
+        "w": 12,
+        "x": 0,
+        "y": 8
       },
-      "id": 31,
+      "id": 41,
       "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
           "fields": "",
-          "values": false
+          "reducer": [
+            "sum"
+          ],
+          "show": false
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
+        "showHeader": true
       },
       "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
-            "uid": "$datasource"
+            "type": "prometheus",
+            "uid": "VictoriaMetrics"
           },
-          "expr": "vmware_vm_mem_vmmemctl_average{vm_name=~\"$vm\"}",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "vmware_vm_power_state{host_name=~\"$esxhost\"}",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "auto",
+          "range": false,
           "refId": "A"
         }
       ],
-      "title": "VM Ballooning",
-      "type": "gauge"
+      "title": "Virtual Machines",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": false,
+              "__name__": true,
+              "cluster_name": true,
+              "dc_name": true,
+              "ds_name": true,
+              "host_name": true,
+              "instance": true,
+              "job": true,
+              "vmware_cluster_name": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value": "Power State",
+              "dc_name": "DC",
+              "host_name": "Host",
+              "job": "",
+              "vm_name": "VM"
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "datasource": {
-        "uid": "$datasource"
+        "uid": "VictoriaMetrics"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 2,
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Operational"
+                },
+                "1": {
+                  "color": "yellow",
+                  "index": 0,
+                  "text": "Maintenance Mode"
+                }
+              },
+              "type": "value"
             }
           ],
-          "max": 100,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46"
+                "color": "green"
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0.01
-              },
-              {
-                "color": "#d44a3a",
-                "value": 0.1
+                "color": "red",
+                "value": 80
               }
             ]
-          },
-          "unit": "deckbytes"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 21,
-        "y": 22
+        "h": 12,
+        "w": 12,
+        "x": 12,
+        "y": 8
       },
-      "id": 35,
+      "id": 42,
       "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "horizontal",
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1208,25 +1114,25 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "12.0.2",
       "targets": [
         {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "vmware_vm_mem_swapped_average{vm_name=~\"$vm\"}",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "vmware_host_maintenance_mode{host_name=~\"$esxhost\"}",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
           "refId": "A"
         }
       ],
-      "title": "VM Swapped",
-      "type": "gauge"
+      "title": "Maintenance Mode Status",
+      "transparent": true,
+      "type": "stat"
     },
     {
       "datasource": {
@@ -1289,10 +1195,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 12,
+        "h": 6,
+        "w": 24,
         "x": 0,
-        "y": 27
+        "y": 20
       },
       "id": 17,
       "options": {
@@ -1303,8 +1209,8 @@
             "max",
             "min"
           ],
-          "displayMode": "list",
-          "placement": "bottom",
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -1320,25 +1226,23 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_cpu_usagemhz_average{vm_name=~\"$vm\"}/vmware_vm_max_cpu_usage{vm_name=~\"$vm\"}*100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Cpu Usage {{vm_name}}",
+          "expr": "(vmware_host_cpu_usagemhz_average{host_name=~\"$esxhost\"}) * 100 / (vmware_host_cpu_max{host_name=~\"$esxhost\"})",
+          "legendFormat": "CPU Usage {{host_name}}",
           "range": true,
-          "refId": "A"
+          "refId": "B"
         },
         {
           "datasource": {
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_cpu_demand_average{vm_name=~\"$vm\"}/vmware_vm_max_cpu_usage{vm_name=~\"$vm\"}*100",
-          "legendFormat": "Cpu Demand {{vm_name}}",
+          "expr": "(vmware_host_cpu_demand_average{host_name=~\"$esxhost\"}) * 100 / (vmware_host_cpu_max{host_name=~\"$esxhost\"})",
+          "legendFormat": "CPU Demand {{host_name}}",
           "range": true,
-          "refId": "B"
+          "refId": "A"
         }
       ],
-      "title": "VM CPU Usage",
+      "title": "Host CPU usage",
       "type": "timeseries"
     },
     {
@@ -1402,10 +1306,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 27
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 26
       },
       "id": 39,
       "options": {
@@ -1416,8 +1320,8 @@
             "max",
             "min"
           ],
-          "displayMode": "list",
-          "placement": "bottom",
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -1433,10 +1337,10 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "(vmware_vm_cpu_ready_summation{vm_name=~\"$vm\"})/200",
+          "expr": "vmware_host_cpu_ready_summation{host_name=~\"$esxhost\"}/200",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Cpu Ready {{vm_name}}",
+          "legendFormat": "Cpu Ready {{host_name}}",
           "range": true,
           "refId": "A"
         },
@@ -1445,13 +1349,23 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_cpu_costop_summation{vm_name=~\"$vm\"}/200",
-          "legendFormat": "Co-Stop {{vm_name}}",
+          "expr": "vmware_host_cpu_costop_summation{host_name=~\"$esxhost\"}/200",
+          "legendFormat": "Cpu Co-Stop {{host_name}}",
           "range": true,
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "expr": "vmware_host_cpu_swapwait_summation{host_name=~\"$esxhost\"}/200",
+          "legendFormat": "Cpu Swap Wait {{host_name}}",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "VM CPU Contention",
+      "title": "Host Cpu Contention",
       "type": "timeseries"
     },
     {
@@ -1497,6 +1411,7 @@
             }
           },
           "decimals": 1,
+          "fieldMinMax": false,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1515,8 +1430,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 12,
+        "h": 6,
+        "w": 24,
         "x": 0,
         "y": 32
       },
@@ -1529,8 +1444,8 @@
             "max",
             "min"
           ],
-          "displayMode": "list",
-          "placement": "bottom",
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -1546,15 +1461,27 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "(vmware_vm_mem_usage_average{vm_name=~\"$vm\"}) * 100 / (vmware_vm_memory_max{vm_name=~\"$vm\"})",
+          "expr": "(vmware_host_mem_usage_average{host_name=~\"$esxhost\"}) * 100 / (vmware_host_memory_max{host_name=~\"$esxhost\"})",
           "format": "time_series",
+          "hide": true,
           "intervalFactor": 1,
-          "legendFormat": "Memory Usage {{vm_name}}",
+          "legendFormat": "Memory Consumed {{host_name}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "expr": "(vmware_host_memory_usage{host_name=~\"$esxhost\"} \n / vmware_host_memory_max{host_name=~\"$esxhost\"}) * 100",
+          "hide": false,
+          "legendFormat": "Memory Active {{host_name}}",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "VM Memory usage",
+      "title": "Host Memory usage",
       "type": "timeseries"
     },
     {
@@ -1618,12 +1545,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 32
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 38
       },
-      "id": 41,
+      "id": 40,
       "options": {
         "dataLinks": [],
         "legend": {
@@ -1632,8 +1559,8 @@
             "max",
             "min"
           ],
-          "displayMode": "list",
-          "placement": "bottom",
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -1649,25 +1576,43 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_mem_vmmemctl_average{vm_name=~\"$vm\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Ballooning {{vm_name}}",
+          "expr": "vmware_host_mem_vmmemctl_average{host_name=~\"$esxhost\"}",
+          "legendFormat": "Memory Balloon {{host_name}}",
           "range": true,
-          "refId": "A"
+          "refId": "B"
         },
         {
           "datasource": {
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_mem_swapped_average{vm_name=~\"$vm\"}",
-          "legendFormat": "Swap {{vm_name}}",
+          "expr": "vmware_host_mem_latency_average{host_name=~\"$esxhost\"}",
+          "legendFormat": "Memory Latency {{host_name}}",
           "range": true,
-          "refId": "B"
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "expr": "vmware_host_mem_swapinRate_average{host_name=~\"$esxhost\"}",
+          "legendFormat": "Memory SwapInRate {{host_name}}",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "expr": "vmware_host_mem_swapoutRate_average{host_name=~\"$esxhost\"}",
+          "legendFormat": "Memory SwapOutRate {{host_name}}",
+          "range": true,
+          "refId": "A"
         }
       ],
-      "title": "VM Memory Contention",
+      "title": "Host Memory usage",
       "type": "timeseries"
     },
     {
@@ -1731,10 +1676,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 44
       },
       "id": 19,
       "options": {
@@ -1745,8 +1690,8 @@
             "max",
             "min"
           ],
-          "displayMode": "list",
-          "placement": "bottom",
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -1762,10 +1707,10 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_received_average{vm_name=~\"$vm\"}+vmware_vm_net_transmitted_average{vm_name=~\"$vm\"}",
+          "expr": "vmware_host_net_usage_average{host_name=~\"$esxhost\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Total Usage {{vm_name}}",
+          "legendFormat": "Total Usage {{host_name}}",
           "range": true,
           "refId": "A"
         },
@@ -1774,8 +1719,8 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_received_average{vm_name=~\"$vm\"}",
-          "legendFormat": "Read Usage {{vm_name}}",
+          "expr": "vmware_host_net_bytesRX_average{host_name=~\"$esxhost\"}",
+          "legendFormat": "Usage RX {{host_name}}",
           "range": true,
           "refId": "B"
         },
@@ -1784,8 +1729,8 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_transmitted_average{vm_name=~\"$vm\"}",
-          "legendFormat": "Transmit Usage {{vm_name}}",
+          "expr": "vmware_host_net_bytesTX_average{host_name=~\"$esxhost\"}",
+          "legendFormat": "Usage TX {{host_name}}",
           "range": true,
           "refId": "C"
         },
@@ -1794,8 +1739,8 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_broadcastTx_summation{vm_name=~\"$vm\"}",
-          "legendFormat": "Broadcast TX {{vm_name}}",
+          "expr": "sum(vmware_vm_net_broadcastRx_summation{host_name=~\"$esxhost\"})",
+          "legendFormat": "Broadcast RX {{host_name}}",
           "range": true,
           "refId": "D"
         },
@@ -1804,8 +1749,8 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_broadcastRx_summation{vm_name=~\"$vm\"}",
-          "legendFormat": "Broadcast RX {{vm_name}}",
+          "expr": "sum(vmware_vm_net_broadcastTx_summation{host_name=~\"$esxhost\"})",
+          "legendFormat": "Broadcast TX {{host_name}}",
           "range": true,
           "refId": "E"
         },
@@ -1814,8 +1759,8 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_multicastTx_summation{vm_name=~\"$vm\"}",
-          "legendFormat": "Multicast TX {{vm_name}}",
+          "expr": "sum(vmware_vm_net_multicastRx_summation{host_name=~\"$esxhost\"})",
+          "legendFormat": "Multicast RX {{host_name}}",
           "range": true,
           "refId": "F"
         },
@@ -1824,13 +1769,13 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_multicastRx_summation{vm_name=~\"$vm\"}",
-          "legendFormat": "Multicast RX {{vm_name}}",
+          "expr": "sum(vmware_vm_net_multicastTx_summation{host_name=~\"$esxhost\"})",
+          "legendFormat": "Multicast TX {{host_name}}",
           "range": true,
           "refId": "G"
         }
       ],
-      "title": "VM Network Usage",
+      "title": "Host Network Usage",
       "type": "timeseries"
     },
     {
@@ -1889,17 +1834,17 @@
               }
             ]
           },
-          "unit": "KBs"
+          "unit": "short"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 50
       },
-      "id": 42,
+      "id": 38,
       "options": {
         "dataLinks": [],
         "legend": {
@@ -1908,8 +1853,8 @@
             "max",
             "min"
           ],
-          "displayMode": "list",
-          "placement": "bottom",
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -1925,10 +1870,10 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_droppedTx_summation{vm_name=~\"$vm\"}",
+          "expr": "vmware_host_net_errorRX_summation{host_name=~\"$esxhost\"} OR vector(0)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Packet Dropped TX {{vm_name}}",
+          "legendFormat": "Error RX {{host_name}}",
           "range": true,
           "refId": "A"
         },
@@ -1937,13 +1882,33 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_net_droppedRx_summation{vm_name=~\"$vm\"}",
-          "legendFormat": "Packet Dropped RX {{vm_name}}",
+          "expr": "vmware_host_net_errorTX_summation{host_name=~\"$esxhost\"} OR vector(0) ",
+          "legendFormat": "Error TX {{host_name}}",
           "range": true,
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "expr": "vmware_host_net_droppedTX_summation{host_name=~\"$esxhost\"} OR vector(0)",
+          "legendFormat": "Dropped TX {{host_name}}",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "expr": "vmware_host_net_droppedRX_summation{host_name=~\"$esxhost\"} OR vector(0)",
+          "legendFormat": "Dropped RX {{host_name}}",
+          "range": true,
+          "refId": "D"
         }
       ],
-      "title": "VM Network Packet Dropped",
+      "title": "Host Network Contention",
       "type": "timeseries"
     },
     {
@@ -2007,10 +1972,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 56
       },
       "id": 20,
       "options": {
@@ -2021,8 +1986,8 @@
             "max",
             "min"
           ],
-          "displayMode": "list",
-          "placement": "bottom",
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -2038,10 +2003,10 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_disk_read_average{vm_name=~\"$vm\"}+vmware_vm_disk_write_average{vm_name=~\"$vm\"}",
+          "expr": "vmware_host_disk_read_average{host_name=~\"$esxhost\"}+vmware_host_disk_write_average{host_name=~\"$esxhost\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Total Usage {{vm_name}}",
+          "legendFormat": "Disk Read and Write {{host_name}}",
           "range": true,
           "refId": "A"
         },
@@ -2050,8 +2015,8 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_disk_read_average{vm_name=~\"$vm\"}",
-          "legendFormat": "Read Usage {{vm_name}}",
+          "expr": "vmware_host_disk_read_average{host_name=~\"$esxhost\"}",
+          "legendFormat": "Disk Read {{host_name}}",
           "range": true,
           "refId": "B"
         },
@@ -2060,124 +2025,21 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "vmware_vm_disk_write_average{vm_name=~\"$vm\"}",
-          "legendFormat": "Write Usage {{vm_name}}",
+          "expr": "vmware_host_disk_write_average{host_name=~\"$esxhost\"}",
+          "legendFormat": "Disk Write {{host_name}}",
           "range": true,
           "refId": "C"
         }
       ],
-      "title": "VM Disk Read And Write",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "uid": "$datasource"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "dtdurationms"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 24,
-        "x": 0,
-        "y": 52
-      },
-      "id": 43,
-      "options": {
-        "dataLinks": [],
-        "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "min"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "editorMode": "code",
-          "expr": "vmware_vm_disk_maxTotalLatency_latest{vm_name=~\"$vm\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Disk Latency {{vm_name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "VM Disk Latency",
+      "title": "Disk R/W Rate",
       "type": "timeseries"
     }
   ],
   "preload": false,
-  "refresh": "10s",
   "schemaVersion": 41,
   "tags": [
-    "vmware"
+    "vmware",
+    "esxi"
   ],
   "templating": {
     "list": [
@@ -2196,23 +2058,22 @@
         "type": "datasource"
       },
       {
-        "allowCustomValue": true,
         "current": {
           "text": [
-            "GB1-LI-AUTO001"
+            "gb1-esx-050.thehut.local"
           ],
           "value": [
-            "GB1-LI-AUTO001"
+            "gb1-esx-050.thehut.local"
           ]
         },
         "datasource": "$datasource",
-        "definition": "label_values(vm_name)",
+        "definition": "",
         "includeAll": false,
-        "label": "vm",
+        "label": "esxhost",
         "multi": true,
-        "name": "vm",
+        "name": "esxhost",
         "options": [],
-        "query": "label_values(vm_name)",
+        "query": "label_values(vmware_host_boot_timestamp_seconds,host_name)",
         "refresh": 1,
         "regex": "",
         "type": "query"
@@ -2225,7 +2086,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "VMware Virtual Machines",
-  "uid": "Sl3uaY2Zk",
-  "version": 17
+  "title": "VMware ESXi Information",
+  "uid": "_gg9LEqmk",
+  "version": 18
 }
