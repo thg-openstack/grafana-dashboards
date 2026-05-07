@@ -857,7 +857,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "openstack_nova_memory_available_bytes{os_region=\"$cluster\",availability_zone=~\"$AZ\"}",
+          "expr": "openstack_nova_memory_available_bytes{os_region=\"$cluster\",availability_zone=~\"$AZ|\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -872,7 +872,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "openstack_nova_running_vms{os_region=\"$cluster\",availability_zone=~\"$AZ\"}",
+          "expr": "openstack_nova_running_vms{os_region=\"$cluster\",availability_zone=~\"$AZ|\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -2762,6 +2762,6 @@
   "timezone": "",
   "title": "Openstack Hypervisor",
   "uid": "ee9f49cd-aecc-4a6c-8eb6-776d085bcb0b",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
