@@ -4766,7 +4766,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(flag{is_set=\"true\", job=~\"$job\", instance=~\"$instance\"}) by(job, instance, name, value)",
+              "expr": "sum(flag{is_set=\"true\", region=~\"$region\", job=~\"$job\", instance=~\"$instance\"}) by(job, instance, name, value)",
               "format": "table",
               "instant": true,
               "legendFormat": "__auto",
@@ -11485,7 +11485,7 @@
       },
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "${ds}"
       },
       "description": "Samples discarded by dedup.minScrapeInterval during background merges (type=merge) compared with rows inserted. With several identical writers (kolla replicas, the peer mirror) the merge rate should approach the surplus copies of the ingest rate over time; zero means dedup is off or writers differ in labels.",
       "fieldConfig": {
@@ -11512,7 +11512,7 @@
           "refId": "A",
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${ds}"
           },
           "expr": "sum(rate(vm_deduplicated_samples_total{region=~\"$region\", job=~\"$job_storage\", type=\"merge\"}[$__rate_interval])) by (region)",
           "legendFormat": "deduplicated on merge {{region}}"
@@ -11521,7 +11521,7 @@
           "refId": "B",
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "${ds}"
           },
           "expr": "sum(rate(vm_rows_inserted_total{region=~\"$region\", job=~\"$job_insert\"}[$__rate_interval])) by (region)",
           "legendFormat": "rows inserted {{region}}"
@@ -11543,7 +11543,7 @@
         "type": "query",
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "${ds}"
         },
         "query": {
           "query": "label_values(vm_app_version{version=~\"^vm(insert|select|storage).*\"}, region)",
