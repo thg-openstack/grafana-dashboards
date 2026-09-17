@@ -182,7 +182,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "(ceph_pool_max_avail{job=~\"$job\", cluster_name=~\"$cluster\"} / deriv(ceph_pool_stored{job=~\"$job\", cluster_name=~\"$cluster\"}[24h])) * on(pool_id) group_left(instance, name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\", name=~\"$pool_name\"} > 0",
+           "expr": "(ceph_pool_max_avail{job=~\"$job\", cluster_name=~\"$cluster\"} / deriv(ceph_pool_stored{job=~\"$job\", cluster_name=~\"$cluster\"}[6h])) * on(pool_id) group_left(instance, name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\", name=~\"$pool_name\"} > 0",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "",
