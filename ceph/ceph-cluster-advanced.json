@@ -3350,7 +3350,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(irate(ceph_osd_recovery_ops{}[$interval]))",
+          "expr": "sum(irate(ceph_osd_recovery_ops{cluster_name=~\"$cluster\"}[$interval]))",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
