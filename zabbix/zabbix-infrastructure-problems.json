@@ -820,7 +820,7 @@
         "options": [],
         "query": {
           "application": "",
-          "group": "/gb4$|gb5$|man2$|de1$|us4$/",
+          "group": "/^os\\/[^_]+$/",
           "host": "",
           "item": "",
           "queryType": "group"
