@@ -790,7 +790,7 @@
           "displayType": "Regular",
           "displayValueWithAlias": "When Alias Displayed",
           "editorMode": "code",
-          "expr": "count(ceph_osd_in{cluster_name=~\"$cluster\"})",
+          "expr": "sum(ceph_osd_in{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2698,7 +2698,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pool_objects)",
+          "expr": "sum(ceph_pool_objects{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2841,7 +2841,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_active{})",
+          "expr": "sum(ceph_pg_active{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2854,7 +2854,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_clean{})",
+          "expr": "sum(ceph_pg_clean{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2867,7 +2867,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_peering{})",
+          "expr": "sum(ceph_pg_peering{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2880,7 +2880,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_degraded{})",
+          "expr": "sum(ceph_pg_degraded{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2894,7 +2894,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_stale{})",
+          "expr": "sum(ceph_pg_stale{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2908,7 +2908,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_unclean_pgs{})",
+          "expr": "sum(ceph_unclean_pgs{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2922,7 +2922,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_undersized{})",
+          "expr": "sum(ceph_pg_undersized{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2936,7 +2936,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_incomplete{})",
+          "expr": "sum(ceph_pg_incomplete{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2949,7 +2949,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_forced_backfill{})",
+          "expr": "sum(ceph_pg_forced_backfill{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2962,7 +2962,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_forced_recovery{})",
+          "expr": "sum(ceph_pg_forced_recovery{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2975,7 +2975,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_creating{})",
+          "expr": "sum(ceph_pg_creating{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -2988,7 +2988,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_wait_backfill{})",
+          "expr": "sum(ceph_pg_wait_backfill{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3001,7 +3001,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_deep{})",
+          "expr": "sum(ceph_pg_deep{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3014,7 +3014,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_scrubbing{})",
+          "expr": "sum(ceph_pg_scrubbing{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3027,7 +3027,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_recovering{})",
+          "expr": "sum(ceph_pg_recovering{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3040,7 +3040,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_repair{})",
+          "expr": "sum(ceph_pg_repair{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3053,7 +3053,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_down{})",
+          "expr": "sum(ceph_pg_down{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3066,7 +3066,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_peered{})",
+          "expr": "sum(ceph_pg_peered{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3079,7 +3079,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_backfill{})",
+          "expr": "sum(ceph_pg_backfill{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3092,7 +3092,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_remapped{})",
+          "expr": "sum(ceph_pg_remapped{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3105,7 +3105,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_backfill_toofull{})",
+          "expr": "sum(ceph_pg_backfill_toofull{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3223,7 +3223,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_degraded{})",
+          "expr": "sum(ceph_pg_degraded{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3237,7 +3237,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_stale{})",
+          "expr": "sum(ceph_pg_stale{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3251,7 +3251,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pg_undersized{})",
+          "expr": "sum(ceph_pg_undersized{cluster_name=~\"$cluster\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -3447,7 +3447,7 @@
           "color": "rgba(255,0,255,0.7)"
         },
         "filterValues": {
-          "le": 1e-9
+          "le": 1e-09
         },
         "legend": {
           "show": true
@@ -3572,7 +3572,7 @@
           "color": "rgba(255,0,255,0.7)"
         },
         "filterValues": {
-          "le": 1e-9
+          "le": 1e-09
         },
         "legend": {
           "show": true
@@ -3697,7 +3697,7 @@
           "color": "rgba(255,0,255,0.7)"
         },
         "filterValues": {
-          "le": 1e-9
+          "le": 1e-09
         },
         "legend": {
           "show": true
@@ -3822,7 +3822,7 @@
           "color": "rgba(255,0,255,0.7)"
         },
         "filterValues": {
-          "le": 1e-9
+          "le": 1e-09
         },
         "legend": {
           "show": true
