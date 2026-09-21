@@ -3134,7 +3134,7 @@
           "text": "Prometheus",
           "value": "Prometheus"
         },
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "datasource",
         "multi": false,

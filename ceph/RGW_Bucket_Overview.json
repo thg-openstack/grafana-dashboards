@@ -959,7 +959,7 @@
           "text": "Prometheus",
           "value": "e2000f63-706c-4926-8569-96324b3454ef"
         },
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "",
         "multi": false,

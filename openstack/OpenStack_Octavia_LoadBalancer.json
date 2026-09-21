@@ -59,7 +59,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Percent CPU utilization. Displays the maximum value if multiple load balancers are selected.",
       "fieldConfig": {
@@ -118,7 +118,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "max(octavia_loadbalancer_cpu{os_region=~'${region}',instance=~'${lb}'})",
@@ -134,7 +134,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Percent RAM utilization. Displays the maximum value if multiple load balancers are selected. ",
       "fieldConfig": {
@@ -193,7 +193,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "max(octavia_loadbalancer_memory{os_region=~'${region}',instance=~'${lb}'})",
@@ -209,7 +209,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Instant read of the current number of connections per second across the selected load balancers.",
       "fieldConfig": {
@@ -266,7 +266,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_loadbalancer_current_connection_rate{os_region=~'${region}',instance=~'${lb}'})",
@@ -279,7 +279,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_loadbalancer_max_connections{os_region=~'${region}',instance=~'${lb}'})",
@@ -296,7 +296,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Instant read of the current throughput across the selected load balancers.",
       "fieldConfig": {
@@ -351,7 +351,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum(irate(octavia_listener_bytes_in_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])*8)",
@@ -362,7 +362,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum(irate(octavia_listener_bytes_out_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])*8)",
@@ -378,7 +378,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Shows the percentage of members in each state across the selected load balancers.\nOptions are: Online, Offline (admin down/disabled),  Error, or Draining.",
       "fieldConfig": {
@@ -515,7 +515,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -529,7 +529,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -543,7 +543,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -557,7 +557,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -571,7 +571,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}', state=~\"MAINT\"} == 1)",
@@ -588,7 +588,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -640,7 +640,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "count(octavia_loadbalancer_cpu{os_region=~'${region}',instance=~'${lb}'})",
@@ -652,7 +652,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "count(octavia_listener_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'})",
@@ -665,7 +665,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "count(octavia_pool_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',pool=~'${pool}'})",
@@ -678,7 +678,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "count(group by (member) (octavia_member_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',pool=~'${pool}',member=~'${member}'}))",
@@ -695,7 +695,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -886,7 +886,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -899,7 +899,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -917,7 +917,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The maximum observed connections per second and requests per second across the selected load balancers. Values may reset on load balancer configuration change or failover.",
       "fieldConfig": {
@@ -971,7 +971,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "max(octavia_loadbalancer_max_connection_rate{os_region=~'${region}',instance=~'${lb}'})",
@@ -983,7 +983,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "max(octavia_loadbalancer_max_ssl_rate{os_region=~'${region}',instance=~'${lb}'})",
@@ -996,7 +996,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "max(sum by (instance) (octavia_listener_http_requests_rate_max{os_region=~'${region}',instance=~'${lb}', listener=~'${listener}'}))",
@@ -1039,7 +1039,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1119,7 +1119,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "octavia_loadbalancer_cpu{os_region=~'${region}',instance=~'${lb}'}",
@@ -1134,7 +1134,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1214,7 +1214,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "octavia_loadbalancer_memory{os_region=~'${region}',instance=~'${lb}'}",
@@ -1229,7 +1229,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1308,7 +1308,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_loadbalancer_connections_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -1319,7 +1319,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_loadbalancer_ssl_connections_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -1335,7 +1335,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -1415,7 +1415,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_loadbalancer_requests_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -1430,7 +1430,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1522,7 +1522,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "octavia_loadbalancer_current_frontend_ssl_key_rate{os_region=~'${region}',instance=~'${lb}'}",
@@ -1534,7 +1534,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "octavia_loadbalancer_current_backend_ssl_key_rate{os_region=~'${region}',instance=~'${lb}'}",
@@ -1550,7 +1550,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1630,7 +1630,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "octavia_loadbalancer_frontent_ssl_reuse{os_region=~'${region}',instance=~'${lb}'}",
@@ -1645,7 +1645,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1724,7 +1724,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_loadbalancer_ssl_cache_lookups_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -1735,7 +1735,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_loadbalancer_ssl_cache_misses_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -1751,7 +1751,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1844,7 +1844,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_loadbalancer_http_comp_bytes_in_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -1855,7 +1855,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_loadbalancer_http_comp_bytes_out_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -1871,7 +1871,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -1951,7 +1951,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "count by (instance) (octavia_listener_status{os_region=~'${region}',instance=~'${lb}'})",
@@ -1966,7 +1966,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Traffic flow logs dropped due to system load.",
       "fieldConfig": {
@@ -2046,7 +2046,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_loadbalancer_dropped_logs_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -2061,7 +2061,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2154,7 +2154,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "octavia_memory_pool_allocated_bytes{os_region=~'${region}',instance=~'${lb}'}",
@@ -2165,7 +2165,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "octavia_memory_pool_used_bytes{os_region=~'${region}',instance=~'${lb}'}",
@@ -2177,7 +2177,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_memory_pool_failures_total{os_region=~'${region}',instance=~'${lb}'}[$__rate_interval])",
@@ -2219,7 +2219,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The current listener status. 0=Offline, 1=Online, 2=Degraded (at the configured capacity).",
       "fieldConfig": {
@@ -2320,7 +2320,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "count(octavia_listener_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'} == 0)",
@@ -2332,7 +2332,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "count(octavia_listener_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'} == 1)",
@@ -2345,7 +2345,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "count(octavia_listener_status{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'} == 2)",
@@ -2362,7 +2362,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The maximum observed concurrent sessions, sessions per second, and requests per second across the selected listeners. Values may reset on load balancer configuration change or failover.",
       "fieldConfig": {
@@ -2416,7 +2416,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "max(octavia_listener_max_sessions{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'})",
@@ -2428,7 +2428,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "max(octavia_listener_max_session_rate{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'})",
@@ -2441,7 +2441,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "max(octavia_listener_http_requests_rate_max{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'})",
@@ -2458,7 +2458,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -2604,7 +2604,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='1xx'})",
@@ -2616,7 +2616,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='2xx'})",
@@ -2629,7 +2629,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='3xx'})",
@@ -2642,7 +2642,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='4xx'})",
@@ -2655,7 +2655,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='5xx'})",
@@ -2668,7 +2668,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='other'})",
@@ -2685,7 +2685,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -2830,7 +2830,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='1xx'})",
@@ -2842,7 +2842,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='2xx'})",
@@ -2855,7 +2855,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='3xx'})",
@@ -2868,7 +2868,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='4xx'})",
@@ -2881,7 +2881,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='5xx'})",
@@ -2894,7 +2894,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
           "expr": "sum(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='other'})",
@@ -2911,7 +2911,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -3084,7 +3084,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='1xx'}[$__rate_interval]))",
@@ -3096,7 +3096,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='2xx'}[$__rate_interval]))",
@@ -3109,7 +3109,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='3xx'}[$__rate_interval]))",
@@ -3122,7 +3122,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='4xx'}[$__rate_interval]))",
@@ -3135,7 +3135,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='5xx'}[$__rate_interval]))",
@@ -3148,7 +3148,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "sum(irate(octavia_listener_http_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}',code='other'}[$__rate_interval]))",
@@ -3165,7 +3165,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3244,7 +3244,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_connections_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -3259,7 +3259,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3338,7 +3338,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_sessions_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -3353,7 +3353,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -3434,7 +3434,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_bytes_in_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -3449,7 +3449,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -3530,7 +3530,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_bytes_out_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -3545,7 +3545,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3624,7 +3624,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_denied_connections_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -3639,7 +3639,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3718,7 +3718,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_denied_sessions_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -3733,7 +3733,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -3813,7 +3813,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_requests_denied_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -3828,7 +3828,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3907,7 +3907,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_responses_denied_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -3922,7 +3922,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4001,7 +4001,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_http_requests_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -4016,7 +4016,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4095,7 +4095,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_request_errors_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -4110,7 +4110,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4190,7 +4190,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "(irate(octavia_listener_http_cache_hits_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])/irate(octavia_listener_http_cache_lookups_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval]))*100",
@@ -4205,7 +4205,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -4286,7 +4286,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "irate(octavia_listener_http_comp_responses_total{os_region=~'${region}',instance=~'${lb}',listener=~'${listener}'}[$__rate_interval])",
@@ -4315,7 +4315,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The current pool status. 0=Error, 1=Online",
           "fieldConfig": {
@@ -4402,7 +4402,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "count(octavia_pool_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'} == 0)",
@@ -4414,7 +4414,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "count(octavia_pool_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'} == 1)",
@@ -4431,7 +4431,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The maximum observed concurrent sessions, sessions per second, and queued requests across the selected pools. Values may reset on load balancer configuration change or failover.",
           "fieldConfig": {
@@ -4482,7 +4482,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_max_sessions{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -4494,7 +4494,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_max_session_rate{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -4507,7 +4507,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_max_queue{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -4524,7 +4524,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -4670,7 +4670,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='1xx'})",
@@ -4682,7 +4682,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='2xx'})",
@@ -4695,7 +4695,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='3xx'})",
@@ -4708,7 +4708,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='4xx'})",
@@ -4721,7 +4721,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='5xx'})",
@@ -4734,7 +4734,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='other'})",
@@ -4751,7 +4751,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -4891,7 +4891,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='1xx'})",
@@ -4903,7 +4903,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='2xx'})",
@@ -4916,7 +4916,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='3xx'})",
@@ -4929,7 +4929,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='4xx'})",
@@ -4942,7 +4942,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='5xx'})",
@@ -4955,7 +4955,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='other'})",
@@ -4972,7 +4972,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -5140,7 +5140,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='1xx'}[$__rate_interval]))",
@@ -5152,7 +5152,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='2xx'}[$__rate_interval]))",
@@ -5165,7 +5165,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='3xx'}[$__rate_interval]))",
@@ -5178,7 +5178,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='4xx'}[$__rate_interval]))",
@@ -5191,7 +5191,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='5xx'}[$__rate_interval]))",
@@ -5204,7 +5204,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_pool_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',code='other'}[$__rate_interval]))",
@@ -5221,7 +5221,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The rate at which the client aborted the connection. I.e. the user closed the browser window.",
           "fieldConfig": {
@@ -5296,7 +5296,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_client_aborts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -5311,7 +5311,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Rate that the backend member servers are aborting connections.",
           "fieldConfig": {
@@ -5386,7 +5386,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_member_aborts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -5401,7 +5401,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -5475,7 +5475,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_sessions_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -5490,7 +5490,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -5566,7 +5566,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_pool_current_queue{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
@@ -5581,7 +5581,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -5657,7 +5657,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_connection_attempts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -5672,7 +5672,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -5748,7 +5748,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_connection_reuses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -5763,7 +5763,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -5839,7 +5839,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_bytes_in_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -5854,7 +5854,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -5930,7 +5930,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_bytes_out_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -5945,7 +5945,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -5995,7 +5995,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum by (member) (octavia_member_loadbalanced_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -6026,7 +6026,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6102,7 +6102,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_http_requests_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -6117,7 +6117,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6193,7 +6193,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_pool_active_members{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
@@ -6208,7 +6208,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6284,7 +6284,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_pool_backup_members{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
@@ -6299,7 +6299,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6375,7 +6375,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_requests_denied_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -6390,7 +6390,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6466,7 +6466,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_responses_denied_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -6481,7 +6481,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6557,7 +6557,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_connection_errors_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -6572,7 +6572,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6648,7 +6648,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_response_errors_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -6663,7 +6663,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6739,7 +6739,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_retry_warnings_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -6754,7 +6754,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6830,7 +6830,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_redispatch_warnings_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -6845,7 +6845,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -6921,7 +6921,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_check_up_down_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -6936,7 +6936,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -7012,7 +7012,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_pool_check_up_down_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7024,7 +7024,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_check_last_change_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7037,7 +7037,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_downtime_seconds_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7054,7 +7054,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -7129,7 +7129,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "(irate(octavia_pool_http_cache_hits_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])/irate(octavia_pool_http_cache_lookups_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval]))*100",
@@ -7144,7 +7144,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -7220,7 +7220,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_pool_http_comp_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}[$__rate_interval])",
@@ -7262,7 +7262,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The current maximum time across the selected pools. Values may reset on load balancer configuration change or failover.",
           "fieldConfig": {
@@ -7313,7 +7313,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_queue_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7325,7 +7325,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_connect_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7338,7 +7338,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_response_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7351,7 +7351,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_total_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7368,7 +7368,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The maximum observed time across the selected pools. Values may reset on load balancer configuration change or failover.",
           "fieldConfig": {
@@ -7419,7 +7419,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_max_queue_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7431,7 +7431,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_max_connect_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7444,7 +7444,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_max_response_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7457,7 +7457,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_pool_max_total_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'})",
@@ -7474,7 +7474,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Average queue time for last 1024 successful connections.",
           "fieldConfig": {
@@ -7550,7 +7550,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_pool_queue_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
@@ -7565,7 +7565,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Average connect time for last 1024 successful connections.",
           "fieldConfig": {
@@ -7641,7 +7641,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_pool_connect_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
@@ -7656,7 +7656,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Average response time for last 1024 successful connections. Inclusive of member server time.",
           "fieldConfig": {
@@ -7732,7 +7732,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_pool_response_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
@@ -7747,7 +7747,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Average total time for last 1024 successful connections. Inclusive of member server time.",
           "fieldConfig": {
@@ -7823,7 +7823,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_pool_total_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}'}",
@@ -7865,7 +7865,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Shows the percentage of members in each state across the selected load balancers.\nOptions are: Online, Offline (admin down/disabled),  Error, or Draining.",
           "fieldConfig": {
@@ -7981,7 +7981,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 0)",
@@ -7993,7 +7993,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 1)",
@@ -8006,7 +8006,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 2)",
@@ -8019,7 +8019,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "count(octavia_member_status{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'} == 3)",
@@ -8036,7 +8036,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The maximum observed concurrent sessions, sessions per second, and queued requests across the selected members. Values may reset on load balancer configuration change or failover.",
           "fieldConfig": {
@@ -8087,7 +8087,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_max_sessions{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -8099,7 +8099,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_max_session_rate{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -8112,7 +8112,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_max_queue{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -8129,7 +8129,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -8275,7 +8275,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'})",
@@ -8287,7 +8287,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'})",
@@ -8300,7 +8300,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'})",
@@ -8313,7 +8313,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'})",
@@ -8326,7 +8326,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'})",
@@ -8339,7 +8339,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'})",
@@ -8356,7 +8356,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -8496,7 +8496,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'})",
@@ -8508,7 +8508,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'})",
@@ -8521,7 +8521,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'})",
@@ -8534,7 +8534,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'})",
@@ -8547,7 +8547,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'})",
@@ -8560,7 +8560,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'})",
@@ -8577,7 +8577,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -8745,7 +8745,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='1xx'}[$__rate_interval]))",
@@ -8757,7 +8757,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='2xx'}[$__rate_interval]))",
@@ -8770,7 +8770,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='3xx'}[$__rate_interval]))",
@@ -8783,7 +8783,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='4xx'}[$__rate_interval]))",
@@ -8796,7 +8796,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='5xx'}[$__rate_interval]))",
@@ -8809,7 +8809,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(irate(octavia_member_http_responses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}',code='other'}[$__rate_interval]))",
@@ -8826,7 +8826,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The rate at which the client aborted the connection. I.e. the user closed the browser window.",
           "fieldConfig": {
@@ -8901,7 +8901,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_client_aborts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -8916,7 +8916,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Rate that the backend member servers are aborting connections.",
           "fieldConfig": {
@@ -8991,7 +8991,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_server_aborts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9006,7 +9006,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -9080,7 +9080,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_sessions_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9095,7 +9095,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9171,7 +9171,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_member_current_queue{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
@@ -9186,7 +9186,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9262,7 +9262,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_bytes_in_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9277,7 +9277,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9353,7 +9353,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_bytes_out_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9368,7 +9368,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9444,7 +9444,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_connection_attempts_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9459,7 +9459,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9535,7 +9535,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_connection_reuses_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9550,7 +9550,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9600,7 +9600,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum by (member) (octavia_member_loadbalanced_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -9631,7 +9631,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9707,7 +9707,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_member_idle_connections_current{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
@@ -9722,7 +9722,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9798,7 +9798,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_responses_denied_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9813,7 +9813,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9889,7 +9889,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_connection_errors_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9904,7 +9904,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -9980,7 +9980,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_response_errors_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -9995,7 +9995,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -10071,7 +10071,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_retry_warnings_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -10086,7 +10086,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -10162,7 +10162,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_redispatch_warnings_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -10177,7 +10177,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Failed check rate. (Only counts checks failed when the member is up).",
           "fieldConfig": {
@@ -10253,7 +10253,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_check_failures_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -10268,7 +10268,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -10344,7 +10344,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "irate(octavia_member_check_up_down_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}[$__rate_interval])",
@@ -10359,7 +10359,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -10435,7 +10435,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum(octavia_member_check_up_down_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10447,7 +10447,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_check_last_change_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10460,7 +10460,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_downtime_seconds_total{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10477,7 +10477,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fieldConfig": {
@@ -10553,7 +10553,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_member_weight{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
@@ -10568,7 +10568,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Current throttle percentage for the member, when slowstart is active, or no value if not in slowstart.",
           "fieldConfig": {
@@ -10645,7 +10645,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_member_current_throttle{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
@@ -10688,7 +10688,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The current maximum time across the selected members. Values may reset on load balancer configuration change or failover.",
           "fieldConfig": {
@@ -10739,7 +10739,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_queue_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10751,7 +10751,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_connect_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10764,7 +10764,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_response_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10777,7 +10777,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_total_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10794,7 +10794,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The maximum observed time across the selected members. Values may reset on load balancer configuration change or failover.",
           "fieldConfig": {
@@ -10845,7 +10845,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_max_queue_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10857,7 +10857,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_max_connect_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10870,7 +10870,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_max_response_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10883,7 +10883,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "max(octavia_member_max_total_time_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'})",
@@ -10900,7 +10900,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Average queue time for last 1024 successful connections.",
           "fieldConfig": {
@@ -10976,7 +10976,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_member_queue_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
@@ -10991,7 +10991,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Average connect time for last 1024 successful connections.",
           "fieldConfig": {
@@ -11067,7 +11067,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_member_connect_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
@@ -11082,7 +11082,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Average response time for last 1024 successful connections. Inclusive of member server time.",
           "fieldConfig": {
@@ -11158,7 +11158,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_member_response_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
@@ -11173,7 +11173,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Average total time for last 1024 successful connections. Inclusive of member server time.",
           "fieldConfig": {
@@ -11249,7 +11249,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "octavia_member_total_time_average_seconds{os_region=~'${region}',instance=~'${lb}',pool=~'${pool}',member=~'${member}'}",
@@ -11290,7 +11290,7 @@
           "text": "Prometheus",
           "value": "e2000f63-706c-4926-8569-96324b3454ef"
         },
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "datasource",
         "multi": false,
@@ -11311,7 +11311,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(octavia_loadbalancer_cpu, os_region)",
         "hide": 0,
@@ -11339,7 +11339,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(octavia_loadbalancer_cpu{os_region=~'${region}'}, instance)",
         "hide": 0,
@@ -11367,7 +11367,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(octavia_listener_status{os_region=~'${region}',instance=~'${lb:raw}', listener!=\"native-prometheus\"}, listener)",
         "description": "Filter to a specific listener.",
@@ -11396,7 +11396,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(octavia_pool_status{os_region=~'${region}',instance=~'${lb:raw}'}, pool)",
         "hide": 0,
@@ -11424,7 +11424,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(octavia_member_status{os_region=~'${region}',instance=~'${lb:raw}', pool=~'${pool:raw}'}, member)",
         "hide": 0,

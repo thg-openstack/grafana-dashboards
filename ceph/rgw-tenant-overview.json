@@ -1499,7 +1499,7 @@
           "text": "NetworMeshMon",
           "value": "45F064FB-7389-4B6D-94BC-C7A926F53936"
         },
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "",
         "multi": false,

@@ -904,7 +904,7 @@
           "text": "prometheus",
           "value": "prometheus"
         },
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "",
         "multi": false,
