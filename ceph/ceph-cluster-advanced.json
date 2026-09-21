@@ -4312,9 +4312,9 @@
         "current": {
           "selected": false,
           "text": "Prometheus",
-          "value": "0327ed88-2327-4893-b15f-b98eb99b9b41"
+          "value": "${DS_PROMETHEUS}"
         },
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "Data Source",
         "multi": false,

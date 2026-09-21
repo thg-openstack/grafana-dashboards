@@ -5056,7 +5056,7 @@
     "list": [
       {
         "current": {},
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "datasource",
         "name": "DS_PROMETHEUS",

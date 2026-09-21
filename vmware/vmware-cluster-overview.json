@@ -3230,7 +3230,7 @@
           "text": "Mimir",
           "value": "${DS_PROMETHEUS}"
         },
-        "hide": 2,
+        "hide": 0,
         "includeAll": false,
         "label": "Datasource",
         "name": "datasource",
