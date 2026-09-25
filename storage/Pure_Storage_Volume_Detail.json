@@ -171,7 +171,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 1
       },
@@ -265,8 +265,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
-        "x": 12,
+        "w": 3,
+        "x": 8,
         "y": 1
       },
       "id": 8,
@@ -333,8 +333,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
-        "x": 18,
+        "w": 3,
+        "x": 11,
         "y": 1
       },
       "id": 7,
@@ -444,6 +444,35 @@
                 "value": "ms"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "QoS IOPS limit"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    10,
+                    10
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              }
+            ]
           }
         ]
       },
@@ -511,6 +540,17 @@
           "legendFormat": "Latency",
           "range": true,
           "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max(purefa_volume_qos_iops_limit{instance=\"$array\", name=~\"$name\"})",
+          "legendFormat": "QoS IOPS limit",
+          "range": true,
+          "refId": "D"
         }
       ],
       "title": "Volume Read Performance",
@@ -601,6 +641,35 @@
                 "value": "ms"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "QoS IOPS limit"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    10,
+                    10
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              }
+            ]
           }
         ]
       },
@@ -654,6 +723,17 @@
           "legendFormat": "Latency",
           "range": true,
           "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max(purefa_volume_qos_iops_limit{instance=\"$array\", name=~\"$name\"})",
+          "legendFormat": "QoS IOPS limit",
+          "range": true,
+          "refId": "D"
         }
       ],
       "title": "Volume Write Performance ",
@@ -1004,24 +1084,36 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "Bps"
         },
         "overrides": [
           {
             "matcher": {
               "id": "byName",
-              "options": "IOPS"
+              "options": "QoS bandwidth limit"
             },
             "properties": [
               {
-                "id": "unit",
-                "value": "ms"
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    10,
+                    10
+                  ]
+                }
               },
               {
                 "id": "color",
                 "value": {
-                  "mode": "palette-classic"
+                  "mode": "fixed",
+                  "fixedColor": "red"
                 }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
               }
             ]
           }
@@ -1058,12 +1150,23 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_performance_bandwidth_bytes{name=~\"$name\",dimension=\"read_bytes_per_sec\"}",
+          "expr": "purefa_volume_performance_bandwidth_bytes{instance=\"$array\", name=~\"$name\", dimension=\"read_bytes_per_sec\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "IOPS",
+          "legendFormat": "Read bandwidth",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max(purefa_volume_qos_bandwidth_bytes_per_sec_limit{instance=\"$array\", name=~\"$name\"})",
+          "legendFormat": "QoS bandwidth limit",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Volume Read Bandwidth",
@@ -1125,24 +1228,10 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "Bps"
         },
         "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "IOPS"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
           {
             "matcher": {
               "id": "byName",
@@ -1152,6 +1241,35 @@
               {
                 "id": "unit",
                 "value": "ms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "QoS bandwidth limit"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    10,
+                    10
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
               }
             ]
           }
@@ -1188,12 +1306,23 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_performance_bandwidth_bytes{name=~\"$name\",dimension=\"write_bytes_per_sec\"}",
+          "expr": "purefa_volume_performance_bandwidth_bytes{instance=\"$array\", name=~\"$name\", dimension=\"write_bytes_per_sec\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "IOPS",
+          "legendFormat": "Write bandwidth",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max(purefa_volume_qos_bandwidth_bytes_per_sec_limit{instance=\"$array\", name=~\"$name\"})",
+          "legendFormat": "QoS bandwidth limit",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Volume Write Bandwidth",
@@ -1497,7 +1626,7 @@
           "color": "rgba(255,0,255,0.7)"
         },
         "filterValues": {
-          "le": 1e-9
+          "le": 1e-09
         },
         "legend": {
           "show": true
@@ -1550,6 +1679,223 @@
       ],
       "title": "Volume Latency Heatmap (5m avg)",
       "type": "heatmap"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Per-volume QoS cap on the array (reads + writes share it).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "iops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 14,
+        "y": 1
+      },
+      "id": 17,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max(purefa_volume_qos_iops_limit{instance=\"$array\", name=~\"$name\"})",
+          "legendFormat": "IOPS limit",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "QoS IOPS limit",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 17,
+        "y": 1
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max(purefa_volume_qos_bandwidth_bytes_per_sec_limit{instance=\"$array\", name=~\"$name\"})",
+          "legendFormat": "Bandwidth limit",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "QoS bandwidth limit",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Current read+write against the volume QoS limit. Near 100% means the array is throttling this volume.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_volume_performance_throughput_iops{instance=\"$array\", name=~\"$name\", dimension=~\"reads_per_sec|writes_per_sec\"}) / max(purefa_volume_qos_iops_limit{instance=\"$array\", name=~\"$name\"}) * 100",
+          "legendFormat": "IOPS",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(purefa_volume_performance_bandwidth_bytes{instance=\"$array\", name=~\"$name\", dimension=~\"read_bytes_per_sec|write_bytes_per_sec\"}) / max(purefa_volume_qos_bandwidth_bytes_per_sec_limit{instance=\"$array\", name=~\"$name\"}) * 100",
+          "legendFormat": "Bandwidth",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "QoS utilisation",
+      "type": "stat"
     }
   ],
   "refresh": "",
