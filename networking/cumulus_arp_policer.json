@@ -268,7 +268,10 @@
   ],
   "refresh": "1m",
   "schemaVersion": 41,
-  "tags": [],
+  "tags": [
+    "network",
+    "cumulus"
+  ],
   "templating": {
     "list": [
       {
