@@ -31,7 +31,7 @@
       },
       "id": 7,
       "panels": [],
-      "title": "",
+      "title": "Overview",
       "type": "row"
     },
     {
@@ -66,7 +66,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 15,
+        "w": 10,
         "x": 0,
         "y": 1
       },
@@ -171,23 +171,7 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "1": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "UP"
-                },
-                "2": {
-                  "color": "red",
-                  "index": 1,
-                  "text": "DOWN"
-                }
-              },
-              "type": "value"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -202,8 +186,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 2,
-        "x": 15,
+        "w": 3,
+        "x": 10,
         "y": 1
       },
       "id": 21,
@@ -238,7 +222,7 @@
           "useBackend": false
         }
       ],
-      "title": "UP Fabric Ports",
+      "title": "Fabric UP",
       "type": "stat"
     },
     {
@@ -251,23 +235,7 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "1": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "UP"
-                },
-                "2": {
-                  "color": "red",
-                  "index": 1,
-                  "text": "DOWN"
-                }
-              },
-              "type": "value"
-            }
-          ],
+          "mappings": [],
           "noValue": "0",
           "thresholds": {
             "mode": "absolute",
@@ -282,8 +250,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 2,
-        "x": 17,
+        "w": 3,
+        "x": 13,
         "y": 1
       },
       "id": 24,
@@ -318,7 +286,7 @@
           "useBackend": false
         }
       ],
-      "title": "DOWN Fabric Ports",
+      "title": "Fabric DOWN",
       "type": "stat"
     },
     {
@@ -331,23 +299,7 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "1": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "UP"
-                },
-                "2": {
-                  "color": "red",
-                  "index": 1,
-                  "text": "DOWN"
-                }
-              },
-              "type": "value"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -362,8 +314,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 2,
-        "x": 19,
+        "w": 3,
+        "x": 16,
         "y": 1
       },
       "id": 23,
@@ -398,7 +350,7 @@
           "useBackend": false
         }
       ],
-      "title": "UP Customer Ports",
+      "title": "Customer UP",
       "type": "stat"
     },
     {
@@ -426,8 +378,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 2,
-        "x": 21,
+        "w": 3,
+        "x": 19,
         "y": 1
       },
       "id": 22,
@@ -462,7 +414,7 @@
           "useBackend": false
         }
       ],
-      "title": "Down Customer Ports",
+      "title": "Customer DOWN",
       "type": "stat"
     },
     {
@@ -515,8 +467,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 1,
-        "x": 23,
+        "w": 2,
+        "x": 22,
         "y": 1
       },
       "id": 5,
@@ -551,7 +503,7 @@
           "useBackend": false
         }
       ],
-      "title": "",
+      "title": "PSU",
       "type": "stat"
     },
     {
