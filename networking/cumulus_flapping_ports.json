@@ -154,7 +154,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (instance, interface) (\n  increase(nvswitch_interface_carrier_changes_total{instance=~\"$site-.*-$rack\", instance=~\"$switch\"}[$__rate_interval]) > 0\n) * on(instance, interface) group_left(ifalias) nvswitch_interface_info",
+          "expr": "sum by (instance, interface) (\n  increase(nvswitch_interface_carrier_changes_total{site=\"$site\", rack=~\"$rack\", instance=~\"$switch\"}[$__rate_interval]) > 0\n) * on(instance, interface) group_left(ifalias) nvswitch_interface_info",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -272,7 +272,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (instance, interface) (\n  increase(nvswitch_interface_carrier_changes_total{instance=~\"$site-.*-$rack\", instance=~\"$switch\"}[15m]) > 0\n) * on(instance, interface) group_left(ifalias) nvswitch_interface_info",
+          "expr": "sum by (instance, interface) (\n  increase(nvswitch_interface_carrier_changes_total{site=\"$site\", rack=~\"$rack\", instance=~\"$switch\"}[15m]) > 0\n) * on(instance, interface) group_left(ifalias) nvswitch_interface_info",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -390,7 +390,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (instance, interface) (\n  increase(nvswitch_interface_carrier_changes_total{instance=~\"$site-.*-$rack\", instance=~\"$switch\"}[60m]) > 0\n) * on(instance, interface) group_left(ifalias) nvswitch_interface_info",
+          "expr": "sum by (instance, interface) (\n  increase(nvswitch_interface_carrier_changes_total{site=\"$site\", rack=~\"$rack\", instance=~\"$switch\"}[60m]) > 0\n) * on(instance, interface) group_left(ifalias) nvswitch_interface_info",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -432,7 +432,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(nvswitch_interface_carrier_changes_total,instance)",
+        "definition": "label_values(nvswitch_interface_carrier_changes_total,site)",
         "includeAll": false,
         "label": "site",
         "multi": false,
@@ -440,16 +440,15 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(nvswitch_interface_carrier_changes_total,instance)",
+          "query": "label_values(nvswitch_interface_carrier_changes_total,site)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "/^(?<value>\\w{3}\\d)-/",
+        "regex": "",
         "sort": 1,
         "type": "query"
       },
       {
-        "allValue": ".*",
         "allowCustomValue": false,
         "current": {
           "selected": true,
@@ -464,7 +463,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(nvswitch_interface_carrier_changes_total{instance=~\"$site-.*\"},instance)",
+        "definition": "label_values(nvswitch_interface_carrier_changes_total{site=\"$site\"},rack)",
         "includeAll": true,
         "label": "rack",
         "multi": true,
@@ -472,16 +471,16 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(nvswitch_interface_carrier_changes_total{instance=~\"$site-.*\"},instance)",
+          "query": "label_values(nvswitch_interface_carrier_changes_total{site=\"$site\"},rack)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "/-(?<value>[^-]+)$/",
+        "regex": "",
         "sort": 1,
-        "type": "query"
+        "type": "query",
+        "allValue": ".*"
       },
       {
-        "allValue": ".*",
         "allowCustomValue": false,
         "current": {
           "selected": true,
@@ -496,7 +495,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(nvswitch_interface_carrier_changes_total{instance=~\"$site-.*-$rack\"},instance)",
+        "definition": "label_values(nvswitch_interface_carrier_changes_total{site=\"$site\",rack=~\"$rack\"},instance)",
         "includeAll": true,
         "label": "switch",
         "multi": true,
@@ -504,13 +503,14 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(nvswitch_interface_carrier_changes_total{instance=~\"$site-.*-$rack\"},instance)",
+          "query": "label_values(nvswitch_interface_carrier_changes_total{site=\"$site\",rack=~\"$rack\"},instance)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
         "sort": 1,
-        "type": "query"
+        "type": "query",
+        "allValue": ".*"
       }
     ]
   },
