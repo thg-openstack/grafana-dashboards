@@ -145,7 +145,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "irate(nvswitch_control_plane_trap_group_pkt_violations{group=\"13\", instance=~\"$site-.*\", instance=~\"$switch\"}[$__rate_interval])",
+          "expr": "irate(nvswitch_control_plane_trap_group_pkt_violations{group=\"13\", instance=~\"$site-.*-$rack\", instance=~\"$switch\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -252,7 +252,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "irate(nvswitch_control_plane_trap_group_pkt_violations{group=\"7\", instance=~\"$site-.*\", instance=~\"$switch\"}[$__rate_interval])",
+          "expr": "irate(nvswitch_control_plane_trap_group_pkt_violations{group=\"7\", instance=~\"$site-.*-$rack\", instance=~\"$switch\"}[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -327,13 +327,45 @@
         },
         "definition": "label_values(nvswitch_control_plane_trap_group_pkt_violations{instance=~\"$site-.*\"},instance)",
         "includeAll": true,
+        "label": "rack",
+        "multi": true,
+        "name": "rack",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(nvswitch_control_plane_trap_group_pkt_violations{instance=~\"$site-.*\"},instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/-(?<value>[^-]+)$/",
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "allowCustomValue": false,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(nvswitch_control_plane_trap_group_pkt_violations{instance=~\"$site-.*-$rack\"},instance)",
+        "includeAll": true,
         "label": "switch",
         "multi": true,
         "name": "switch",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(nvswitch_control_plane_trap_group_pkt_violations{instance=~\"$site-.*\"},instance)",
+          "query": "label_values(nvswitch_control_plane_trap_group_pkt_violations{instance=~\"$site-.*-$rack\"},instance)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
