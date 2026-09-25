@@ -65,8 +65,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 10,
+        "h": 4,
+        "w": 24,
         "x": 0,
         "y": 1
       },
@@ -185,10 +185,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 10,
-        "y": 1
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 5
       },
       "id": 21,
       "options": {
@@ -222,7 +222,7 @@
           "useBackend": false
         }
       ],
-      "title": "Fabric UP",
+      "title": "Fabric ports UP",
       "type": "stat"
     },
     {
@@ -249,10 +249,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 13,
-        "y": 1
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 5
       },
       "id": 24,
       "options": {
@@ -286,7 +286,7 @@
           "useBackend": false
         }
       ],
-      "title": "Fabric DOWN",
+      "title": "Fabric ports DOWN",
       "type": "stat"
     },
     {
@@ -313,10 +313,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 16,
-        "y": 1
+        "h": 4,
+        "w": 5,
+        "x": 10,
+        "y": 5
       },
       "id": 23,
       "options": {
@@ -350,7 +350,7 @@
           "useBackend": false
         }
       ],
-      "title": "Customer UP",
+      "title": "Customer ports UP",
       "type": "stat"
     },
     {
@@ -377,10 +377,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 19,
-        "y": 1
+        "h": 4,
+        "w": 5,
+        "x": 15,
+        "y": 5
       },
       "id": 22,
       "options": {
@@ -414,7 +414,7 @@
           "useBackend": false
         }
       ],
-      "title": "Customer DOWN",
+      "title": "Customer ports DOWN",
       "type": "stat"
     },
     {
@@ -466,10 +466,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 2,
-        "x": 22,
-        "y": 1
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 5
       },
       "id": 5,
       "options": {
@@ -507,14 +507,16 @@
       "type": "stat"
     },
     {
+      "id": 25,
+      "type": "row",
+      "title": "ARP",
       "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 9
       },
-      "id": 4,
       "panels": [
         {
           "datasource": {
@@ -580,9 +582,9 @@
           },
           "gridPos": {
             "h": 7,
-            "w": 8,
+            "w": 24,
             "x": 0,
-            "y": 7
+            "y": 10
           },
           "id": 14,
           "options": {
@@ -625,7 +627,19 @@
           ],
           "title": "ARP Entries",
           "type": "timeseries"
-        },
+        }
+      ]
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 4,
+      "panels": [
         {
           "datasource": {
             "type": "prometheus",
@@ -690,8 +704,8 @@
           "gridPos": {
             "h": 7,
             "w": 8,
-            "x": 8,
-            "y": 7
+            "x": 0,
+            "y": 11
           },
           "id": 15,
           "options": {
@@ -796,8 +810,8 @@
           "gridPos": {
             "h": 7,
             "w": 8,
-            "x": 16,
-            "y": 7
+            "x": 8,
+            "y": 11
           },
           "id": 16,
           "options": {
@@ -914,8 +928,8 @@
           "gridPos": {
             "h": 7,
             "w": 8,
-            "x": 0,
-            "y": 14
+            "x": 16,
+            "y": 11
           },
           "id": 1,
           "options": {
@@ -1018,8 +1032,8 @@
           "gridPos": {
             "h": 7,
             "w": 8,
-            "x": 8,
-            "y": 14
+            "x": 0,
+            "y": 18
           },
           "id": 3,
           "options": {
@@ -1126,8 +1140,8 @@
           "gridPos": {
             "h": 7,
             "w": 8,
-            "x": 16,
-            "y": 14
+            "x": 8,
+            "y": 18
           },
           "id": 2,
           "options": {
@@ -1181,7 +1195,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 11
       },
       "id": 8,
       "panels": [
