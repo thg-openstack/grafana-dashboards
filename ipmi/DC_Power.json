@@ -95,7 +95,7 @@
       },
       "options": {
         "mode": "markdown",
-        "content": "**Coverage differs.** Servers = hosts scraped by the IPMI exporter (the OpenStack fleet only). Switches = every Cumulus switch in NetBox for the site, including racks with no monitored servers. A rack total is therefore *our hosts + all switches*, not the rack's full draw."
+        "content": "**Coverage differs.** Servers = hosts scraped by the IPMI exporter (the OpenStack fleet only). Switches = every Cumulus switch in NetBox for the site, including racks with no monitored servers. A rack total is therefore *our hosts + all switches*, not the rack's full draw. PDUs = metered draw from the rack PDUs (SNMP); they already include the servers and switches plugged into them, so they are shown alongside, not added to Total."
       }
     },
     {
@@ -108,7 +108,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
+        "w": 3,
         "x": 0,
         "y": 3
       },
@@ -128,7 +128,7 @@
       "fieldConfig": {
         "defaults": {
           "unit": "watt",
-          "decimals": 0,
+          "decimals": 2,
           "noValue": "0",
           "color": {
             "mode": "fixed",
@@ -173,8 +173,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 4,
+        "w": 3,
+        "x": 3,
         "y": 3
       },
       "targets": [
@@ -193,7 +193,7 @@
       "fieldConfig": {
         "defaults": {
           "unit": "watt",
-          "decimals": 0,
+          "decimals": 2,
           "noValue": "0",
           "color": {
             "mode": "fixed",
@@ -238,8 +238,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 8,
+        "w": 3,
+        "x": 6,
         "y": 3
       },
       "targets": [
@@ -258,7 +258,7 @@
       "fieldConfig": {
         "defaults": {
           "unit": "watt",
-          "decimals": 0,
+          "decimals": 2,
           "noValue": "0",
           "color": {
             "mode": "fixed",
@@ -302,7 +302,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
+        "w": 3,
         "x": 12,
         "y": 3
       },
@@ -366,8 +366,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 16,
+        "w": 3,
+        "x": 15,
         "y": 3
       },
       "targets": [
@@ -421,6 +421,135 @@
       }
     },
     {
+      "id": 21,
+      "type": "stat",
+      "title": "PDUs (measured)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 3
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(apc_pdu_power_watts{site=~\"(?i)^$site$\", rack=~\"$rack\"})",
+          "legendFormat": "",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "watt",
+          "decimals": 2,
+          "noValue": "0",
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "blue"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "textMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "wideLayout": true
+      },
+      "description": "IPMI DCMI power reading, our hosts only"
+    },
+    {
+      "id": 22,
+      "type": "stat",
+      "title": "PDUs reporting",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 18,
+        "y": 3
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "count(up{job=\"snmp_pdu\", site=~\"(?i)^$site$\", rack=~\"$rack\"} == 1)",
+          "legendFormat": "",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "blue"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "textMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "wideLayout": true
+      }
+    },
+    {
       "id": 8,
       "type": "stat",
       "title": "Switch PSU load",
@@ -430,8 +559,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 20,
+        "w": 3,
+        "x": 21,
         "y": 3
       },
       "targets": [
@@ -538,7 +667,8 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "watt",
+          "decimals": 2
         },
         "overrides": []
       },
@@ -593,6 +723,17 @@
           "legendFormat": "Switches",
           "range": true,
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(apc_pdu_power_watts{site=~\"(?i)^$site$\", rack=~\"$rack\"})",
+          "legendFormat": "PDUs (measured)",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "Power",
@@ -668,6 +809,19 @@
           "refId": "B",
           "format": "table",
           "instant": true
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (rack) (apc_pdu_power_watts{site=~\"(?i)^$site$\", rack=~\"$rack\"})",
+          "legendFormat": "",
+          "range": false,
+          "refId": "C",
+          "format": "table",
+          "instant": true
         }
       ],
       "transformations": [
@@ -684,11 +838,13 @@
             "excludeByName": {
               "Time 1": true,
               "Time 2": true,
-              "Time": true
+              "Time": true,
+              "Time 3": true
             },
             "renameByName": {
               "Value #A": "Servers",
-              "Value #B": "Switches"
+              "Value #B": "Switches",
+              "Value #C": "PDUs (measured)"
             }
           }
         },
@@ -697,7 +853,11 @@
           "options": {
             "mode": "reduceRow",
             "reduce": {
-              "reducer": "sum"
+              "reducer": "sum",
+              "include": [
+                "Servers",
+                "Switches"
+              ]
             },
             "alias": "Total"
           }
@@ -717,7 +877,7 @@
       "fieldConfig": {
         "defaults": {
           "unit": "watt",
-          "decimals": 0,
+          "decimals": 2,
           "custom": {
             "align": "auto",
             "cellOptions": {
@@ -814,7 +974,8 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "watt",
+          "decimals": 2
         },
         "overrides": []
       },
@@ -933,7 +1094,8 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "watt",
+          "decimals": 2
         },
         "overrides": []
       },
@@ -1064,7 +1226,8 @@
                   }
                 ]
               },
-              "unit": "watt"
+              "unit": "watt",
+              "decimals": 2
             },
             "overrides": []
           },
@@ -1555,7 +1718,8 @@
                   }
                 ]
               },
-              "unit": "watt"
+              "unit": "watt",
+              "decimals": 2
             },
             "overrides": []
           },
@@ -1622,6 +1786,306 @@
           "type": "timeseries"
         }
       ]
+    },
+    {
+      "type": "row",
+      "title": "PDUs",
+      "id": 23,
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "id": 24,
+          "title": "Power per PDU",
+          "type": "timeseries",
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 33
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "watt",
+              "custom": {
+                "lineWidth": 1,
+                "fillOpacity": 10
+              },
+              "decimals": 2
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ]
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance) (apc_pdu_power_watts{site=~\"(?i)^$site$\", rack=~\"$rack\"})",
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "id": 25,
+          "title": "PDU power by rack",
+          "type": "timeseries",
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 33
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "watt",
+              "custom": {
+                "lineWidth": 1,
+                "fillOpacity": 10
+              },
+              "decimals": 2
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ]
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (rack) (apc_pdu_power_watts{site=~\"(?i)^$site$\", rack=~\"$rack\"})",
+              "legendFormat": "{{rack}}",
+              "range": true,
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "id": 26,
+          "title": "Current per PDU",
+          "type": "timeseries",
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 43
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "amp",
+              "custom": {
+                "lineWidth": 1,
+                "fillOpacity": 10
+              },
+              "decimals": 1
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ]
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (instance) (apc_pdu_phase_current_amps{site=~\"(?i)^$site$\", rack=~\"$rack\"})",
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "id": 27,
+          "title": "PDU load state",
+          "type": "state-timeline",
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 43
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [
+                {
+                  "type": "value",
+                  "options": {
+                    "1": {
+                      "text": "low",
+                      "color": "blue"
+                    },
+                    "2": {
+                      "text": "normal",
+                      "color": "green"
+                    },
+                    "3": {
+                      "text": "near overload",
+                      "color": "orange"
+                    },
+                    "4": {
+                      "text": "overload",
+                      "color": "red"
+                    }
+                  }
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "options": {
+            "showValue": "never",
+            "legend": {
+              "showLegend": false
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "max by (instance) (apc_pdu_load_state{site=~\"(?i)^$site$\", rack=~\"$rack\"})",
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "id": 28,
+          "title": "Voltage per PDU",
+          "type": "timeseries",
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 53
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "volt",
+              "custom": {
+                "lineWidth": 1,
+                "fillOpacity": 10
+              },
+              "decimals": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ]
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "avg by (instance) (apc_pdu_phase_voltage_volts{site=~\"(?i)^$site$\", rack=~\"$rack\"})",
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ]
+        }
+      ]
     }
   ],
   "refresh": "1m",
@@ -1659,10 +2123,10 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(nvswitch_platform_environment_psu_power,site)",
+        "definition": "label_values({__name__=~\"nvswitch_platform_environment_psu_power|apc_pdu_power_watts\"},site)",
         "query": {
           "qryType": 1,
-          "query": "label_values(nvswitch_platform_environment_psu_power,site)",
+          "query": "label_values({__name__=~\"nvswitch_platform_environment_psu_power|apc_pdu_power_watts\"},site)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1684,10 +2148,10 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values({__name__=~\"nvswitch_platform_environment_psu_power|node_ipmi_dcmi_power_consumption_watts\", site=~\"(?i)^$site$\"},rack)",
+        "definition": "label_values({__name__=~\"nvswitch_platform_environment_psu_power|node_ipmi_dcmi_power_consumption_watts|apc_pdu_power_watts\", site=~\"(?i)^$site$\"},rack)",
         "query": {
           "qryType": 1,
-          "query": "label_values({__name__=~\"nvswitch_platform_environment_psu_power|node_ipmi_dcmi_power_consumption_watts\", site=~\"(?i)^$site$\"},rack)",
+          "query": "label_values({__name__=~\"nvswitch_platform_environment_psu_power|node_ipmi_dcmi_power_consumption_watts|apc_pdu_power_watts\", site=~\"(?i)^$site$\"},rack)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
