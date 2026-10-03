@@ -2199,12 +2199,7 @@
               "vmware2openstack_migration_status": "Status",
               "vmware2openstack_vm_disks": "",
               "vmware2openstack_vm_memory": "",
-              "vmware2openstack_vm_storage": "",
-              "{__name__=\"vmware2openstack_downtime_seconds\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Downtime",
-              "{__name__=\"vmware2openstack_migration_status\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Status",
-              "{__name__=\"vmware2openstack_vm_disks\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "DIsks Count",
-              "{__name__=\"vmware2openstack_vm_memory\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Memory_Gb",
-              "{__name__=\"vmware2openstack_vm_storage\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Storage_Gb"
+              "vmware2openstack_vm_storage": ""
             }
           }
         },
@@ -3773,12 +3768,7 @@
                   "vmware2openstack_migration_status": "Status",
                   "vmware2openstack_vm_disks": "",
                   "vmware2openstack_vm_memory": "",
-                  "vmware2openstack_vm_storage": "",
-                  "{__name__=\"vmware2openstack_downtime_seconds\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Downtime",
-                  "{__name__=\"vmware2openstack_migration_status\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Status",
-                  "{__name__=\"vmware2openstack_vm_disks\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "DIsks Count",
-                  "{__name__=\"vmware2openstack_vm_memory\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Memory_Gb",
-                  "{__name__=\"vmware2openstack_vm_storage\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Storage_Gb"
+                  "vmware2openstack_vm_storage": ""
                 }
               }
             },
@@ -4759,12 +4749,7 @@
                   "vmware2openstack_migration_status": "Status",
                   "vmware2openstack_vm_disks": "",
                   "vmware2openstack_vm_memory": "",
-                  "vmware2openstack_vm_storage": "",
-                  "{__name__=\"vmware2openstack_downtime_seconds\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Downtime",
-                  "{__name__=\"vmware2openstack_migration_status\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Status",
-                  "{__name__=\"vmware2openstack_vm_disks\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "DIsks Count",
-                  "{__name__=\"vmware2openstack_vm_memory\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Memory_Gb",
-                  "{__name__=\"vmware2openstack_vm_storage\", app=\"migratekit\", cluster_name=\"gb4-canary-vms\", database=\"migration_status\", env=\"migratekit\", instance=\"vm-migrator-001:9560\", ip_address=\"10.11.41.112\", job=\"migratekit-exporter\", site=\"gb4\", vm_name=\"gb4-li-canarygb4sn009-002\"}": "Storage_Gb"
+                  "vmware2openstack_vm_storage": ""
                 }
               }
             },

@@ -6949,8 +6949,7 @@
                   "host": true,
                   "instance": true,
                   "instance_name": false,
-                  "job": true,
-                  "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": true
+                  "job": true
                 },
                 "includeByName": {},
                 "indexByName": {},
@@ -6963,8 +6962,7 @@
                   "Value #F": "Disk Total",
                   "domain": "Domain",
                   "flavor_name": "",
-                  "instanceId": "Instance ID",
-                  "{__name__=\"libvirt_domain_info_meta\", compute=\"gb5-st-osnova-001\", domain=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\", flavor=\"c1.tiny\", instance=\"10.12.81.1:9177\", instance_name=\"st-omega-consul-server-2\", job=\"libvirt_exporter\", os_region=\"gb-dev\", project_name=\"st-omega\", project_uuid=\"44fb330bbe3640f8aae31d1d4b840381\", user_name=\"omega-sa\", user_uuid=\"0de0be88a0ba4aa9ad42712276089486\", uuid=\"1ef5cc4c-594e-4f41-9e13-d2bc100e03b2\"}": ""
+                  "instanceId": "Instance ID"
                 }
               }
             },
