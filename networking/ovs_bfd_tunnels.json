@@ -538,9 +538,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum by (os_region, instance, name, remote_ip) (increase(ovs_tunnel_bfd_flap_count_total{os_region=~\"$region\", instance=~\"$host\"}[$__rate_interval])) > 0",
+          "expr": "(sum by (os_region, instance, name, remote_ip) (increase(ovs_tunnel_bfd_flap_count_total{os_region=~\"$region\", instance=~\"$host\"}[$__rate_interval])) > 0) * on(os_region, remote_ip) group_left(remote_host) group by (os_region, remote_ip, remote_host) (label_replace(label_replace(ovs_tunnel_bfd_enabled{os_region=~\"$region\"}, \"remote_ip\", \"$1\", \"local_ip\", \"(.*)\"), \"remote_host\", \"$1\", \"instance\", \"(.*)\")) or on(os_region, instance, name, remote_ip) label_replace((sum by (os_region, instance, name, remote_ip) (increase(ovs_tunnel_bfd_flap_count_total{os_region=~\"$region\", instance=~\"$host\"}[$__rate_interval])) > 0), \"remote_host\", \"$1\", \"remote_ip\", \"(.*)\")",
           "refId": "A",
-          "legendFormat": "{{instance}} {{name}} -> {{remote_ip}}",
+          "legendFormat": "{{instance}} -> {{remote_host}}",
           "range": true,
           "instant": false,
           "format": "time_series",
@@ -589,7 +589,7 @@
       "id": 10,
       "type": "timeseries",
       "title": "Tunnels not forwarding, per host",
-      "description": "Number of BFD tunnels on each host whose BFD session is not forwarding.",
+      "description": "Number of BFD tunnels on each host that were not forwarding when scraped (every 30s). Short flaps that recover between scrapes do not show here; see BFD flaps per tunnel.",
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -738,7 +738,7 @@
       "id": 12,
       "type": "table",
       "title": "BFD tunnels",
-      "description": "Current state of every BFD tunnel. Flaps are counted over the selected time range.",
+      "description": "Current state of every BFD tunnel. Flaps are counted over the selected time range. Diagnostic is the reason for the last state change: \"Detect time expired\" means this host stopped receiving BFD packets from the remote; \"Neighbor down\" means the remote told it the session went down.",
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
@@ -755,7 +755,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "max by (os_region, instance, name, remote_ip) (ovs_tunnel_bfd_forwarding{os_region=~\"$region\", instance=~\"$host\"} and on(os_region, instance, name, remote_ip) ovs_tunnel_bfd_enabled{os_region=~\"$region\", instance=~\"$host\"} == 1)",
+          "expr": "(max by (os_region, instance, name, remote_ip) (ovs_tunnel_bfd_forwarding{os_region=~\"$region\", instance=~\"$host\"} and on(os_region, instance, name, remote_ip) ovs_tunnel_bfd_enabled{os_region=~\"$region\", instance=~\"$host\"} == 1)) * on(os_region, remote_ip) group_left(remote_host) group by (os_region, remote_ip, remote_host) (label_replace(label_replace(ovs_tunnel_bfd_enabled{os_region=~\"$region\"}, \"remote_ip\", \"$1\", \"local_ip\", \"(.*)\"), \"remote_host\", \"$1\", \"instance\", \"(.*)\")) or on(os_region, instance, name, remote_ip) label_replace((max by (os_region, instance, name, remote_ip) (ovs_tunnel_bfd_forwarding{os_region=~\"$region\", instance=~\"$host\"} and on(os_region, instance, name, remote_ip) ovs_tunnel_bfd_enabled{os_region=~\"$region\", instance=~\"$host\"} == 1)), \"remote_host\", \"$1\", \"remote_ip\", \"(.*)\")",
           "refId": "A",
           "legendFormat": "__auto",
           "range": false,
@@ -768,7 +768,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "max by (os_region, instance, name, remote_ip, state) (ovs_tunnel_bfd_state{os_region=~\"$region\", instance=~\"$host\"} == 1)",
+          "expr": "(max by (os_region, instance, name, remote_ip, state) (ovs_tunnel_bfd_state{os_region=~\"$region\", instance=~\"$host\"} == 1)) * on(os_region, remote_ip) group_left(remote_host) group by (os_region, remote_ip, remote_host) (label_replace(label_replace(ovs_tunnel_bfd_enabled{os_region=~\"$region\"}, \"remote_ip\", \"$1\", \"local_ip\", \"(.*)\"), \"remote_host\", \"$1\", \"instance\", \"(.*)\")) or on(os_region, instance, name, remote_ip) label_replace((max by (os_region, instance, name, remote_ip, state) (ovs_tunnel_bfd_state{os_region=~\"$region\", instance=~\"$host\"} == 1)), \"remote_host\", \"$1\", \"remote_ip\", \"(.*)\")",
           "refId": "B",
           "legendFormat": "__auto",
           "range": false,
@@ -781,7 +781,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "max by (os_region, instance, name, remote_ip, remote_state) (label_replace(ovs_tunnel_bfd_remote_state{os_region=~\"$region\", instance=~\"$host\"} == 1, \"remote_state\", \"$1\", \"state\", \"(.*)\"))",
+          "expr": "(max by (os_region, instance, name, remote_ip, remote_state) (label_replace(ovs_tunnel_bfd_remote_state{os_region=~\"$region\", instance=~\"$host\"} == 1, \"remote_state\", \"$1\", \"state\", \"(.*)\"))) * on(os_region, remote_ip) group_left(remote_host) group by (os_region, remote_ip, remote_host) (label_replace(label_replace(ovs_tunnel_bfd_enabled{os_region=~\"$region\"}, \"remote_ip\", \"$1\", \"local_ip\", \"(.*)\"), \"remote_host\", \"$1\", \"instance\", \"(.*)\")) or on(os_region, instance, name, remote_ip) label_replace((max by (os_region, instance, name, remote_ip, remote_state) (label_replace(ovs_tunnel_bfd_remote_state{os_region=~\"$region\", instance=~\"$host\"} == 1, \"remote_state\", \"$1\", \"state\", \"(.*)\"))), \"remote_host\", \"$1\", \"remote_ip\", \"(.*)\")",
           "refId": "C",
           "legendFormat": "__auto",
           "range": false,
@@ -794,7 +794,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "max by (os_region, instance, name, remote_ip) (increase(ovs_tunnel_bfd_flap_count_total{os_region=~\"$region\", instance=~\"$host\"}[$__range]))",
+          "expr": "(max by (os_region, instance, name, remote_ip) (increase(ovs_tunnel_bfd_flap_count_total{os_region=~\"$region\", instance=~\"$host\"}[$__range]))) * on(os_region, remote_ip) group_left(remote_host) group by (os_region, remote_ip, remote_host) (label_replace(label_replace(ovs_tunnel_bfd_enabled{os_region=~\"$region\"}, \"remote_ip\", \"$1\", \"local_ip\", \"(.*)\"), \"remote_host\", \"$1\", \"instance\", \"(.*)\")) or on(os_region, instance, name, remote_ip) label_replace((max by (os_region, instance, name, remote_ip) (increase(ovs_tunnel_bfd_flap_count_total{os_region=~\"$region\", instance=~\"$host\"}[$__range]))), \"remote_host\", \"$1\", \"remote_ip\", \"(.*)\")",
           "refId": "D",
           "legendFormat": "__auto",
           "range": false,
@@ -807,7 +807,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "max by (os_region, instance, name, remote_ip, diagnostic, remote_diagnostic) (ovs_tunnel_bfd_info{os_region=~\"$region\", instance=~\"$host\"})",
+          "expr": "(max by (os_region, instance, name, remote_ip, diagnostic, remote_diagnostic) (ovs_tunnel_bfd_info{os_region=~\"$region\", instance=~\"$host\"})) * on(os_region, remote_ip) group_left(remote_host) group by (os_region, remote_ip, remote_host) (label_replace(label_replace(ovs_tunnel_bfd_enabled{os_region=~\"$region\"}, \"remote_ip\", \"$1\", \"local_ip\", \"(.*)\"), \"remote_host\", \"$1\", \"instance\", \"(.*)\")) or on(os_region, instance, name, remote_ip) label_replace((max by (os_region, instance, name, remote_ip, diagnostic, remote_diagnostic) (ovs_tunnel_bfd_info{os_region=~\"$region\", instance=~\"$host\"})), \"remote_host\", \"$1\", \"remote_ip\", \"(.*)\")",
           "refId": "E",
           "legendFormat": "__auto",
           "range": false,
@@ -828,13 +828,14 @@
               "Time": true,
               "Value #B": true,
               "Value #C": true,
-              "Value #E": true
+              "Value #E": true,
+              "remote_ip": true
             },
             "indexByName": {
               "os_region": 0,
               "instance": 1,
               "name": 2,
-              "remote_ip": 3,
+              "remote_host": 3,
               "Value #A": 4,
               "state": 5,
               "remote_state": 6,
@@ -846,13 +847,13 @@
               "os_region": "Region",
               "instance": "Host",
               "name": "Tunnel",
-              "remote_ip": "Remote IP",
               "Value #A": "Forwarding",
               "state": "Local state",
               "remote_state": "Remote state",
               "Value #D": "Flaps (range)",
               "diagnostic": "Diagnostic",
-              "remote_diagnostic": "Remote diagnostic"
+              "remote_diagnostic": "Remote diagnostic",
+              "remote_host": "Remote host"
             }
           }
         },
@@ -871,7 +872,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": "auto",
+            "align": "left",
             "filterable": true,
             "cellOptions": {
               "type": "auto"
@@ -910,6 +911,14 @@
                 "value": {
                   "type": "color-background"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
               }
             ]
           },
@@ -948,6 +957,182 @@
                 "value": {
                   "type": "color-background"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 120
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Region"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Host"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 170
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Tunnel"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 115
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Remote host"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 170
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Local state"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 105
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Remote state"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Diagnostic"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 160
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "Control Detection Time Expired": {
+                        "text": "Detect time expired",
+                        "index": 0
+                      },
+                      "Neighbor Signaled Session Down": {
+                        "text": "Neighbor down",
+                        "index": 1
+                      },
+                      "Administratively Down": {
+                        "text": "Admin down",
+                        "index": 2
+                      },
+                      "Concatenated Path Down": {
+                        "text": "Concat path down",
+                        "index": 3
+                      },
+                      "Reverse Concatenated Path Down": {
+                        "text": "Rev concat path down",
+                        "index": 4
+                      },
+                      "Forwarding Plane Reset": {
+                        "text": "Fwd plane reset",
+                        "index": 5
+                      },
+                      "No Diagnostic": {
+                        "text": "-",
+                        "index": 6
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Remote diagnostic"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "Control Detection Time Expired": {
+                        "text": "Detect time expired",
+                        "index": 0
+                      },
+                      "Neighbor Signaled Session Down": {
+                        "text": "Neighbor down",
+                        "index": 1
+                      },
+                      "Administratively Down": {
+                        "text": "Admin down",
+                        "index": 2
+                      },
+                      "Concatenated Path Down": {
+                        "text": "Concat path down",
+                        "index": 3
+                      },
+                      "Reverse Concatenated Path Down": {
+                        "text": "Rev concat path down",
+                        "index": 4
+                      },
+                      "Forwarding Plane Reset": {
+                        "text": "Fwd plane reset",
+                        "index": 5
+                      },
+                      "No Diagnostic": {
+                        "text": "-",
+                        "index": 6
+                      }
+                    }
+                  }
+                ]
               }
             ]
           }
