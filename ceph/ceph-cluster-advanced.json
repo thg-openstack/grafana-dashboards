@@ -4309,11 +4309,7 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "Prometheus",
-          "value": "${DS_PROMETHEUS}"
-        },
+        "current": {},
         "hide": 0,
         "includeAll": false,
         "label": "Data Source",
@@ -4323,7 +4319,7 @@
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "/^Prometheus$/g",
+        "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
       },
