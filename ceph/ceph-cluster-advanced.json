@@ -530,7 +530,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(ceph_osd_op_r_out_bytes{cluster_name=~\"$cluster\",job=\"ceph\"}[5m]))",
+          "expr": "sum(irate(ceph_osd_op_r_out_bytes{cluster_name=~\"$cluster\"}[5m]))",
           "format": "time_series",
           "instant": true,
           "interval": "$interval",

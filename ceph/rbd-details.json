@@ -145,7 +145,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_write_ops{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
+           "expr": "rate(ceph_rbd_write_ops{pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Write",
@@ -158,7 +158,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_read_ops{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
+           "expr": "rate(ceph_rbd_read_ops{pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Read",
@@ -258,7 +258,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_write_bytes{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\",cluster_name=\"$cluster\"}[$__rate_interval])",
+           "expr": "rate(ceph_rbd_write_bytes{pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Write",
@@ -271,7 +271,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_read_bytes{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\",cluster_name=\"$cluster\"}[$__rate_interval])",
+           "expr": "rate(ceph_rbd_read_bytes{pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Read",
@@ -371,7 +371,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_write_latency_sum{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_write_latency_count{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
+           "expr": "rate(ceph_rbd_write_latency_sum{pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_write_latency_count{pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Write",
@@ -384,7 +384,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "rate(ceph_rbd_read_latency_sum{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_read_latency_count{job=~\"ceph|ceph-exporter\", pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
+           "expr": "rate(ceph_rbd_read_latency_sum{pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval]) /\n  rate(ceph_rbd_read_latency_count{pool=\"$pool\", image=\"$image\", cluster_name=\"$cluster\"}[$__rate_interval])\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{pool}} Read",
@@ -444,30 +444,6 @@
          },
          "refresh": 1,
          "regex": "/block/",
-         "skipUrlSync": false,
-         "sort": 1,
-         "tagValuesQuery": "",
-         "tagsQuery": "",
-         "type": "query",
-         "useTags": false
-       },
-       {
-         "allValue": ".+",
-         "current": {},
-         "datasource": {
-           "type": "prometheus",
-           "uid": "${DS_PROMETHEUS}"
-         },
-         "definition": "",
-         "hide": 2,
-         "includeAll": false,
-         "label": "job",
-         "multi": false,
-         "name": "job",
-         "options": [],
-         "query": "label_values(ceph_osd_metadata{}, job)",
-         "refresh": 1,
-         "regex": "(.*)",
          "skipUrlSync": false,
          "sort": 1,
          "tagValuesQuery": "",

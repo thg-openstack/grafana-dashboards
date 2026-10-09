@@ -143,7 +143,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "count(ceph_pool_metadata{job=~\"$job\",cluster_name=~\"$cluster\"})",
+          "expr": "count(ceph_pool_metadata{cluster_name=~\"$cluster\"})",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -224,7 +224,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "count(ceph_pool_metadata{job=~\"$job\", compression_mode!=\"none\",cluster_name=~\"$cluster\"})",
+          "expr": "count(ceph_pool_metadata{compression_mode!=\"none\", cluster_name=~\"$cluster\"})",
           "format": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -304,7 +304,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_osd_stat_bytes{job=~\"ceph-exporter|ceph\", cluster_name=\"$cluster\"})",
+          "expr": "sum(ceph_osd_stat_bytes{cluster_name=\"$cluster\"})",
           "format": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -384,7 +384,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pool_bytes_used{job=~\"$job\", cluster_name=~\"$cluster\"})",
+          "expr": "sum(ceph_pool_bytes_used{cluster_name=~\"$cluster\"})",
           "format": "",
           "instant": true,
           "intervalFactor": 1,
@@ -465,7 +465,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(ceph_pool_stored{job=~\"$job\",cluster_name=~\"$cluster\"})",
+          "expr": "sum(ceph_pool_stored{cluster_name=~\"$cluster\"})",
           "format": "",
           "instant": true,
           "intervalFactor": 1,
@@ -546,7 +546,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\",cluster_name=~\"$cluster\"} -\n    ceph_pool_compress_bytes_used{job=~\"$job\",cluster_name=~\"$cluster\"}\n)\n",
+          "expr": "sum(\n  ceph_pool_compress_under_bytes{cluster_name=~\"$cluster\"} -\n    ceph_pool_compress_bytes_used{cluster_name=~\"$cluster\"}\n)\n",
           "format": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -626,7 +626,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "(\n  sum(ceph_pool_compress_under_bytes{job=~\"$job\",cluster_name=~\"$cluster\"} > 0) /\n    sum(ceph_pool_stored_raw{job=~\"$job\",cluster_name=~\"$cluster\"} and ceph_pool_compress_under_bytes{job=~\"$job\",cluster_name=~\"$cluster\"} > 0)\n) * 100\n",
+          "expr": "(\n  sum(ceph_pool_compress_under_bytes{cluster_name=~\"$cluster\"} > 0) /\n    sum(ceph_pool_stored_raw{cluster_name=~\"$cluster\"} and ceph_pool_compress_under_bytes{cluster_name=~\"$cluster\"} > 0)\n) * 100\n",
           "format": "table",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -706,7 +706,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(\n  ceph_pool_compress_under_bytes{job=~\"$job\",cluster_name=~\"$cluster\"} > 0)\n    / sum(ceph_pool_compress_bytes_used{job=~\"$job\",cluster_name=~\"$cluster\"} > 0\n)\n",
+          "expr": "sum(\n  ceph_pool_compress_under_bytes{cluster_name=~\"$cluster\"} > 0)\n    / sum(ceph_pool_compress_bytes_used{cluster_name=~\"$cluster\"} > 0\n)\n",
           "format": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1201,7 +1201,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(\n  ceph_pool_compress_under_bytes{job=~\"$job\", cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"} /\n    ceph_pool_compress_bytes_used{job=~\"$job\", cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"} > 0\n) and on(pool_id) (\n  (\n    (ceph_pool_compress_under_bytes{job=~\"$job\", cluster_name=~\"$cluster\",pool_name=~\"$pool_name\"} > 0) /\n      ceph_pool_stored_raw{job=~\"$job\", cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"}\n  ) * 100 > 0.5\n)",
+          "expr": "(\n  ceph_pool_compress_under_bytes{cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"} /\n    ceph_pool_compress_bytes_used{cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"} > 0\n) and on(pool_id) (\n  (\n    (ceph_pool_compress_under_bytes{cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"} > 0) /\n      ceph_pool_stored_raw{cluster_name=~\"$cluster\", pool_name=~\"$pool_name\"}\n  ) * 100 > 0.5\n)",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1213,7 +1213,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "ceph_pool_max_avail{job=~\"$job\", cluster_name=~\"$cluster\"} *\n  on(pool_id) group_left(name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}\n",
+          "expr": "ceph_pool_max_avail{cluster_name=~\"$cluster\"} *\n  on(pool_id) group_left(name) ceph_pool_metadata{cluster_name=~\"$cluster\"}\n",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1225,7 +1225,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "(\n  (ceph_pool_compress_under_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} > 0) /\n    ceph_pool_stored_raw{job=~\"$job\", cluster_name=~\"$cluster\"}\n) * 100\n",
+          "expr": "(\n  (ceph_pool_compress_under_bytes{cluster_name=~\"$cluster\"} > 0) /\n    ceph_pool_stored_raw{cluster_name=~\"$cluster\"}\n) * 100\n",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1237,7 +1237,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "ceph_pool_percent_used{job=~\"$job\", cluster_name=~\"$cluster\"} *\n  on(pool_id) group_left(name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}\n",
+          "expr": "ceph_pool_percent_used{cluster_name=~\"$cluster\"} *\n  on(pool_id) group_left(name) ceph_pool_metadata{cluster_name=~\"$cluster\"}\n",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1249,7 +1249,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "ceph_pool_compress_under_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} -\n  ceph_pool_compress_bytes_used{job=~\"$job\", cluster_name=~\"$cluster\"} > 0\n",
+          "expr": "ceph_pool_compress_under_bytes{cluster_name=~\"$cluster\"} -\n  ceph_pool_compress_bytes_used{cluster_name=~\"$cluster\"} > 0\n",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1261,7 +1261,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "delta(ceph_pool_stored{job=~\"$job\", cluster_name=~\"$cluster\"}[5d])",
+          "expr": "delta(ceph_pool_stored{cluster_name=~\"$cluster\"}[5d])",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1273,7 +1273,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "rate(ceph_pool_rd{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n  + rate(ceph_pool_wr{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n",
+          "expr": "rate(ceph_pool_rd{cluster_name=~\"$cluster\"}[$__rate_interval])\n  + rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval])\n",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1285,7 +1285,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "rate(ceph_pool_rd_bytes{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n  rate(ceph_pool_wr_bytes{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n",
+          "expr": "rate(ceph_pool_rd_bytes{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n  rate(ceph_pool_wr_bytes{cluster_name=~\"$cluster\"}[$__rate_interval])\n",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1297,7 +1297,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}",
+          "expr": "ceph_pool_metadata{cluster_name=~\"$cluster\"}",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1309,7 +1309,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "ceph_pool_stored{job=~\"$job\", cluster_name=~\"$cluster\"} * on(pool_id) group_left ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}",
+          "expr": "ceph_pool_stored{cluster_name=~\"$cluster\"} * on(pool_id) group_left ceph_pool_metadata{cluster_name=~\"$cluster\"}",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1321,7 +1321,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\", compression_mode!=\"none\"}",
+          "expr": "ceph_pool_metadata{cluster_name=~\"$cluster\", compression_mode!=\"none\"}",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -1406,7 +1406,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "topk($topk,\n  round(\n    (\n      rate(ceph_pool_rd{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_pool_wr{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n    ), 1\n  ) * on(pool_id) group_left(instance,name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"})\n",
+          "expr": "topk($topk,\n  round(\n    (\n      rate(ceph_pool_rd{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval])\n    ), 1\n  ) * on(pool_id) group_left(instance,name) ceph_pool_metadata{cluster_name=~\"$cluster\"})\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{name}} ",
@@ -1419,7 +1419,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "topk($topk,\n  rate(ceph_pool_wr{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n    on(pool_id) group_left(instance,name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}\n)\n",
+          "expr": "topk($topk,\n  rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n    on(pool_id) group_left(instance,name) ceph_pool_metadata{cluster_name=~\"$cluster\"}\n)\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{name}} - write",
@@ -1514,7 +1514,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "topk($topk,\n  (\n    rate(ceph_pool_rd_bytes{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval]) +\n      rate(ceph_pool_wr_bytes{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])\n  ) * on(pool_id) group_left(instance, name) ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}\n)\n",
+          "expr": "topk($topk,\n  (\n    rate(ceph_pool_rd_bytes{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n      rate(ceph_pool_wr_bytes{cluster_name=~\"$cluster\"}[$__rate_interval])\n  ) * on(pool_id) group_left(instance, name) ceph_pool_metadata{cluster_name=~\"$cluster\"}\n)\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{name}}",
@@ -1674,7 +1674,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "ceph_pool_bytes_used {job=~\"$job\", cluster_name=~\"$cluster\", pool_id=\"$pool_id\"} * on(pool_id) group_right ceph_pool_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}",
+          "expr": "ceph_pool_bytes_used {cluster_name=~\"$cluster\", pool_id=\"$pool_id\"} * on(pool_id) group_right ceph_pool_metadata{cluster_name=~\"$cluster\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{cluster_name}}-{{name}}",
@@ -1762,30 +1762,6 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
-      },
-      {
-        "allValue": ".+",
-        "current": {},
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "definition": "",
-        "hide": 2,
-        "includeAll": false,
-        "label": "job",
-        "multi": false,
-        "name": "job",
-        "options": [],
-        "query": "label_values(ceph_osd_metadata{}, job)",
-        "refresh": 1,
-        "regex": "(.*)",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
       },
       {
         "current": {
