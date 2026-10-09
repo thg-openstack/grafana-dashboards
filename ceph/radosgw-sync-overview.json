@@ -178,7 +178,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_bytes_count{}[$__rate_interval]))",
+           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_bytes_count{cluster_name=~\"$cluster\"}[$__rate_interval]))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{source_zone}}",
@@ -271,7 +271,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_poll_latency_sum{}[$__rate_interval]))",
+           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_poll_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{source_zone}}",
@@ -363,7 +363,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_errors{}[$__rate_interval]))",
+           "expr": "sum by (source_zone) (rate(ceph_data_sync_from_zone_fetch_errors{cluster_name=~\"$cluster\"}[$__rate_interval]))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{source_zone}}",
