@@ -97,7 +97,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "sum(ceph_bluestore_onode_hits{job=~\"$job\", cluster_name=~\"$cluster\"}) / (\n  sum(ceph_bluestore_onode_hits{job=~\"$job\", cluster_name=~\"$cluster\"}) +\n  sum(ceph_bluestore_onode_misses{job=~\"$job\", cluster_name=~\"$cluster\"})\n)\n",
+           "expr": "sum(ceph_bluestore_onode_hits{cluster_name=~\"$cluster\"}) / (\n  sum(ceph_bluestore_onode_hits{cluster_name=~\"$cluster\"}) +\n  sum(ceph_bluestore_onode_misses{cluster_name=~\"$cluster\"})\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "",
@@ -169,7 +169,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count by (device_class) (ceph_osd_metadata{job=~\"$job\", cluster_name=~\"$cluster\"})",
+           "expr": "count by (device_class) (ceph_osd_metadata{cluster_name=~\"$cluster\"})",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{device_class}}",
@@ -258,7 +258,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "count(ceph_bluefs_wal_total_bytes{job=~\"$job\",cluster_name=~\"$cluster\"})",
+           "expr": "count(ceph_bluefs_wal_total_bytes{cluster_name=~\"$cluster\"})",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "bluestore",
@@ -271,7 +271,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "absent(ceph_bluefs_wal_total_bytes{job=~\"$job\",cluster_name=~\"$cluster\"}) * count(ceph_osd_metadata{job=~\"$job\",cluster_name=~\"$cluster\"})",
+           "expr": "absent(ceph_bluefs_wal_total_bytes{cluster_name=~\"$cluster\"}) * count(ceph_osd_metadata{cluster_name=~\"$cluster\"})",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "filestore",
@@ -344,7 +344,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} < 1099511627776)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} < 1099511627776)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<1TB",
@@ -355,7 +355,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} >= 1099511627776 < 2199023255552)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} >= 1099511627776 < 2199023255552)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<2TB",
@@ -366,7 +366,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} >= 2199023255552 < 3298534883328)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} >= 2199023255552 < 3298534883328)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<3TB",
@@ -377,7 +377,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} >= 3298534883328 < 4398046511104)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} >= 3298534883328 < 4398046511104)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<4TB",
@@ -388,7 +388,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} >= 4398046511104 < 6597069766656)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} >= 4398046511104 < 6597069766656)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<6TB",
@@ -399,7 +399,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} >= 6597069766656 < 8796093022208)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} >= 6597069766656 < 8796093022208)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<8TB",
@@ -410,7 +410,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} >= 8796093022208 < 10995116277760)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} >= 8796093022208 < 10995116277760)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<10TB",
@@ -421,7 +421,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} >= 10995116277760 < 13194139533312)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} >= 10995116277760 < 13194139533312)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<12TB",
@@ -432,7 +432,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "count(ceph_osd_stat_bytes{job=~\"$job\", cluster_name=~\"$cluster\"} >= 13194139533312)",
+           "expr": "count(ceph_osd_stat_bytes{cluster_name=~\"$cluster\"} >= 13194139533312)",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "<12TB+",
@@ -494,7 +494,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "ceph_osd_numpg{job=~\"$job\", cluster_name=~\"$cluster\"}",
+           "expr": "ceph_osd_numpg{cluster_name=~\"$cluster\"}",
            "format": "time_series",
            "instant": true,
            "intervalFactor": 1,
@@ -641,7 +641,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "avg (\n  rate(ceph_osd_op_r_latency_sum{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    on (ceph_daemon) rate(ceph_osd_op_r_latency_count{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) * 1000\n)\n",
+           "expr": "avg (\n  rate(ceph_osd_op_r_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    on (ceph_daemon) rate(ceph_osd_op_r_latency_count{cluster_name=~\"$cluster\"}[$__rate_interval]) * 1000\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "AVG read",
@@ -654,7 +654,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "max(\n  rate(ceph_osd_op_r_latency_sum{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) /\n  on (ceph_daemon) rate(ceph_osd_op_r_latency_count{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) * 1000\n)\n",
+           "expr": "max(\n  rate(ceph_osd_op_r_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]) /\n  on (ceph_daemon) rate(ceph_osd_op_r_latency_count{cluster_name=~\"$cluster\"}[$__rate_interval]) * 1000\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "MAX read",
@@ -667,7 +667,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "quantile(0.95,\n  (\n    rate(ceph_osd_op_r_latency_sum{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) /\n      on (ceph_daemon) rate(ceph_osd_op_r_latency_count{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval])\n      * 1000\n  )\n)\n",
+           "expr": "quantile(0.95,\n  (\n    rate(ceph_osd_op_r_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]) /\n      on (ceph_daemon) rate(ceph_osd_op_r_latency_count{cluster_name=~\"$cluster\"}[$__rate_interval])\n      * 1000\n  )\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "@95%ile",
@@ -793,7 +793,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "topk(10,\n  (sort(\n    (\n      rate(ceph_osd_op_r_latency_sum{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) /\n        on (ceph_daemon) rate(ceph_osd_op_r_latency_count{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) *\n        1000\n    )\n  ))\n)\n",
+           "expr": "topk(10,\n  (sort(\n    (\n      rate(ceph_osd_op_r_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]) /\n        on (ceph_daemon) rate(ceph_osd_op_r_latency_count{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n        1000\n    )\n  ))\n)\n",
            "format": "table",
            "instant": true,
            "intervalFactor": 1,
@@ -917,7 +917,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "avg(\n  rate(ceph_osd_op_w_latency_sum{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    on (ceph_daemon) rate(ceph_osd_op_w_latency_count{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval])\n    * 1000\n)\n",
+           "expr": "avg(\n  rate(ceph_osd_op_w_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    on (ceph_daemon) rate(ceph_osd_op_w_latency_count{cluster_name=~\"$cluster\"}[$__rate_interval])\n    * 1000\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "AVG write",
@@ -933,7 +933,7 @@
          },
          {
            "editorMode": "code",
-           "expr": "max(\n  rate(ceph_osd_op_w_latency_sum{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    on (ceph_daemon) rate(ceph_osd_op_w_latency_count{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) *\n    1000\n)\n",
+           "expr": "max(\n  rate(ceph_osd_op_w_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    on (ceph_daemon) rate(ceph_osd_op_w_latency_count{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n    1000\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "MAX write",
@@ -946,7 +946,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "quantile(0.95, (\n  rate(ceph_osd_op_w_latency_sum{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    on (ceph_daemon) rate(ceph_osd_op_w_latency_count{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) *\n    1000\n))\n",
+           "expr": "quantile(0.95, (\n  rate(ceph_osd_op_w_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]) /\n    on (ceph_daemon) rate(ceph_osd_op_w_latency_count{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n    1000\n))\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "@95%ile write",
@@ -1072,7 +1072,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "topk(10,\n  (sort(\n    (rate(ceph_osd_op_w_latency_sum{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) /\n      on (ceph_daemon) rate(ceph_osd_op_w_latency_count{job=~\"$job\",cluster_name=~\"$cluster\"}[$__rate_interval]) *\n      1000)\n  ))\n)\n",
+           "expr": "topk(10,\n  (sort(\n    (rate(ceph_osd_op_w_latency_sum{cluster_name=~\"$cluster\"}[$__rate_interval]) /\n      on (ceph_daemon) rate(ceph_osd_op_w_latency_count{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n      1000)\n  ))\n)\n",
            "format": "table",
            "instant": true,
            "intervalFactor": 1,
@@ -1173,7 +1173,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "round(sum(rate(ceph_pool_rd{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])))",
+           "expr": "round(sum(rate(ceph_pool_rd{cluster_name=~\"$cluster\"}[$__rate_interval])))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "Reads",
@@ -1184,7 +1184,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "round(sum(rate(ceph_pool_wr{job=~\"$job\", cluster_name=~\"$cluster\"}[$__rate_interval])))",
+           "expr": "round(sum(rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval])))",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "Writes",
@@ -1364,34 +1364,6 @@
          "refresh": 1,
          "comment": "Remove below regex once the labels are cleaned up",
          "regex": "/[^bhdjy$,^rmtzh$]/g",
-         "skipUrlSync": false,
-         "sort": 1,
-         "tagValuesQuery": "",
-         "tagsQuery": "",
-         "type": "query",
-         "useTags": false
-       },
-       {
-         "allValue": ".+",
-         "current": {
-           "selected": false,
-           "text": "ceph",
-           "value": "ceph"
-         },
-         "datasource": {
-           "type": "prometheus",
-           "uid": "${DS_PROMETHEUS}"
-         },
-         "definition": "",
-         "hide": 2,
-         "includeAll": false,
-         "label": "job",
-         "multi": false,
-         "name": "job",
-         "options": [],
-         "query": "label_values(ceph_osd_metadata{}, job)",
-         "refresh": 1,
-         "regex": "(.*)",
          "skipUrlSync": false,
          "sort": 1,
          "tagValuesQuery": "",

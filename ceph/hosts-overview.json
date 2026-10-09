@@ -106,7 +106,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "count(sum by (hostname) (ceph_osd_metadata{job=~\"$job\", cluster_name=~\"$cluster\"}))",
+           "expr": "count(sum by (hostname) (ceph_osd_metadata{cluster_name=~\"$cluster\"}))",
            "format": "time_series",
            "instant": true,
            "intervalFactor": 1,
@@ -350,7 +350,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "sum(label_replace(\n  (\n    rate(node_disk_writes_completed{instance=~\"($osd_hosts).*\"}[$__rate_interval]) or\n    rate(node_disk_writes_completed_total{instance=~\"($osd_hosts).*\"}[$__rate_interval])\n  ), \"instance\", \"$1\", \"instance\", \"([^:.]*).*\"\n) * on(instance, device) group_left(ceph_daemon) label_replace(\n  label_replace(\n    ceph_disk_occupation_human{job=~\"$job\"}, \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n  ), \"instance\", \"$1\", \"instance\", \"([^:.]*).*\"\n))",
+           "expr": "sum(label_replace(\n  (\n    rate(node_disk_writes_completed{instance=~\"($osd_hosts).*\"}[$__rate_interval]) or\n    rate(node_disk_writes_completed_total{instance=~\"($osd_hosts).*\"}[$__rate_interval])\n  ), \"instance\", \"$1\", \"instance\", \"([^:.]*).*\"\n) * on(instance, device) group_left(ceph_daemon) label_replace(\n  label_replace(\n    ceph_disk_occupation_human{}, \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n  ), \"instance\", \"$1\", \"instance\", \"([^:.]*).*\"\n))",
            "format": "time_series",
            "instant": true,
            "intervalFactor": 1,
@@ -363,7 +363,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "sum(label_replace(\n  (\n    rate(node_disk_reads_completed{instance=~\"($osd_hosts).*\"}[$__rate_interval]) or\n    rate(node_disk_reads_completed_total{instance=~\"($osd_hosts).*\"}[$__rate_interval])\n  ), \"instance\", \"$1\", \"instance\", \"([^:.]*).*\"\n) * on(instance, device) group_left(ceph_daemon) label_replace(\n  label_replace(\n    ceph_disk_occupation_human{job=~\"$job\"}, \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n  ), \"instance\", \"$1\", \"instance\", \"([^:.]*).*\"\n))",
+           "expr": "sum(label_replace(\n  (\n    rate(node_disk_reads_completed{instance=~\"($osd_hosts).*\"}[$__rate_interval]) or\n    rate(node_disk_reads_completed_total{instance=~\"($osd_hosts).*\"}[$__rate_interval])\n  ), \"instance\", \"$1\", \"instance\", \"([^:.]*).*\"\n) * on(instance, device) group_left(ceph_daemon) label_replace(\n  label_replace(\n    ceph_disk_occupation_human{}, \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n  ), \"instance\", \"$1\", \"instance\", \"([^:.]*).*\"\n))",
            "hide": false,
            "instant": false,
            "legendFormat": "Read IOPs",
@@ -443,7 +443,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "avg (\n  label_replace(\n    (rate(node_disk_io_time_ms[$__rate_interval]) / 10 ) or\n      (rate(node_disk_io_time_seconds_total[$__rate_interval]) * 100),\n    \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  ) * on(instance, device) group_left(ceph_daemon) label_replace(\n    label_replace(\n      ceph_disk_occupation_human{job=~\"$job\", instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"},\n      \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n    ), \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  )\n)\n",
+           "expr": "avg (\n  label_replace(\n    (rate(node_disk_io_time_ms[$__rate_interval]) / 10 ) or\n      (rate(node_disk_io_time_seconds_total[$__rate_interval]) * 100),\n    \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  ) * on(instance, device) group_left(ceph_daemon) label_replace(\n    label_replace(\n      ceph_disk_occupation_human{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"},\n      \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n    ), \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  )\n)\n",
            "format": "time_series",
            "instant": true,
            "intervalFactor": 1,
@@ -794,34 +794,6 @@
          "useTags": false
        },
        {
-         "allValue": ".+",
-         "current": {
-           "selected": false,
-           "text": "ceph",
-           "value": "ceph"
-         },
-         "datasource": {
-           "type": "prometheus",
-           "uid": "${DS_PROMETHEUS}"
-         },
-         "definition": "",
-         "hide": 2,
-         "includeAll": false,
-         "label": "job",
-         "multi": false,
-         "name": "job",
-         "options": [],
-         "query": "label_values(ceph_osd_metadata{}, job)",
-         "refresh": 1,
-         "regex": "(.*)",
-         "skipUrlSync": false,
-         "sort": 1,
-         "tagValuesQuery": "",
-         "tagsQuery": "",
-         "type": "query",
-         "useTags": false
-       },
-       {
          "current": {
            "selected": false
          },
@@ -856,14 +828,14 @@
            "type": "prometheus",
            "uid": "${DS_PROMETHEUS}"
          },
-         "definition": "label_values(ceph_mon_metadata{job=~\"$job\", cluster_name=\"$cluster\"},ceph_daemon)",
+         "definition": "label_values(ceph_mon_metadata{cluster_name=\"$cluster\"},ceph_daemon)",
          "hide": 0,
          "includeAll": true,
          "multi": false,
          "name": "mon_hosts",
          "options": [],
          "query": {
-           "query": "label_values(ceph_mon_metadata{job=~\"$job\", cluster_name=\"$cluster\"},ceph_daemon)",
+           "query": "label_values(ceph_mon_metadata{cluster_name=\"$cluster\"},ceph_daemon)",
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
@@ -891,7 +863,7 @@
          "multi": false,
          "name": "mds_hosts",
          "options": [],
-         "query": "label_values(ceph_mds_inodes{job=~\"$job\"}, ceph_daemon)",
+         "query": "label_values(ceph_mds_inodes{}, ceph_daemon)",
          "refresh": 1,
          "regex": "mds.(.*)",
          "skipUrlSync": false,
@@ -907,14 +879,14 @@
            "type": "prometheus",
            "uid": "${DS_PROMETHEUS}"
          },
-         "definition": "label_values(ceph_rgw_metadata{job=~\"$job\", cluster_name=\"$cluster\"},ceph_daemon)",
+         "definition": "label_values(ceph_rgw_metadata{cluster_name=\"$cluster\"},ceph_daemon)",
          "hide": 0,
          "includeAll": true,
          "multi": false,
          "name": "rgw_hosts",
          "options": [],
          "query": {
-           "query": "label_values(ceph_rgw_metadata{job=~\"$job\", cluster_name=\"$cluster\"},ceph_daemon)",
+           "query": "label_values(ceph_rgw_metadata{cluster_name=\"$cluster\"},ceph_daemon)",
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
