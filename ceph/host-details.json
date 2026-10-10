@@ -568,7 +568,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum by (device) (\n  rate(\n    node_network_receive_bytes{instance=~\"($ceph_hosts)([\\\\\\\\.:].*)?\",device!=\"lo\"}[$__rate_interval]) or\n    rate(node_network_receive_bytes_total{instance=~\"($ceph_hosts)([\\\\\\\\.:].*)?\",device!=\"lo\"}[$__rate_interval]\n  )\n)\n",
+          "expr": "sum by (device) (\n  rate(\n    node_network_receive_bytes{instance=~\"($ceph_hosts)([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n    rate(node_network_receive_bytes_total{instance=~\"($ceph_hosts)([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]\n  )\n)\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}.rx",
@@ -579,7 +579,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum by (device) (\n  rate(node_network_transmit_bytes{instance=~\"($ceph_hosts)([\\\\\\\\.:].*)?\",device!=\"lo\"}[$__rate_interval]) or\n  rate(node_network_transmit_bytes_total{instance=~\"($ceph_hosts)([\\\\\\\\.:].*)?\",device!=\"lo\"}[$__rate_interval])\n)\n",
+          "expr": "sum by (device) (\n  rate(node_network_transmit_bytes{instance=~\"($ceph_hosts)([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_transmit_bytes_total{instance=~\"($ceph_hosts)([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n)\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}.tx",
@@ -675,7 +675,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "rate(node_network_receive_drop{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\"}[$__rate_interval]) or\n  rate(node_network_receive_drop_total{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\"}[$__rate_interval])\n",
+          "expr": "rate(node_network_receive_drop{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_receive_drop_total{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}.rx",
@@ -686,7 +686,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "rate(node_network_transmit_drop{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\"}[$__rate_interval]) or\n  rate(node_network_transmit_drop_total{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\"}[$__rate_interval])\n",
+          "expr": "rate(node_network_transmit_drop{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_transmit_drop_total{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}.tx",
@@ -863,7 +863,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "rate(node_network_receive_errs{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\"}[$__rate_interval]) or\n  rate(node_network_receive_errs_total{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\"}[$__rate_interval])\n",
+          "expr": "rate(node_network_receive_errs{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_receive_errs_total{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}.rx",
@@ -874,7 +874,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "rate(node_network_transmit_errs{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\"}[$__rate_interval]) or\n  rate(node_network_transmit_errs_total{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\"}[$__rate_interval])\n",
+          "expr": "rate(node_network_transmit_errs{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_transmit_errs_total{instance=~\"$ceph_hosts([\\\\\\\\.:].*)?\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}.tx",
