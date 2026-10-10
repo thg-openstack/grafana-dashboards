@@ -98,7 +98,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Protocol rbd = Ceph; disk type block = iSCSI (Pure). Volume ID is empty for ephemeral disks. Provisioned falls back to the Cinder volume size where the libvirt exporter has no capacity metric (gb1).",
+      "description": "Protocol rbd = Ceph; disk type block = iSCSI (Pure). Volume ID is empty for ephemeral disks. Provisioned falls back to the Cinder volume size where the libvirt exporter has no capacity metric (older exporter versions).",
       "type": "table",
       "title": "Disks",
       "gridPos": {
@@ -448,7 +448,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Time per request as the guest sees it (QEMU), including backend, network and QoS waits. Not available in gb1: its libvirt exporter does not export read/write/flush time.",
+      "description": "Time per request as the guest sees it (QEMU), including backend, network and QoS waits. Not available where the libvirt exporter does not export read/write/flush time (older exporter versions).",
       "type": "timeseries",
       "title": "Average latency",
       "gridPos": {

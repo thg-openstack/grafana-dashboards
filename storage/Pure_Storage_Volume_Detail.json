@@ -397,7 +397,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Per-volume QoS limit set on the array (Cinder QoS spec). No limit: the array reports QoS but this volume has none. Not reported by this array: the array exports no QoS metrics at all (gb1 arrays, Purity 6.7.4).",
+      "description": "Per-volume QoS limit set on the array (Cinder QoS spec). No limit: the array reports QoS but this volume has none. Not reported by this array: the array exports no QoS metrics at all (seen on older Purity versions).",
       "type": "stat",
       "title": "QoS IOPS limit",
       "gridPos": {
@@ -471,7 +471,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Per-volume QoS limit set on the array (Cinder QoS spec). No limit: the array reports QoS but this volume has none. Not reported by this array: the array exports no QoS metrics at all (gb1 arrays, Purity 6.7.4).",
+      "description": "Per-volume QoS limit set on the array (Cinder QoS spec). No limit: the array reports QoS but this volume has none. Not reported by this array: the array exports no QoS metrics at all (seen on older Purity versions).",
       "type": "stat",
       "title": "QoS bandwidth limit",
       "gridPos": {
