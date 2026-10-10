@@ -1124,7 +1124,7 @@
         "type": "yesoreyeram-infinity-datasource",
         "uid": "${DS_INFINITY}"
       },
-      "description": "Active, non-suppressed problems grouped by the host rack tag. Problems without a rack tag are not listed.",
+      "description": "Active, non-suppressed problems grouped by the host rack tag. Problems without a rack tag, and \"Container ... has been stopped\" problems, are not listed.",
       "gridPos": {
         "h": 10,
         "w": 8,
@@ -1142,7 +1142,7 @@
           "source": "url",
           "parser": "backend",
           "format": "table",
-          "root_selector": "(result.($t := tags; {\"Site\": ($t[tag=\"site\"].value)[0], \"Rack\": ($t[tag=\"rack\"].value)[0], \"Host\": ($t[tag=\"service-host\"].value)[0], \"Severity\": $number(severity), \"Problem\": name, \"Since\": $number(clock) * 1000}))[Rack and (\"os/\" & Site) in ${Group:json}]",
+          "root_selector": "(result.($t := tags; {\"Site\": ($t[tag=\"site\"].value)[0], \"Rack\": ($t[tag=\"rack\"].value)[0], \"Host\": ($t[tag=\"service-host\"].value)[0], \"Severity\": $number(severity), \"Problem\": name, \"Since\": $number(clock) * 1000}))[Rack and (\"os/\" & Site) in ${Group:json} and $not($contains(Problem, /^Container .+ has been stopped/))]",
           "columns": [],
           "filters": [],
           "url": "/api/datasources/uid/${zabbix_uid}/resources/zabbix-api",
@@ -1237,7 +1237,7 @@
           "source": "url",
           "parser": "backend",
           "format": "table",
-          "root_selector": "(result.($t := tags; {\"Site\": ($t[tag=\"site\"].value)[0], \"Rack\": ($t[tag=\"rack\"].value)[0], \"Host\": ($t[tag=\"service-host\"].value)[0], \"Severity\": $number(severity), \"Problem\": name, \"Since\": $number(clock) * 1000}))[Rack and (\"os/\" & Site) in ${Group:json}]",
+          "root_selector": "(result.($t := tags; {\"Site\": ($t[tag=\"site\"].value)[0], \"Rack\": ($t[tag=\"rack\"].value)[0], \"Host\": ($t[tag=\"service-host\"].value)[0], \"Severity\": $number(severity), \"Problem\": name, \"Since\": $number(clock) * 1000}))[Rack and (\"os/\" & Site) in ${Group:json} and $not($contains(Problem, /^Container .+ has been stopped/))]",
           "columns": [],
           "filters": [],
           "url": "/api/datasources/uid/${zabbix_uid}/resources/zabbix-api",
