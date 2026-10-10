@@ -3919,32 +3919,80 @@
           },
           "fieldConfig": {
             "defaults": {
-              "unit": "percent",
-              "min": 0,
-              "max": 150,
-              "decimals": 0,
-              "color": {
-                "mode": "thresholds"
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": false,
+                "inspect": true
               },
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
+              "unit": "string"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Peak % of limit"
+                },
+                "properties": [
                   {
-                    "color": "green",
-                    "value": null
+                    "id": "unit",
+                    "value": "percent"
                   },
                   {
-                    "color": "yellow",
-                    "value": 85
+                    "id": "decimals",
+                    "value": 0
                   },
                   {
-                    "color": "red",
-                    "value": 100
+                    "id": "min",
+                    "value": 0
+                  },
+                  {
+                    "id": "max",
+                    "value": 150
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "yellow",
+                          "value": 85
+                        },
+                        {
+                          "color": "red",
+                          "value": 100
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "gauge",
+                      "mode": "gradient",
+                      "valueDisplayMode": "color"
+                    }
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 320
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 19,
@@ -3954,24 +4002,22 @@
           },
           "id": 85,
           "options": {
-            "displayMode": "gradient",
-            "orientation": "horizontal",
-            "showUnfilled": true,
-            "valueMode": "color",
-            "namePlacement": "left",
-            "sizing": "manual",
-            "minVizHeight": 16,
-            "maxVizHeight": 22,
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
+            "showHeader": true,
+            "cellHeight": "sm",
+            "footer": {
+              "show": false,
+              "reducer": [
+                "sum"
               ],
               "fields": "",
-              "values": false
+              "countRows": false
             },
-            "legend": {
-              "showLegend": false
-            }
+            "sortBy": [
+              {
+                "displayName": "Peak % of limit",
+                "desc": true
+              }
+            ]
           },
           "pluginVersion": "11.6.2",
           "targets": [
@@ -3983,17 +4029,51 @@
               "editorMode": "code",
               "exemplar": false,
               "expr": "sort_desc(\n  max_over_time((\n  label_replace(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\",dimension=\"writes_per_sec\"}, \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\")\n  + on(id) group_left(volume_type, volume_name)\n  (0 * max by (id, volume_type, volume_name) (label_replace(openstack_cinder_volume_gb{os_region=~\"$cluster\",volume_type=~\".*-${iops_limit}$\"}, \"volume_name\", \"$1\", \"name\", \"(.*)\")))\n  )[$__range:1m]) / ${iops_limit} * 100 > 85\n)",
-              "format": "time_series",
+              "format": "table",
               "hide": false,
               "instant": true,
-              "legendFormat": "{{volume_name}} {{id}}",
               "range": false,
               "refId": "B"
             }
           ],
           "title": "Volumes Close to ${iops_limit} Write IOPS Limit",
-          "type": "bargauge",
-          "description": "Pure volumes of the ${iops_limit}-IOPS volume types whose peak write IOPS over the selected time range reached 85% of the limit or more, as a percentage of the limit. Pure only: Ceph volumes have no per-volume IOPS in this exporter."
+          "type": "table",
+          "description": "Pure volumes of the ${iops_limit}-IOPS volume types whose peak write IOPS over the selected time range reached 85% of the limit or more, as a percentage of the limit. Pure only: Ceph volumes have no per-volume IOPS in this exporter.",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true
+                },
+                "indexByName": {
+                  "volume_name": 0,
+                  "id": 1,
+                  "volume_type": 2,
+                  "Value": 3
+                },
+                "renameByName": {
+                  "volume_name": "Volume",
+                  "id": "Volume ID",
+                  "volume_type": "Type",
+                  "Value": "Peak % of limit"
+                }
+              }
+            },
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                    "Volume",
+                    "Volume ID",
+                    "Type",
+                    "Peak % of limit"
+                  ]
+                }
+              }
+            }
+          ]
         },
         {
           "datasource": {
@@ -4002,32 +4082,80 @@
           },
           "fieldConfig": {
             "defaults": {
-              "unit": "percent",
-              "min": 0,
-              "max": 150,
-              "decimals": 0,
-              "color": {
-                "mode": "thresholds"
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": false,
+                "inspect": true
               },
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
+              "unit": "string"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Peak % of limit"
+                },
+                "properties": [
                   {
-                    "color": "green",
-                    "value": null
+                    "id": "unit",
+                    "value": "percent"
                   },
                   {
-                    "color": "yellow",
-                    "value": 85
+                    "id": "decimals",
+                    "value": 0
                   },
                   {
-                    "color": "red",
-                    "value": 100
+                    "id": "min",
+                    "value": 0
+                  },
+                  {
+                    "id": "max",
+                    "value": 150
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "yellow",
+                          "value": 85
+                        },
+                        {
+                          "color": "red",
+                          "value": 100
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "gauge",
+                      "mode": "gradient",
+                      "valueDisplayMode": "color"
+                    }
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 320
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 19,
@@ -4037,24 +4165,22 @@
           },
           "id": 79,
           "options": {
-            "displayMode": "gradient",
-            "orientation": "horizontal",
-            "showUnfilled": true,
-            "valueMode": "color",
-            "namePlacement": "left",
-            "sizing": "manual",
-            "minVizHeight": 16,
-            "maxVizHeight": 22,
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
+            "showHeader": true,
+            "cellHeight": "sm",
+            "footer": {
+              "show": false,
+              "reducer": [
+                "sum"
               ],
               "fields": "",
-              "values": false
+              "countRows": false
             },
-            "legend": {
-              "showLegend": false
-            }
+            "sortBy": [
+              {
+                "displayName": "Peak % of limit",
+                "desc": true
+              }
+            ]
           },
           "pluginVersion": "11.6.2",
           "targets": [
@@ -4066,17 +4192,51 @@
               "editorMode": "code",
               "exemplar": false,
               "expr": "sort_desc(\n  max_over_time((\n  label_replace(purefa_volume_performance_throughput_iops{os_region=~\"$cluster\",dimension=\"reads_per_sec\"}, \"id\", \"$1\", \"name\", \"volume-(.*)-cinder\")\n  + on(id) group_left(volume_type, volume_name)\n  (0 * max by (id, volume_type, volume_name) (label_replace(openstack_cinder_volume_gb{os_region=~\"$cluster\",volume_type=~\".*-${iops_limit}$\"}, \"volume_name\", \"$1\", \"name\", \"(.*)\")))\n  )[$__range:1m]) / ${iops_limit} * 100 > 85\n)",
-              "format": "time_series",
+              "format": "table",
               "hide": false,
               "instant": true,
-              "legendFormat": "{{volume_name}} {{id}}",
               "range": false,
               "refId": "B"
             }
           ],
           "title": "Volumes Close to ${iops_limit} Read IOPS Limit",
-          "type": "bargauge",
-          "description": "Pure volumes of the ${iops_limit}-IOPS volume types whose peak read IOPS over the selected time range reached 85% of the limit or more, as a percentage of the limit. Pure only: Ceph volumes have no per-volume IOPS in this exporter."
+          "type": "table",
+          "description": "Pure volumes of the ${iops_limit}-IOPS volume types whose peak read IOPS over the selected time range reached 85% of the limit or more, as a percentage of the limit. Pure only: Ceph volumes have no per-volume IOPS in this exporter.",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true
+                },
+                "indexByName": {
+                  "volume_name": 0,
+                  "id": 1,
+                  "volume_type": 2,
+                  "Value": 3
+                },
+                "renameByName": {
+                  "volume_name": "Volume",
+                  "id": "Volume ID",
+                  "volume_type": "Type",
+                  "Value": "Peak % of limit"
+                }
+              }
+            },
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                    "Volume",
+                    "Volume ID",
+                    "Type",
+                    "Peak % of limit"
+                  ]
+                }
+              }
+            }
+          ]
         },
         {
           "datasource": {
@@ -5033,32 +5193,80 @@
           },
           "fieldConfig": {
             "defaults": {
-              "unit": "percent",
-              "min": 0,
-              "max": 100,
-              "decimals": 1,
-              "color": {
-                "mode": "thresholds"
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": false,
+                "inspect": true
               },
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
+              "unit": "string"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Memory used %"
+                },
+                "properties": [
                   {
-                    "color": "green",
-                    "value": null
+                    "id": "unit",
+                    "value": "percent"
                   },
                   {
-                    "color": "yellow",
-                    "value": 80
+                    "id": "decimals",
+                    "value": 1
                   },
                   {
-                    "color": "red",
-                    "value": 90
+                    "id": "min",
+                    "value": 0
+                  },
+                  {
+                    "id": "max",
+                    "value": 100
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "yellow",
+                          "value": 80
+                        },
+                        {
+                          "color": "red",
+                          "value": 90
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "gauge",
+                      "mode": "gradient",
+                      "valueDisplayMode": "color"
+                    }
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 320
                   }
                 ]
               }
-            },
-            "overrides": []
+            ]
           },
           "gridPos": {
             "h": 10,
@@ -5068,24 +5276,22 @@
           },
           "id": 47,
           "options": {
-            "displayMode": "gradient",
-            "orientation": "horizontal",
-            "showUnfilled": true,
-            "valueMode": "color",
-            "namePlacement": "left",
-            "sizing": "manual",
-            "minVizHeight": 16,
-            "maxVizHeight": 22,
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
+            "showHeader": true,
+            "cellHeight": "sm",
+            "footer": {
+              "show": false,
+              "reducer": [
+                "sum"
               ],
               "fields": "",
-              "values": false
+              "countRows": false
             },
-            "legend": {
-              "showLegend": false
-            }
+            "sortBy": [
+              {
+                "displayName": "Memory used %",
+                "desc": true
+              }
+            ]
           },
           "pluginVersion": "10.2.1",
           "targets": [
@@ -5098,13 +5304,47 @@
               "expr": "sort_desc(topk($TopItems,\n  (1 - libvirt_domain_memory_stats_usable_bytes{job=~\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\",domain=~\"$virtual_machine\"}\n    / libvirt_domain_info_maximum_memory_bytes{job=~\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\",domain=~\"$virtual_machine\"}) * 100\n  * on(domain) group_left(instance_name, project_name)\n    max by (domain, instance_name, project_name) (libvirt_domain_openstack_info{job=~\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\",domain=~\"$virtual_machine\"})\n))",
               "instant": true,
               "range": false,
-              "format": "time_series",
-              "legendFormat": "{{instance_name}} ({{project_name}})"
+              "format": "table"
             }
           ],
           "title": "Top $TopItems VMs by memory used %",
-          "type": "bargauge",
-          "description": "Guest memory in use as a share of the VM's memory: 1 - usable / maximum, where usable is the guest's MemAvailable from the balloon driver, so page cache counts as free. VMs without balloon stats are not listed."
+          "type": "table",
+          "description": "Guest memory in use as a share of the VM's memory: 1 - usable / maximum, where usable is the guest's MemAvailable from the balloon driver, so page cache counts as free. VMs without balloon stats are not listed.",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true
+                },
+                "indexByName": {
+                  "instance_name": 0,
+                  "project_name": 1,
+                  "domain": 2,
+                  "Value": 3
+                },
+                "renameByName": {
+                  "instance_name": "Instance",
+                  "project_name": "Project",
+                  "domain": "Instance ID",
+                  "Value": "Memory used %"
+                }
+              }
+            },
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                    "Instance",
+                    "Project",
+                    "Instance ID",
+                    "Memory used %"
+                  ]
+                }
+              }
+            }
+          ]
         },
         {
           "datasource": {
