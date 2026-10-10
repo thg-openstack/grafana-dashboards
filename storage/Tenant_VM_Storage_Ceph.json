@@ -751,7 +751,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_domain_openstack_info{os_region=\"$region\"}, project_name)",
+        "definition": "query_result(max by (project_name) (libvirt_domain_openstack_info{os_region=\"$region\"} * on (domain) group_left () max by (domain) (libvirt_domain_block_stats_info{os_region=\"$region\",source_protocol=\"rbd\",serial!=\"\"})))",
         "hide": 0,
         "includeAll": false,
         "label": "project",
@@ -759,15 +759,16 @@
         "name": "project",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(libvirt_domain_openstack_info{os_region=\"$region\"}, project_name)",
+          "qryType": 3,
+          "query": "query_result(max by (project_name) (libvirt_domain_openstack_info{os_region=\"$region\"} * on (domain) group_left () max by (domain) (libvirt_domain_block_stats_info{os_region=\"$region\",source_protocol=\"rbd\",serial!=\"\"})))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
-        "regex": "",
+        "regex": "/project_name=\"([^\"]+)\"/",
         "skipUrlSync": false,
         "sort": 1,
-        "type": "query"
+        "type": "query",
+        "description": "Projects with at least one Ceph RBD volume attached to an instance."
       },
       {
         "current": {},
@@ -775,7 +776,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "query_result(max by (instance_id, instance_name) (libvirt_domain_openstack_info{os_region=\"$region\",project_name=\"$project\"}))",
+        "definition": "query_result(max by (instance_id, instance_name) (libvirt_domain_openstack_info{os_region=\"$region\",project_name=\"$project\"} * on (domain) group_left () max by (domain) (libvirt_domain_block_stats_info{os_region=\"$region\",source_protocol=\"rbd\",serial!=\"\"})))",
         "hide": 0,
         "includeAll": false,
         "label": "instance",
@@ -784,14 +785,15 @@
         "options": [],
         "query": {
           "qryType": 3,
-          "query": "query_result(max by (instance_id, instance_name) (libvirt_domain_openstack_info{os_region=\"$region\",project_name=\"$project\"}))",
+          "query": "query_result(max by (instance_id, instance_name) (libvirt_domain_openstack_info{os_region=\"$region\",project_name=\"$project\"} * on (domain) group_left () max by (domain) (libvirt_domain_block_stats_info{os_region=\"$region\",source_protocol=\"rbd\",serial!=\"\"})))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
         "regex": "/\\binstance_id=\"(?<value>[^\"]+)\".*\\binstance_name=\"(?<text>[^\"]+)\"/",
         "skipUrlSync": false,
         "sort": 1,
-        "type": "query"
+        "type": "query",
+        "description": "Instances with at least one Ceph RBD volume attached."
       },
       {
         "current": {},
@@ -799,7 +801,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",source_protocol=\"rbd\"}, serial)",
+        "definition": "label_values(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",source_protocol=\"rbd\",serial!=\"\"}, serial)",
         "hide": 0,
         "includeAll": false,
         "label": "volume (Cinder ID)",
@@ -808,7 +810,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",source_protocol=\"rbd\"}, serial)",
+          "query": "label_values(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",source_protocol=\"rbd\",serial!=\"\"}, serial)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
