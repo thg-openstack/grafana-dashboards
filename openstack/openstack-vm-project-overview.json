@@ -151,17 +151,17 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 5,
         "w": 6,
         "x": 0,
         "y": 1
       },
       "id": 77,
       "options": {
-        "colorMode": "value",
+        "colorMode": "none",
         "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
+        "justifyMode": "center",
+        "orientation": "vertical",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
@@ -172,7 +172,11 @@
         },
         "showPercentChange": false,
         "textMode": "value_and_name",
-        "wideLayout": true
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 30
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -239,12 +243,13 @@
                 "color": "green"
               }
             ]
-          }
+          },
+          "unit": "none"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 5,
         "w": 6,
         "x": 6,
         "y": 1
@@ -253,8 +258,8 @@
       "options": {
         "colorMode": "none",
         "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
+        "justifyMode": "center",
+        "orientation": "vertical",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
@@ -264,8 +269,12 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "textMode": "value_and_name",
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 30
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -334,12 +343,12 @@
               }
             ]
           },
-          "unit": "decmbytes"
+          "unit": "mbytes"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 5,
         "w": 6,
         "x": 12,
         "y": 1
@@ -348,8 +357,8 @@
       "options": {
         "colorMode": "none",
         "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
+        "justifyMode": "center",
+        "orientation": "vertical",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
@@ -359,8 +368,12 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "textMode": "value_and_name",
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 30
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -433,12 +446,12 @@
               }
             ]
           },
-          "unit": "decgbytes"
+          "unit": "gbytes"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 5,
         "w": 6,
         "x": 18,
         "y": 1
@@ -447,8 +460,8 @@
       "options": {
         "colorMode": "none",
         "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
+        "justifyMode": "center",
+        "orientation": "vertical",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
@@ -458,8 +471,12 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "textMode": "value_and_name",
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 30
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -505,7 +522,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 6
       },
       "id": 69,
       "panels": [],
@@ -541,7 +558,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 9
+        "y": 7
       },
       "id": 72,
       "options": {
@@ -605,7 +622,7 @@
         "h": 8,
         "w": 5,
         "x": 8,
-        "y": 9
+        "y": 7
       },
       "id": 71,
       "options": {
@@ -719,7 +736,7 @@
         "h": 8,
         "w": 11,
         "x": 13,
-        "y": 9
+        "y": 7
       },
       "id": 76,
       "options": {
@@ -770,7 +787,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 15
       },
       "id": 9,
       "panels": [],
@@ -804,7 +821,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 18
+        "y": 16
       },
       "id": 4,
       "options": {
@@ -870,7 +887,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 18
+        "y": 16
       },
       "id": 5,
       "options": {
@@ -936,7 +953,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 18
+        "y": 16
       },
       "id": 6,
       "options": {
@@ -1012,7 +1029,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 18
+        "y": 16
       },
       "id": 66,
       "options": {
@@ -1105,7 +1122,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 18
+        "y": 16
       },
       "id": 55,
       "options": {
@@ -1194,7 +1211,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 22
+        "y": 20
       },
       "id": 54,
       "options": {
@@ -1270,7 +1287,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 22
+        "y": 20
       },
       "id": 7,
       "options": {
@@ -1346,7 +1363,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 22
+        "y": 20
       },
       "id": 48,
       "options": {
@@ -1423,7 +1440,7 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 25
+        "y": 23
       },
       "id": 51,
       "options": {
@@ -1513,7 +1530,7 @@
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 25
+        "y": 23
       },
       "id": 56,
       "options": {
@@ -1592,7 +1609,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 26
+        "y": 24
       },
       "id": 53,
       "options": {
@@ -1669,7 +1686,7 @@
         "h": 5,
         "w": 4,
         "x": 8,
-        "y": 26
+        "y": 24
       },
       "id": 10,
       "options": {
@@ -1768,7 +1785,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 31
+        "y": 29
       },
       "id": 63,
       "options": {
@@ -1856,7 +1873,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 31
+        "y": 29
       },
       "id": 67,
       "options": {
@@ -1946,7 +1963,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 31
+        "y": 29
       },
       "id": 68,
       "options": {
@@ -2003,7 +2020,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 36
       },
       "id": 15,
       "panels": [
@@ -2067,7 +2084,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 39
+            "y": 37
           },
           "id": 18,
           "options": {
@@ -2168,7 +2185,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 39
+            "y": 37
           },
           "id": 12,
           "options": {
@@ -2264,7 +2281,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 55
+            "y": 53
           },
           "id": 61,
           "options": {
@@ -2312,7 +2329,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 37
       },
       "id": 31,
       "panels": [
@@ -2376,7 +2393,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 40
+            "y": 38
           },
           "id": 32,
           "options": {
@@ -2472,7 +2489,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 40
+            "y": 38
           },
           "id": 33,
           "options": {
@@ -2570,7 +2587,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 56
+            "y": 54
           },
           "id": 34,
           "options": {
@@ -2668,7 +2685,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 56
+            "y": 54
           },
           "id": 35,
           "options": {
@@ -2770,7 +2787,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 64
+            "y": 62
           },
           "id": 58,
           "options": {
@@ -2874,7 +2891,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 64
+            "y": 62
           },
           "id": 59,
           "options": {
@@ -2922,7 +2939,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 38
       },
       "id": 24,
       "panels": [
@@ -3007,7 +3024,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 91
+            "y": 89
           },
           "id": 64,
           "options": {
@@ -3138,7 +3155,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 101
+            "y": 99
           },
           "id": 19,
           "options": {
@@ -3237,7 +3254,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 101
+            "y": 99
           },
           "id": 20,
           "options": {
@@ -3337,7 +3354,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 109
+            "y": 107
           },
           "id": 21,
           "options": {
@@ -3438,7 +3455,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 109
+            "y": 107
           },
           "id": 26,
           "options": {
@@ -3539,7 +3556,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 117
+            "y": 115
           },
           "id": 25,
           "options": {
@@ -3640,7 +3657,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 117
+            "y": 115
           },
           "id": 27,
           "options": {
@@ -3690,7 +3707,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 39
       },
       "id": 37,
       "panels": [
@@ -3754,7 +3771,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 92
+            "y": 90
           },
           "id": 38,
           "options": {
@@ -3853,7 +3870,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 92
+            "y": 90
           },
           "id": 39,
           "options": {
@@ -3953,7 +3970,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 100
+            "y": 98
           },
           "id": 40,
           "options": {
@@ -4052,7 +4069,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 100
+            "y": 98
           },
           "id": 41,
           "options": {
@@ -4152,7 +4169,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 108
+            "y": 106
           },
           "id": 42,
           "options": {
@@ -4251,7 +4268,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 108
+            "y": 106
           },
           "id": 43,
           "options": {
@@ -4351,7 +4368,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 116
+            "y": 114
           },
           "id": 44,
           "options": {
@@ -4451,7 +4468,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 116
+            "y": 114
           },
           "id": 45,
           "options": {
@@ -4499,7 +4516,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 40
       },
       "id": 29,
       "panels": [
@@ -4638,7 +4655,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 43
+            "y": 41
           },
           "id": 65,
           "options": {
@@ -4923,7 +4940,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 41
       },
       "id": 75,
       "panels": [
@@ -4987,7 +5004,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 94
+            "y": 92
           },
           "id": 74,
           "options": {
