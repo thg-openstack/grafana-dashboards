@@ -67,7 +67,7 @@
   "panels": [
     {
       "type": "row",
-      "title": "Disks of $instance",
+      "title": "Instance $instance_name ($instance)",
       "collapsed": false,
       "gridPos": {
         "h": 1,
@@ -656,6 +656,30 @@
         "query": {
           "qryType": 1,
           "query": "label_values(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\"}, target_device)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_domain_openstack_info{os_region=\"$region\",domain=\"$instance\"}, instance_name)",
+        "hide": 2,
+        "includeAll": false,
+        "label": "instance_name",
+        "multi": false,
+        "name": "instance_name",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(libvirt_domain_openstack_info{os_region=\"$region\",domain=\"$instance\"}, instance_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
