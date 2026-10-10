@@ -105,7 +105,7 @@
       },
       "id": 10,
       "panels": [],
-      "title": "Volume Stats",
+      "title": "Volume Stats: $volume_name ($volume)",
       "type": "row"
     },
     {
@@ -202,7 +202,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_space_bytes{name=\"volume-$name-cinder\",space=\"total_provisioned\"}",
+          "expr": "purefa_volume_space_bytes{name=\"volume-$volume-cinder\",space=\"total_provisioned\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Size",
@@ -216,7 +216,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_space_bytes{name=\"volume-$name-cinder\",space=\"total_physical\"}",
+          "expr": "purefa_volume_space_bytes{name=\"volume-$volume-cinder\",space=\"total_physical\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Used",
@@ -230,7 +230,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_space_bytes{name=\"volume-$name-cinder\",space=\"snapshots\"}",
+          "expr": "purefa_volume_space_bytes{name=\"volume-$volume-cinder\",space=\"snapshots\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Snapshot Used",
@@ -298,15 +298,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "max(purefa_volume_performance_throughput_iops{name=~\"volume-$name-cinder\", dimension=\"reads_per_sec\"})\n",
-          "interval": "",
-          "legendFormat": "Max Read Throughput",
+          "expr": "max_over_time(purefa_volume_performance_throughput_iops{name=\"volume-$volume-cinder\",dimension=\"reads_per_sec\"}[$__range])",
+          "legendFormat": "Max Read IOPS",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Max Read Throughput ",
+      "title": "Max Read IOPS",
       "type": "stat"
     },
     {
@@ -366,15 +364,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max(purefa_volume_performance_throughput_iops{name=~\"volume-$name-cinder\", dimension=\"writes_per_sec\"})",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
+          "expr": "max_over_time(purefa_volume_performance_throughput_iops{name=\"volume-$volume-cinder\",dimension=\"writes_per_sec\"}[$__range])",
+          "legendFormat": "Max Write IOPS",
           "range": true,
-          "refId": "B"
+          "refId": "A"
         }
       ],
-      "title": "Max Write Throughput",
+      "title": "Max Write IOPS",
       "type": "stat"
     },
     {
@@ -433,7 +429,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "iops"
         },
         "overrides": [
           {
@@ -482,29 +479,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "purefa_volume_performance_throughput_iops{name=~\"volume-$name-cinder\",dimension=\"reads_per_sec\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "IOPS",
+          "expr": "purefa_volume_performance_throughput_iops{name=\"volume-$volume-cinder\",dimension=\"reads_per_sec\"}",
+          "legendFormat": "Read IOPS",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "avg_over_time(purefa_volume_performance_latency_usec{name=~\"volume-$name-cinder\",dimension=\"usec_per_read_op\"})/1000",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "Latency",
-          "range": true,
-          "refId": "C"
         }
       ],
-      "title": "Volume Read IOPS ",
+      "title": "Volume Read IOPS",
       "type": "timeseries"
     },
     {
@@ -567,7 +548,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "iops"
         },
         "overrides": [
           {
@@ -631,26 +613,10 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "purefa_volume_performance_throughput_iops{name=~\"volume-$name-cinder\",dimension=\"writes_per_sec\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "IOPS",
+          "expr": "purefa_volume_performance_throughput_iops{name=\"volume-$volume-cinder\",dimension=\"writes_per_sec\"}",
+          "legendFormat": "Write IOPS",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "avg_over_time(purefa_volume_performance_latency_usec{ name=~\"volume-$name-cinder\", dimension=\"usec_per_write_op\" })/1000",
-          "hide": true,
-          "instant": false,
-          "legendFormat": "Latency",
-          "range": true,
-          "refId": "C"
         }
       ],
       "title": "Volume Write IOPS",
@@ -712,7 +678,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "ms"
         },
         "overrides": [
           {
@@ -761,26 +728,10 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "purefa_volume_performance_throughput_iops{name=~\"volume-$name-cinder\",dimension=\"reads_per_sec\"}",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "IOPS",
+          "expr": "purefa_volume_performance_latency_usec{name=\"volume-$volume-cinder\",dimension=\"usec_per_read_op\"} / 1000",
+          "legendFormat": "Read latency",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "avg_over_time(purefa_volume_performance_latency_usec{name=~\"volume-$name-cinder\",dimension=\"usec_per_read_op\"})/1000",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Latency",
-          "range": true,
-          "refId": "C"
         }
       ],
       "title": "Volume Read Latency",
@@ -842,7 +793,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "ms"
         },
         "overrides": [
           {
@@ -906,26 +858,10 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "purefa_volume_performance_throughput_iops{name=~\"volume-$name-cinder\",dimension=\"writes_per_sec\"}",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "IOPS",
+          "expr": "purefa_volume_performance_latency_usec{name=\"volume-$volume-cinder\",dimension=\"usec_per_write_op\"} / 1000",
+          "legendFormat": "Write latency",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "avg_over_time(purefa_volume_performance_latency_usec{ name=~\"volume-$name-cinder\", dimension=\"usec_per_write_op\" })/1000",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Latency",
-          "range": true,
-          "refId": "C"
         }
       ],
       "title": "Volume Write Latency",
@@ -987,7 +923,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "Bps"
         },
         "overrides": [
           {
@@ -1036,11 +973,8 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "purefa_volume_performance_bandwidth_bytes{name=~\"volume-$name-cinder\",dimension=\"read_bytes_per_sec\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Bytes",
+          "expr": "purefa_volume_performance_bandwidth_bytes{name=\"volume-$volume-cinder\",dimension=\"read_bytes_per_sec\"}",
+          "legendFormat": "Read",
           "range": true,
           "refId": "A"
         }
@@ -1104,7 +1038,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "Bps"
         },
         "overrides": [
           {
@@ -1168,11 +1103,8 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "purefa_volume_performance_bandwidth_bytes{name=~\"volume-$name-cinder\",dimension=\"read_bytes_per_sec\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Bytes",
+          "expr": "purefa_volume_performance_bandwidth_bytes{name=\"volume-$volume-cinder\",dimension=\"write_bytes_per_sec\"}",
+          "legendFormat": "Write",
           "range": true,
           "refId": "A"
         }
@@ -1236,7 +1168,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bytes"
         },
         "overrides": [
           {
@@ -1285,16 +1218,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "purefa_volume_performance_average_bytes{name=~\"volume-$name-cinder\",dimension=\"bytes_per_read\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Bytes",
+          "expr": "purefa_volume_performance_average_bytes{name=\"volume-$volume-cinder\",dimension=\"bytes_per_read\"}",
+          "legendFormat": "Read size",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Volume Read Bytes",
+      "title": "Average Read Size",
       "type": "timeseries"
     },
     {
@@ -1353,7 +1283,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bytes"
         },
         "overrides": [
           {
@@ -1417,16 +1348,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "exemplar": true,
-          "expr": "purefa_volume_performance_average_bytes{name=~\"volume-$name-cinder\",dimension=\"bytes_per_write\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Bytes",
+          "expr": "purefa_volume_performance_average_bytes{name=\"volume-$volume-cinder\",dimension=\"bytes_per_write\"}",
+          "legendFormat": "Write size",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Volume Write bytes",
+      "title": "Average Write Size",
       "type": "timeseries"
     },
     {
@@ -1513,7 +1441,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_performance_latency_usec{name=~\"volume-$name-cinder\"}",
+          "expr": "purefa_volume_performance_latency_usec{name=\"volume-$volume-cinder\",dimension=\"usec_per_write_op\"}",
           "interval": "",
           "legendFormat": "Write",
           "range": true,
@@ -1526,7 +1454,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_performance_latency_usec{name=~\"volume-$name-cinder\"}",
+          "expr": "purefa_volume_performance_latency_usec{name=\"volume-$volume-cinder\",dimension=\"usec_per_read_op\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Read",
@@ -1607,19 +1535,20 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(openstack_nova_server_status{os_region=\"$region\", tenant_id=\"$tenant_id\"},name)",
+        "definition": "query_result(openstack_nova_server_status{os_region=\"$region\", tenant_id=\"$tenant_id\"})",
         "description": "",
         "label": "instance",
         "name": "instance",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(openstack_nova_server_status{os_region=\"$region\", tenant_id=\"$tenant_id\"},name)",
+          "qryType": 3,
+          "query": "query_result(openstack_nova_server_status{os_region=\"$region\", tenant_id=\"$tenant_id\"})",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
-        "type": "query"
+        "regex": "/\\bid=\"(?<value>[^\"]+)\".*\\bname=\"(?<text>[^\"]+)\"/",
+        "type": "query",
+        "sort": 1
       },
       {
         "current": {},
@@ -1649,19 +1578,19 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "query_result(openstack_cinder_volume_gb  * on(server_id) group_left()    label_replace(      label_replace(        openstack_nova_server_status{name=\"$instance\"},        \"server_id\", \"$1\", \"id\", \"(.*)\"      ),      \"server_name\", \"$1\", \"name\", \"(.*)\"    ))",
-        "description": "",
+        "definition": "label_values(openstack_cinder_volume_gb{os_region=\"$region\", server_id=\"$instance\"},id)",
+        "description": "Cinder volume ID attached to the instance",
         "includeAll": false,
-        "label": "vol_name",
-        "name": "vol_name",
+        "label": "volume",
+        "name": "volume",
         "options": [],
         "query": {
-          "qryType": 3,
-          "query": "query_result(openstack_cinder_volume_gb  * on(server_id) group_left()    label_replace(      label_replace(        openstack_nova_server_status{name=\"$instance\"},        \"server_id\", \"$1\", \"id\", \"(.*)\"      ),      \"server_name\", \"$1\", \"name\", \"(.*)\"    ))",
+          "qryType": 1,
+          "query": "label_values(openstack_cinder_volume_gb{os_region=\"$region\", server_id=\"$instance\"},id)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "/name=\"([^\"]+)\"/",
+        "regex": "",
         "type": "query"
       },
       {
@@ -1701,14 +1630,14 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values({os_region=\"$region\", tenant=\"$project\"},tenant_id)",
+        "definition": "label_values(openstack_cinder_limits_volume_max_gb{os_region=\"$region\", tenant=\"$project\"},tenant_id)",
         "hide": 2,
         "label": "tenant_id",
         "name": "tenant_id",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({os_region=\"$region\", tenant=\"$project\"},tenant_id)",
+          "query": "label_values(openstack_cinder_limits_volume_max_gb{os_region=\"$region\", tenant=\"$project\"},tenant_id)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1788,14 +1717,14 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(openstack_cinder_volume_gb{name=~\"$vol_name\"},id)",
+        "definition": "label_values(openstack_cinder_volume_gb{os_region=\"$region\", id=\"$volume\"},name)",
         "hide": 2,
-        "label": "name",
-        "name": "name",
+        "label": "volume_name",
+        "name": "volume_name",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(openstack_cinder_volume_gb{name=~\"$vol_name\"},id)",
+          "query": "label_values(openstack_cinder_volume_gb{os_region=\"$region\", id=\"$volume\"},name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
