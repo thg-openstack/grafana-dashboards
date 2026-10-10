@@ -691,7 +691,7 @@
       "options": {
         "colorMode": "background",
         "graphMode": "none",
-        "justifyMode": "auto",
+        "justifyMode": "center",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
@@ -702,8 +702,12 @@
           "values": false
         },
         "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "textMode": "value_and_name",
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 26
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -724,18 +728,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "refId": "B",
-          "expr": "sum(libvirt_domain_memory_stats_rss_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
-          "legendFormat": "On host",
-          "range": true,
-          "instant": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "refId": "C",
-          "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} - libvirt_domain_memory_stats_usable_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+          "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} - (libvirt_domain_memory_stats_usable_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} > 0))",
           "legendFormat": "In guests",
           "range": true,
           "instant": false
@@ -745,16 +738,16 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "refId": "D",
+          "refId": "C",
           "expr": "sum(node_memory_MemTotal_bytes{os_region=~\"$cluster\",instance=~\"$compute\"}) - sum(node_memory_MemAvailable_bytes{os_region=~\"$cluster\",instance=~\"$compute\"})",
           "legendFormat": "Host used",
           "range": true,
           "instant": false
         }
       ],
-      "title": "RAM: allocated / on host / in guests",
+      "title": "RAM: allocated / in guests / host used",
       "type": "stat",
-      "description": "Allocated: flavor memory of the VMs. On host (QEMU): VM memory resident on the hypervisors. In guests: memory the guests use (maximum minus guest MemAvailable; page cache counts as free). Host used: hypervisor MemTotal - MemAvailable, VMs plus host processes."
+      "description": "Allocated: flavor memory of the VMs. On host (QEMU): VM memory resident on the hypervisors. In guests: memory the guests use (maximum minus guest MemAvailable; page cache counts as free), for VMs that report guest memory stats (balloon driver). No guest stats: allocated memory of VMs that report none, not included in In guests. Host used: hypervisor MemTotal - MemAvailable. On host (QEMU RSS) and VMs without guest stats are in the Capacity trend graph."
     },
     {
       "datasource": {
@@ -1695,105 +1688,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Price a year with commit and without commit",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#299c46"
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 50
-              },
-              {
-                "color": "#d44a3a",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "currencyUSD"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "x": 0,
-        "y": 24,
-        "w": 11,
-        "h": 8
-      },
-      "id": 78,
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2 * 350",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Without commit",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2 * 338",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "With commit",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "Price per year running on VMware",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1847,9 +1741,9 @@
         "overrides": []
       },
       "gridPos": {
-        "x": 11,
+        "x": 0,
         "y": 24,
-        "w": 13,
+        "w": 24,
         "h": 8
       },
       "id": 63,
@@ -9030,7 +8924,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Allocated: flavor memory of the VMs. On host (QEMU): VM memory resident on the hypervisors. In guests: memory the guests use (maximum minus guest MemAvailable; page cache counts as free). Host used: hypervisor MemTotal - MemAvailable, VMs plus host processes.",
+          "description": "Allocated: flavor memory of the VMs. On host (QEMU): VM memory resident on the hypervisors. In guests: memory the guests use (maximum minus guest MemAvailable; page cache counts as free), for VMs that report guest memory stats (balloon driver). No guest stats: allocated memory of VMs that report none, not included in In guests. Host used: hypervisor MemTotal - MemAvailable.",
           "gridPos": {
             "x": 0,
             "y": 49,
@@ -9088,8 +8982,19 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "refId": "E",
-              "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} - libvirt_domain_memory_stats_usable_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+              "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} - (libvirt_domain_memory_stats_usable_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} > 0))",
               "legendFormat": "In guests",
+              "range": true,
+              "instant": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "refId": "F",
+              "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} unless on(domain) (libvirt_domain_memory_stats_usable_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} > 0)) or vector(0)",
+              "legendFormat": "No guest stats",
               "range": true,
               "instant": false
             }
@@ -9842,6 +9747,123 @@
           "title": "Storage as reported to Nova",
           "type": "timeseries",
           "description": "Placement DISK_GB summed over hosts. With shared (Ceph) storage every host reports the same pool, so the total counts it once per host: not local disk."
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "VMware comparison",
+      "collapsed": true,
+      "id": 114,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "Price a year with commit and without commit",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "match": "null",
+                    "result": {
+                      "text": "N/A"
+                    }
+                  },
+                  "type": "special"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "#299c46"
+                  },
+                  {
+                    "color": "rgba(237, 129, 40, 0.89)",
+                    "value": 50
+                  },
+                  {
+                    "color": "#d44a3a",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "currencyUSD"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 43,
+            "w": 6,
+            "h": 4
+          },
+          "id": 78,
+          "maxDataPoints": 100,
+          "options": {
+            "colorMode": "none",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true,
+            "text": {
+              "titleSize": 12,
+              "valueSize": 20
+            }
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2 * 350",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "Without commit",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2 * 338",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "With commit",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Price per year running on VMware",
+          "type": "stat"
         }
       ]
     }
