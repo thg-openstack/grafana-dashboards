@@ -1561,7 +1561,7 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "sort": 1,
         "type": "query"
       },
@@ -1597,7 +1597,7 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(openstack_volume_metadata{os_region=\"$region\",uuid=\"$volume\"}, host)",
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "backend",
         "multi": false,
@@ -1610,7 +1610,7 @@
         },
         "refresh": 2,
         "regex": "/^([^@]+)@/",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "sort": 1,
         "type": "query",
         "description": "Cinder backend of the selected volume, from its host (ceph@... or pure@...)."
@@ -1635,7 +1635,7 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "sort": 1,
         "type": "query"
       },
@@ -1659,7 +1659,7 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "sort": 1,
         "type": "query"
       },
@@ -1683,7 +1683,7 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "sort": 1,
         "type": "query"
       },
@@ -1707,7 +1707,7 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "sort": 1,
         "type": "query"
       },
@@ -1731,7 +1731,7 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "sort": 1,
         "type": "query"
       }
