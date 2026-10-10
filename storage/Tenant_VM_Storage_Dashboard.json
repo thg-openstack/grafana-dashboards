@@ -202,7 +202,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_space_bytes{name=\"volume-$volume-cinder\",space=\"total_provisioned\"}",
+          "expr": "purefa_volume_space_bytes{name=\"$pure_name\",space=\"total_provisioned\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Size",
@@ -216,7 +216,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_space_bytes{name=\"volume-$volume-cinder\",space=\"total_physical\"}",
+          "expr": "purefa_volume_space_bytes{name=\"$pure_name\",space=\"total_physical\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Used",
@@ -230,7 +230,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_space_bytes{name=\"volume-$volume-cinder\",space=\"snapshots\"}",
+          "expr": "purefa_volume_space_bytes{name=\"$pure_name\",space=\"snapshots\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Snapshot Used",
@@ -298,7 +298,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max_over_time(purefa_volume_performance_throughput_iops{name=\"volume-$volume-cinder\",dimension=\"reads_per_sec\"}[$__range])",
+          "expr": "max_over_time(purefa_volume_performance_throughput_iops{name=\"$pure_name\",dimension=\"reads_per_sec\"}[$__range])",
           "legendFormat": "Max Read IOPS",
           "range": true,
           "refId": "A"
@@ -364,7 +364,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max_over_time(purefa_volume_performance_throughput_iops{name=\"volume-$volume-cinder\",dimension=\"writes_per_sec\"}[$__range])",
+          "expr": "max_over_time(purefa_volume_performance_throughput_iops{name=\"$pure_name\",dimension=\"writes_per_sec\"}[$__range])",
           "legendFormat": "Max Write IOPS",
           "range": true,
           "refId": "A"
@@ -479,7 +479,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "purefa_volume_performance_throughput_iops{name=\"volume-$volume-cinder\",dimension=\"reads_per_sec\"}",
+          "expr": "purefa_volume_performance_throughput_iops{name=\"$pure_name\",dimension=\"reads_per_sec\"}",
           "legendFormat": "Read IOPS",
           "range": true,
           "refId": "A"
@@ -613,7 +613,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "purefa_volume_performance_throughput_iops{name=\"volume-$volume-cinder\",dimension=\"writes_per_sec\"}",
+          "expr": "purefa_volume_performance_throughput_iops{name=\"$pure_name\",dimension=\"writes_per_sec\"}",
           "legendFormat": "Write IOPS",
           "range": true,
           "refId": "A"
@@ -728,7 +728,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "purefa_volume_performance_latency_usec{name=\"volume-$volume-cinder\",dimension=\"usec_per_read_op\"} / 1000",
+          "expr": "purefa_volume_performance_latency_usec{name=\"$pure_name\",dimension=\"usec_per_read_op\"} / 1000",
           "legendFormat": "Read latency",
           "range": true,
           "refId": "A"
@@ -858,7 +858,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "purefa_volume_performance_latency_usec{name=\"volume-$volume-cinder\",dimension=\"usec_per_write_op\"} / 1000",
+          "expr": "purefa_volume_performance_latency_usec{name=\"$pure_name\",dimension=\"usec_per_write_op\"} / 1000",
           "legendFormat": "Write latency",
           "range": true,
           "refId": "A"
@@ -973,7 +973,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "purefa_volume_performance_bandwidth_bytes{name=\"volume-$volume-cinder\",dimension=\"read_bytes_per_sec\"}",
+          "expr": "purefa_volume_performance_bandwidth_bytes{name=\"$pure_name\",dimension=\"read_bytes_per_sec\"}",
           "legendFormat": "Read",
           "range": true,
           "refId": "A"
@@ -1103,7 +1103,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "purefa_volume_performance_bandwidth_bytes{name=\"volume-$volume-cinder\",dimension=\"write_bytes_per_sec\"}",
+          "expr": "purefa_volume_performance_bandwidth_bytes{name=\"$pure_name\",dimension=\"write_bytes_per_sec\"}",
           "legendFormat": "Write",
           "range": true,
           "refId": "A"
@@ -1218,7 +1218,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "purefa_volume_performance_average_bytes{name=\"volume-$volume-cinder\",dimension=\"bytes_per_read\"}",
+          "expr": "purefa_volume_performance_average_bytes{name=\"$pure_name\",dimension=\"bytes_per_read\"}",
           "legendFormat": "Read size",
           "range": true,
           "refId": "A"
@@ -1348,7 +1348,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "purefa_volume_performance_average_bytes{name=\"volume-$volume-cinder\",dimension=\"bytes_per_write\"}",
+          "expr": "purefa_volume_performance_average_bytes{name=\"$pure_name\",dimension=\"bytes_per_write\"}",
           "legendFormat": "Write size",
           "range": true,
           "refId": "A"
@@ -1441,7 +1441,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_performance_latency_usec{name=\"volume-$volume-cinder\",dimension=\"usec_per_write_op\"}",
+          "expr": "purefa_volume_performance_latency_usec{name=\"$pure_name\",dimension=\"usec_per_write_op\"}",
           "interval": "",
           "legendFormat": "Write",
           "range": true,
@@ -1454,7 +1454,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "purefa_volume_performance_latency_usec{name=\"volume-$volume-cinder\",dimension=\"usec_per_read_op\"}",
+          "expr": "purefa_volume_performance_latency_usec{name=\"$pure_name\",dimension=\"usec_per_read_op\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Read",
@@ -1516,18 +1516,19 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values({job=\"libvirt_exporter\", os_region=\"$region\", __name__=~\"libvirt_domain_info_meta|libvirt_domain_openstack_info\"},project_name)",
+        "definition": "query_result(max by (project_name) (libvirt_domain_openstack_info{os_region=\"$region\"} * on (domain) group_left () max by (domain) (label_replace(libvirt_domain_block_stats_info{os_region=\"$region\",serial!=\"\"}, \"uuid\", \"$1\", \"serial\", \"(.*)\") * on (uuid) group_left () max by (uuid) (openstack_volume_metadata{os_region=\"$region\",host=~\"pure@.*\"}))))",
         "label": "project",
         "name": "project",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values({job=\"libvirt_exporter\", os_region=\"$region\", __name__=~\"libvirt_domain_info_meta|libvirt_domain_openstack_info\"},project_name)",
+          "qryType": 3,
+          "query": "query_result(max by (project_name) (libvirt_domain_openstack_info{os_region=\"$region\"} * on (domain) group_left () max by (domain) (label_replace(libvirt_domain_block_stats_info{os_region=\"$region\",serial!=\"\"}, \"uuid\", \"$1\", \"serial\", \"(.*)\") * on (uuid) group_left () max by (uuid) (openstack_volume_metadata{os_region=\"$region\",host=~\"pure@.*\"}))))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
-        "type": "query"
+        "regex": "/project_name=\"([^\"]+)\"/",
+        "type": "query",
+        "description": "Projects with at least one Pure volume attached to an instance."
       },
       {
         "current": {},
@@ -1535,18 +1536,18 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "query_result(openstack_nova_server_status{os_region=\"$region\", tenant_id=\"$tenant_id\"})",
-        "description": "",
+        "definition": "query_result(max by (instance_id, instance_name) (libvirt_domain_openstack_info{os_region=\"$region\",project_name=\"$project\"} * on (domain) group_left () max by (domain) (label_replace(libvirt_domain_block_stats_info{os_region=\"$region\",serial!=\"\"}, \"uuid\", \"$1\", \"serial\", \"(.*)\") * on (uuid) group_left () max by (uuid) (openstack_volume_metadata{os_region=\"$region\",host=~\"pure@.*\"}))))",
+        "description": "Instances with at least one Pure volume attached.",
         "label": "instance",
         "name": "instance",
         "options": [],
         "query": {
           "qryType": 3,
-          "query": "query_result(openstack_nova_server_status{os_region=\"$region\", tenant_id=\"$tenant_id\"})",
+          "query": "query_result(max by (instance_id, instance_name) (libvirt_domain_openstack_info{os_region=\"$region\",project_name=\"$project\"} * on (domain) group_left () max by (domain) (label_replace(libvirt_domain_block_stats_info{os_region=\"$region\",serial!=\"\"}, \"uuid\", \"$1\", \"serial\", \"(.*)\") * on (uuid) group_left () max by (uuid) (openstack_volume_metadata{os_region=\"$region\",host=~\"pure@.*\"}))))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "/\\bid=\"(?<value>[^\"]+)\".*\\bname=\"(?<text>[^\"]+)\"/",
+        "regex": "/\\binstance_id=\"(?<value>[^\"]+)\".*\\binstance_name=\"(?<text>[^\"]+)\"/",
         "type": "query",
         "sort": 1
       },
@@ -1578,19 +1579,19 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(openstack_cinder_volume_gb{os_region=\"$region\", server_id=\"$instance\"},id)",
-        "description": "Cinder volume ID attached to the instance",
+        "definition": "query_result(max by (uuid) (label_replace(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",serial!=\"\"}, \"uuid\", \"$1\", \"serial\", \"(.*)\") * on (uuid) group_left () max by (uuid) (openstack_volume_metadata{os_region=\"$region\",host=~\"pure@.*\"})))",
+        "description": "Cinder volume ID; Pure-backed volumes attached to the instance.",
         "includeAll": false,
         "label": "volume",
         "name": "volume",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(openstack_cinder_volume_gb{os_region=\"$region\", server_id=\"$instance\"},id)",
+          "qryType": 3,
+          "query": "query_result(max by (uuid) (label_replace(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",serial!=\"\"}, \"uuid\", \"$1\", \"serial\", \"(.*)\") * on (uuid) group_left () max by (uuid) (openstack_volume_metadata{os_region=\"$region\",host=~\"pure@.*\"})))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
+        "regex": "/uuid=\"([^\"]+)\"/",
         "type": "query"
       },
       {
@@ -1623,26 +1624,6 @@
         "refresh": 1,
         "regex": "",
         "type": "datasource"
-      },
-      {
-        "current": {},
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "definition": "label_values(openstack_cinder_limits_volume_max_gb{os_region=\"$region\", tenant=\"$project\"},tenant_id)",
-        "hide": 2,
-        "label": "tenant_id",
-        "name": "tenant_id",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(openstack_cinder_limits_volume_max_gb{os_region=\"$region\", tenant=\"$project\"},tenant_id)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "type": "query"
       },
       {
         "auto": true,
@@ -1717,19 +1698,40 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(openstack_cinder_volume_gb{os_region=\"$region\", id=\"$volume\"},name)",
+        "definition": "label_values(openstack_volume_metadata{os_region=\"$region\",uuid=\"$volume\"}, display_name)",
         "hide": 2,
         "label": "volume_name",
         "name": "volume_name",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(openstack_cinder_volume_gb{os_region=\"$region\", id=\"$volume\"},name)",
+          "query": "label_values(openstack_volume_metadata{os_region=\"$region\",uuid=\"$volume\"}, display_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
         "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(openstack_volume_metadata{os_region=\"$region\",uuid=\"$volume\"}, backend_name)",
+        "hide": 2,
+        "label": "pure_name",
+        "name": "pure_name",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(openstack_volume_metadata{os_region=\"$region\",uuid=\"$volume\"}, backend_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query",
+        "description": "Pure array volume name"
       }
     ]
   },
