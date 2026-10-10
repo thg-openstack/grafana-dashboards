@@ -270,7 +270,9 @@
               "type": "auto"
             },
             "filterable": true,
-            "inspect": false
+            "inspect": false,
+            "wrapHeaderText": true,
+            "minWidth": 64
           },
           "fieldMinMax": false,
           "mappings": [],
@@ -307,10 +309,6 @@
               {
                 "id": "unit",
                 "value": "none"
-              },
-              {
-                "id": "custom.width",
-                "value": 76
               }
             ]
           },
@@ -368,10 +366,6 @@
               "options": "Value #RAM (lastNotNull)"
             },
             "properties": [
-              {
-                "id": "custom.width",
-                "value": 219
-              },
               {
                 "id": "unit",
                 "value": "decmbytes"
@@ -471,6 +465,24 @@
                   "mode": "basic",
                   "type": "color-background"
                 }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "index": 0,
+                        "text": "–"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "displayName",
+                "value": "RAM used %"
               }
             ]
           },
@@ -482,11 +494,7 @@
             "properties": [
               {
                 "id": "unit",
-                "value": "decbytes"
-              },
-              {
-                "id": "custom.width",
-                "value": 120
+                "value": "bytes"
               },
               {
                 "id": "mappings",
@@ -496,7 +504,7 @@
                       "match": "null",
                       "result": {
                         "index": 0,
-                        "text": "0 GiB"
+                        "text": "–"
                       }
                     },
                     "type": "special"
@@ -512,96 +520,8 @@
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": 133
-              },
-              {
                 "id": "unit",
                 "value": "none"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Value #VCPU (lastNotNull)"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 98
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Value #DISK (lastNotNull)"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 121
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Value #Disk Used (lastNotNull)"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 137
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "RAM Total"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 118
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "AZ"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 108
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "VCPU Total"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 105
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "VCPU Usage"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 102
               }
             ]
           },
@@ -616,10 +536,6 @@
                 "value": "days"
               },
               {
-                "id": "custom.width",
-                "value": 95
-              },
-              {
                 "id": "mappings",
                 "value": [
                   {
@@ -627,24 +543,12 @@
                       "match": "null",
                       "result": {
                         "index": 0,
-                        "text": "0 days"
+                        "text": "–"
                       }
                     },
                     "type": "special"
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Compute"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 233
               }
             ]
           },
@@ -691,10 +595,6 @@
                 }
               },
               {
-                "id": "custom.width",
-                "value": 133
-              },
-              {
                 "id": "mappings",
                 "value": [
                   {
@@ -702,24 +602,16 @@
                       "match": "null",
                       "result": {
                         "index": 0,
-                        "text": "0 %"
+                        "text": "–"
                       }
                     },
                     "type": "special"
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "VMs"
-            },
-            "properties": [
+              },
               {
-                "id": "custom.width",
-                "value": 60
+                "id": "displayName",
+                "value": "CPU usage"
               }
             ]
           },
@@ -766,22 +658,6 @@
               {
                 "id": "displayName",
                 "value": "STATUS"
-              },
-              {
-                "id": "custom.width",
-                "value": 100
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "availability_zone"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 129
               }
             ]
           },
@@ -791,10 +667,6 @@
               "options": "Host Status"
             },
             "properties": [
-              {
-                "id": "custom.width",
-                "value": 124
-              },
               {
                 "id": "custom.cellOptions",
                 "value": {
@@ -831,6 +703,58 @@
                     "type": "special"
                   }
                 ]
+              },
+              {
+                "id": "displayName",
+                "value": "Host"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Allocated"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "RAM alloc."
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Local Storage (total)"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Storage total"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Local Storage (used)"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Storage used"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Compute"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 170
               }
             ]
           }
@@ -848,7 +772,16 @@
         "footer": {
           "countRows": false,
           "enablePagination": true,
-          "fields": [],
+          "fields": [
+            "VMs",
+            "VCPU",
+            "VCPU Total",
+            "VCPU Usage",
+            "RAM Total",
+            "RAM Allocated",
+            "RAM usage",
+            "RAM alloc."
+          ],
           "reducer": [
             "sum"
           ],
@@ -859,7 +792,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Consumed Memory %"
+            "displayName": "RAM used %"
           }
         ]
       },
@@ -1591,7 +1524,9 @@
               "Value #RAM (lastNotNull)": false,
               "Value #RAM ALLOCATED (lastNotNull)": false,
               "Value #RAM_TOTAL (lastNotNull)": true,
-              "Value #adminState (lastNotNull)": true
+              "Value #adminState (lastNotNull)": true,
+              "availability_zone": true,
+              "availability_zone (lastNotNull)": true
             },
             "indexByName": {
               "Value #CPU Usage (lastNotNull)": 12,
@@ -1666,6 +1601,30 @@
             ],
             "match": "any",
             "type": "exclude"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "renameByName": {},
+            "indexByName": {
+              "Compute": 0,
+              "VMs": 1,
+              "VCPU": 2,
+              "VCPU Total": 3,
+              "VCPU Usage": 4,
+              "Local Storage (total)": 5,
+              "Local Storage (used)": 6,
+              "RAM Total": 7,
+              "RAM Allocated": 8,
+              "RAM usage": 9,
+              "Consumed Memory %": 10,
+              "CPU Consumption": 11,
+              "Status": 12,
+              "Uptime": 13,
+              "Host Status": 14
+            }
           }
         }
       ],
