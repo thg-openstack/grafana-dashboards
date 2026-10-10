@@ -397,7 +397,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Per-volume QoS limit set on the array (Cinder QoS spec).",
+      "description": "Per-volume QoS limit set on the array (Cinder QoS spec). No limit: the array reports QoS but this volume has none. Not reported by this array: the array exports no QoS metrics at all (gb1 arrays, Purity 6.7.4).",
       "type": "stat",
       "title": "QoS IOPS limit",
       "gridPos": {
@@ -421,7 +421,18 @@
               }
             ]
           },
-          "noValue": "none"
+          "noValue": "Not reported by this array",
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "-1": {
+                  "index": 0,
+                  "text": "No limit"
+                }
+              }
+            }
+          ]
         },
         "overrides": []
       },
@@ -446,7 +457,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max(purefa_volume_qos_iops_limit{instance=\"$array\",name=\"$name\"})",
+          "expr": "max(purefa_volume_qos_iops_limit{instance=\"$array\",name=\"$name\"}) or on() (0 * count(purefa_volume_qos_iops_limit{instance=\"$array\"}) - 1)",
           "legendFormat": "QoS IOPS limit",
           "range": true,
           "instant": false,
@@ -460,7 +471,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
+      "description": "Per-volume QoS limit set on the array (Cinder QoS spec). No limit: the array reports QoS but this volume has none. Not reported by this array: the array exports no QoS metrics at all (gb1 arrays, Purity 6.7.4).",
       "type": "stat",
       "title": "QoS bandwidth limit",
       "gridPos": {
@@ -484,7 +495,18 @@
               }
             ]
           },
-          "noValue": "none"
+          "noValue": "Not reported by this array",
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "-1": {
+                  "index": 0,
+                  "text": "No limit"
+                }
+              }
+            }
+          ]
         },
         "overrides": []
       },
@@ -509,7 +531,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max(purefa_volume_qos_bandwidth_bytes_per_sec_limit{instance=\"$array\",name=\"$name\"})",
+          "expr": "max(purefa_volume_qos_bandwidth_bytes_per_sec_limit{instance=\"$array\",name=\"$name\"}) or on() (0 * count(purefa_volume_qos_bandwidth_bytes_per_sec_limit{instance=\"$array\"}) - 1)",
           "legendFormat": "QoS bandwidth limit",
           "range": true,
           "instant": false,
