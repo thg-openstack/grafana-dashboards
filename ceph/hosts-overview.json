@@ -202,7 +202,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "avg(1 - (\n  avg by(instance) (\n    rate(node_cpu_seconds_total{mode='idle',instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}[$__rate_interval]) or\n    rate(node_cpu{mode='idle',instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}[$__rate_interval])\n  )\n))\n",
+           "expr": "avg(1 - (\n  avg by(instance) (\n    rate(node_cpu_seconds_total{mode='idle',instance=~\"$ceph_hosts.*\"}[$__rate_interval]) or\n    rate(node_cpu{mode='idle',instance=~\"$ceph_hosts.*\"}[$__rate_interval])\n  )\n))\n",
            "format": "time_series",
            "instant": true,
            "intervalFactor": 1,
@@ -283,7 +283,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "avg ((\n  (\n    node_memory_MemTotal{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n    node_memory_MemTotal_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}\n  ) - ((\n    node_memory_MemFree{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n    node_memory_MemFree_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}) +\n    (\n      node_memory_Cached{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n      node_memory_Cached_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}\n    ) + (\n      node_memory_Buffers{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n      node_memory_Buffers_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}\n    ) + (\n      node_memory_Slab{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n      node_memory_Slab_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}\n    )\n  )\n) / (\n  node_memory_MemTotal{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n   node_memory_MemTotal_bytes{instance=~\"($osd_hosts|$rgw_hosts|$mon_hosts|$mds_hosts).*\"}\n))\n",
+           "expr": "avg ((\n  (\n    node_memory_MemTotal{instance=~\"$ceph_hosts.*\"} or\n    node_memory_MemTotal_bytes{instance=~\"$ceph_hosts.*\"}\n  ) - ((\n    node_memory_MemFree{instance=~\"$ceph_hosts.*\"} or\n    node_memory_MemFree_bytes{instance=~\"$ceph_hosts.*\"}) +\n    (\n      node_memory_Cached{instance=~\"$ceph_hosts.*\"} or\n      node_memory_Cached_bytes{instance=~\"$ceph_hosts.*\"}\n    ) + (\n      node_memory_Buffers{instance=~\"$ceph_hosts.*\"} or\n      node_memory_Buffers_bytes{instance=~\"$ceph_hosts.*\"}\n    ) + (\n      node_memory_Slab{instance=~\"$ceph_hosts.*\"} or\n      node_memory_Slab_bytes{instance=~\"$ceph_hosts.*\"}\n    )\n  )\n) / (\n  node_memory_MemTotal{instance=~\"$ceph_hosts.*\"} or\n   node_memory_MemTotal_bytes{instance=~\"($osd_hosts|$rgw_hosts|$mon_hosts|$mds_hosts).*\"}\n))\n",
            "format": "time_series",
            "instant": true,
            "intervalFactor": 1,
@@ -458,7 +458,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "avg (\n  label_replace(\n    (rate(node_disk_io_time_ms[$__rate_interval]) / 10 ) or\n      (rate(node_disk_io_time_seconds_total[$__rate_interval]) * 100),\n    \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  ) * on(instance, device) group_left(ceph_daemon) label_replace(\n    label_replace(\n      ceph_disk_occupation_human{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\", cluster_name=~\"$cluster\"},\n      \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n    ), \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  )\n)\n",
+           "expr": "avg (\n  label_replace(\n    (rate(node_disk_io_time_ms[$__rate_interval]) / 10 ) or\n      (rate(node_disk_io_time_seconds_total[$__rate_interval]) * 100),\n    \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  ) * on(instance, device) group_left(ceph_daemon) label_replace(\n    label_replace(\n      ceph_disk_occupation_human{instance=~\"$ceph_hosts.*\", cluster_name=~\"$cluster\"},\n      \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n    ), \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  )\n)\n",
            "format": "time_series",
            "instant": true,
            "intervalFactor": 1,
@@ -539,7 +539,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "sum (\n  (\n    rate(node_network_receive_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n    rate(node_network_receive_bytes_total{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n  ) unless on (device, instance)\n  label_replace((node_bonding_slaves > 0), \"device\", \"$1\", \"master\", \"(.+)\")\n) +\nsum (\n  (\n    rate(node_network_transmit_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n    rate(node_network_transmit_bytes_total{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n  ) unless on (device, instance)\n  label_replace((node_bonding_slaves > 0), \"device\", \"$1\", \"master\", \"(.+)\")\n)\n",
+           "expr": "sum (\n  (\n    rate(node_network_receive_bytes{instance=~\"$ceph_hosts.*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n    rate(node_network_receive_bytes_total{instance=~\"$ceph_hosts.*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n  ) unless on (device, instance)\n  label_replace((node_bonding_slaves > 0), \"device\", \"$1\", \"master\", \"(.+)\")\n) +\nsum (\n  (\n    rate(node_network_transmit_bytes{instance=~\"$ceph_hosts.*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n    rate(node_network_transmit_bytes_total{instance=~\"$ceph_hosts.*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n  ) unless on (device, instance)\n  label_replace((node_bonding_slaves > 0), \"device\", \"$1\", \"master\", \"(.+)\")\n)\n",
            "format": "time_series",
            "instant": true,
            "intervalFactor": 1,
@@ -639,7 +639,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "topk(10,\n  100 * (\n    1 - (\n      avg by(instance) (\n        rate(node_cpu_seconds_total{cluster_name=~\"$cluster\",mode='idle',instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}[$__rate_interval]) or\n          rate(node_cpu{cluster_name=~\"$cluster\",mode='idle',instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}[$__rate_interval])\n      )\n    )\n  )\n)\n",
+           "expr": "topk(10,\n  100 * (\n    1 - (\n      avg by(instance) (\n        rate(node_cpu_seconds_total{mode='idle',instance=~\"$ceph_hosts.*\"}[$__rate_interval]) or\n          rate(node_cpu{mode='idle',instance=~\"$ceph_hosts.*\"}[$__rate_interval])\n      )\n    )\n  )\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{instance}}",
@@ -739,7 +739,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "topk(10, (sum by(instance) (\n(\n  rate(node_network_receive_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_receive_bytes_total{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n) +\n(\n  rate(node_network_transmit_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_transmit_bytes_total{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n) unless on (device, instance)\n  label_replace((node_bonding_slaves > 0), \"device\", \"$1\", \"master\", \"(.+)\"))\n))\n",
+           "expr": "topk(10, (sum by(instance) (\n(\n  rate(node_network_receive_bytes{instance=~\"$ceph_hosts.*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_receive_bytes_total{instance=~\"$ceph_hosts.*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n) +\n(\n  rate(node_network_transmit_bytes{instance=~\"$ceph_hosts.*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval]) or\n  rate(node_network_transmit_bytes_total{instance=~\"$ceph_hosts.*\",device!~\"lo|tap.*|genev_sys_.*|ovs-system|br-int|docker.*\"}[$__rate_interval])\n) unless on (device, instance)\n  label_replace((node_bonding_slaves > 0), \"device\", \"$1\", \"master\", \"(.+)\"))\n))\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "{{instance}}",
@@ -828,7 +828,7 @@
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
-         "regex": "/osd/",
+         "regex": "",
          "skipUrlSync": false,
          "sort": 1,
          "tagValuesQuery": "",
@@ -913,6 +913,37 @@
          "tagsQuery": "",
          "type": "query",
          "useTags": false
+       },
+       {
+         "current": {
+           "text": [
+             "All"
+           ],
+           "value": [
+             "$__all"
+           ]
+         },
+         "datasource": {
+           "type": "prometheus",
+           "uid": "${DS_PROMETHEUS}"
+         },
+         "definition": "query_result(group by (hostname) (ceph_osd_metadata{cluster_name=~\"$cluster\",hostname=~\"$osd_hosts\"} or ceph_mon_metadata{cluster_name=~\"$cluster\",hostname=~\"$mon_hosts\"} or ceph_mds_metadata{cluster_name=~\"$cluster\",ceph_daemon=~\"mds.$mds_hosts\"} or ceph_rgw_metadata{cluster_name=~\"$cluster\",ceph_daemon=~\"rgw.$rgw_hosts\"}))",
+         "description": "Hostnames of the selected OSD, MON, MDS and RGW daemons; used to filter node-exporter series.",
+         "hide": 2,
+         "includeAll": true,
+         "multi": true,
+         "name": "ceph_hosts",
+         "options": [],
+         "query": {
+           "qryType": 3,
+           "query": "query_result(group by (hostname) (ceph_osd_metadata{cluster_name=~\"$cluster\",hostname=~\"$osd_hosts\"} or ceph_mon_metadata{cluster_name=~\"$cluster\",hostname=~\"$mon_hosts\"} or ceph_mds_metadata{cluster_name=~\"$cluster\",ceph_daemon=~\"mds.$mds_hosts\"} or ceph_rgw_metadata{cluster_name=~\"$cluster\",ceph_daemon=~\"rgw.$rgw_hosts\"}))",
+           "refId": "PrometheusVariableQueryEditor-VariableQuery"
+         },
+         "refresh": 2,
+         "regex": "/hostname=\"([^\"]+)\"/",
+         "skipUrlSync": true,
+         "sort": 1,
+         "type": "query"
        }
      ]
    },
