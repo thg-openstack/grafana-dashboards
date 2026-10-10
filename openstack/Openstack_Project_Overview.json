@@ -125,36 +125,41 @@
       },
       "fieldConfig": {
         "defaults": {
-          "mappings": [],
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "-1": {
+                  "index": 0,
+                  "text": "Unlimited"
+                }
+              }
+            }
+          ],
           "thresholds": {
-            "mode": "percentage",
+            "mode": "absolute",
             "steps": [
               {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 90
+                "color": "text",
+                "value": null
               }
             ]
           },
-          "unit": "short"
+          "unit": "none",
+          "color": {
+            "mode": "thresholds"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 6,
         "x": 0,
-        "y": 1
+        "y": 1,
+        "w": 6,
+        "h": 5
       },
       "id": 77,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -162,9 +167,16 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 30
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -231,10 +243,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 6,
-        "y": 1
+        "x": 0,
+        "y": 6,
+        "w": 5,
+        "h": 6
       },
       "id": 71,
       "options": {
@@ -269,7 +281,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",bootable=\"true\",tenant_id=~\"$tenant_id\"})",
+          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",bootable=\"true\",tenant_id=~\"$tenant_id\"}) or vector(0)",
           "instant": false,
           "legendFormat": "Bootable",
           "range": true,
@@ -281,7 +293,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",bootable=\"false\",tenant_id=~\"$tenant_id\"})",
+          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",bootable=\"false\",tenant_id=~\"$tenant_id\"}) or vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "Not bootable",
@@ -294,7 +306,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",name=~\"pvc-(.*)\",tenant_id=~\"$tenant_id\"})",
+          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",name=~\"pvc-(.*)\",tenant_id=~\"$tenant_id\"}) or vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "PVC",
@@ -307,7 +319,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",name=~\"pvc-(.*)\",status=\"available\",tenant_id=~\"$tenant_id\"})",
+          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",name=~\"pvc-(.*)\",status=\"available\",tenant_id=~\"$tenant_id\"}) or vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "PVC Available",
@@ -346,10 +358,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 10,
-        "y": 1
+        "x": 5,
+        "y": 6,
+        "w": 5,
+        "h": 6
       },
       "id": 76,
       "options": {
@@ -384,7 +396,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count(openstack_cinder_volume_gb{tenant_id=~\"$tenant_id\"}) by (volume_type)",
+          "expr": "count(openstack_cinder_volume_gb{os_region=~\"$cluster\",tenant_id=~\"$tenant_id\"}) by (volume_type)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -418,10 +430,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "x": 10,
+        "y": 6,
         "w": 4,
-        "x": 14,
-        "y": 1
+        "h": 6
       },
       "id": 83,
       "options": {
@@ -452,7 +464,6 @@
           "exemplar": false,
           "expr": "sum(libvirt_domain_info_virtual_cpus{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} and on(compute,domain) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) or on() vector(0)",
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Total",
           "refId": "A"
         }
@@ -468,46 +479,40 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "thresholds"
           },
-          "mappings": [],
-          "min": 0,
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "-1": {
+                  "index": 0,
+                  "text": "Unlimited"
+                }
+              }
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
+                "color": "text",
+                "value": null
               }
             ]
           },
-          "unit": "decgbytes"
+          "unit": "gbytes"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 6,
         "x": 18,
-        "y": 1
+        "y": 1,
+        "w": 6,
+        "h": 5
       },
       "id": 80,
       "options": {
-        "displayMode": "gradient",
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "maxVizHeight": 300,
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -515,9 +520,16 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 30
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -555,7 +567,7 @@
         }
       ],
       "title": "Volume Quota",
-      "type": "bargauge"
+      "type": "stat"
     },
     {
       "datasource": {
@@ -565,45 +577,40 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "thresholds"
           },
-          "mappings": [],
-          "min": 0,
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "-1": {
+                  "index": 0,
+                  "text": "Unlimited"
+                }
+              }
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
+                "color": "text",
+                "value": null
               }
             ]
-          }
+          },
+          "unit": "none"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 4,
         "x": 6,
-        "y": 4
+        "y": 1,
+        "w": 6,
+        "h": 5
       },
       "id": 78,
       "options": {
-        "displayMode": "gradient",
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "maxVizHeight": 300,
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -611,9 +618,16 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 30
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -651,7 +665,7 @@
         }
       ],
       "title": "CPU Quota",
-      "type": "bargauge"
+      "type": "stat"
     },
     {
       "datasource": {
@@ -661,46 +675,40 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "thresholds"
           },
-          "mappings": [],
-          "min": 0,
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "-1": {
+                  "index": 0,
+                  "text": "Unlimited"
+                }
+              }
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
+                "color": "text",
+                "value": null
               }
             ]
           },
-          "unit": "decmbytes"
+          "unit": "mbytes"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 10,
-        "y": 4
+        "x": 12,
+        "y": 1,
+        "w": 6,
+        "h": 5
       },
       "id": 79,
       "options": {
-        "displayMode": "gradient",
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "maxVizHeight": 300,
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -708,9 +716,16 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "orientation": "vertical",
+        "textMode": "value_and_name",
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 30
+        }
       },
       "pluginVersion": "11.6.2",
       "targets": [
@@ -748,7 +763,7 @@
         }
       ],
       "title": "RAM Quota",
-      "type": "bargauge"
+      "type": "stat"
     },
     {
       "datasource": {
@@ -760,7 +775,17 @@
           "color": {
             "mode": "continuous-GrYlRd"
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "-1": {
+                  "index": 0,
+                  "text": "Unlimited"
+                }
+              }
+            }
+          ],
           "min": 0,
           "noValue": "0",
           "thresholds": {
@@ -780,10 +805,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 4,
         "x": 14,
-        "y": 4
+        "y": 6,
+        "w": 5,
+        "h": 6
       },
       "id": 82,
       "options": {
@@ -920,7 +945,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "fixed",
+            "fixedColor": "green"
           },
           "mappings": [],
           "min": 0,
@@ -928,11 +954,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
-              },
-              {
                 "color": "green",
-                "value": 1000
+                "value": null
               }
             ]
           }
@@ -940,10 +963,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 18,
-        "y": 4
+        "x": 19,
+        "y": 6,
+        "w": 5,
+        "h": 6
       },
       "id": 72,
       "options": {
@@ -978,7 +1001,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "count by (availability_zone)(openstack_nova_server_status{os_region=~\"$cluster\",tenant_id=~\"$tenant_id\"}) > 1",
+          "expr": "count by (availability_zone)(openstack_nova_server_status{os_region=~\"$cluster\",tenant_id=~\"$tenant_id\"})",
           "instant": false,
           "legendFormat": "{{availability_zone}}",
           "range": true,
@@ -994,7 +1017,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 12
       },
       "id": 9,
       "panels": [],
@@ -1028,7 +1051,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 8
+        "y": 13
       },
       "id": 4,
       "options": {
@@ -1059,7 +1082,6 @@
           "exemplar": false,
           "expr": "count(libvirt_domain_info_state{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} and on(compute,domain) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) or on() vector(0)",
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Total",
           "refId": "A"
         }
@@ -1095,7 +1117,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 8
+        "y": 13
       },
       "id": 5,
       "options": {
@@ -1126,7 +1148,6 @@
           "exemplar": false,
           "expr": "count(libvirt_domain_info_state{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} == 1 and on(compute,domain) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) or on() vector(0)",
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Running",
           "refId": "A"
         }
@@ -1162,7 +1183,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 8
+        "y": 13
       },
       "id": 6,
       "options": {
@@ -1193,7 +1214,6 @@
           "exemplar": false,
           "expr": "count(libvirt_domain_info_state{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} == 5 and on(compute,domain) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) or on() vector(0)",
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Shut Off",
           "refId": "A"
         }
@@ -1239,7 +1259,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 8
+        "y": 13
       },
       "id": 54,
       "options": {
@@ -1270,7 +1290,6 @@
           "exemplar": false,
           "expr": "count(libvirt_domain_info_state{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} == 0 and on(compute,domain) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) or on() vector(0)",
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Suspend",
           "refId": "A"
         }
@@ -1316,7 +1335,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 8
+        "y": 13
       },
       "id": 7,
       "options": {
@@ -1347,7 +1366,6 @@
           "exemplar": false,
           "expr": "count(libvirt_domain_info_state{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} == 3 and on(compute,domain) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) or on() vector(0)",
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Suspend",
           "refId": "A"
         }
@@ -1393,7 +1411,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 8
+        "y": 13
       },
       "id": 48,
       "options": {
@@ -1424,7 +1442,6 @@
           "exemplar": false,
           "expr": "count(libvirt_domain_info_state{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} == 6 and on(compute,domain) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) or on() vector(0)",
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Shut Off",
           "refId": "A"
         }
@@ -1554,7 +1571,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 17
       },
       "id": 91,
       "options": {
@@ -1592,7 +1609,6 @@
           "expr": "libvirt_domain_info_virtual_cpus{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
           "format": "table",
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "vCPU Total",
           "refId": "A"
         },
@@ -1607,7 +1623,6 @@
           "format": "table",
           "hide": false,
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "vCPU Used",
           "refId": "B"
         },
@@ -1622,7 +1637,6 @@
           "format": "table",
           "hide": false,
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Memory Total",
           "refId": "C"
         },
@@ -1633,11 +1647,10 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(libvirt_domain_info_maximum_memory_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} - libvirt_domain_memory_stats_unused_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
+          "expr": "(libvirt_domain_info_maximum_memory_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} - libvirt_domain_memory_stats_usable_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
           "format": "table",
           "hide": false,
           "instant": true,
-          "interval": "$interval",
           "legendFormat": "Memory Used",
           "refId": "D"
         },
@@ -1830,7 +1843,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 30
       },
       "id": 15,
       "panels": [
@@ -1900,7 +1913,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 26
+            "y": 31
           },
           "id": 18,
           "options": {
@@ -2017,7 +2030,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 26
+            "y": 31
           },
           "id": 12,
           "options": {
@@ -2048,7 +2061,6 @@
               "exemplar": true,
               "expr": "topk(20, avg by (domain,instance_name) (irate(libvirt_domain_info_cpu_time_seconds_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) * 100)",
               "instant": false,
-              "interval": "$interval",
               "legendFormat": "{{instance_name}}",
               "refId": "A"
             }
@@ -2116,7 +2128,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 34
+            "y": 39
           },
           "id": 61,
           "options": {
@@ -2164,7 +2176,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 31
       },
       "id": 24,
       "panels": [
@@ -2228,7 +2240,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 46
+            "y": 51
           },
           "id": 84,
           "options": {
@@ -2327,7 +2339,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 46
+            "y": 51
           },
           "id": 85,
           "options": {
@@ -2356,7 +2368,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, libvirt_domain_memory_stats_unused_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"})",
+              "expr": "topk(20, libvirt_domain_memory_stats_usable_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"})",
               "interval": "1m",
               "legendFormat": "{{instance_name}}",
               "range": true,
@@ -2364,7 +2376,8 @@
             }
           ],
           "title": "Available",
-          "type": "timeseries"
+          "type": "timeseries",
+          "description": "Guest MemAvailable from the balloon driver (page cache counts as available)."
         },
         {
           "datasource": {
@@ -2426,7 +2439,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 54
+            "y": 59
           },
           "id": 86,
           "options": {
@@ -2455,7 +2468,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "topk(20, (libvirt_domain_info_maximum_memory_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} - libvirt_domain_memory_stats_unused_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"})",
+              "expr": "topk(20, (libvirt_domain_info_maximum_memory_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} - libvirt_domain_memory_stats_usable_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"})",
               "interval": "1m",
               "legendFormat": "{{instance_name}}",
               "range": true,
@@ -2463,7 +2476,8 @@
             }
           ],
           "title": "Used",
-          "type": "timeseries"
+          "type": "timeseries",
+          "description": "Memory minus guest MemAvailable, so page cache does not count as used."
         },
         {
           "datasource": {
@@ -2526,7 +2540,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 54
+            "y": 59
           },
           "id": 87,
           "options": {
@@ -2575,7 +2589,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 32
       },
       "id": 37,
       "panels": [
@@ -2631,7 +2645,7 @@
                   }
                 ]
               },
-              "unit": "decbits"
+              "unit": "bps"
             },
             "overrides": []
           },
@@ -2639,7 +2653,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 63
+            "y": 68
           },
           "id": 38,
           "options": {
@@ -2670,7 +2684,6 @@
               "editorMode": "code",
               "exemplar": true,
               "expr": "topk(10, (rate(libvirt_domain_interface_stats_receive_bytes_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) * 8)",
-              "interval": "$interval",
               "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
@@ -2731,7 +2744,7 @@
                   }
                 ]
               },
-              "unit": "decbits"
+              "unit": "bps"
             },
             "overrides": []
           },
@@ -2739,7 +2752,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 63
+            "y": 68
           },
           "id": 39,
           "options": {
@@ -2770,7 +2783,6 @@
               "editorMode": "code",
               "exemplar": true,
               "expr": "topk(10, (rate(libvirt_domain_interface_stats_transmit_bytes_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}) * 8)",
-              "interval": "$interval",
               "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
@@ -2840,7 +2852,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 71
+            "y": 76
           },
           "id": 40,
           "options": {
@@ -2870,7 +2882,6 @@
               "editorMode": "code",
               "exemplar": true,
               "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_packets_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"})",
-              "interval": "$interval",
               "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
@@ -2940,7 +2951,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 71
+            "y": 76
           },
           "id": 41,
           "options": {
@@ -2970,7 +2981,6 @@
               "editorMode": "code",
               "exemplar": true,
               "expr": "topk(10, rate(libvirt_domain_interface_stats_transmit_packets_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"})",
-              "interval": "$interval",
               "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
@@ -3041,7 +3051,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 79
+            "y": 84
           },
           "id": 42,
           "options": {
@@ -3071,7 +3081,6 @@
               "editorMode": "code",
               "exemplar": true,
               "expr": "topk(10, rate(libvirt_domain_interface_stats_receive_errors_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"})",
-              "interval": "$interval",
               "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
@@ -3141,7 +3150,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 79
+            "y": 84
           },
           "id": 43,
           "options": {
@@ -3171,7 +3180,6 @@
               "editorMode": "code",
               "exemplar": true,
               "expr": "rate(libvirt_domain_interface_stats_transmit_errors_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
-              "interval": "$interval",
               "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
@@ -3242,7 +3250,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 87
+            "y": 92
           },
           "id": 44,
           "options": {
@@ -3272,7 +3280,6 @@
               "editorMode": "code",
               "exemplar": true,
               "expr": "rate(libvirt_domain_interface_stats_receive_drops_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
-              "interval": "$interval",
               "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
@@ -3343,7 +3350,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 87
+            "y": 92
           },
           "id": 45,
           "options": {
@@ -3373,7 +3380,6 @@
               "editorMode": "code",
               "exemplar": true,
               "expr": "rate(libvirt_domain_interface_stats_transmit_drops_total{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(flavor_name,instance_name,project_name,user_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
-              "interval": "$interval",
               "legendFormat": "{{instance_name}} - {{target_device}}",
               "range": true,
               "refId": "A"
@@ -3392,7 +3398,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 33
       },
       "id": 88,
       "panels": [
@@ -3456,7 +3462,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 48
+            "y": 53
           },
           "id": 74,
           "options": {
@@ -3485,7 +3491,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "openstack_cinder_volume_gb{name=~\"pvc-(.*)\",os_region=~\"$cluster\"}",
+              "expr": "openstack_cinder_volume_gb{name=~\"pvc-(.*)\",os_region=~\"$cluster\",tenant_id=~\"$tenant_id\"}",
               "instant": false,
               "legendFormat": "__auto",
               "range": true,
@@ -3517,7 +3523,8 @@
               }
             }
           ],
-          "type": "table"
+          "type": "table",
+          "description": "Kubernetes PVC volumes (Cinder volumes named pvc-*) of the selected project."
         }
       ],
       "title": "Storage",
@@ -3529,7 +3536,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 34
       },
       "id": 90,
       "panels": [
@@ -3580,7 +3587,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 45
+            "y": 50
           },
           "id": 89,
           "options": {
@@ -3713,68 +3720,6 @@
         "refresh": 1,
         "regex": "",
         "type": "query"
-      },
-      {
-        "auto": true,
-        "auto_count": 10,
-        "auto_min": "1m",
-        "current": {
-          "text": "30s",
-          "value": "30s"
-        },
-        "hide": 2,
-        "label": "Interval",
-        "name": "interval",
-        "options": [
-          {
-            "selected": true,
-            "text": "30s",
-            "value": "30s"
-          },
-          {
-            "selected": false,
-            "text": "1m",
-            "value": "1m"
-          },
-          {
-            "selected": false,
-            "text": "2m",
-            "value": "2m"
-          },
-          {
-            "selected": false,
-            "text": "5m",
-            "value": "5m"
-          },
-          {
-            "selected": false,
-            "text": "15m",
-            "value": "15m"
-          },
-          {
-            "selected": false,
-            "text": "30m",
-            "value": "30m"
-          },
-          {
-            "selected": false,
-            "text": "1h",
-            "value": "1h"
-          },
-          {
-            "selected": false,
-            "text": "2h",
-            "value": "2h"
-          },
-          {
-            "selected": false,
-            "text": "1d",
-            "value": "1d"
-          }
-        ],
-        "query": "30s,1m,2m,5m,15m,30m,1h,2h,1d",
-        "refresh": 2,
-        "type": "interval"
       },
       {
         "current": {},
