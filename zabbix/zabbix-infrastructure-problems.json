@@ -7,6 +7,14 @@
       "type": "datasource",
       "pluginId": "alexanderzobnin-zabbix-datasource",
       "pluginName": "Zabbix"
+    },
+    {
+      "name": "DS_INFINITY",
+      "label": "Infinity (Grafana API)",
+      "description": "Infinity datasource with base URL = this Grafana and a Viewer service-account token",
+      "type": "datasource",
+      "pluginId": "yesoreyeram-infinity-datasource",
+      "pluginName": "Infinity"
     }
   ],
   "__elements": {},
@@ -34,6 +42,12 @@
       "id": "table",
       "name": "Table",
       "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "yesoreyeram-infinity-datasource",
+      "name": "Infinity",
+      "version": "2.0.0"
     }
   ],
   "annotations": {
@@ -60,9 +74,329 @@
   "links": [],
   "panels": [
     {
+      "id": 30,
+      "type": "stat",
+      "title": "Active problems by severity",
       "datasource": {
         "type": "alexanderzobnin-zabbix-datasource",
         "uid": "${DS_ZABBIX}"
+      },
+      "description": "Triggers in problem state across the selected regions (includes hosts in maintenance).",
+      "gridPos": {
+        "h": 4,
+        "w": 16,
+        "x": 0,
+        "y": 0
+      },
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ZABBIX}"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "$Group"
+          },
+          "host": {
+            "filter": "$Hosts"
+          },
+          "item": {
+            "filter": ""
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "mode": 4,
+          "options": {
+            "acknowledged": 2,
+            "count": false,
+            "disableDataAlignment": false,
+            "hostProxy": false,
+            "hostsInMaintenance": false,
+            "limit": 1001,
+            "minSeverity": 0,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "sortProblems": "default",
+            "useTimeRange": false,
+            "useTrends": "default",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "4",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "showProblems": "problems",
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "target": "",
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          },
+          "triggers": {
+            "acknowledged": 2,
+            "count": false,
+            "minSeverity": 0
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ],
+            "includeTimeField": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Host group": true
+            }
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "green"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Disaster"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#d70000"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "High"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#ff6548"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#ff891e"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Warning"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#afb424"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Information"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#789eb7"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Not classified"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#6c6c6c"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value_and_name",
+        "orientation": "vertical",
+        "wideLayout": true,
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 31,
+      "type": "stat",
+      "title": "Hosts with active maintenance",
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "description": "Monitored hosts in an active Zabbix maintenance, including maintenances scoped to specific problem tags (e.g. container=fluentd).",
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "type": "json",
+          "source": "url",
+          "parser": "backend",
+          "format": "table",
+          "root_selector": "(result.{\"Host\": name, \"Host group\": (groups[$contains(name, /^os\\/[a-z-]+[0-9]+$/)].name)[0], \"In maintenance since\": $number(maintenance_from) * 1000})[`Host group` in ${Group:json}]",
+          "columns": [],
+          "filters": [],
+          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"method\": \"host.get\", \"params\": {\"output\": [\"host\", \"name\", \"maintenance_from\"], \"selectGroups\": [\"name\"], \"filter\": {\"maintenance_status\": \"1\"}, \"monitored_hosts\": true}}"
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "mode": "reduceFields",
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "includeByName": {
+              "Host": true
+            },
+            "renameByName": {
+              "Host": "Hosts"
+            }
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "blue",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
       },
       "fieldConfig": {
         "defaults": {
@@ -152,6 +486,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Disaster"
               }
             ]
           },
@@ -193,6 +531,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "High"
               }
             ]
           },
@@ -234,6 +576,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Average"
               }
             ]
           },
@@ -275,6 +621,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Warning"
               }
             ]
           },
@@ -316,6 +666,10 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Information"
               }
             ]
           },
@@ -357,6 +711,66 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "displayName",
+                "value": "Not classified"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Hosts in maintenance"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "0"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text",
+                      "value": null
+                    },
+                    {
+                      "color": "blue",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Region"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": "^os/(.*)$",
+                      "result": {
+                        "text": "$1"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -366,7 +780,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 4
       },
       "id": 21,
       "options": {
@@ -449,10 +863,70 @@
             "count": false,
             "minSeverity": 0
           }
+        },
+        {
+          "refId": "B",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "type": "json",
+          "source": "url",
+          "parser": "backend",
+          "format": "table",
+          "root_selector": "(result.{\"Host\": name, \"Host group\": (groups[$contains(name, /^os\\/[a-z-]+[0-9]+$/)].name)[0], \"In maintenance since\": $number(maintenance_from) * 1000})[`Host group` in ${Group:json}]",
+          "columns": [],
+          "filters": [],
+          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"method\": \"host.get\", \"params\": {\"output\": [\"host\", \"name\", \"maintenance_from\"], \"selectGroups\": [\"name\"], \"filter\": {\"maintenance_status\": \"1\"}, \"monitored_hosts\": true}}"
+          }
         }
       ],
-      "title": "System status",
-      "type": "table"
+      "title": "Summary by region",
+      "type": "table",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "filter": {
+            "id": "byRefId",
+            "options": "B"
+          },
+          "options": {
+            "fields": {
+              "Host group": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Host": {
+                "aggregations": [
+                  "count"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "Host group",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "renameByName": {
+              "Host group": "Region",
+              "Host (count)": "Hosts in maintenance"
+            }
+          }
+        }
+      ]
     },
     {
       "datasource": {
@@ -460,10 +934,10 @@
         "uid": "${DS_ZABBIX}"
       },
       "gridPos": {
-        "h": 18,
+        "h": 16,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 13
       },
       "id": 24,
       "options": {
@@ -497,11 +971,15 @@
           },
           {
             "id": "host",
-            "value": 248.3333282470703
+            "value": 200
           },
           {
             "id": "name",
-            "value": 784
+            "value": 480
+          },
+          {
+            "id": "tags",
+            "value": 520
           }
         ],
         "severityField": true,
@@ -552,7 +1030,9 @@
             "severity": "Disaster",
             "show": true
           }
-        ]
+        ],
+        "customTagColumns": "site, rack",
+        "showSearchFilter": true
       },
       "pluginVersion": "4.4.3",
       "targets": [
@@ -587,8 +1067,8 @@
             "count": true,
             "disableDataAlignment": false,
             "hostProxy": false,
-            "hostsInMaintenance": true,
-            "limit": 20,
+            "hostsInMaintenance": false,
+            "limit": 1001,
             "minSeverity": 3,
             "showDisabledItems": false,
             "skipEmptyValues": false,
@@ -620,8 +1100,359 @@
           }
         }
       ],
-      "title": "Problems",
+      "title": "Problems (excluding maintenance)",
       "type": "alexanderzobnin-zabbix-triggers-panel"
+    },
+    {
+      "id": 38,
+      "type": "row",
+      "title": "By rack",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 29
+      },
+      "panels": []
+    },
+    {
+      "id": 36,
+      "type": "table",
+      "title": "Problems per rack",
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "description": "Active, non-suppressed problems grouped by the host rack tag. Problems without a rack tag are not listed.",
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 30
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "type": "json",
+          "source": "url",
+          "parser": "backend",
+          "format": "table",
+          "root_selector": "(result.($t := tags; {\"Site\": ($t[tag=\"site\"].value)[0], \"Rack\": ($t[tag=\"rack\"].value)[0], \"Host\": ($t[tag=\"service-host\"].value)[0], \"Severity\": $number(severity), \"Problem\": name, \"Since\": $number(clock) * 1000}))[Rack and (\"os/\" & Site) in ${Group:json}]",
+          "columns": [],
+          "filters": [],
+          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"method\": \"problem.get\", \"params\": {\"output\": [\"name\", \"severity\", \"clock\"], \"selectTags\": \"extend\", \"suppressed\": false, \"sortfield\": [\"eventid\"], \"sortorder\": \"DESC\"}}"
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Site": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Rack": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Problem": {
+                "aggregations": [
+                  "count"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "renameByName": {
+              "Problem (count)": "Problems"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "sort": [
+              {
+                "field": "Problems",
+                "desc": true
+              }
+            ]
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "cellHeight": "sm",
+        "showHeader": true
+      }
+    },
+    {
+      "id": 37,
+      "type": "table",
+      "title": "Problems by rack",
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 16,
+        "x": 8,
+        "y": 30
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "type": "json",
+          "source": "url",
+          "parser": "backend",
+          "format": "table",
+          "root_selector": "(result.($t := tags; {\"Site\": ($t[tag=\"site\"].value)[0], \"Rack\": ($t[tag=\"rack\"].value)[0], \"Host\": ($t[tag=\"service-host\"].value)[0], \"Severity\": $number(severity), \"Problem\": name, \"Since\": $number(clock) * 1000}))[Rack and (\"os/\" & Site) in ${Group:json}]",
+          "columns": [],
+          "filters": [],
+          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"method\": \"problem.get\", \"params\": {\"output\": [\"name\", \"severity\", \"clock\"], \"selectTags\": \"extend\", \"suppressed\": false, \"sortfield\": [\"eventid\"], \"sortorder\": \"DESC\"}}"
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "indexByName": {
+              "Site": 0,
+              "Rack": 1,
+              "Host": 2,
+              "Severity": 3,
+              "Problem": 4,
+              "Since": 5
+            }
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Severity"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "Not classified",
+                        "color": "#6c6c6c",
+                        "index": 0
+                      }
+                    }
+                  },
+                  {
+                    "type": "value",
+                    "options": {
+                      "1": {
+                        "text": "Information",
+                        "color": "#789eb7",
+                        "index": 1
+                      }
+                    }
+                  },
+                  {
+                    "type": "value",
+                    "options": {
+                      "2": {
+                        "text": "Warning",
+                        "color": "#afb424",
+                        "index": 2
+                      }
+                    }
+                  },
+                  {
+                    "type": "value",
+                    "options": {
+                      "3": {
+                        "text": "Average",
+                        "color": "#ff891e",
+                        "index": 3
+                      }
+                    }
+                  },
+                  {
+                    "type": "value",
+                    "options": {
+                      "4": {
+                        "text": "High",
+                        "color": "#ff6548",
+                        "index": 4
+                      }
+                    }
+                  },
+                  {
+                    "type": "value",
+                    "options": {
+                      "5": {
+                        "text": "Disaster",
+                        "color": "#d70000",
+                        "index": 5
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Site"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rack"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Host"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 190
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Severity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Since"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 170
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Since"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "cellHeight": "sm",
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "Site"
+          },
+          {
+            "displayName": "Rack"
+          }
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "type": "row",
+      "title": "Maintenance",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "panels": []
     },
     {
       "datasource": {
@@ -629,110 +1460,105 @@
         "uid": "${DS_ZABBIX}"
       },
       "gridPos": {
-        "h": 13,
-        "w": 24,
+        "h": 10,
+        "w": 15,
         "x": 0,
-        "y": 27
+        "y": 41
       },
-      "id": 17,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Zabbix - Full Server Status",
-          "url": "dashboard/db/zabbix-full-server-status"
-        }
-      ],
+      "id": 32,
       "options": {
         "ackEventColor": "rgb(56, 219, 156)",
         "ackField": true,
         "ageField": true,
         "allowDangerousHTML": false,
         "customLastChangeFormat": false,
-        "descriptionAtNewLine": true,
-        "descriptionField": true,
-        "fontSize": "110%",
+        "descriptionAtNewLine": false,
+        "descriptionField": false,
+        "fontSize": "90%",
         "highlightBackground": true,
         "highlightNewEvents": true,
         "highlightNewerThan": "1h",
-        "hostField": false,
+        "hostField": true,
         "hostGroups": false,
         "hostProxy": false,
-        "hostTechNameField": true,
+        "hostTechNameField": false,
         "lastChangeFormat": "",
         "layout": "table",
-        "limit": 100,
+        "limit": 20,
         "markAckEvents": true,
         "okEventColor": "rgb(56, 189, 113)",
         "opdataField": false,
         "pageSize": 20,
-        "problemTimeline": true,
+        "problemTimeline": false,
         "resizedColumns": [
           {
             "id": "lastchange",
-            "value": 170
-          },
-          {
-            "id": "hostTechName",
-            "value": 184
-          },
-          {
-            "id": "severity",
-            "value": 95
+            "value": 164
           },
           {
             "id": "host",
-            "value": 153
+            "value": 200
+          },
+          {
+            "id": "name",
+            "value": 480
+          },
+          {
+            "id": "tags",
+            "value": 520
           }
         ],
-        "severityField": false,
+        "severityField": true,
         "showTags": true,
-        "sortProblems": "lastchange",
+        "sortProblems": "priority",
         "statusField": false,
         "statusIcon": true,
         "triggerSeverity": [
           {
-            "$$hashKey": "object:277",
+            "$$hashKey": "object:71",
             "color": "rgb(108, 108, 108)",
             "priority": 0,
-            "severity": "Not classified",
+            "severity": "Service",
             "show": true
           },
           {
-            "$$hashKey": "object:278",
+            "$$hashKey": "object:72",
             "color": "rgb(120, 158, 183)",
             "priority": 1,
             "severity": "Information",
             "show": true
           },
           {
-            "$$hashKey": "object:279",
+            "$$hashKey": "object:73",
             "color": "rgb(175, 180, 36)",
             "priority": 2,
             "severity": "Warning",
             "show": true
           },
           {
-            "$$hashKey": "object:280",
+            "$$hashKey": "object:74",
             "color": "rgb(255, 137, 30)",
             "priority": 3,
             "severity": "Average",
             "show": true
           },
           {
-            "$$hashKey": "object:281",
+            "$$hashKey": "object:75",
             "color": "rgb(255, 101, 72)",
             "priority": 4,
             "severity": "High",
             "show": true
           },
           {
-            "$$hashKey": "object:282",
+            "$$hashKey": "object:76",
             "color": "rgb(215, 0, 0)",
             "priority": 5,
             "severity": "Disaster",
             "show": true
           }
-        ]
+        ],
+        "customTagColumns": "site, rack",
+        "showSearchFilter": true
       },
       "pluginVersion": "4.4.3",
       "targets": [
@@ -751,7 +1577,7 @@
             "filter": "$Group"
           },
           "host": {
-            "filter": ""
+            "filter": "/^$MaintHosts$/"
           },
           "item": {
             "filter": ""
@@ -764,15 +1590,15 @@
           },
           "options": {
             "acknowledged": 2,
-            "count": false,
+            "count": true,
             "disableDataAlignment": false,
             "hostProxy": false,
-            "hostsInMaintenance": false,
+            "hostsInMaintenance": true,
             "limit": 1001,
-            "minSeverity": 0,
+            "minSeverity": 3,
             "showDisabledItems": false,
             "skipEmptyValues": false,
-            "sortProblems": "default",
+            "sortProblems": "severity",
             "useTimeRange": false,
             "useTrends": "default",
             "useZabbixValueMapping": false
@@ -794,11 +1620,308 @@
           "textFilter": "",
           "trigger": {
             "filter": ""
+          },
+          "triggers": {
+            "acknowledged": 2
           }
         }
       ],
-      "title": "Log",
+      "title": "Problems on hosts in maintenance",
       "type": "alexanderzobnin-zabbix-triggers-panel"
+    },
+    {
+      "id": 33,
+      "type": "table",
+      "title": "Hosts in maintenance",
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 9,
+        "x": 15,
+        "y": 41
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "type": "json",
+          "source": "url",
+          "parser": "backend",
+          "format": "table",
+          "root_selector": "(result.{\"Host\": name, \"Host group\": (groups[$contains(name, /^os\\/[a-z-]+[0-9]+$/)].name)[0], \"In maintenance since\": $number(maintenance_from) * 1000})[`Host group` in ${Group:json}]",
+          "columns": [],
+          "filters": [],
+          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"method\": \"host.get\", \"params\": {\"output\": [\"host\", \"name\", \"maintenance_from\"], \"selectGroups\": [\"name\"], \"filter\": {\"maintenance_status\": \"1\"}, \"monitored_hosts\": true}}"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "In maintenance since"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Host group"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Region"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": "^os/(.*)$",
+                      "result": {
+                        "text": "$1"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "cellHeight": "sm",
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "Region"
+          }
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "type": "row",
+      "title": "Log",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 51
+      },
+      "panels": [
+        {
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "${DS_ZABBIX}"
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 24,
+            "x": 0,
+            "y": 52
+          },
+          "id": 17,
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Zabbix - Full Server Status",
+              "url": "dashboard/db/zabbix-full-server-status"
+            }
+          ],
+          "options": {
+            "ackEventColor": "rgb(56, 219, 156)",
+            "ackField": true,
+            "ageField": true,
+            "allowDangerousHTML": false,
+            "customLastChangeFormat": false,
+            "descriptionAtNewLine": true,
+            "descriptionField": true,
+            "fontSize": "110%",
+            "highlightBackground": true,
+            "highlightNewEvents": true,
+            "highlightNewerThan": "1h",
+            "hostField": false,
+            "hostGroups": false,
+            "hostProxy": false,
+            "hostTechNameField": true,
+            "lastChangeFormat": "",
+            "layout": "table",
+            "limit": 100,
+            "markAckEvents": true,
+            "okEventColor": "rgb(56, 189, 113)",
+            "opdataField": false,
+            "pageSize": 20,
+            "problemTimeline": true,
+            "resizedColumns": [
+              {
+                "id": "lastchange",
+                "value": 170
+              },
+              {
+                "id": "hostTechName",
+                "value": 184
+              },
+              {
+                "id": "severity",
+                "value": 95
+              },
+              {
+                "id": "host",
+                "value": 153
+              },
+              {
+                "id": "tags",
+                "value": 620
+              }
+            ],
+            "severityField": false,
+            "showTags": true,
+            "sortProblems": "lastchange",
+            "statusField": false,
+            "statusIcon": true,
+            "triggerSeverity": [
+              {
+                "$$hashKey": "object:277",
+                "color": "rgb(108, 108, 108)",
+                "priority": 0,
+                "severity": "Not classified",
+                "show": true
+              },
+              {
+                "$$hashKey": "object:278",
+                "color": "rgb(120, 158, 183)",
+                "priority": 1,
+                "severity": "Information",
+                "show": true
+              },
+              {
+                "$$hashKey": "object:279",
+                "color": "rgb(175, 180, 36)",
+                "priority": 2,
+                "severity": "Warning",
+                "show": true
+              },
+              {
+                "$$hashKey": "object:280",
+                "color": "rgb(255, 137, 30)",
+                "priority": 3,
+                "severity": "Average",
+                "show": true
+              },
+              {
+                "$$hashKey": "object:281",
+                "color": "rgb(255, 101, 72)",
+                "priority": 4,
+                "severity": "High",
+                "show": true
+              },
+              {
+                "$$hashKey": "object:282",
+                "color": "rgb(215, 0, 0)",
+                "priority": 5,
+                "severity": "Disaster",
+                "show": true
+              }
+            ],
+            "customTagColumns": "site, rack",
+            "showSearchFilter": true
+          },
+          "pluginVersion": "4.4.3",
+          "targets": [
+            {
+              "application": {
+                "filter": ""
+              },
+              "countTriggersBy": "",
+              "datasource": {
+                "type": "alexanderzobnin-zabbix-datasource",
+                "uid": "${DS_ZABBIX}"
+              },
+              "evaltype": "0",
+              "functions": [],
+              "group": {
+                "filter": "$Group"
+              },
+              "host": {
+                "filter": ""
+              },
+              "item": {
+                "filter": ""
+              },
+              "itemTag": {
+                "filter": ""
+              },
+              "macro": {
+                "filter": ""
+              },
+              "options": {
+                "acknowledged": 2,
+                "count": false,
+                "disableDataAlignment": false,
+                "hostProxy": false,
+                "hostsInMaintenance": false,
+                "limit": 1001,
+                "minSeverity": 0,
+                "showDisabledItems": false,
+                "skipEmptyValues": false,
+                "sortProblems": "default",
+                "useTimeRange": false,
+                "useTrends": "default",
+                "useZabbixValueMapping": false
+              },
+              "proxy": {
+                "filter": ""
+              },
+              "queryType": "5",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "schema": 12,
+              "showProblems": "problems",
+              "table": {
+                "skipEmptyValues": false
+              },
+              "tags": {
+                "filter": ""
+              },
+              "textFilter": "",
+              "trigger": {
+                "filter": ""
+              }
+            }
+          ],
+          "title": "Log",
+          "type": "alexanderzobnin-zabbix-triggers-panel"
+        }
+      ]
     }
   ],
   "refresh": "5s",
@@ -814,13 +1937,13 @@
         },
         "definition": "Zabbix - group",
         "includeAll": true,
-        "label": "Group",
+        "label": "Region",
         "multi": true,
         "name": "Group",
         "options": [],
         "query": {
           "application": "",
-          "group": "/^os\\/[^_]+$/",
+          "group": "/^os\\/[a-z-]+[0-9]+$/",
           "host": "",
           "item": "",
           "queryType": "group"
@@ -873,6 +1996,56 @@
         "regex": "/OS-(.*)$/",
         "sort": 1,
         "type": "query"
+      },
+      {
+        "name": "MaintHosts",
+        "label": "Hosts in maintenance",
+        "type": "query",
+        "hide": 2,
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "${DS_INFINITY}"
+        },
+        "includeAll": true,
+        "multi": true,
+        "refresh": 2,
+        "sort": 1,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "refId": "A",
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "${DS_INFINITY}"
+            },
+            "type": "json",
+            "source": "url",
+            "parser": "backend",
+            "format": "table",
+            "root_selector": "result.name",
+            "columns": [],
+            "filters": [],
+            "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+            "url_options": {
+              "method": "POST",
+              "body_type": "raw",
+              "body_content_type": "application/json",
+              "data": "{\"method\": \"host.get\", \"params\": {\"output\": [\"host\", \"name\", \"maintenance_from\"], \"selectGroups\": [\"name\"], \"filter\": {\"maintenance_status\": \"1\"}, \"monitored_hosts\": true}}"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "definition": "Zabbix host.get maintenance_status=1"
       }
     ]
   },
@@ -882,8 +2055,8 @@
   },
   "timepicker": {},
   "timezone": "",
- "title": "Zabbix - Infrastructure Problems",
+  "title": "Zabbix - Infrastructure Problems",
   "uid": "a9235ed0-c583-4374-a6ab-cecbc8642c4c",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
