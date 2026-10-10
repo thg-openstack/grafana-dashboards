@@ -712,29 +712,49 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(node_memory_MemTotal_bytes{os_region=~\"$cluster\",instance=~\"$compute\"}) - sum(node_memory_MemAvailable_bytes{os_region=~\"$cluster\",instance=~\"$compute\"})",
-          "instant": true,
-          "interval": "$interval",
-          "legendFormat": "Used (hosts)",
-          "refId": "A"
+          "refId": "A",
+          "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+          "legendFormat": "Allocated",
+          "range": true,
+          "instant": false
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
-          "hide": false,
-          "legendFormat": "Allocated (VMs)",
+          "refId": "B",
+          "expr": "sum(libvirt_domain_memory_stats_rss_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+          "legendFormat": "On host",
           "range": true,
-          "refId": "B"
+          "instant": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "refId": "C",
+          "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} - libvirt_domain_memory_stats_usable_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+          "legendFormat": "In guests",
+          "range": true,
+          "instant": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "refId": "D",
+          "expr": "sum(node_memory_MemTotal_bytes{os_region=~\"$cluster\",instance=~\"$compute\"}) - sum(node_memory_MemAvailable_bytes{os_region=~\"$cluster\",instance=~\"$compute\"})",
+          "legendFormat": "Host used",
+          "range": true,
+          "instant": false
         }
       ],
-      "title": "RAM usage",
-      "type": "stat"
+      "title": "RAM: allocated / on host / in guests",
+      "type": "stat",
+      "description": "Allocated: flavor memory of the VMs. On host (QEMU): VM memory resident on the hypervisors. In guests: memory the guests use (maximum minus guest MemAvailable; page cache counts as free). Host used: hypervisor MemTotal - MemAvailable, VMs plus host processes."
     },
     {
       "datasource": {
@@ -9001,6 +9021,134 @@
           "title": "vCPUs allocated vs capacity",
           "type": "timeseries",
           "description": "Placement: schedulable = (total - reserved) x allocation ratio; allocated = vCPUs instances hold; physical = host CPU threads."
+        },
+        {
+          "id": 113,
+          "type": "timeseries",
+          "title": "VM memory: allocated vs on host vs in guests",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "Allocated: flavor memory of the VMs. On host (QEMU): VM memory resident on the hypervisors. In guests: memory the guests use (maximum minus guest MemAvailable; page cache counts as free). Host used: hypervisor MemTotal - MemAvailable, VMs plus host processes.",
+          "gridPos": {
+            "x": 0,
+            "y": 49,
+            "w": 24,
+            "h": 9
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "refId": "A",
+              "expr": "sum(node_memory_MemTotal_bytes{os_region=~\"$cluster\",instance=~\"$compute\"})",
+              "legendFormat": "Host total",
+              "range": true,
+              "instant": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "refId": "B",
+              "expr": "sum(node_memory_MemTotal_bytes{os_region=~\"$cluster\",instance=~\"$compute\"}) - sum(node_memory_MemAvailable_bytes{os_region=~\"$cluster\",instance=~\"$compute\"})",
+              "legendFormat": "Host used",
+              "range": true,
+              "instant": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "refId": "C",
+              "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+              "legendFormat": "Allocated",
+              "range": true,
+              "instant": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "refId": "D",
+              "expr": "sum(libvirt_domain_memory_stats_rss_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+              "legendFormat": "On host (QEMU)",
+              "range": true,
+              "instant": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "refId": "E",
+              "expr": "sum(libvirt_domain_info_maximum_memory_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"} - libvirt_domain_memory_stats_usable_bytes{domain=~\"$virtual_machine\",compute=~\"$compute\",job=~\"libvirt_exporter\",os_region=~\"$cluster\"})",
+              "legendFormat": "In guests",
+              "range": true,
+              "instant": false
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "bytes",
+              "min": 0,
+              "custom": {
+                "drawStyle": "line",
+                "lineWidth": 2,
+                "fillOpacity": 0,
+                "showPoints": "never",
+                "spanNulls": true
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Host total"
+                },
+                "properties": [
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "fill": "dash",
+                      "dash": [
+                        10,
+                        10
+                      ]
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "fixed",
+                      "fixedColor": "text"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "options": {
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          }
         }
       ]
     },
