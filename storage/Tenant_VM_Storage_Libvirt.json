@@ -98,7 +98,24 @@
             "align": "auto"
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Provisioned"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          }
+        ]
       },
       "options": {
         "showHeader": true,
@@ -126,6 +143,17 @@
               "target_bus": "Bus",
               "compute": "Compute",
               "Value #B": "Provisioned"
+            },
+            "indexByName": {
+              "target_device": 0,
+              "serial": 1,
+              "Value #B": 2,
+              "source_protocol": 3,
+              "disk_type": 4,
+              "driver_cache": 5,
+              "driver_discard": 6,
+              "target_bus": 7,
+              "compute": 8
             }
           }
         }
