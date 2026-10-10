@@ -1,0 +1,679 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.1.5"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Per-VM disk view from the libvirt exporter: what the guest sees, for any storage backend.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "type": "row",
+      "title": "Disks of $instance",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "panels": [],
+      "id": 1
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Protocol rbd = Ceph; disk type block = iSCSI (Pure). Volume ID is empty for ephemeral disks.",
+      "type": "table",
+      "title": "Disks",
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm"
+      },
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #A": true
+            },
+            "renameByName": {
+              "target_device": "Device",
+              "serial": "Volume ID (serial)",
+              "source_protocol": "Protocol",
+              "disk_type": "Disk type",
+              "driver_cache": "Cache",
+              "driver_discard": "Discard",
+              "target_bus": "Bus",
+              "compute": "Compute",
+              "Value #B": "Provisioned"
+            }
+          }
+        }
+      ],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max by (target_device, serial, source_protocol, disk_type, driver_cache, driver_discard, target_bus, compute) (libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"})",
+          "legendFormat": "",
+          "range": false,
+          "instant": true,
+          "refId": "A",
+          "format": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max by (target_device) (libvirt_domain_block_stats_capacity_bytes{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"})",
+          "legendFormat": "",
+          "range": false,
+          "instant": true,
+          "refId": "B",
+          "format": "table"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Requests the guest issued, as QEMU counts them; includes any QoS throttling.",
+      "type": "timeseries",
+      "title": "IOPS",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "iops",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_read_requests_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} read",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_write_requests_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} write",
+          "range": true,
+          "instant": false,
+          "refId": "B"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "type": "timeseries",
+      "title": "Throughput",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "Bps",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_read_bytes_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} read",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_write_bytes_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} write",
+          "range": true,
+          "instant": false,
+          "refId": "B"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Time per request as the guest sees it (QEMU), including backend, network and QoS waits.",
+      "type": "timeseries",
+      "title": "Average latency",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_read_time_seconds_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval])) / sum by (target_device) (rate(libvirt_domain_block_stats_read_requests_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} read",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_write_time_seconds_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval])) / sum by (target_device) (rate(libvirt_domain_block_stats_write_requests_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} write",
+          "range": true,
+          "instant": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_flush_time_seconds_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval])) / sum by (target_device) (rate(libvirt_domain_block_stats_flush_requests_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} flush",
+          "range": true,
+          "instant": false,
+          "refId": "C"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "type": "timeseries",
+      "title": "Average I/O size",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_read_bytes_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval])) / sum by (target_device) (rate(libvirt_domain_block_stats_read_requests_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} read",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum by (target_device) (rate(libvirt_domain_block_stats_write_bytes_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval])) / sum by (target_device) (rate(libvirt_domain_block_stats_write_requests_total{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}[$__rate_interval]))",
+          "legendFormat": "{{target_device}} write",
+          "range": true,
+          "instant": false,
+          "refId": "B"
+        }
+      ],
+      "id": 6
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Provisioned from QEMU. Used from the backend: Ceph rbd du or Pure total_physical (after data reduction), joined through the Cinder volume ID.",
+      "type": "timeseries",
+      "title": "Capacity",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "showPoints": "never",
+            "spanNulls": true
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max by (target_device) (libvirt_domain_block_stats_capacity_bytes{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"})",
+          "legendFormat": "{{target_device}} provisioned",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max by (target_device) (ceph_rbd_image_used_bytes{os_region=\"$region\"} * on (image) group_left (uuid) label_replace(max by (uuid, backend_name) (openstack_volume_metadata{os_region=\"$region\"}), \"image\", \"$1\", \"backend_name\", \"(.*)\") * on (uuid) group_left (target_device) label_replace(max by (serial, target_device) (libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}), \"uuid\", \"$1\", \"serial\", \"(.*)\"))",
+          "legendFormat": "{{target_device}} used (Ceph)",
+          "range": true,
+          "instant": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "max by (target_device) (purefa_volume_space_bytes{os_region=\"$region\",space=\"total_physical\"} * on (name) group_left (uuid) label_replace(max by (uuid, backend_name) (openstack_volume_metadata{os_region=\"$region\"}), \"name\", \"$1\", \"backend_name\", \"(.*)\") * on (uuid) group_left (target_device) label_replace(max by (serial, target_device) (libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}), \"uuid\", \"$1\", \"serial\", \"(.*)\"))",
+          "legendFormat": "{{target_device}} used (Pure)",
+          "range": true,
+          "instant": false,
+          "refId": "C"
+        }
+      ],
+      "id": 7
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "tags": [
+    "storage",
+    "libvirt",
+    "tenant"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_domain_openstack_info, os_region)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "region",
+        "multi": false,
+        "name": "region",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(libvirt_domain_openstack_info, os_region)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_domain_openstack_info{os_region=\"$region\"}, project_name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "project",
+        "multi": false,
+        "name": "project",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(libvirt_domain_openstack_info{os_region=\"$region\"}, project_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "query_result(max by (instance_id, instance_name) (libvirt_domain_openstack_info{os_region=\"$region\",project_name=\"$project\"}))",
+        "hide": 0,
+        "includeAll": false,
+        "label": "instance",
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": {
+          "qryType": 3,
+          "query": "query_result(max by (instance_id, instance_name) (libvirt_domain_openstack_info{os_region=\"$region\",project_name=\"$project\"}))",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "/\\binstance_id=\"(?<value>[^\"]+)\".*\\binstance_name=\"(?<text>[^\"]+)\"/",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\"}, target_device)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "disk",
+        "multi": true,
+        "name": "disk",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\"}, target_device)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Tenant VM Storage (libvirt)",
+  "uid": "tenant-vm-storage-libvirt",
+  "version": 1,
+  "weekStart": ""
+}
