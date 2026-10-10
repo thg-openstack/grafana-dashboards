@@ -430,7 +430,7 @@
            "type": "prometheus",
            "uid": "${DS_PROMETHEUS}"
          },
-         "definition": "label_values(ceph_osd_metadata,cluster_name)",
+         "definition": "label_values(ceph_rbd_read_ops,cluster_name)",
          "hide": 0,
          "includeAll": false,
          "label": "cluster",
@@ -439,11 +439,11 @@
          "options": [],
          "query": {
            "qryType": 1,
-           "query": "label_values(ceph_osd_metadata,cluster_name)",
+           "query": "label_values(ceph_rbd_read_ops,cluster_name)",
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
-         "regex": "/block/",
+         "regex": "",
          "skipUrlSync": false,
          "sort": 1,
          "tagValuesQuery": "",
