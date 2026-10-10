@@ -98,7 +98,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Protocol rbd = Ceph; disk type block = iSCSI (Pure). Volume ID is empty for ephemeral disks.",
+      "description": "Protocol rbd = Ceph; disk type block = iSCSI (Pure). Volume ID is empty for ephemeral disks. Provisioned falls back to the Cinder volume size where the libvirt exporter has no capacity metric (gb1).",
       "type": "table",
       "title": "Disks",
       "gridPos": {
@@ -127,6 +127,42 @@
               {
                 "id": "decimals",
                 "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Volume ID (serial)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 320
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Provisioned"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 120
               }
             ]
           }
@@ -193,7 +229,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max by (target_device) (libvirt_domain_block_stats_capacity_bytes{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"})",
+          "expr": "max by (target_device) (libvirt_domain_block_stats_capacity_bytes{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}) or max by (target_device) (label_replace(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\",serial!=\"\"}, \"id\", \"$1\", \"serial\", \"(.*)\") * on (id) group_left () max by (id) (openstack_cinder_volume_gb{os_region=\"$region\"})) * 1073741824",
           "legendFormat": "",
           "range": false,
           "instant": true,
@@ -352,7 +388,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Time per request as the guest sees it (QEMU), including backend, network and QoS waits.",
+      "description": "Time per request as the guest sees it (QEMU), including backend, network and QoS waits. Not available in gb1: its libvirt exporter does not export read/write/flush time.",
       "type": "timeseries",
       "title": "Average latency",
       "gridPos": {
@@ -371,7 +407,8 @@
             "fillOpacity": 10,
             "showPoints": "never",
             "spanNulls": true
-          }
+          },
+          "noValue": "No latency data (not exported by this region's libvirt exporter)"
         },
         "overrides": []
       },
@@ -554,7 +591,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max by (target_device) (libvirt_domain_block_stats_capacity_bytes{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"})",
+          "expr": "max by (target_device) (libvirt_domain_block_stats_capacity_bytes{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\"}) or max by (target_device) (label_replace(libvirt_domain_block_stats_info{os_region=\"$region\",domain=\"$instance\",target_device=~\"$disk\",serial!=\"\"}, \"id\", \"$1\", \"serial\", \"(.*)\") * on (id) group_left () max by (id) (openstack_cinder_volume_gb{os_region=\"$region\"})) * 1073741824",
           "legendFormat": "{{target_device}} provisioned",
           "range": true,
           "instant": false,
