@@ -1074,7 +1074,7 @@
           "refId": "A"
         }
       ],
-      "title": "Shut off VMs",
+      "title": "Shut off",
       "type": "stat"
     },
     {
@@ -1120,6 +1120,30 @@
                     },
                     {
                       "color": "red",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "E"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
                       "value": 1
                     }
                   ]
@@ -1205,11 +1229,23 @@
           "instant": false,
           "range": true,
           "legendFormat": "Error (Nova)"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "refId": "E",
+          "expr": "count(openstack_nova_server_status{os_region=~\"$cluster\",status=\"RESCUE\"}) or on() vector(0)",
+          "legendFormat": "Rescue (Nova)",
+          "format": "time_series",
+          "instant": false,
+          "range": true
         }
       ],
       "title": "Other VM states",
       "type": "stat",
-      "description": "Libvirt domain states, plus instances Nova has in ERROR (these often have no libvirt domain)."
+      "description": "Libvirt domain states, plus instances Nova has in ERROR (these often have no libvirt domain) or RESCUE (booted from a rescue image)."
     },
     {
       "datasource": {
