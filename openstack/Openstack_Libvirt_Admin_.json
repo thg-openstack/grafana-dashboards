@@ -9803,7 +9803,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Price a year with commit and without commit",
+          "description": "What these hypervisors would cost to license on VMware for a year: physical cores (placement VCPU / 2) x $350 per core without commit, x $338 with commit.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -9838,21 +9838,34 @@
               },
               "unit": "currencyUSD"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "C"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "short"
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
             "x": 0,
             "y": 43,
-            "w": 6,
-            "h": 4
+            "w": 12,
+            "h": 5
           },
           "id": 78,
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
             "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
+            "justifyMode": "center",
+            "orientation": "vertical",
             "percentChangeColorMode": "standard",
             "reduceOptions": {
               "calcs": [
@@ -9862,15 +9875,22 @@
               "values": false
             },
             "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true,
-            "text": {
-              "titleSize": 12,
-              "valueSize": 20
-            }
+            "textMode": "value_and_name",
+            "wideLayout": true
           },
           "pluginVersion": "11.6.2",
           "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "refId": "C",
+              "expr": "sum(openstack_placement_resource_total{os_region=~\"$cluster\", resourcetype=\"VCPU\"})/2",
+              "legendFormat": "Cores counted",
+              "range": true,
+              "instant": false
+            },
             {
               "datasource": {
                 "type": "prometheus",
@@ -9898,7 +9918,7 @@
               "refId": "B"
             }
           ],
-          "title": "Price per year running on VMware",
+          "title": "VMware cost per year (equivalent)",
           "type": "stat"
         }
       ]
