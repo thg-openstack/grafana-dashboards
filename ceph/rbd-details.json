@@ -457,16 +457,16 @@
            "type": "prometheus",
            "uid": "${DS_PROMETHEUS}"
          },
-         "definition": "",
-         "hide": 2,
+         "definition": "label_values(ceph_rbd_read_ops{cluster_name=\"$cluster\"},pool)",
+         "hide": 0,
          "includeAll": false,
          "label": "",
          "multi": false,
          "name": "pool",
          "options": [],
-         "query": "label_values(pool)",
+         "query": "label_values(ceph_rbd_read_ops{cluster_name=\"$cluster\"},pool)",
          "refresh": 1,
-         "regex": "/cinder/",
+         "regex": "/^(cinder|volumes)$/",
          "skipUrlSync": false,
          "sort": 0,
          "tagValuesQuery": "",
@@ -480,7 +480,7 @@
            "type": "prometheus",
            "uid": "${DS_PROMETHEUS}"
          },
-         "definition": "label_values({cluster_name=\"$cluster\"},image)",
+         "definition": "label_values(ceph_rbd_read_ops{cluster_name=\"$cluster\",pool=\"$pool\"},image)",
          "description": "/^volume-/",
          "hide": 0,
          "includeAll": false,
@@ -490,7 +490,7 @@
          "options": [],
          "query": {
            "qryType": 1,
-           "query": "label_values({cluster_name=\"$cluster\"},image)",
+           "query": "label_values(ceph_rbd_read_ops{cluster_name=\"$cluster\",pool=\"$pool\"},image)",
            "refId": "PrometheusVariableQueryEditor-VariableQuery"
          },
          "refresh": 1,
