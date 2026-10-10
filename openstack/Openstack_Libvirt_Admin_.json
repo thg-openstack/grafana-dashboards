@@ -2702,7 +2702,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "openstack_nova_memory_available_bytes{os_region=\"$cluster\",availability_zone=~\"$AZ\"}",
+              "expr": "openstack_nova_memory_available_bytes{os_region=\"$cluster\",availability_zone=~\"$AZ|\"}",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -2717,7 +2717,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "openstack_nova_running_vms{os_region=\"$cluster\",availability_zone=~\"$AZ\"}",
+              "expr": "openstack_nova_running_vms{os_region=\"$cluster\",availability_zone=~\"$AZ|\"}",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -7234,7 +7234,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", os_region=~\"$cluster\", compute=~\"$compute\"},domain)",
+        "definition": "label_values(libvirt_domain_openstack_info{job=\"libvirt_exporter\", os_region=~\"$cluster\", compute=~\"$compute\"},domain)",
         "hide": 2,
         "includeAll": true,
         "label": "VM",
@@ -7243,7 +7243,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", os_region=~\"$cluster\", compute=~\"$compute\"},domain)",
+          "query": "label_values(libvirt_domain_openstack_info{job=\"libvirt_exporter\", os_region=~\"$cluster\", compute=~\"$compute\"},domain)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
