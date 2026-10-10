@@ -324,7 +324,7 @@
           "root_selector": "(result.{\"Host\": name, \"Host group\": (groups[$contains(name, /^os\\/[a-z-]+[0-9]+$/)].name)[0], \"In maintenance since\": $number(maintenance_from) * 1000})[`Host group` in ${Group:json}]",
           "columns": [],
           "filters": [],
-          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url": "/api/datasources/uid/${zabbix_uid}/resources/zabbix-api",
           "url_options": {
             "method": "POST",
             "body_type": "raw",
@@ -877,7 +877,7 @@
           "root_selector": "(result.{\"Host\": name, \"Host group\": (groups[$contains(name, /^os\\/[a-z-]+[0-9]+$/)].name)[0], \"In maintenance since\": $number(maintenance_from) * 1000})[`Host group` in ${Group:json}]",
           "columns": [],
           "filters": [],
-          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url": "/api/datasources/uid/${zabbix_uid}/resources/zabbix-api",
           "url_options": {
             "method": "POST",
             "body_type": "raw",
@@ -1145,7 +1145,7 @@
           "root_selector": "(result.($t := tags; {\"Site\": ($t[tag=\"site\"].value)[0], \"Rack\": ($t[tag=\"rack\"].value)[0], \"Host\": ($t[tag=\"service-host\"].value)[0], \"Severity\": $number(severity), \"Problem\": name, \"Since\": $number(clock) * 1000}))[Rack and (\"os/\" & Site) in ${Group:json}]",
           "columns": [],
           "filters": [],
-          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url": "/api/datasources/uid/${zabbix_uid}/resources/zabbix-api",
           "url_options": {
             "method": "POST",
             "body_type": "raw",
@@ -1240,7 +1240,7 @@
           "root_selector": "(result.($t := tags; {\"Site\": ($t[tag=\"site\"].value)[0], \"Rack\": ($t[tag=\"rack\"].value)[0], \"Host\": ($t[tag=\"service-host\"].value)[0], \"Severity\": $number(severity), \"Problem\": name, \"Since\": $number(clock) * 1000}))[Rack and (\"os/\" & Site) in ${Group:json}]",
           "columns": [],
           "filters": [],
-          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url": "/api/datasources/uid/${zabbix_uid}/resources/zabbix-api",
           "url_options": {
             "method": "POST",
             "body_type": "raw",
@@ -1657,7 +1657,7 @@
           "root_selector": "(result.{\"Host\": name, \"Host group\": (groups[$contains(name, /^os\\/[a-z-]+[0-9]+$/)].name)[0], \"In maintenance since\": $number(maintenance_from) * 1000})[`Host group` in ${Group:json}]",
           "columns": [],
           "filters": [],
-          "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+          "url": "/api/datasources/uid/${zabbix_uid}/resources/zabbix-api",
           "url_options": {
             "method": "POST",
             "body_type": "raw",
@@ -2034,7 +2034,7 @@
             "root_selector": "result.name",
             "columns": [],
             "filters": [],
-            "url": "/api/datasources/uid/${DS_ZABBIX}/resources/zabbix-api",
+            "url": "/api/datasources/uid/${zabbix_uid}/resources/zabbix-api",
             "url_options": {
               "method": "POST",
               "body_type": "raw",
@@ -2046,6 +2046,17 @@
           "queryType": "infinity"
         },
         "definition": "Zabbix host.get maintenance_status=1"
+      },
+      {
+        "name": "zabbix_uid",
+        "label": "Zabbix datasource",
+        "type": "datasource",
+        "hide": 2,
+        "query": "alexanderzobnin-zabbix-datasource",
+        "current": {},
+        "options": [],
+        "refresh": 1,
+        "regex": ""
       }
     ]
   },
