@@ -74,6 +74,20 @@
       "keepTime": false,
       "tags": [],
       "tooltip": ""
+    },
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-network"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
     }
   ],
   "panels": [
@@ -1156,7 +1170,8 @@
   "tags": [
     "ovn",
     "ovs",
-    "openvswitch"
+    "openvswitch",
+    "folder-network"
   ],
   "templating": {
     "list": [

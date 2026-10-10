@@ -76,7 +76,22 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-tenant"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -1489,7 +1504,8 @@
     "ceph",
     "overview",
     "s3",
-    "ceph-s3"
+    "ceph-s3",
+    "folder-tenant"
   ],
   "templating": {
     "list": [

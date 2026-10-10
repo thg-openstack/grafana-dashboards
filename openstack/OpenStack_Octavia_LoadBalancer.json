@@ -27,7 +27,22 @@
   "gnetId": 15828,
   "graphTooltip": 0,
   "id": 179,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-openstack"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -11280,7 +11295,8 @@
   "tags": [
     "OpenStack",
     "Octavia",
-    "LoadBalancer"
+    "LoadBalancer",
+    "folder-openstack"
   ],
   "templating": {
     "list": [

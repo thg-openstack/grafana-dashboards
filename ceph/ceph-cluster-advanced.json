@@ -87,7 +87,7 @@
       "includeVars": true,
       "keepTime": true,
       "tags": [
-        "ceph-mixin"
+        "folder-ceph"
       ],
       "targetBlank": false,
       "title": "Browse Dashboards",
@@ -4321,7 +4321,8 @@
   "refresh": "1m",
   "schemaVersion": 38,
   "tags": [
-    "ceph-mixin"
+    "ceph-mixin",
+    "folder-ceph"
   ],
   "templating": {
     "list": [

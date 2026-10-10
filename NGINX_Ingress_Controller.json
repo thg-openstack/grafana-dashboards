@@ -40,7 +40,8 @@
   "tags": [
     "nginx",
     "ingress",
-    "kubernetes"
+    "kubernetes",
+    "folder-default"
   ],
   "description": "F5 NGINX Ingress Controller (open source edition): stub_status traffic, controller health and upstream latency metrics. Per-ingress request counts and server zones need NGINX Plus and are not available.",
   "editable": true,
@@ -53,7 +54,22 @@
     "to": "now"
   },
   "timezone": "browser",
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-default"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "annotations": {
     "list": []
   },

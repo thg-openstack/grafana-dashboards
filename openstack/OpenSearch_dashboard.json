@@ -88,7 +88,22 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-opensearch"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -5632,7 +5647,9 @@
   "refresh": "",
   "revision": 1,
   "schemaVersion": 38,
-  "tags": [],
+  "tags": [
+    "folder-opensearch"
+  ],
   "templating": {
     "list": [
       {

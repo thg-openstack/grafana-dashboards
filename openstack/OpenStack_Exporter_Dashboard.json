@@ -82,7 +82,22 @@
   "gnetId": 9701,
   "graphTooltip": 0,
   "id": null,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-openstack"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -3098,7 +3113,8 @@
   "schemaVersion": 38,
   "tags": [
     "openstack",
-    "openstack-exporter"
+    "openstack-exporter",
+    "folder-openstack"
   ],
   "templating": {
     "list": [

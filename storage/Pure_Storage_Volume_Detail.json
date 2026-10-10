@@ -65,30 +65,15 @@
   "id": null,
   "links": [
     {
-      "asDropdown": false,
+      "asDropdown": true,
       "icon": "external link",
       "includeVars": false,
       "keepTime": true,
       "tags": [
-        "HPE Storage Arrays",
-        "HPE Volume Details"
+        "folder-storage"
       ],
       "targetBlank": false,
-      "title": "HPE Storage Arrays",
-      "tooltip": "",
-      "type": "dashboards",
-      "url": ""
-    },
-    {
-      "asDropdown": false,
-      "icon": "dashboard",
-      "includeVars": true,
-      "keepTime": true,
-      "tags": [
-        "HPE Storage Pools"
-      ],
-      "targetBlank": false,
-      "title": "HPE Storage Pools",
+      "title": "Browse Dashboards",
       "tooltip": "",
       "type": "dashboards",
       "url": ""
@@ -1900,7 +1885,9 @@
   ],
   "refresh": "",
   "schemaVersion": 41,
-  "tags": [],
+  "tags": [
+    "folder-storage"
+  ],
   "templating": {
     "list": [
       {

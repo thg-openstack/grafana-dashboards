@@ -51,7 +51,22 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": 451,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-storage"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "panels": [
     {
       "datasource": {
@@ -3062,7 +3077,8 @@
     "flashblade",
     "fb",
     "prometheus",
-    "openmetrics"
+    "openmetrics",
+    "folder-storage"
   ],
   "templating": {
     "list": [

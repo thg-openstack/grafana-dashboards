@@ -60,7 +60,22 @@
   "gnetId": 10076,
   "graphTooltip": 1,
   "id": null,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-vmware"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -1167,7 +1182,8 @@
   "refresh": "",
   "schemaVersion": 38,
   "tags": [
-    "vmware"
+    "vmware",
+    "folder-vmware"
   ],
   "templating": {
     "list": [

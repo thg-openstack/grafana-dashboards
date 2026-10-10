@@ -110,6 +110,20 @@
       "title": "Releases",
       "type": "link",
       "url": "https://github.com/VictoriaMetrics/VictoriaMetrics/releases"
+    },
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-default"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
     }
   ],
   "panels": [
@@ -11465,7 +11479,8 @@
   "refresh": "",
   "schemaVersion": 42,
   "tags": [
-    "victoriametrics"
+    "victoriametrics",
+    "folder-default"
   ],
   "templating": {
     "list": [
