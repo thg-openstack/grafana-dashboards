@@ -47,7 +47,22 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": 449,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-vmware"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "panels": [
     {
       "collapsed": false,
@@ -3222,7 +3237,9 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 41,
-  "tags": [],
+  "tags": [
+    "folder-vmware"
+  ],
   "templating": {
     "list": [
       {

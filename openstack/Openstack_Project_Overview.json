@@ -74,7 +74,36 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-openstack"
+      ],
+      "targetBlank": false,
+      "title": "Openstack Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-tenant"
+      ],
+      "targetBlank": false,
+      "title": "Tenant Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "panels": [
     {
       "collapsed": false,
@@ -3648,7 +3677,10 @@
   ],
   "refresh": "5m",
   "schemaVersion": 41,
-  "tags": [],
+  "tags": [
+    "folder-openstack",
+    "folder-tenant"
+  ],
   "templating": {
     "list": [
       {

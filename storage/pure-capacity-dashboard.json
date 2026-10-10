@@ -92,7 +92,22 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": null,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-capacity"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "panels": [
     {
       "gridPos": {
@@ -3096,7 +3111,9 @@
   ],
   "refresh": "",
   "schemaVersion": 41,
-  "tags": [],
+  "tags": [
+    "folder-capacity"
+  ],
   "templating": {
     "list": [
       {

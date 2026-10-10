@@ -47,7 +47,22 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": 462,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-vmware"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "panels": [
     {
       "datasource": {
@@ -2064,7 +2079,8 @@
   "schemaVersion": 41,
   "tags": [
     "vmware",
-    "esxi"
+    "esxi",
+    "folder-vmware"
   ],
   "templating": {
     "list": [

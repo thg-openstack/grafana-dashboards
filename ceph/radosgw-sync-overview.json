@@ -29,7 +29,7 @@
        "includeVars": true,
        "keepTime": true,
        "tags": [
-         "ceph-mixin"
+         "folder-ceph"
        ],
        "targetBlank": false,
        "title": "Browse Dashboards",
@@ -424,7 +424,8 @@
    "style": "dark",
    "tags": [
      "ceph-mixin",
-     "overview"
+     "overview",
+     "folder-ceph"
    ],
    "templating": {
      "list": [

@@ -108,7 +108,22 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "folder-openstack"
+      ],
+      "targetBlank": false,
+      "title": "Browse Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "liveNow": true,
   "panels": [
     {
@@ -5310,7 +5325,9 @@
   ],
   "refresh": "1m",
   "schemaVersion": 41,
-  "tags": [],
+  "tags": [
+    "folder-openstack"
+  ],
   "templating": {
     "list": [
       {
