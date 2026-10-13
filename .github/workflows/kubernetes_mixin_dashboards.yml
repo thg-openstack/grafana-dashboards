@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: grafana-dashboards
       - name: create new branch
@@ -16,7 +16,7 @@ jobs:
         run: |
           git checkout -b k8s_automation_${{ github.run_id }}
       - name: check out k8s mixin dashboards
-        uses: actions/checkout@v3
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: kubernetes-mixin
           repository: kubernetes-monitoring/kubernetes-mixin
@@ -50,7 +50,7 @@ jobs:
           git add -A .
           git commit -m "Auto Generated k8s-mixin $(date)"
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # v1.3.0
         with:
           directory: grafana-dashboards
           github_token: ${{ secrets.GITHUB_TOKEN }}
