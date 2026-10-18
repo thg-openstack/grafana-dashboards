@@ -113,7 +113,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "(ceph_pool_stored{cluster_name=~\"$cluster\"} / (ceph_pool_stored{cluster_name=~\"$cluster\"} + ceph_pool_max_avail{cluster_name=~\"$cluster\"})) * on(pool_id) group_left(instance, name) ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"}\n",
+           "expr": "max without (instance) (\n  (ceph_pool_stored{cluster_name=~\"$cluster\"} / (ceph_pool_stored{cluster_name=~\"$cluster\"} + ceph_pool_max_avail{cluster_name=~\"$cluster\"})) *\n    on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"})\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "",
@@ -197,7 +197,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "(ceph_pool_max_avail{cluster_name=~\"$cluster\"} / deriv(ceph_pool_stored{cluster_name=~\"$cluster\"}[6h])) * on(pool_id) group_left(instance, name) ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"} > 0",
+           "expr": "max without (instance) (\n  (ceph_pool_max_avail{cluster_name=~\"$cluster\"} / deriv(ceph_pool_stored{cluster_name=~\"$cluster\"}[6h])) *\n    on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"})\n) > 0",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "",
@@ -266,7 +266,7 @@
              "uid": "${DS_PROMETHEUS}"
            },
            "editorMode": "code",
-           "expr": "deriv(ceph_pool_objects{cluster_name=~\"$cluster\"}[1m]) *\n  on(pool_id) group_left(instance, name) ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"}\n",
+           "expr": "max without (instance) (\n  deriv(ceph_pool_objects{cluster_name=~\"$cluster\"}[1m]) *\n    on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"})\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "Objects per second",
@@ -366,7 +366,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "rate(ceph_pool_rd{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on(pool_id) group_left(instance,name) ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"}\n",
+           "expr": "max without (instance) (\n  rate(ceph_pool_rd{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n    on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"})\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "reads",
@@ -377,7 +377,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n  on(pool_id) group_left(instance, name) ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"}\n",
+           "expr": "max without (instance) (\n  rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n    on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"})\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "writes",
@@ -476,7 +476,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "rate(ceph_pool_rd_bytes{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n  on(pool_id) group_left(instance, name) ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"}\n",
+           "expr": "max without (instance) (\n  rate(ceph_pool_rd_bytes{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n    on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"})\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "reads",
@@ -487,7 +487,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "rate(ceph_pool_wr_bytes{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n  on(pool_id) group_left(instance,name) ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"}\n",
+           "expr": "max without (instance) (\n  rate(ceph_pool_wr_bytes{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n    on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"})\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "writes",
@@ -581,7 +581,7 @@
              "type": "prometheus",
              "uid": "${DS_PROMETHEUS}"
            },
-           "expr": "ceph_pool_objects{cluster_name=~\"$cluster\"} *\n  on(pool_id) group_left(instance,name) ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"}\n",
+           "expr": "max without (instance) (\n  ceph_pool_objects{cluster_name=~\"$cluster\"} *\n    on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\", name=~\"$pool_name\"})\n)\n",
            "format": "time_series",
            "intervalFactor": 1,
            "legendFormat": "Number of Objects",
