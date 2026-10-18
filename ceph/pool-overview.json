@@ -1421,7 +1421,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "topk($topk,\n  round(\n    (\n      rate(ceph_pool_rd{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval])\n    ), 1\n  ) * on(pool_id) group_left(instance,name) ceph_pool_metadata{cluster_name=~\"$cluster\"})\n",
+          "expr": "topk($topk,\n  max without (instance) (\n    round(\n      (\n        rate(ceph_pool_rd{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n          rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval])\n      ), 1\n    ) * on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\"})\n  )\n)\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{name}} ",
@@ -1434,7 +1434,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "topk($topk,\n  rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n    on(pool_id) group_left(instance,name) ceph_pool_metadata{cluster_name=~\"$cluster\"}\n)\n",
+          "expr": "topk($topk,\n  max without (instance) (\n    rate(ceph_pool_wr{cluster_name=~\"$cluster\"}[$__rate_interval]) *\n      on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\"})\n  )\n)\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{name}} - write",
@@ -1529,7 +1529,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "topk($topk,\n  (\n    rate(ceph_pool_rd_bytes{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n      rate(ceph_pool_wr_bytes{cluster_name=~\"$cluster\"}[$__rate_interval])\n  ) * on(pool_id) group_left(instance, name) ceph_pool_metadata{cluster_name=~\"$cluster\"}\n)\n",
+          "expr": "topk($topk,\n  max without (instance) (\n    (\n      rate(ceph_pool_rd_bytes{cluster_name=~\"$cluster\"}[$__rate_interval]) +\n        rate(ceph_pool_wr_bytes{cluster_name=~\"$cluster\"}[$__rate_interval])\n    ) * on(pool_id) group_left(name) max by (pool_id, name) (ceph_pool_metadata{cluster_name=~\"$cluster\"})\n  )\n)\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{name}}",
