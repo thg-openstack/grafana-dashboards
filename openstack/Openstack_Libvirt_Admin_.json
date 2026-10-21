@@ -1833,6 +1833,1445 @@
       "type": "timeseries"
     },
     {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 115,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "One row per project. VMs, vCPUs and RAM are current values; CPU, disk and network are averages over the selected time range. RAM used is allocated minus guest-usable memory, so it only covers VMs that report memory stats. Click a column header to rank projects by it.",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "decimals": 1,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "VMs"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "none"
+                  },
+                  {
+                    "id": "decimals",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "vCPUs"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "none"
+                  },
+                  {
+                    "id": "decimals",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU used (cores)"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "none"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "RAM allocated"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "RAM used"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Read IOPS"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "iops"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Write IOPS"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "iops"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disk read"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "Bps"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disk write"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "Bps"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Net RX"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bps"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Net TX"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bps"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "RX packets"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "pps"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "TX packets"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "pps"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "RX/TX drops"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "pps"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 33
+          },
+          "id": 116,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Write IOPS"
+              }
+            ]
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "count by (os_region, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"})",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (libvirt_domain_info_virtual_cpus{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_info_cpu_time_seconds_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (libvirt_domain_info_maximum_memory_bytes{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) ((libvirt_domain_info_maximum_memory_bytes{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} - libvirt_domain_memory_stats_usable_bytes{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_block_stats_read_requests_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_block_stats_write_requests_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_block_stats_read_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "H"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_block_stats_write_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "I"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_receive_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range])*8 * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "J"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_transmit_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range])*8 * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "K"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_receive_packets_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "L"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_transmit_packets_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "M"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) ((rate(libvirt_domain_interface_stats_receive_drops_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range]) + rate(libvirt_domain_interface_stats_transmit_drops_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range])) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))",
+              "format": "table",
+              "instant": true,
+              "range": false,
+              "refId": "N"
+            }
+          ],
+          "title": "Project stats",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true
+                },
+                "includeByName": {},
+                "indexByName": {
+                  "os_region": 0,
+                  "project_name": 1,
+                  "Value #A": 2,
+                  "Value #B": 3,
+                  "Value #C": 4,
+                  "Value #D": 5,
+                  "Value #E": 6,
+                  "Value #F": 7,
+                  "Value #G": 8,
+                  "Value #H": 9,
+                  "Value #I": 10,
+                  "Value #J": 11,
+                  "Value #K": 12,
+                  "Value #L": 13,
+                  "Value #M": 14,
+                  "Value #N": 15
+                },
+                "renameByName": {
+                  "os_region": "Region",
+                  "project_name": "Project",
+                  "Value #A": "VMs",
+                  "Value #B": "vCPUs",
+                  "Value #C": "CPU used (cores)",
+                  "Value #D": "RAM allocated",
+                  "Value #E": "RAM used",
+                  "Value #F": "Read IOPS",
+                  "Value #G": "Write IOPS",
+                  "Value #H": "Disk read",
+                  "Value #I": "Disk write",
+                  "Value #J": "Net RX",
+                  "Value #K": "Net TX",
+                  "Value #L": "RX packets",
+                  "Value #M": "TX packets",
+                  "Value #N": "RX/TX drops"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "iops"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 45
+          },
+          "id": 117,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_block_stats_read_requests_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_block_stats_read_requests_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end()) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by read IOPS",
+          "type": "timeseries",
+          "description": "Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "iops"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 45
+          },
+          "id": 118,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_block_stats_write_requests_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_block_stats_write_requests_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end()) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by write IOPS",
+          "type": "timeseries",
+          "description": "Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "Bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 53
+          },
+          "id": 119,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_block_stats_read_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_block_stats_read_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end()) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by disk read",
+          "type": "timeseries",
+          "description": "Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "Bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 53
+          },
+          "id": 120,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_block_stats_write_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_block_stats_write_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end()) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by disk write",
+          "type": "timeseries",
+          "description": "Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 61
+          },
+          "id": 121,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_receive_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval])*8 * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_receive_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end())*8 * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by network RX",
+          "type": "timeseries",
+          "description": "Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "bps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 61
+          },
+          "id": 122,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_transmit_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval])*8 * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_transmit_bytes_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end())*8 * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by network TX",
+          "type": "timeseries",
+          "description": "Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "pps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 69
+          },
+          "id": 123,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_receive_packets_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_receive_packets_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end()) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by RX packets",
+          "type": "timeseries",
+          "description": "Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "pps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 69
+          },
+          "id": 124,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_transmit_packets_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_interface_stats_transmit_packets_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end()) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by TX packets",
+          "type": "timeseries",
+          "description": "Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 77
+          },
+          "id": 125,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) (rate(libvirt_domain_info_cpu_time_seconds_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) (rate(libvirt_domain_info_cpu_time_seconds_total{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}[$__range] @ end()) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by CPU usage (cores)",
+          "type": "timeseries",
+          "description": "vCPU time used, in cores. Ranked by the average over the selected time range."
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 77
+          },
+          "id": 126,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region, project_name) ((libvirt_domain_info_maximum_memory_bytes{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} - libvirt_domain_memory_stats_usable_bytes{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"}))\nand on(os_region, project_name)\ntopk($TopItems, sum by (os_region, project_name) ((libvirt_domain_info_maximum_memory_bytes{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end() - libvirt_domain_memory_stats_usable_bytes{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end()) * on(os_region, domain, compute) group_left(project_name) max by (os_region, domain, compute, project_name) (libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=~\"$cluster\",compute=~\"$compute\"} @ end())))",
+              "legendFormat": "{{project_name}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems projects by RAM used",
+          "type": "timeseries",
+          "description": "Allocated minus guest-usable memory, for VMs that report memory stats. Ranked by the value at the end of the range."
+        }
+      ],
+      "title": "Projects",
+      "type": "row"
+    },
+    {
       "type": "row",
       "title": "OpenStack services",
       "collapsed": true,
@@ -1841,7 +3280,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 33
       },
       "panels": [
         {
@@ -2815,7 +4254,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 34
       },
       "id": 67,
       "panels": [
@@ -4344,7 +5783,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 35
       },
       "id": 15,
       "panels": [
@@ -4793,7 +6232,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 36
       },
       "id": 31,
       "panels": [
@@ -6067,7 +7506,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 37
       },
       "id": 24,
       "panels": [
@@ -6876,7 +8315,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 38
       },
       "id": 37,
       "panels": [
@@ -7659,7 +9098,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 39
       },
       "id": 29,
       "panels": [
@@ -8051,7 +9490,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 40
       },
       "panels": [
         {
@@ -8693,7 +10132,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 41
       },
       "panels": [
         {
@@ -9102,7 +10541,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 42
       },
       "panels": [
         {
@@ -9795,7 +11234,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 43
       },
       "panels": [
         {
