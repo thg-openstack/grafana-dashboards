@@ -2622,6 +2622,216 @@
       "id": 71
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Average number of I/O requests in flight (read + write + flush time per second, as libvirt measures it on the hypervisor). 1 means one request was outstanding the whole time; sustained values above 1 mean the VM is waiting on storage. This is the host-side view of the guest's I/O wait: it shows queued I/O, not whether the guest's CPUs were idle because of it.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": 1800000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "short",
+          "decimals": 2
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 74
+      },
+      "id": 82,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Mean",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(rate(libvirt_domain_block_stats_read_time_seconds_total{target_device=~\"$disk\",domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) + rate(libvirt_domain_block_stats_write_time_seconds_total{target_device=~\"$disk\",domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]) + rate(libvirt_domain_block_stats_flush_time_seconds_total{target_device=~\"$disk\",domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval]))\n* on(domain) group_left(instance_name) max by (domain, instance_name) (libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{instance_name}} - {{target_device}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Disk queue depth",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Average time per flush (fsync) request as the guest sees it (libvirt), per disk.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": 1800000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 74
+      },
+      "id": 83,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "topk(20,\n  rate(libvirt_domain_block_stats_flush_time_seconds_total{target_device=~\"$disk\",domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])\n  / rate(libvirt_domain_block_stats_flush_requests_total{target_device=~\"$disk\",domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"}[$__rate_interval])\n  * on(domain) group_left(instance_name) max by (domain, instance_name) (libvirt_domain_openstack_info{domain=~\"$domain\",job=~\"libvirt_exporter\",compute=~\"$compute\"})\n)",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{instance_name}} - {{target_device}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Flush latency",
+      "type": "timeseries"
+    },
+    {
       "type": "row",
       "title": "Backend view ($backend): volume $volume_name ($volume)",
       "collapsed": false,
@@ -2629,7 +2839,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 74
+        "y": 82
       },
       "panels": [],
       "id": 72
@@ -2646,7 +2856,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 75
+        "y": 83
       },
       "fieldConfig": {
         "defaults": {
@@ -2716,7 +2926,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 79
+        "y": 87
       },
       "fieldConfig": {
         "defaults": {
@@ -2790,7 +3000,7 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 79
+        "y": 87
       },
       "fieldConfig": {
         "defaults": {
@@ -2864,7 +3074,7 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 79
+        "y": 87
       },
       "fieldConfig": {
         "defaults": {
@@ -2939,7 +3149,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 84
+        "y": 92
       },
       "fieldConfig": {
         "defaults": {
@@ -3035,7 +3245,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 84
+        "y": 92
       },
       "fieldConfig": {
         "defaults": {
@@ -3131,7 +3341,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 92
+        "y": 100
       },
       "fieldConfig": {
         "defaults": {
@@ -3251,7 +3461,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 92
+        "y": 100
       },
       "fieldConfig": {
         "defaults": {
@@ -3347,7 +3557,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 108
       },
       "fieldConfig": {
         "defaults": {
@@ -3461,7 +3671,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 108
+        "y": 116
       },
       "id": 24,
       "panels": [],
@@ -3528,7 +3738,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 109
+        "y": 117
       },
       "id": 19,
       "options": {
@@ -3627,7 +3837,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 109
+        "y": 117
       },
       "id": 20,
       "options": {
@@ -3727,7 +3937,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 117
+        "y": 125
       },
       "id": 21,
       "options": {
@@ -3828,7 +4038,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 117
+        "y": 125
       },
       "id": 26,
       "options": {
@@ -3929,7 +4139,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 125
+        "y": 133
       },
       "id": 25,
       "options": {
@@ -4030,7 +4240,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 125
+        "y": 133
       },
       "id": 27,
       "options": {
@@ -4076,7 +4286,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 133
+        "y": 141
       },
       "id": 37,
       "panels": [],
@@ -4143,7 +4353,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 134
+        "y": 142
       },
       "id": 38,
       "options": {
@@ -4242,7 +4452,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 134
+        "y": 142
       },
       "id": 39,
       "options": {
@@ -4342,7 +4552,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 142
+        "y": 150
       },
       "id": 40,
       "options": {
@@ -4441,7 +4651,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 142
+        "y": 150
       },
       "id": 41,
       "options": {
@@ -4541,7 +4751,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 150
+        "y": 158
       },
       "id": 42,
       "options": {
@@ -4640,7 +4850,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 150
+        "y": 158
       },
       "id": 43,
       "options": {
@@ -4740,7 +4950,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 158
+        "y": 166
       },
       "id": 44,
       "options": {
@@ -4840,7 +5050,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 158
+        "y": 166
       },
       "id": 45,
       "options": {

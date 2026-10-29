@@ -7495,6 +7495,115 @@
           ],
           "title": "Top $TopItems Write latency",
           "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "Average number of I/O requests in flight (read + write + flush time per second, as libvirt measures it on the hypervisor). 1 means one request was outstanding the whole time; sustained values above 1 mean the VM is waiting on storage. This is the host-side view of the guest's I/O wait: it shows queued I/O, not whether the guest's CPUs were idle because of it. Summed over the VM's disks; ranked by the average over the selected range.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 3,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "always",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "short",
+              "decimals": 2
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 147
+          },
+          "id": 127,
+          "interval": "$interval",
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Mean",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "11.6.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "(sum by (domain, compute) (rate(libvirt_domain_block_stats_read_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval]) + rate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval]) + rate(libvirt_domain_block_stats_flush_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__rate_interval]))\nand on(domain, compute)\ntopk($TopItems, sum by (domain, compute) (rate(libvirt_domain_block_stats_read_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__range] @ end()) + rate(libvirt_domain_block_stats_write_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__range] @ end()) + rate(libvirt_domain_block_stats_flush_time_seconds_total{domain=~\"$virtual_machine\",job=~\"libvirt_exporter\",compute=~\"$compute\",os_region=~\"$cluster\"}[$__range] @ end()))))\n* on(domain) group_left(instance_name, project_name) max by (domain, instance_name, project_name) (libvirt_domain_openstack_info{os_region=~\"$cluster\"})",
+              "format": "time_series",
+              "instant": false,
+              "interval": "$interval",
+              "legendFormat": "{{instance_name}} ({{project_name}}) - {{compute}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Top $TopItems VMs by disk queue depth",
+          "type": "timeseries"
         }
       ],
       "title": "Disk",
