@@ -1017,7 +1017,8 @@
               "type": "auto"
             },
             "filterable": true,
-            "inspect": false
+            "inspect": false,
+            "minWidth": 90
           },
           "mappings": [],
           "thresholds": {
@@ -1039,19 +1040,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 300
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "vCPU Total"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 188
+                "value": 315
               }
             ]
           },
@@ -1064,42 +1053,42 @@
               {
                 "id": "unit",
                 "value": "percent"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory Total"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "bytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "bytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Compute"
-            },
-            "properties": [
+              },
               {
                 "id": "custom.width",
-                "value": 170
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Total"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              },
+              {
+                "id": "custom.width",
+                "value": 95
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM Used"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bytes"
+              },
+              {
+                "id": "custom.width",
+                "value": 110
               }
             ]
           },
@@ -1111,7 +1100,19 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 200
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "vCPU Total"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
@@ -1142,7 +1143,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Memory Used"
+            "displayName": "RAM Used"
           }
         ]
       },
@@ -1320,12 +1321,25 @@
         {
           "id": "organize",
           "options": {
-            "excludeByName": {},
-            "indexByName": {},
+            "excludeByName": {
+              "os_region (lastNotNull)": true,
+              "user_name (lastNotNull)": true
+            },
+            "indexByName": {
+              "instance_name (lastNotNull)": 0,
+              "Domain": 1,
+              "project_name (lastNotNull)": 2,
+              "flavor_name (lastNotNull)": 3,
+              "vCPU Total (lastNotNull)": 4,
+              "vCPU Used (lastNotNull)": 5,
+              "Memory Total (lastNotNull)": 6,
+              "Memory Used (lastNotNull)": 7,
+              "compute (lastNotNull)": 8
+            },
             "renameByName": {
               "Domain": "Instance ID",
-              "Memory Total (lastNotNull)": "Memory Total",
-              "Memory Used (lastNotNull)": "Memory Used",
+              "Memory Total (lastNotNull)": "RAM Total",
+              "Memory Used (lastNotNull)": "RAM Used",
               "compute (lastNotNull)": "Compute",
               "instance_name (lastNotNull)": "Instance Name",
               "os_region (lastNotNull)": "Region",
