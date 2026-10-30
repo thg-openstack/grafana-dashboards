@@ -3499,7 +3499,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "The total amount of data read from swap space",
+          "description": "Rate at which the guest reads data back in from swap",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -3548,7 +3548,7 @@
                   }
                 ]
               },
-              "unit": "bytes"
+              "unit": "Bps"
             },
             "overrides": []
           },
@@ -3585,7 +3585,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "libvirt_domain_memory_stats_swap_in_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} * on(compute,domain) group_left(instance_name,project_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
+              "expr": "rate(libvirt_domain_memory_stats_swap_in_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(instance_name,project_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
               "interval": "1m",
               "legendFormat": "{{instance_name}}",
               "range": true,
@@ -3600,7 +3600,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "The total amount of memory written out to swap space",
+          "description": "Rate at which the guest writes memory out to swap",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -3649,7 +3649,7 @@
                   }
                 ]
               },
-              "unit": "bytes"
+              "unit": "Bps"
             },
             "overrides": []
           },
@@ -3686,7 +3686,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "libvirt_domain_memory_stats_swap_out_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"} * on(compute,domain) group_left(instance_name,project_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
+              "expr": "rate(libvirt_domain_memory_stats_swap_out_bytes{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\"}[$__rate_interval]) * on(compute,domain) group_left(instance_name,project_name) libvirt_domain_openstack_info{job=\"libvirt_exporter\",os_region=\"$cluster\",compute=~\"$compute\",project_name=\"$project\",domain=~\"$virtual_machine\",instance_name=~\"$instance_name\"}",
               "hide": false,
               "interval": "1m",
               "legendFormat": "{{instance_name}}",
