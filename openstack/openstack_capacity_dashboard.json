@@ -3871,6 +3871,568 @@
       ],
       "title": "AZ overview",
       "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 133,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "IPv4 addresses not yet allocated on the shared external network, across the selected clusters.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "unit": "none",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 1
+                  },
+                  {
+                    "color": "green",
+                    "value": 10
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 24,
+            "w": 6,
+            "h": 4
+          },
+          "id": 134,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(((openstack_neutron_network_ip_availabilities_total{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} - openstack_neutron_network_ip_availabilities_used{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"}) and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\")))",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Free public IPs",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "IPv4 addresses allocated to ports on the shared external network.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "unit": "none",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "text",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "x": 6,
+            "y": 24,
+            "w": 6,
+            "h": 4
+          },
+          "id": 135,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum((openstack_neutron_network_ip_availabilities_used{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\")))",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Used public IPs",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "Size of the allocation pools of the shared external network's IPv4 subnets.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "unit": "none",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "text",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "x": 12,
+            "y": 24,
+            "w": 6,
+            "h": 4
+          },
+          "id": 136,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum((openstack_neutron_network_ip_availabilities_total{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\")))",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Total public IPs",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "Share of the shared external network's IPv4 pool that is allocated.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "unit": "percentunit",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 0.9
+                  },
+                  {
+                    "color": "red",
+                    "value": 0.98
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "x": 18,
+            "y": 24,
+            "w": 6,
+            "h": 4
+          },
+          "id": 137,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum((openstack_neutron_network_ip_availabilities_used{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\"))) / sum((openstack_neutron_network_ip_availabilities_total{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\")))",
+              "instant": true,
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Public IPs used %",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "Free, used and total IPv4 addresses per subnet of the shared external network (external and shared, so networks reserved for infrastructure are left out). Filter any column to narrow down to a cluster or subnet.",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": true,
+                "filterable": true
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Free"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "color-text"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "red",
+                          "value": null
+                        },
+                        {
+                          "color": "orange",
+                          "value": 1
+                        },
+                        {
+                          "color": "green",
+                          "value": 10
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Used %"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percentunit"
+                  },
+                  {
+                    "id": "min",
+                    "value": 0
+                  },
+                  {
+                    "id": "max",
+                    "value": 1
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "gauge",
+                      "mode": "basic",
+                      "valueDisplayMode": "text"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "orange",
+                          "value": 0.9
+                        },
+                        {
+                          "color": "red",
+                          "value": 0.98
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 28,
+            "w": 15,
+            "h": 14
+          },
+          "id": 138,
+          "options": {
+            "showHeader": true,
+            "cellHeight": "sm",
+            "sortBy": [
+              {
+                "displayName": "Free",
+                "desc": true
+              }
+            ],
+            "footer": {
+              "show": true,
+              "reducer": [
+                "sum"
+              ],
+              "fields": [
+                "Free",
+                "Used",
+                "Total"
+              ],
+              "countRows": false
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "refId": "Free",
+              "expr": "sum by (os_region, network_name, subnet_name, cidr) ((openstack_neutron_network_ip_availabilities_total{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} - openstack_neutron_network_ip_availabilities_used{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"}) and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\"))",
+              "format": "table",
+              "instant": true,
+              "range": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "refId": "Used",
+              "expr": "sum by (os_region, network_name, subnet_name, cidr) (openstack_neutron_network_ip_availabilities_used{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\"))",
+              "format": "table",
+              "instant": true,
+              "range": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "refId": "Total",
+              "expr": "sum by (os_region, network_name, subnet_name, cidr) (openstack_neutron_network_ip_availabilities_total{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\"))",
+              "format": "table",
+              "instant": true,
+              "range": false
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "refId": "Pct",
+              "expr": "sum by (os_region, network_name, subnet_name, cidr) (openstack_neutron_network_ip_availabilities_used{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\")) / sum by (os_region, network_name, subnet_name, cidr) (openstack_neutron_network_ip_availabilities_total{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\"))",
+              "format": "table",
+              "instant": true,
+              "range": false
+            }
+          ],
+          "title": "Public IPs by subnet",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true
+                },
+                "indexByName": {
+                  "os_region": 0,
+                  "network_name": 1,
+                  "subnet_name": 2,
+                  "cidr": 3,
+                  "Value #Free": 4,
+                  "Value #Used": 5,
+                  "Value #Total": 6,
+                  "Value #Pct": 7
+                },
+                "renameByName": {
+                  "os_region": "Cluster",
+                  "network_name": "Network",
+                  "subnet_name": "Subnet",
+                  "cidr": "CIDR",
+                  "Value #Free": "Free",
+                  "Value #Used": "Used",
+                  "Value #Total": "Total",
+                  "Value #Pct": "Used %"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "Free IPv4 addresses on the shared external network over time, per cluster.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "drawStyle": "line",
+                "lineWidth": 1,
+                "fillOpacity": 10,
+                "showPoints": "never",
+                "spanNulls": true
+              },
+              "min": 0,
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "x": 15,
+            "y": 28,
+            "w": 9,
+            "h": 14
+          },
+          "id": 139,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "min"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum by (os_region) ((openstack_neutron_network_ip_availabilities_total{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"} - openstack_neutron_network_ip_availabilities_used{os_region=~\"$cluster\",ip_version=\"4\",subnet_name!~\"$subnet_exclude\"}) and on (os_region, network_id) label_replace(openstack_neutron_network{os_region=~\"$cluster\",is_external=\"true\",is_shared=\"true\"}, \"network_id\", \"$1\", \"id\", \"(.+)\"))",
+              "legendFormat": "{{os_region}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Free public IPs over time",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Public IPs",
+      "type": "row"
     }
   ],
   "refresh": "1d",
@@ -4275,6 +4837,24 @@
         "refresh": 1,
         "regex": "/-st|016/",
         "type": "query"
+      },
+      {
+        "name": "subnet_exclude",
+        "label": "Exclude subnets",
+        "description": "Regex of subnet names left out of the public IP panels, such as ranges being retired.",
+        "type": "textbox",
+        "query": ".*_renumber",
+        "current": {
+          "text": ".*_renumber",
+          "value": ".*_renumber"
+        },
+        "options": [
+          {
+            "selected": true,
+            "text": ".*_renumber",
+            "value": ".*_renumber"
+          }
+        ]
       }
     ]
   },
