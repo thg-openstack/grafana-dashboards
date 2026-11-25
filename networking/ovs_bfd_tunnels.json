@@ -332,7 +332,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "count(ovs_tunnel_scrape_success{os_region=~\"$region\", instance=~\"$host\"} == 0) or vector(0)",
+          "expr": "count(ovs_tunnel_scrape_success{os_region=~\"$region\", instance=~\"$host\", instance!~\".*-control-.*\"} == 0) or vector(0)",
           "refId": "A",
           "legendFormat": "__auto",
           "range": false,
